@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      laravel Router 转为 Hyperf Router | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    
+<!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+</style>
+<div id="article-banner">
+  <h2>laravel Router 转为 Hyperf Router</h2>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.13/lib/theme-chalk/index.css">
+  <style>
+    #app {
+      width:100%;
+    }
+  </style>
+</head>
+<main class="app-body flex-box">
+<div id="app">
+  <el-alert
+    title="laravel Router 转为 Hyperf Router"
+    description="使用场景: 迁移项目; 目前只能处理通用简易路由,中间件等option参数可能需要手动调整"
+    type="warning">
+  </el-alert>
+  <br/><br/>
+  <el-input
+    type="textarea"
+    :rows="10"
+    placeholder="请输入laravel router"
+    v-model="textarea"
+            @change="compressCode"
+    >
+  </el-input>
+  <br/><br/><br/>
+  <el-input
+    type="textarea"
+    :rows="10"
+    placeholder="结果"
+    v-model="result"
+    >
+  </el-input>
+  <br/>
+</div>
+</main>
+<!-- import Vue before Element -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.13/lib/index.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: function() {
+    return { 
+      textarea: '',
+      result:'' 
+    }
+  },
+  methods:{
+    compressCode(originCode){
+        console.log(originCode)
+        let resultString = originCode
+        resultString = resultString.replace(/\$router->group/g, "Router::addGroup")
+        resultString = resultString.replace(/\['prefix' => '(.*)'\]/g, "'/$1/'")
+        resultString = resultString.replace(/Router \$router/g, '')
+        resultString = resultString.replace(/\$router->/g, 'Router::')
+        resultString = resultString.replace(/'([^']+)Controller@([^']+)'/g, "'App\\Controller\\$1Controller::$2'");
+        this.result = resultString
+    }
+  }
+})
+</script>
+
+<script>
+    $(function () {
+      var url = 'https://blog.siammm.cn/tools/shurui/laravelRouterToHyperf.html';
+      $('#article-banner').geopattern(url)
+    });
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

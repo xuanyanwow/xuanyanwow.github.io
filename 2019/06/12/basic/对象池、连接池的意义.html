@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="对象池、连接池的意义. 这次我们来讲讲对象池、连接池的意义，在此之前我们先了解学习一些其他的基础知识，以便我们结合理解池的意义。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="对象池,连接池" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      对象池、连接池的意义 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>对象池、连接池的意义</h2>
+  <p class="post-date">2019-06-12</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>这次我们来讲讲对象池、连接池的意义，在此之前我们先了解学习一些其他的基础知识，以便我们结合理解池的意义。</p>
+<h4 id="nginx与php-fpm的进程模型">nginx与php-fpm的进程模型</h4>
+<p>nginx采用多进程模型，启动之后的进程将包含<code>一个master</code>和<code>多个worker</code>进程。 <strong>master</strong>是worker的父进程，主要职责是用来管理worker进程的。</p>
+<ul>
+<li>向worker进程发送信号，如通知退出</li>
+<li>监控worker状态，当worker退出后（无论正常异常），可以重新启动新的worker。</li>
+</ul>
+<blockquote>
+<p>可以实现<code>从容重启</code>：master进程在接收到信号后，会先重新加载配置，然后再启动新进程开始接收新请求，并向所有老进程发送信号告知不再接收新请求并在处理完所有未处理完的请求后自动退出。</p>
+</blockquote>
+<p><strong>worker</strong>进程负责处理请求，如果是静态文件则可以直接处理完，如果是php程序还需要调用php来处理，当php处理完成时获取php的返回，并返回给客户端。 采用的是<code>异步非堵塞</code>，当调用php的时候不会堵塞等待，会抽空处理下一个请求，当php处理完成时恢复之前的请求并返回给客户端。 <strong>php-fpm</strong>是php-cgi的管理器，在<code>php &gt;= 5.3.3</code>就已经集成在php中了。 它的出现提供了更好的php管理方式</p>
+<span id="more"></span>
+<ul>
+<li>可以平滑停止/启动php进程（重载配置生效）</li>
+<li>可以配置监控多个端口和使用不同的配置</li>
+</ul>
+<p>php脚本的解释器是php-cgi php-fpm是一个管理器，管理对象是php-cgi php-fpm实现了fastcgi协议，当php-fpm启动时，会启动多个cgi解释器进程。 web服务器可以发送数据给php-fpm，php-fpm再把数据发给php-cgi处理。（跟nginx发送数据给php-fpm类似）</p>
+<h4 id="常驻内存下程序的对象回收">常驻内存下程序的对象回收</h4>
+<p><code>常驻内存程序</code>是指把自己装入内存后将控制返回给操作系统，直到运行结束、异常、用户手动退出才会中断运行的程序。 当程序运行时，对象和变量将会一直存在。除非在程序中释放销毁。</p>
+<h4 id="高并发下频繁new对象的资源占用">高并发下频繁new对象的资源占用</h4>
+<p>当我们new一个对象的时候，需要先经过这几个步骤：类加载检查、分配内存空间、设置类的基本信息、调用初始化构造函数。<br>
+首先我们看看<code>构造函数</code>这一块，这是在代码中按我们的需求和意愿编写的。 在这一块中我们经常会做一些配置检测、数据初始化、数据库连接（网络io）等。<br>
+接下来是<code>分配内存空间</code> OS的内存分配器一般是预先向OS申请一大段内存。然后每次分配时，再将里面的一小段标记为<code>已分配</code>，释放的时候再标记成未分配。 由于是有很多程序在运行，所以分配和释放会交替存在，得到的结果可能是 分配1段-未分配1段-分配2段-未分配2段 一个一个的<code>未分配</code>就是内存碎片，会占用额外的内存，碎片不一定可以马上被重复使用（当分配不出连续内存时，需要向OS申请更多的内存）<br>
+同时，创建和销毁对象时，OS都需要做一些处理工作，也会产生资源占用。</p>
+<h3 id="new太多对象，然后导致cpu负载上线让全站死机的概念">new太多对象，然后导致cpu负载上线让全站死机的概念</h3>
+<p>若程序未产生IO（网络请求、读写文件等），执行时间等于cpu的占用时间。 频繁地创建销毁对象将会占用更多cpu资源，高并发时容易导致cpu长期处于高负载运行状态。</p>
+<h3 id="什么是对象池">什么是对象池</h3>
+<p>对象池就是一个在程序启动的时候先创建好若干个可以重复使用的对象。 当程序其他地方需要使用该类型对象时，不再是向系统申请创建，而是向池发出请求。 池将会从池内发配出一个对象提供使用，当程序使用完毕后，需要将对象归还给对象池做管理。</p>
+<blockquote>
+<p>对象池服务可以减少从头创建每个对象的系统开销。</p>
+</blockquote>
+<h3 id="大并发下多个mysql连接导致mysql繁忙全站崩溃">大并发下多个mysql连接导致mysql繁忙全站崩溃</h3>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">db</span>(<span class="hljs-params"></span>)</span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">mysqli_connect</span>(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>); 
+&#125;
+
+<span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span>=<span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-number">10000</span>; <span class="hljs-variable">$i</span>++) &#123; 
+    <span class="hljs-variable">$name</span>  = <span class="hljs-string">&quot;db<span class="hljs-subst">&#123;$i&#125;</span>&quot;</span>;
+    <span class="hljs-variable">$$name</span> = <span class="hljs-title function_ invoke__">db</span>();
+&#125;</code></pre>
+<p>这一个demo将会产生报错:<code>Warning: mysqli_connect(): (08004/1040): Too many connections</code> 我们习惯性地在PHP脚本中不会主动关闭mysql连接，而是等到脚本运行完毕之后再由gc自动回收。在这个期间将会继续占用连接资源，而连接资源的数量又是有限制的，所以会更快出现连接不够用的情况。 处理会影响程序的运行，同时还将可能<code>导致全站崩溃</code>。</p>
+<ul>
+<li>mysql是一个连接创建一个线程处理。</li>
+<li>创建销毁mysql线程需要的内存等性能消耗、线程缓存命中率下降</li>
+<li>mysql底层几乎在同时需要处理几百个线程提交的查询请求，而cpu一次只能处理一条指令，并且数据库查询需要产生IO，在IO期间cpu将会切换上下文处理其他的请求，当cpu频繁切换上下文，性能抖动，发生性能下降甚至宕机的情况。</li>
+</ul>
+<h3 id="连接池-保护mysql不崩溃">连接池 保护mysql不崩溃</h3>
+<p>连接池是将已经创建好的连接保存在池中，当有请求来时，直接使用已经创建好的连接对数据库进行访问。</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pool</span></span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-variable">$pool</span> = [];
+    <span class="hljs-keyword">private</span> <span class="hljs-variable">$min</span> = <span class="hljs-number">5</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-variable">$max</span> = <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-variable">$now</span>;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-comment">// 在池创建的时候就先创建好一些连接</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span> ; <span class="hljs-variable">$i</span> &lt; <span class="hljs-variable language_">$this</span>-&gt;min; <span class="hljs-variable">$i</span>++)&#123;
+            <span class="hljs-variable language_">$this</span>-&gt;pool[] = <span class="hljs-title function_ invoke__">mysqli_connect</span>(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>);
+            <span class="hljs-variable language_">$this</span>-&gt;now++;
+        &#125;
+    &#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get</span>(<span class="hljs-params"></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-comment">// 这里要判断当前池还有没有空闲的</span>
+        <span class="hljs-comment">// 若没有，则判断当前已经提供的服务数量大不大于最大数量   如果还没有达到最大数量  可以向系统再申请一个资源到池中</span>
+        <span class="hljs-comment">// 如果已经达到最大数量，并且池内没有服务了，则进行短暂等等看看有没有</span>
+
+        <span class="hljs-comment">// 需要销毁避免同一个连接多处使用，会冲突</span>
+        <span class="hljs-variable">$connect</span> = <span class="hljs-title function_ invoke__">array_shift</span>(<span class="hljs-variable">$this</span>-&gt;pool);
+
+        <span class="hljs-keyword">return</span> <span class="hljs-variable">$connect</span>;<span class="hljs-comment">//伪代码</span>
+    &#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">recovery</span>(<span class="hljs-params"><span class="hljs-variable">$connect</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-variable language_">$this</span>-&gt;pool[] = <span class="hljs-variable">$connect</span>;
+    &#125;
+&#125;</code></pre>
+<blockquote>
+<p>因为连接池需要长期保持在线，在传统的php脚本中不支持，在<code>swoole</code>中可以常驻内存运行，即可使用连接池</p>
+</blockquote>
+<p>这样省略了创建连接和销毁连接的过程。这样性能上得到了提高。 然而除了性能上的提高外，还有一个意义也很重要：<code>保护服务稳定运行，不发生全站崩溃。</code> 在上面一点我们已经提到，更多的链接将会导致cpu频繁切换上下文，性能抖动，严重情况时将会全站崩溃。 假设本来我们的服务器配置是可以保证1000个连接同时稳定运行，突然某一时刻有3000个人并发，导致连接不够用，那么是保证原有1000人都正常运行好，还是让这3000人争抢资源最终导致机器响应不了全站崩溃好呢？</p>
+<h4 id="连接池的意义此时才得以体现，我们设置连接池的最大数量为机器能承受并且稳定运行的最大数量。">连接池的意义此时才得以体现，我们设置连接池的最大数量为机器能承受并且稳定运行的最大数量。</h4>
+<p>当已经有这么多的数量在服务的时候，后面的请求申请连接资源时需要进行短暂的等待，若时间到了还是没有空余连接提供，则需要熔断服务，返回给客户端失败。 这样子可以保证机器长期稳定服务。若是越来越多的客户端申请不到资源，则需要提高机器配置。（因为我们的连接池最大数量已经是机器的瓶颈，只能通过硬件配置来提升能服务的数量）</p>
+<h3 id="nginx-php-fpm在大并发下504">nginx - php fpm在大并发下504</h3>
+<p>在最开始的时候已经介绍过nginx和php的运行进程模型，php-fpm就是一个池管理器，内部装了若干个php-cgi程序，当nginx申请解析php脚本时，php-fpm则分配一个php-cgi出去处理，处理完则收回管理。 在高并发下，nginx会产生504错误，这就是我们上面介绍到的，客户端进行了短暂的 <code>等待</code> 后，仍然申请不到资源，则只能告诉客户端失败。 （在京东、淘宝的大活动期间很有机会碰到504错误哦！ 这种情况下我们一般只需要刷新页面即可。 因为再刷新时大几率已经有连接资源空闲了！）</p>
+<ul>
+<li>Nginx 504 Gateway Time-out的含义是没有请求到可以执行的PHP-CGI。</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>连接池、对象池的意义不仅仅是可以减少频繁创建销毁对象连接的性能开销 更大的意义是可以保证应有服务客户端的稳定运行。 <img src="https://blog.siammm.cn/wp-content/uploads/2019/06/b4bba8937eaf4ddf3e8b67767d50259d.png" alt=""></p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+    
+      <a class="nav-right" href="/2019/06/19/php/php%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0thinkphp%E8%B0%83%E8%AF%95.html">
+        
+          PHP异常处理函数,Thinkphp调试
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#nginx%E4%B8%8Ephp-fpm%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-nav-text">nginx与php-fpm的进程模型</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%B8%B8%E9%A9%BB%E5%86%85%E5%AD%98%E4%B8%8B%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%9B%9E%E6%94%B6"><span class="toc-nav-text">常驻内存下程序的对象回收</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B8%8B%E9%A2%91%E7%B9%81new%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%B5%84%E6%BA%90%E5%8D%A0%E7%94%A8"><span class="toc-nav-text">高并发下频繁new对象的资源占用</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#new%E5%A4%AA%E5%A4%9A%E5%AF%B9%E8%B1%A1%EF%BC%8C%E7%84%B6%E5%90%8E%E5%AF%BC%E8%87%B4cpu%E8%B4%9F%E8%BD%BD%E4%B8%8A%E7%BA%BF%E8%AE%A9%E5%85%A8%E7%AB%99%E6%AD%BB%E6%9C%BA%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-nav-text">new太多对象，然后导致cpu负载上线让全站死机的概念</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E8%B1%A1%E6%B1%A0"><span class="toc-nav-text">什么是对象池</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%A4%A7%E5%B9%B6%E5%8F%91%E4%B8%8B%E5%A4%9A%E4%B8%AAmysql%E8%BF%9E%E6%8E%A5%E5%AF%BC%E8%87%B4mysql%E7%B9%81%E5%BF%99%E5%85%A8%E7%AB%99%E5%B4%A9%E6%BA%83"><span class="toc-nav-text">大并发下多个mysql连接导致mysql繁忙全站崩溃</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0-%E4%BF%9D%E6%8A%A4mysql%E4%B8%8D%E5%B4%A9%E6%BA%83"><span class="toc-nav-text">连接池 保护mysql不崩溃</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E6%84%8F%E4%B9%89%E6%AD%A4%E6%97%B6%E6%89%8D%E5%BE%97%E4%BB%A5%E4%BD%93%E7%8E%B0%EF%BC%8C%E6%88%91%E4%BB%AC%E8%AE%BE%E7%BD%AE%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E9%87%8F%E4%B8%BA%E6%9C%BA%E5%99%A8%E8%83%BD%E6%89%BF%E5%8F%97%E5%B9%B6%E4%B8%94%E7%A8%B3%E5%AE%9A%E8%BF%90%E8%A1%8C%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E9%87%8F%E3%80%82"><span class="toc-nav-text">连接池的意义此时才得以体现，我们设置连接池的最大数量为机器能承受并且稳定运行的最大数量。</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#nginx-php-fpm%E5%9C%A8%E5%A4%A7%E5%B9%B6%E5%8F%91%E4%B8%8B504"><span class="toc-nav-text">nginx - php fpm在大并发下504</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-nav-text">总结</span></a>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/06/12/basic/对象池、连接池的意义.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "对象池、连接池的意义",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

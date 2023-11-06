@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/11/21/wechat/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B-%E5%85%8D%E8%B4%B9%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%98%A0%E5%B0%84%E6%9C%AC%E5%9C%B0%EF%BC%8C.html">微信公众号应用开发流程 免费内网穿透映射本地，实现调试</a>
+      </h2>
+      <p class="article-date">2020年11月21日</p>
+      
+        
+  <a href="/tags#微信" >
+    <span class="tag-code">微信</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>众所周知，我们微信开发过程会遇到以下两个场景：</p>
+<ul>
+<li>用户扫码、点击菜单、发送消息 等，【微信】会转发到【我们在微信后台配置的域名】，实现逻辑处理，推送消息给用户 或者 做相应的逻辑处理</li>
+<li>公众号页面，需要登录获取openid，跳转的域名需要白名单。不利于本地调试</li>
+</ul>
+<h1>内网映射</h1>
+<p>我们可以使用一系列内网穿透映射的工具，可以在公网访问本地开放的程序，（无论是自己搭建还是使用其他产品 都适用） 如果是自己搭建或者使用付费的内网穿透工具，那么隧道域名将可以固定，我们在以下两个地方配置为获取到的内网域名，微信将会把所有请求 转发到 我们本地的这个穿透域名上，就可以实时调试了</p>
+        
+      </div>
+      <a class="more" href="/2020/11/21/wechat/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B-%E5%85%8D%E8%B4%B9%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%98%A0%E5%B0%84%E6%9C%AC%E5%9C%B0%EF%BC%8C.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/11/16/php/php-easywechat-sdk-%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%8E%9F%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF.html">PHP EasyWechat SDK 微信公众号原页面获取用户信息</a>
+      </h2>
+      <p class="article-date">2020年11月16日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          前因
+由于EasyWechat文档编写的不够完善，在这里补充一下。 官方提供的文档如下
+$app = Factory::officialAccount($config);
+$oauth = $app-&gt;oauth;
+
+// 未登录
+if (empty($_SESSION[&#x27;w ...
+        
+      </div>
+      <a class="more" href="/2020/11/16/php/php-easywechat-sdk-%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%8E%9F%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/07/30/wechat/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Fwebview%EF%BC%8Ca%E9%94%9A%E7%82%B9%E8%B7%B3%E8%BD%AC%EF%BC%8C%E5%9B%9E%E9%80%80%E6%97%B6%E4%B8%80%E7%9B%B4%E4%BF%9D%E7%95%99%E5%9C%A8%E5%8E%9F%E9%A1%B5.html">微信小程序webview，a锚点跳转，回退时一直保留在原页面</a>
+      </h2>
+      <p class="article-date">2020年7月30日</p>
+      
+        
+  <a href="/tags#微信" >
+    <span class="tag-code">微信</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>公司业务，需要写一个页面导航，大概功能如下（APP排版，webview嵌套在小程序中） <img src="https://blog.siammm.cn/wp-content/uploads/2020/07/wp_editor_md_9e40612d7c54bb960332699721f5db9c.jpg" alt=""> 当点击导航的时候，也可以自动跳转到相应的地方。使用的是<code>a标签的锚点跳转</code> 功能和效果都是在浏览器上测试正常的，但在小程序上遇到以下问题</p>
+        
+      </div>
+      <a class="more" href="/2020/07/30/wechat/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Fwebview%EF%BC%8Ca%E9%94%9A%E7%82%B9%E8%B7%B3%E8%BD%AC%EF%BC%8C%E5%9B%9E%E9%80%80%E6%97%B6%E4%B8%80%E7%9B%B4%E4%BF%9D%E7%95%99%E5%9C%A8%E5%8E%9F%E9%A1%B5.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/07/02/php/php-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E5%88%86-%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B-h5%E5%95%86%E5%9F%8E%E5%85%88%E4%BA%AB%E5%90%8E%E4%BB%98.html">php 微信支付分 开发过程 H5商城先享后付</a>
+      </h2>
+      <p class="article-date">2020年7月2日</p>
+      
+        
+  <a href="/tags#微信" >
+    <span class="tag-code">微信</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          前言
+公司项目需要，在H5商城、小程序商城、APP商城、线下促销场景，推出最新的微信支付分功能。 （类似花呗） 先签约，后续付款 遇到一些问题，写下此文章。 有不明确的地方，欢迎添加我QQ 59419979 一起交流补充。
+问题
+the permission value is offline ...
+        
+      </div>
+      <a class="more" href="/2020/07/02/php/php-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E5%88%86-%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B-h5%E5%95%86%E5%9F%8E%E5%85%88%E4%BA%AB%E5%90%8E%E4%BB%98.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/06/24/database/mysql-%E7%B4%A2%E5%BC%95%E6%88%90%E6%9C%AC%E8%AE%A1%E7%AE%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88mysql%E9%A2%84%E5%88%A4%E5%90%8E%E9%80%89%E6%8B%A9%E4%BA%86%E9%94%99%E8%AF%AF%E7%B4%A2%E5%BC%95%EF%BC%9F.html">MYSQL 索引成本计算，为什么MYSQL预判后选择了错误索引？</a>
+      </h2>
+      <p class="article-date">2020年6月24日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          正文
+SQL 选用索引的执行成本如何计算 就如前文所述，在有多个索引的情况下， 在查询数据前，MySQL 会选择成本最小原则来选择使用对应的索引，这里的成本主要包含两个方面。
+
+IO 成本: 即从磁盘把数据加载到内存的成本，默认情况下，读取数据页的 IO 成本是 1，MySQL 是以页的形式 ...
+        
+      </div>
+      <a class="more" href="/2020/06/24/database/mysql-%E7%B4%A2%E5%BC%95%E6%88%90%E6%9C%AC%E8%AE%A1%E7%AE%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88mysql%E9%A2%84%E5%88%A4%E5%90%8E%E9%80%89%E6%8B%A9%E4%BA%86%E9%94%99%E8%AF%AF%E7%B4%A2%E5%BC%95%EF%BC%9F.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/06/24/other/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE-%E8%BD%A8%E9%81%93%E7%A7%BB%E5%8A%A8%EF%BC%8C%E5%B0%8F%E8%BD%A6.html">百度地图 轨道移动，小车</a>
+      </h2>
+      <p class="article-date">2020年6月24日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          &lt;!DOCTYPE html&gt;  
+&lt;html&gt;  
+&lt;head&gt;  
+&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, user-scalable=no&quot; / ...
+        
+      </div>
+      <a class="more" href="/2020/06/24/other/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE-%E8%BD%A8%E9%81%93%E7%A7%BB%E5%8A%A8%EF%BC%8C%E5%B0%8F%E8%BD%A6.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/05/26/read-book/%E4%B8%AD%E5%8C%BB-%E5%9B%9B%E8%99%9A%E8%AF%8A%E6%96%AD%EF%BC%8C%E5%8F%8A%E5%85%B6%E9%A3%9F%E8%8D%AF%E8%86%B3.html">中医 四虚诊断，及其食药膳</a>
+      </h2>
+      <p class="article-date">2020年5月26日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          中医 中华文化瑰宝
+一、先虚而后病
+无论什么病，只要是生病，都是先虚而后病。通俗地说，“虚”说明人体正气不足，“正气存内，邪不可干”，**只有人体正气旺盛，才能卫外固密，**外邪难以入侵，内邪也就难以产生，也就不会发生疾病。否则，“虚”在初级阶段，会导致人疲乏无力、精力不济、情绪低落、头目不 ...
+        
+      </div>
+      <a class="more" href="/2020/05/26/read-book/%E4%B8%AD%E5%8C%BB-%E5%9B%9B%E8%99%9A%E8%AF%8A%E6%96%AD%EF%BC%8C%E5%8F%8A%E5%85%B6%E9%A3%9F%E8%8D%AF%E8%86%B3.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/05/22/other/cocos-%E4%B8%AA%E4%BA%BA%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html">COCOS 个人踩坑日记</a>
+      </h2>
+      <p class="article-date">2020年5月22日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          改变子节点的label内容
+this.turnDuration.getChildByName(&quot;number&quot;).getComponent(cc.Label).string)
+动态添加精灵（发牌）
+``` /** * 发牌 个人 */ showMyCard(){ let  ...
+        
+      </div>
+      <a class="more" href="/2020/05/22/other/cocos-%E4%B8%AA%E4%BA%BA%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/05/21/php/phpstome-idea-%E5%BF%BD%E7%95%A5%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E7%9A%84todo%EF%BC%8C%E4%BB%A3%E7%A0%81%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86.html">phpstome/idea 忽略指定文件夹里的todo，代码任务管理</a>
+      </h2>
+      <p class="article-date">2020年5月21日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          使用TODO管理自己的时间和任务
+什么是todo
+常见的名词是：TODO LIST ，一般出现在“个人规划”中出现，记录一定周期内需要完成的任务、完成任务情况 可能如下图  在代码中，我们通过在注释中编写todo，来记录某些待完善功能点 如下 
+phpstorm 中的todo
+格式为 两个斜 ...
+        
+      </div>
+      <a class="more" href="/2020/05/21/php/phpstome-idea-%E5%BF%BD%E7%95%A5%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E7%9A%84todo%EF%BC%8C%E4%BB%A3%E7%A0%81%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/05/13/other/vue-vant-cdn%E5%BC%95%E5%85%A5%E6%96%B9%E5%BC%8F%EF%BC%8C%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%A0%B7%E5%BC%8F%E9%94%99%E4%B9%B1.html">vue vant cdn引入方式，组件使用样式错乱</a>
+      </h2>
+      <p class="article-date">2020年5月13日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          问题复现
+使用的是vant cdn方式引入框架，而非vue-cli 在使用一些组件，如宫格，复制文档的示例代码， 但是并不能正常运行，效果如下图。
+&lt;div id=&quot;app&quot;&gt;
+    &lt;van-grid&gt;
+      &lt;van-grid-i ...
+        
+      </div>
+      <a class="more" href="/2020/05/13/other/vue-vant-cdn%E5%BC%95%E5%85%A5%E6%96%B9%E5%BC%8F%EF%BC%8C%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%A0%B7%E5%BC%8F%E9%94%99%E4%B9%B1.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/5/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/7/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

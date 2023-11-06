@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Navicat数据同步,主键重复无法插入 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>Navicat数据同步,主键重复无法插入</h2>
+  <p class="post-date">2019-10-16</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1>基础知识</h1>
+<p><code>Navicat</code>是一个非常好用的可视化mysql管理软件（其他数据库也有对应版本的支持） 它拥有非常丰富的功能，结构同步、数据同步、数据传输、进程监控、数据导出导入等等 但这是一个付费软件，新用户可以免费试用，这个问题是笔者在以前试用处理数据的时候遇到的。</p>
+<h1>问题</h1>
+<p>在A和B机器上分别有<code>结构相同</code>，<code>数据不完全相同</code>的两个数据库 比如 A机器上的表</p>
+<span id="more"></span>
+<p>id</p>
+<p>name</p>
+<p>age</p>
+<p>1</p>
+<p>宣言</p>
+<p>21</p>
+<p>2</p>
+<p>Siam</p>
+<p>21</p>
+<p>B机器上的表</p>
+<p>id</p>
+<p>name</p>
+<p>age</p>
+<p>1</p>
+<p>宣言B</p>
+<p>22</p>
+<p>2</p>
+<p>SiamB</p>
+<p>22</p>
+<p>现在要实现的点是：将两个表的数据合并为一个，以后统一使用一个数据库即可。 在使用数据同步的时候，能筛选出不同数据，但是却不能运行，因为筛选出的数据主键在第二个数据库中已经被占用。 使用软件，选择A同步到B，那么会筛选出id 1 2两条数据 生成的语句却是以下这样子的</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> 表名 (id, name, age) <span class="hljs-keyword">values</span> (<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;宣言&#x27;</span>, <span class="hljs-number">21</span>) ...</code></pre>
+<p>在B中运行这样的语句。主键id重复，自然就会产生失败了</p>
+<h1>问题怎么解决</h1>
+<p>因为我这里需要处理的数据量比较小 我这里采用的是比较直接的方法，如果有更好的方式，请大家在评论中留言，一起探讨</p>
+<ul>
+<li>在A中筛选出差异数据（可以根据软件或者其他筛选条件等）</li>
+<li>数据压缩成json字符串，大概如图所示 <img src="https://blog.siammm.cn/wp-content/uploads/2019/10/e2aca9df4caaed6b9aca85e491140a1b.png" alt=""></li>
+<li>json文件上传到B机器中，写一个脚本，读取json 并且删除id主键，重新生成insert语句</li>
+</ul>
+<pre><code class="hljs php"><span class="hljs-variable">$data</span> = <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-string">&quot;./data.txt&quot;</span>);
+<span class="hljs-variable">$data</span> = <span class="hljs-title function_ invoke__">json_decode</span>(<span class="hljs-variable">$data</span>, <span class="hljs-literal">true</span>);
+
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$data</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>)&#123;
+    <span class="hljs-keyword">unset</span>(<span class="hljs-variable">$value</span>[<span class="hljs-string">&#x27;id&#x27;</span>]);
+    <span class="hljs-variable">$sql</span> = <span class="hljs-string">&quot;INSERT xxx &quot;</span> . <span class="hljs-title function_ invoke__">array_to_sql</span>(<span class="hljs-variable">$value</span>);
+    <span class="hljs-title function_ invoke__">mysql_query</span>(<span class="hljs-variable">$sql</span>,<span class="hljs-variable">$db</span>);
+&#125;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;ok&quot;</span>;</code></pre>
+<p>因为是一个临时的脚本，这里就没有引入其他类库，用了面向过程的php代码来完成，大概思路就是这样子。</p>
+<blockquote>
+<p>如果是使用mysqladmin，还可以在导出的时候直接选成导出php array 也许会更方便哦！</p>
+</blockquote>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/10/11/Swoole/easyswoole-mysql-pool%E8%BF%9E%E6%8E%A5%E6%B1%A0empty-null%E7%9A%84%E9%97%AE%E9%A2%98.html">
+        <span class="nav-arrow">← </span>
+        
+          easyswoole mysql-pool连接池empty null的问题
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/10/17/other/%E5%A5%BD%E8%A7%86%E9%A2%91.html">
+        
+          21个数学原理 gif图演示
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">基础知识</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">问题</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">问题怎么解决</span></a></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/10/16/php/navicat数据同步主键重复无法插入.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "Navicat数据同步,主键重复无法插入",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

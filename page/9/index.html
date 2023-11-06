@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/25/php/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB%E4%B8%80%E7%A7%8D%E5%B0%8F%E6%8A%80%E5%B7%A7%E6%96%B9%E5%BC%8F.html">宝塔面板数据库迁移一种小技巧方式</a>
+      </h2>
+      <p class="article-date">2019年10月25日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>主要是自己偷懒过程琢磨出来测试的一种方式，迁移成功，所以写下这篇文章稍微记录一下操作步骤。</p>
+<h1>宝塔面板</h1>
+<p>宝塔面板是很方便的一款服务器管理操作面板，拥有很多服务器管理的常见操作的可视化。 今天我们要用到的是它的 <code>数据库备份</code> 功能</p>
+<h1>开始操作</h1>
+<p>要迁移数据，那么一般情况下两边服务器的mysql版本、配置应该<code>保持一致</code> 将变化的可能性尽可能减低，否则你不会预料到迁移过后会发生什么事… 其实这个方法只是在恢复数据的时候一种小灵活的手法。主体逻辑还是没有变化的。</p>
+<ul>
+<li>先利用宝塔的数据库备份功能打包数据</li>
+<li>下载数据压缩包</li>
+<li>在新的服务器上创建同样名字的数据库</li>
+<li>备份新服务器上的数据库（空，数据为0kb）</li>
+<li>将第二步下载的压缩包上传到新服务器上的备份目录</li>
+<li>将第四步备份的空压缩包名字复制，然后文件删除</li>
+<li>原数据压缩包的名字修改为上一步复制下来的文件名</li>
+<li>宝塔面板点击恢复数据</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2019/10/25/php/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB%E4%B8%80%E7%A7%8D%E5%B0%8F%E6%8A%80%E5%B7%A7%E6%96%B9%E5%BC%8F.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/21/basic/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E3%80%8Bb%E7%AB%99%E6%95%99%E5%AD%A6%E8%A7%86%E9%A2%91.html">《数据结构与算法基础》B站教学视频</a>
+      </h2>
+      <p class="article-date">2019年10月21日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>原文链接</h1>
+<p>:revolving_hearts: <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv3285768" title="原文链接">原文链接</a></p>
+<h1>怎么发现</h1>
+<p>宣言在计算&quot;最短路径问题&quot;的时候，接触到了Dijkstra算法，但是从文字上看这个算法是比较枯燥的，想要寻找类似以前我推荐的文章一样，可以用gif图演示原理的教程。 于是一路寻找下来，找到该老师在B站上的视频，顺利完成了学习，理解了计算的过程。</p>
+<h1>为什么推荐</h1>
+<p>该老师是介绍青岛大学的教师，虽然我只看了两三节视频，但是不影响我对该系列视频的推荐。 老师的PPT和讲解点还是比较不错的，比较容易理解。 该系列视频非常齐全，估算大概有一百多节视频，相信是老师倾注了大量的精力心血在上面，也相信热情带来的是美好。 <img src="https://blog.siammm.cn/wp-content/uploads/2019/10/6b6e971c52f7fa861c126781fd22254c.png" alt="B站算法视频预览截图"></p>
+        
+      </div>
+      <a class="more" href="/2019/10/21/basic/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E3%80%8Bb%E7%AB%99%E6%95%99%E5%AD%A6%E8%A7%86%E9%A2%91.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/18/read-book/%E3%80%8A%E5%BC%80%E8%AE%B2%E5%95%A6%E3%80%8B%E5%BE%90%E6%98%9F-%E6%81%90%E9%BE%99%E3%80%81%E7%A7%91%E5%AD%A6%E3%80%81%E5%A5%BD%E5%A5%87%E5%BF%83%E3%80%81%E5%AD%A9%E7%AB%A5%E8%88%AC.html">《开讲啦》徐星——恐龙、科学、好奇心、孩童般的快乐</a>
+      </h2>
+      <p class="article-date">2019年10月18日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>原文链接</h1>
+<p><a target="_blank" rel="noopener" href="http://tv.cctv.com/2019/06/02/VIDEHWza75wnRSgbCv3z6OXZ190602.shtml" title="原文链接《开讲啦》">原文链接《开讲啦》</a></p>
+<blockquote>
+<p>本期嘉宾是中国科学院古脊椎与古人类研究所研究员、古生物学家——徐星。徐星是目前世界上发现并命名恐龙最多的科学家，超过七十余种。其中徐星及其团队在2005年于内蒙古境内挖掘发现的二连巨盗龙是迄今发现最大体型的长羽毛恐龙，被美国时代杂志评为07年世界十大科技突破。</p>
+</blockquote>
+<h1>推荐原因</h1>
+<p>想要让演讲击中人的内心，那么演讲者必须先迸发热情，观众才能代入到其中，走向他心中的世界。 徐星先生，从上台开始就给我留下了比较深刻的印象，比较积极主动，带着微笑。 在开讲过程中也以幽默生动的语言，给我们讲述了一个又一个的恐龙故事。 青年代表中还有一位让我印象同样深刻的儿童，他的提问、他的思考、他的热爱，带给我更多的感悟——我们应该怎么做，来保持自己的好奇心，从而获得孩童般的快乐。</p>
+        
+      </div>
+      <a class="more" href="/2019/10/18/read-book/%E3%80%8A%E5%BC%80%E8%AE%B2%E5%95%A6%E3%80%8B%E5%BE%90%E6%98%9F-%E6%81%90%E9%BE%99%E3%80%81%E7%A7%91%E5%AD%A6%E3%80%81%E5%A5%BD%E5%A5%87%E5%BF%83%E3%80%81%E5%AD%A9%E7%AB%A5%E8%88%AC.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/17/other/%E5%A5%BD%E8%A7%86%E9%A2%91.html">21个数学原理 gif图演示</a>
+      </h2>
+      <p class="article-date">2019年10月17日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>本系列文章主要是分享我所见到的有趣的有价值的文章，所以会附上原文链接。 资源来自互联网，如有侵权，请联系站长删除。 原文链接：<a target="_blank" rel="noopener" href="https://www.sohu.com/a/194412105%5C_750370">https://www.sohu.com/a/194412105\_750370</a></p>
+<h1>正文</h1>
+<h2 id="1-被简单证明的勾股定理">1.被简单证明的勾股定理</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/1.gif" alt=""></p>
+<h2 id="2-勾股定理的面积证明法">2.勾股定理的面积证明法</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/2.gif" alt=""></p>
+<h2 id="3-周长和直径的π点小事">3.周长和直径的π点小事</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/3.gif" alt=""></p>
+<h2 id="4-圆的面积-2πr">4.圆的面积=2πr?</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/4.gif" alt=""></p>
+<h2 id="5、圆周率π">5、圆周率π</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/5.gif" alt=""></p>
+<h2 id="6、椭圆画法">6、椭圆画法</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/6.gif" alt=""></p>
+<h2 id="7-正切值曲线">7.正切值曲线</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/7.gif" alt=""></p>
+<h2 id="8-圆规和正方形的爱恨纠缠">8.圆规和正方形的爱恨纠缠</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/8.gif" alt=""></p>
+<h2 id="9、一弧度就是长度刚好等于半径的一段圆弧所对的圆心角">9、一弧度就是长度刚好等于半径的一段圆弧所对的圆心角</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/9.gif" alt=""></p>
+<h2 id="10、在Y轴上使用正弦-红色-，在X轴上使用余弦-蓝色-，则在XY轴平面上画出的环形如下图-黑色">10、在Y轴上使用正弦(红色)，在X轴上使用余弦(蓝色)，则在XY轴平面上画出的环形如下图(黑色)</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/10.gif" alt=""></p>
+<h2 id="11、将一个公式从笛卡尔坐标转换成轴坐标">11、将一个公式从笛卡尔坐标转换成轴坐标</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/11.gif" alt=""></p>
+<h2 id="12、画抛物线">12、画抛物线</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/12.gif" alt=""></p>
+<h2 id="13、将双曲线表现成-3D-形式，也许你不相信，它完全是用直线画成的">13、将双曲线表现成 3D 形式，也许你不相信，它完全是用直线画成的</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/13.gif" alt=""></p>
+<h2 id="14、考赛因和赛因的你追我赶">14、考赛因和赛因的你追我赶</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/14.gif" alt=""></p>
+<h2 id="15、多边形的外角之和总是等于-360-度">15、多边形的外角之和总是等于 360 度</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/15.gif" alt=""></p>
+<h2 id="16、使用“FOIL”轻松的解决二项式乘法">16、使用“FOIL”轻松的解决二项式乘法</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/16.gif" alt=""></p>
+<h2 id="17、矩阵转置的技巧">17、矩阵转置的技巧</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/17.gif" alt=""></p>
+<h2 id="18、杨辉三角问题-Pascal-triangles-解法">18、杨辉三角问题(Pascal triangles)解法</h2>
+<p>原文丢失</p>
+<h2 id="19-谢尔宾斯基三角形">19.谢尔宾斯基三角形</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/19.gif" alt=""></p>
+<h2 id="20、得到永生的证明">20、得到永生的证明</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/20.gif" alt=""></p>
+<h2 id="21、最后，放一张数学家很会玩之胖子超人的诞生，咦？这不是大白吗">21、最后，放一张数学家很会玩之胖子超人的诞生，咦？这不是大白吗</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/17/21.gif" alt=""></p>
+        
+      </div>
+      <a class="more" href="/2019/10/17/other/%E5%A5%BD%E8%A7%86%E9%A2%91.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/16/php/navicat%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E4%B8%BB%E9%94%AE%E9%87%8D%E5%A4%8D%E6%97%A0%E6%B3%95%E6%8F%92%E5%85%A5.html">Navicat数据同步,主键重复无法插入</a>
+      </h2>
+      <p class="article-date">2019年10月16日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>基础知识</h1>
+<p><code>Navicat</code>是一个非常好用的可视化mysql管理软件（其他数据库也有对应版本的支持） 它拥有非常丰富的功能，结构同步、数据同步、数据传输、进程监控、数据导出导入等等 但这是一个付费软件，新用户可以免费试用，这个问题是笔者在以前试用处理数据的时候遇到的。</p>
+<h1>问题</h1>
+<p>在A和B机器上分别有<code>结构相同</code>，<code>数据不完全相同</code>的两个数据库 比如 A机器上的表</p>
+        
+      </div>
+      <a class="more" href="/2019/10/16/php/navicat%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E4%B8%BB%E9%94%AE%E9%87%8D%E5%A4%8D%E6%97%A0%E6%B3%95%E6%8F%92%E5%85%A5.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/11/Swoole/easyswoole-mysql-pool%E8%BF%9E%E6%8E%A5%E6%B1%A0empty-null%E7%9A%84%E9%97%AE%E9%A2%98.html">easyswoole mysql-pool连接池empty null的问题</a>
+      </h2>
+      <p class="article-date">2019年10月11日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>问题由来</h1>
+<p>在easyswoole的群里，每天都需要回答各种各样的问题，其中不乏一些问题反复被小白们问起，比如今天的这个主题：<code>连接池取出empty 为null</code>导致的问题 本文会简单引申出<code>什么是连接池</code>、<code>连接池数量如何设置</code>、<code>连接池的优点</code>等问题。</p>
+<h1>什么是连接池</h1>
+<blockquote>
+<p>连接池是创建和管理一个连接的缓冲池的技术，这些连接准备好被任何需要它们的线程使用。</p>
+</blockquote>
+<p>简单来说，就是创建一个容器，并且把资源提前准备好放在里面，比如我们常用的redis连接、mysql连接。</p>
+<h1>连接池的优点</h1>
+<p>计算机是由许多零件组装而成，比如CPU、内存、硬盘等等。 当我们进行网络连接、请求的时候，就需要在不同组件中传递和返回各种信号、数据 比如在CPU、内存、网卡中，数据的传递，请求，获取。 如果在短时间内进行一万次mysql的连接，就需要在这个往返过程循环，在路上浪费了很多时间、性能消耗。 如果我们先把连接连接好，并且放在连接池中，程序中需要使用就从池中获取，执行操作。 就省去了反复创建连接、断开连接的操作。 可以减少I/O操作，提高资源利用率。</p>
+        
+      </div>
+      <a class="more" href="/2019/10/11/Swoole/easyswoole-mysql-pool%E8%BF%9E%E6%8E%A5%E6%B1%A0empty-null%E7%9A%84%E9%97%AE%E9%A2%98.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/09/Swoole/easyswoole%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%AE%9D%E5%A1%94%E5%AE%89%E8%A3%85%E9%94%99%E8%AF%AF.html">easyswoole一键安装脚本,宝塔安装错误</a>
+      </h2>
+      <p class="article-date">2019年10月9日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>常见问题</h1>
+<p>在新接触easyswoole的phper中，经常遇到以下几个问题</p>
+<ul>
+<li>安装步骤多 麻烦</li>
+<li>宝塔等集成环境下容易出错</li>
+<li>自己会安装，但是懒 有没有一键的？</li>
+</ul>
+<h1>开始创造</h1>
+<p>本人作为easyswoole开发组组员之一。为生态的完善和偷懒着想，在某一天讨论中就开始有了这个想法。 并且写下了这个小脚本</p>
+<blockquote>
+<p>需要注意的是，这只是几句很简单的命令，并且在文档中都有出现。只是文档有比较多的场景描述，可能导致有些新人没有细心观看到。</p>
+</blockquote>
+<p>在宝塔面板中，如果按照easyswoole文档第一步骤进行安装的话，是会产生错误的，在文档后续步骤会有解决方案，但是很多新人到了报错这里就不看了，或者就走了弯路。 使用这个脚本，可以直接安装成功，比较方便 最大的作用还是偷懒吧~</p>
+        
+      </div>
+      <a class="more" href="/2019/10/09/Swoole/easyswoole%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%AE%9D%E5%A1%94%E5%AE%89%E8%A3%85%E9%94%99%E8%AF%AF.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/27/other/js%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8F%92%E5%80%BC%EF%BC%8C%E5%8F%98%E9%87%8F%E9%95%BF%E6%96%87%E6%9C%AC%E6%8D%A2%E8%A1%8C.html">JS的字符串插值，变量长文本换行</a>
+      </h2>
+      <p class="article-date">2019年9月27日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>苦逼的PHPer要写前端</h1>
+<p>作为一个PHPer，经常需要在html中写js jq来解析数据，形成列表、选项等等。 （谁让我们PHPer还要兼顾页面呢？？ 又不会Vue，只能这样子讨讨生活。） 那么就经常遇到Html代码拼接，或者字符串拼接，可能是这样子的问题</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">let</span> html = <span class="hljs-string">&quot;&quot;</span>;
+
+<span class="hljs-keyword">for</span>(...)&#123;
+    html += <span class="hljs-string">&quot;&lt;li&gt; &quot;</span> + data.<span class="hljs-property">name</span> + <span class="hljs-string">&quot;&lt;/li&gt;&quot;</span>;
+&#125;</code></pre>
+<p>这种还是简单的，只有一个li，如果是2层、3层的div嵌套，那么这里就会是一团糟糕 有没有优雅一点的写法呢，比如php中的</p>
+        
+      </div>
+      <a class="more" href="/2019/09/27/other/js%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8F%92%E5%80%BC%EF%BC%8C%E5%8F%98%E9%87%8F%E9%95%BF%E6%96%87%E6%9C%AC%E6%8D%A2%E8%A1%8C.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/20/php/php%E5%AE%9A%E6%9C%9F%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%AF%94.html">php定期拉取数据对比</a>
+      </h2>
+      <p class="article-date">2019年9月20日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>今天在网上看帖子提问的时候，看到有人发表了一个提问</p>
+<blockquote>
+<p>php下载远程的批量文件，每天一次，对比昨天和今天的文件，将旧文件替换成新文件</p>
+</blockquote>
+<p>我们通过这个问题来分析讲解一下其中的知识点。 首先要解决的问题是：如何让程序每天自动执行一次脚本</p>
+        
+      </div>
+      <a class="more" href="/2019/09/20/php/php%E5%AE%9A%E6%9C%9F%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%AF%94.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/19/other/vmware-workstation%E5%AE%A2%E6%88%B7%E7%AB%AF-centos%E7%B3%BB%E7%BB%9F-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81-utf-8%E5%AD%97%E7%AC%A6%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA.html">VMware Workstation客户端 Centos系统 中文乱码 UTF-8字符无法正常显示</a>
+      </h2>
+      <p class="article-date">2019年9月19日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          问题由来
+发生该问题的时间比较长了，之前没有第一时间整理记录。依稀记得是因为系统重装之后，Vmware软件重新安装，然后导入以前的虚拟机配置文件，就出现了中文乱码的问题。 从百度上查到的各种资料，都是说语言包和配置的问题，需要重新安装、修改配置等等步骤，下面将记录我的尝试步骤和解决问题的方案 ...
+        
+      </div>
+      <a class="more" href="/2019/09/19/other/vmware-workstation%E5%AE%A2%E6%88%B7%E7%AB%AF-centos%E7%B3%BB%E7%BB%9F-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81-utf-8%E5%AD%97%E7%AC%A6%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/8/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/10/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      md5加密介绍以及php中md5的漏洞 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>md5加密介绍以及php中md5的漏洞</h2>
+  <p class="post-date">2019-09-18</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="什么是MD5">什么是MD5</h2>
+<p><code>md5</code>是一种密码散列函数，也叫密码散列算法。 <code>密码散列函数</code>是一种单向散列函数，它可以将给定的数据提取出<code>信息摘要</code>，也就是给定数据的<code>指纹信息</code>。结果的摘要信息格式是一致的，通常用一个短的随机字母和数字组成的字符串来代表。</p>
+<h3 id="密码散列函数的特点">密码散列函数的特点</h3>
+<ul>
+<li>对于任何一个给定的消息，它都很容易就能运算出散列数值。</li>
+<li>难以用散列数值推算出原始数据。</li>
+<li>数据变动（哪怕很微小），散列数值也会发生很大的变动。</li>
+<li>单向散列函数生成的信息摘要是不可预见的。</li>
+</ul>
+<p>算数模型为： h = H(M) h为散列数值结果 H为散列函数 M为原始数据 <strong>模型特点</strong></p>
+<ul>
+<li>h需要有固定的长度，即生成的散列数值格式需要一致，跟原始数据M的长度和格式无关</li>
+<li>给定h和H，很难甚至根本无法计算出原始数据M</li>
+<li>给定H，找到M1和M2，使得 H(M1) = H(M2) 在计算上是不可行的 （但是这不代表不存在散列数值相等的M1和M2，只是想通过计算得出是不可行的）</li>
+</ul>
+<h3 id="MD5的应用">MD5的应用</h3>
+<p><strong>一致性验证</strong> 在UNIX下有很多软件在下载的时候都提供了一个后缀为.md5的文件，这个文件通常的内容只有一行，格式大概为： <code>MD5 (xxx.tar.gz) = 38b8c2c1093dd0fec383a9d9ac940515</code>。 这是软件或者下载包的md5散列数值，我们可以计算我们下载的包的散列数值，并与该值进行对比，只有数值相同的才是正确、安全的下载。 这是防止软件被篡改，或者在传输过程造成的文件损坏，只要数据内部结构产生微小的变化，散列数值的结果就会发生很大的变动。 <strong>安全访问认证</strong> 当我们在程序中保存用户密码的时候，如果我们采用明文储存，当服务器权限或者管理员账号泄露，用户的密码就会被查询出来，根据我们的习惯，我们往往会在多个不同系统中使用相同的密码，这会造成更大的影响。 我们可以将用户的密码进行md5加密储存，在用户登录的时候，将输入内容进行md5加密，与储存的数值对比，这样子就可以在不需要知道用户的明文密码请求下完成认证验证。 当然这也不是绝对安全的，常见的方式有：字典反查、暴力穷举 暴力穷举先设定一个范围，并在这个范围内逐一地对数据进行验证，需要的运算量和时间比较大。 黑客往往拥有强大的<code>彩虹表</code>，这就是密码字典。这种表是为了破解密码的散列值而准备的，它将提前计算好的散列数值储存起来，通常都是100G以上。 当黑客拿到了hash散列数值，它可以通过在彩虹表中反查出对应该散列数值的原文，这样子就可以直接登录系统进行操作。</p>
+<h2 id="php中md5函数的漏洞">php中md5函数的漏洞</h2>
+<p>在PHP中，我们也常将md5哈希字符串进行对比，然而却没有在意处理的细节，导致漏洞的出现。 我们在运行以下的php脚本</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$str</span> = <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-string">&#x27;QNKCDZO&#x27;</span>);
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$str</span> == <span class="hljs-string">&#x27;0&#x27;</span>);</code></pre>
+<p>打印出来的结果是：bool(true) 是不是与我们预想中的情况不一样，这明显是两个不一样的字符串，为什么会得到相等的结果。 我们将$str的值打印出来得到：<code>0e830400451993494058024219903391</code> 为什么<code>&quot;0e830400451993494058024219903391&quot; == &quot;0&quot;</code>会得到true的结果，这是因为PHP的语言特性，导致了问题的发生。</p>
+<h4 id="php是弱类型语言">php是弱类型语言</h4>
+<p>因为php是弱类型语言，在使用<code>==</code>进行对比的时候，只判断两个参数的值，而不判断参数的类型。 我们运行该脚本，也一样能得到true的结果</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-string">&quot;0e830400451993494058024219903391&quot;</span> == <span class="hljs-number">0</span>);</code></pre>
+<h4 id="0e代表什么">0e代表什么</h4>
+<p>除了以上demo的<code>QNKCDZO</code>，以下的字符进行MD5运行后的哈希值也会出现一样的问题</p>
+<pre><code class="hljs plaintext">QNKCDZO   =&gt; 0e830400451993494058024219903391
+240610708 =&gt; 0e462097431906509019562988736854
+s878926199a =&gt; 0e545993274517709034328855841020
+s155964671a =&gt; 0e342768416822451524974117254469
+s214587387a =&gt; 0e848240448830537924465865611904
+s214587387a =&gt; 0e848240448830537924465865611904</code></pre>
+<p>这些值的md5哈希结果全都是以<code>0e</code>开头的，我们来看看0e代表的是什么 首先我们了解一下科学计数法。 这是一种计数的写法，把一个数表示成a与10的n次幂相乘的形式<code>（1≤a&lt;10，n为整数）</code> 比如将650000记成 <code>6.5E+5</code>，在支持科学计数法的计算器中都可以测试，我们手机自带的计算器一般都有该功能。 但是在输入的时候要把<code>+</code>号省略，并且显示的E是小写的<code>e</code> 在PHP中 以下几种写法的结果相同</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-number">6.5E+5</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-number">6.5E5</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-number">6.5e5</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;</code></pre>
+<p>那么就可以来解释我们上面出现的问题了，以0e开头的数，如果是按科学计数法来计算，不管后面的幂是多大，它的值永远是等于0的。 所以<code>0e830400451993494058024219903391 == 0</code></p>
+<h4 id="php对比数据时的类型选择">php对比数据时的类型选择</h4>
+<p>由于php是弱类型语言，在处理变量的时候，php内部会根据需要转换数据的格式</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$str</span> = <span class="hljs-string">&quot;100&quot;</span>;
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$str</span>); <span class="hljs-comment">// string(3) &quot;100&quot;</span>
+
+<span class="hljs-keyword">echo</span> (<span class="hljs-variable">$str</span> - <span class="hljs-number">99</span>); <span class="hljs-comment">// 1</span></code></pre>
+<p>以上例子中，当一个字符串变量需要进行数值运算的时候，php先把它变成了一个数值类型，再计算。 那么我们一开始遇到问题的时候的<code>==</code>比较运算符号中，php也会根据场景将值转换为对应格式来比较</p>
+<ul>
+<li>如果比较的数据中，有布尔值，则转为布尔值比较，布尔值比较有一个规则：true&gt; false</li>
+<li>如果比较的数据中，有数字值，就转为数字值比较</li>
+<li>如果比较的数据中，两边的值都为 纯数字字符串 ，就转为数字值比较</li>
+<li>如果以上都不符合，则按常规字符串比较</li>
+</ul>
+<p>那么当我们 “0e830400451993494058024219903391” == “0” 的时候，符合第三点要求，两边都是数字字符串，会转为数字值比较，所以得到的结果是true。</p>
+<blockquote>
+<p><code>0e830400451993494058024219903391 === 0</code> 是错误的哦！ 因为科学计数法在php中会转为float类型 可以通过<code>var_dump(0e830400451993494058024219903391)</code>查看类型;</p>
+</blockquote>
+<h4 id="问题以及解决">问题以及解决</h4>
+<p>假设有一个会员账号设置的密码是 <code>240610708</code> ，那么登录的时候如果输入<code>s155964671a</code>或者其他的值（上面有列举了一些），他也是能登录成功的。 那么需要我们如何处理呢 我们将用户的密码md5储存在数据库中，取出来之后应该是string类型的，我们应该使用<code>恒等运算符</code>，来让php脚本限定两个参数的类型。</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-string">&quot;0e830400451993494058024219903391&quot;</span> === <span class="hljs-string">&quot;0e342768416822451524974117254469&quot;</span>)</code></pre>
+<p>脚本将会得到不相等的结果。 在php中，使用比较运算符的时候需要考虑数据类型的问题，防止特殊数据影响了判断的结果。</p>
+<h1>提示</h1>
+<p>关于MD5在PHP中的使用注意事项 将会有一篇新的文章罗列讲解，有兴趣可以在博客内搜索看一下。</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/17/php/php%E8%AE%A1%E7%AE%97%E4%B8%A4%E4%B8%AA%E6%97%A5%E6%9C%9F%E4%B9%8B%E9%97%B4%E7%9A%84%E9%97%B4%E9%9A%94%E9%81%BF%E5%85%8D%E5%AF%BC%E5%87%BA%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE.html">
+        <span class="nav-arrow">← </span>
+        
+          php计算两个日期之间的间隔,避免导出大量数据
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/09/18/php/md5%E5%9C%A8php%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">
+        
+          MD5在PHP中使用的注意事项
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMD5"><span class="toc-nav-text">什么是MD5</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AF%86%E7%A0%81%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-nav-text">密码散列函数的特点</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#MD5%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-nav-text">MD5的应用</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#php%E4%B8%ADmd5%E5%87%BD%E6%95%B0%E7%9A%84%E6%BC%8F%E6%B4%9E"><span class="toc-nav-text">php中md5函数的漏洞</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#php%E6%98%AF%E5%BC%B1%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80"><span class="toc-nav-text">php是弱类型语言</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#0e%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88"><span class="toc-nav-text">0e代表什么</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#php%E5%AF%B9%E6%AF%94%E6%95%B0%E6%8D%AE%E6%97%B6%E7%9A%84%E7%B1%BB%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="toc-nav-text">php对比数据时的类型选择</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3"><span class="toc-nav-text">问题以及解决</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">提示</span></a>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/09/18/php/md5加密介绍以及php中md5的漏洞.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "md5加密介绍以及php中md5的漏洞",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

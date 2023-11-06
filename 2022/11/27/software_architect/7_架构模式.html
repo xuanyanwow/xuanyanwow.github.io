@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      《架构师修炼之道》第七章--架构模式 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>《架构师修炼之道》第七章--架构模式</h2>
+  <p class="post-date">2022-11-27</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1>架构模式</h1>
+<p>架构模式是针对特定问题的可复用解决方案 ，通过特定的结构组合提升某方面的质量属性。</p>
+<h2 id="架构模式-vs-设计模式">架构模式 vs 设计模式</h2>
+<p>设计模式可以提高面向对象程序的可复用性和可维护性</p>
+<p>架构模式有所不同，定义了各种质量属性场景（包括设计属性、运行属性、感知属性）的解决方案，常常涉及软件系统的多个组件。</p>
+<h2 id="分层模式">分层模式</h2>
+<p>分层实现了层间的低耦合与层内的高内聚，提升了可维护性。</p>
+<p>如果想更改模块内的代码而不影响其他模块，就应该使用分层模式</p>
+<p>优势： 提升可运维性、可移植性、可复用性、可测试性、设计阶段的可修改性，概念上比较容易实施。</p>
+<p>劣势：从最上层到最下层，每一层都引入了额外的抽象，增加了复杂度，可能会影响性能。层数繁多和<code>抽象泄露(leaky abstraction)</code>可能导致开发过程非常痛苦</p>
+<h2 id="端口适配器模式">端口适配器模式</h2>
+<p>端口适配器模式可以确保核心业务逻辑不变，在多种环境下使用，以及在隔离其他组件（负责提供数据和事件的）的状态下进行测试</p>
+<p>如开发的系统 运行设备较为贵重、不便（雷达、工业物联网设备），开发人员不方便每次都在真机上进行测试和开发，可以采用此模式，将<code>数据输入源</code>、<code>输出事件</code>等，抽离为适配器。</p>
+<p>开发时使用<code>模拟适配器</code> ，本地模拟产生数据，进行开发测试</p>
+<p>在真机上只需保证<code>数据适配器</code>的调试正确，便可轻松地不改变核心业务逻辑情况下切换适配器到真机使用</p>
+<h2 id="管道过滤器模式">管道过滤器模式</h2>
+<p>一个过滤器负责单一的数据转换或数据操作，数据快速从一个过滤器流转到下一个过滤去。</p>
+<p>松耦合的过滤器可以通过各种方式组合和复用，从而创建出新管道（一个业务逻辑就是一个管道，逻辑内分割为多个小步骤，每个小步骤为一个过滤器组件）</p>
+<p>该模型多运用在数据分析和数据转换领域。</p>
+<h2 id="面向服务架构模式">面向服务架构模式</h2>
+<p>简称SOA，用独立的组件提供特定功能的服务。各种服务在运行时整合在一起，决定了系统的行为。</p>
+<ul>
+<li>传统的SOA非常倚重消息总线和SOAP通信。</li>
+<li>现代的SOA则鼓励使用细粒度的微服务，用轻量级消息协议（如HTTP）进行连接。</li>
+</ul>
+<p>SOA允许各个部门在其专业领域内独立工作（隐藏重要业务信息），同时这些子系统又能供外部访问</p>
+<p>优势：提升互用性、可复用性、可伸缩性</p>
+<p>劣势：SOA系统是分布式系统，，带有分布式计算的所有复杂性。组成部分多，集成复杂。</p>
+<h3 id="元素">元素</h3>
+<ul>
+<li>服务：可独立部署的单元，通过定义好的接口提供功能服务</li>
+<li>服务注册表：列出所有可用的服务，以便服务查找其他可用服务（服务注册发现中心）</li>
+<li>消息系统：如SOAP,REST,gRPC,异步消息</li>
+</ul>
+<h2 id="发布订阅模式">发布订阅模式</h2>
+<p>在生产者和消费者彼此不知情的情况下独立存在。 事件总线负责将发布的事件与感兴趣的订阅者连接起来。</p>
+<p>事件总线技术的选择极大地影响系统属性。</p>
+<p>如果有多个独立组件要访问相同的信息，就可以选用发布订阅模式。</p>
+<p>优势： 提升可扩展性、可复用性、可测试性。根据事件总线的选择及其配置方式，还可以提升可用性、可靠性、可伸缩性</p>
+<p>劣势：考虑到组件通信的独立性和异步性，发布订阅系统的性能很难判断，事件总线的选择决定了发布订阅系统的成败</p>
+<h2 id="开源贡献模式">开源贡献模式</h2>
+<p>除了开发团队负责开发架构组件，同时允许其他人为开发做贡献。</p>
+<p>团队负责从质量和概念完整性的角度审核其他人提交的组件和更新。</p>
+<p>当有来自多个开发团队的专家参与项目，或对某些组件存在共同依赖时，可以使用该模式。</p>
+<p>这种模式可以进一步强化团队对组件的责任，并且<code>事先编写风格指南、注重可测试性，限制技术选择和开发平台的选择</code>，可以让开发人员更容易做出贡献</p>
+<blockquote>
+<p>开源贡献模式 个人理解更多偏向于<code>协作模型</code>，可以与其他技术模型配合使用。</p>
+</blockquote>
+<h2 id="大泥球模式">大泥球模式</h2>
+<p>其实更应该叫一种开发现象，对所有元素关系不做定义，杂乱无章。</p>
+<p>大泥球模式的唯一优势是在短期内提升开发速度（以牺牲设计的完整性为代价）</p>
+<h2 id="领悟">领悟</h2>
+<p>架构师决定的<code>不只是技术选型</code>，还有协作模型、公司部门结构模型</p>
+<p>比如可以采用<code>能力中心模型</code>，由专家团队和架构师团队组成Coc部门，为其他项目团队部门建立最佳范例、开发支持工具、提供培训等。</p>
+<p>Coc团队不会构建和交付系统模块，也可以成立中台团队，为其他项目团队部门提供通用的能力服务，如短信中台、日志中台、Im中台等</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#架构" >
+    <span class="tag-code">架构</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2022/11/20/docker/wsl_error.html">
+        <span class="nav-arrow">← </span>
+        
+          windows.Docker.安装运行失败
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2022/11/27/software_architect/8_%E5%BB%BA%E7%AB%8B%E6%A8%A1%E5%9E%8B.html">
+        
+          《架构师修炼之道》第八章--建立模型，化繁为简
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">架构模式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F-vs-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">架构模式 vs 设计模式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%88%86%E5%B1%82%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">分层模式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AB%AF%E5%8F%A3%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">端口适配器模式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%AE%A1%E9%81%93%E8%BF%87%E6%BB%A4%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">管道过滤器模式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">面向服务架构模式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%85%83%E7%B4%A0"><span class="toc-nav-text">元素</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">发布订阅模式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%BC%80%E6%BA%90%E8%B4%A1%E7%8C%AE%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">开源贡献模式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%A4%A7%E6%B3%A5%E7%90%83%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">大泥球模式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%A2%86%E6%82%9F"><span class="toc-nav-text">领悟</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2022/11/27/software_architect/7_架构模式.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "《架构师修炼之道》第七章--架构模式",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

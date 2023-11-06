@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      bitmap算法的PHP实现，快速去重排序，数据压缩储存 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>bitmap算法的PHP实现，快速去重排序，数据压缩储存</h2>
+  <p class="post-date">2019-08-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>，## 基础知识储备</p>
+<h4 id="一个字节占用8个位">一个字节占用8个位</h4>
+<pre><code class="hljs plaintext">1字节(byte)=8位(bit)
+1K=1024字节
+1M=1024k</code></pre>
+<p>因为电路的逻辑只有0和1两个状态，这里的0和1并不是数字的0和1，0和1是表示两种不同的状态，0表示低电平，1表示高电平。因为计算机是由无数个逻辑电路组成的，只能根据0和1的无限位数和组合来表达信息。 电脑只认识0和1这两个数字，所有的数据在电脑中都是以0和1组成的编码存储的，这样的编码叫做二进制。一个0或一个1就叫做一个位 最初的计算机性能和存储容量都比较差,所以普遍采用4位BCD编码(这个编码出现比计算机还早,最早是用在打孔卡上的)。 BCD编码表示数字还可以,但表示字母或符号就很不好用,需要用多个编码来表示。 后来又演变出6位的BCD编码(BCDIC),以及至今仍在广泛使用的7位ASCII编码。 不过最终决定字节大小的,是大名鼎鼎的System/360。当时IBM为System/360设计了一套8位EBCDIC编码,涵盖了数字、大小写字母和大部分常用符号,同时又兼容广泛用于打孔卡的6位BCDIC编码。System/360很成功,也奠定了字符存储单位采用8位长度的基础,这就是1字节=8位的由来。</p>
+<span id="more"></span>
+<h4 id="位运算">位运算</h4>
+<p>位运算就是直接对整数在内存中的二进制位进行操作。 上面已经介绍了什么是二进制位，数字1的二进制位为 <code>00000001</code> 数字2的二进制位为 <code>00000010</code></p>
+<p>例子</p>
+<p>说明</p>
+<p>名称</p>
+<p>$a &amp; $b</p>
+<p>将把 $a 和 $b 中都为 1 的位设为 1。</p>
+<p>按位与</p>
+<p>$a 丨 $b</p>
+<p>将把 $a 和 $b 中任何一个为 1 的位设为 1。</p>
+<p>按位或</p>
+<p>$a ^ $b</p>
+<p>将把 $a 和 $b 中一个为 1 另一个为 0 的位设为 1。</p>
+<dl>
+<dt>按位异或</dt>
+<dd>$a</dd>
+</dl>
+<p>将 $a 中为 0 的位设为 1，反之亦然。</p>
+<p>按位取反</p>
+<p>$a &lt;&lt; $b</p>
+<p>将 $a 中的位向左移动 $b 次（每一次移动都表示“乘以 2”）。</p>
+<p>左移</p>
+<p>$a &gt;&gt; $b</p>
+<p>将 $a 中的位向右移动 $b 次（每一次移动都表示“除以 2”）。</p>
+<p>右移</p>
+<p>这里只拿&amp; 和 简单介绍，其他的可以在官网手册进一步学习。</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$a</span> = <span class="hljs-number">1</span>;
+<span class="hljs-variable">$b</span> = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$a</span> &amp; <span class="hljs-variable">$b</span>;  <span class="hljs-comment">// 结果0</span>
+<span class="hljs-comment">// $a =&gt; 00000001</span>
+<span class="hljs-comment">// $b =&gt; 00000010</span>
+<span class="hljs-comment">//   ↓ 同一个位都为1的才设为1</span>
+<span class="hljs-comment">//    =&gt; 00000000</span></code></pre>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$a</span> = <span class="hljs-number">1</span>;
+<span class="hljs-variable">$b</span> = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$a</span>  <span class="hljs-variable">$b</span>;  <span class="hljs-comment">// 结果3</span>
+<span class="hljs-comment">// $a =&gt; 00000001</span>
+<span class="hljs-comment">// $b =&gt; 00000010</span>
+<span class="hljs-comment">//   ↓ 任何一个位为1的就设为1</span>
+<span class="hljs-comment">//    =&gt; 00000011</span></code></pre>
+<h4 id="php中int类型占用多少字节">php中int类型占用多少字节</h4>
+<pre><code class="hljs plaintext">var_dump(PHP_INT_SIZE);  // 表示整数integer值的字节长。在32位平台上int占4个字节，在64位平台上int占8个字节。</code></pre>
+<blockquote>
+<p>以下场景均为使用64位平台</p>
+</blockquote>
+<p>在php中，一个int类型的值占用的位数为：</p>
+<pre><code class="hljs plaintext">PHP_INT_SIZE * 8 = 8 * 8 = 64</code></pre>
+<h3 id="bitmap算法">bitmap算法</h3>
+<p><code>bitmap</code>从字面意思是位图，但是在这里，我们应该翻译成 <code>位的映射</code> BitMap算法就是用一个bit位来标记某个元素存在，该bit位所在的key就是该元素的值。 如我们需要储存一组数据：3,6,7,1,5 我们可以声明一字节空间（8个位） 然后分别将第3位、第6位、第7位、第1位、第5位的bit值设置成1</p>
+<blockquote>
+<p>位的下标是从0开始算的</p>
+</blockquote>
+<p>于是这一字节空间就变成了 <code>010100110</code></p>
+<blockquote>
+<p>本来是5个int，占用 40个字节，用bitmap储存只占用了 1个字节</p>
+</blockquote>
+<p>储存完后 也可以达到排序的效果，只要遍历一次，从第0位开始读取是否为1，这样就能拿到5个元素排序后的结果。</p>
+<h3 id="用途">用途</h3>
+<ul>
+<li>数据压缩储存</li>
+<li>通过位运算对比筛选储存数据</li>
+<li>数据去重排序</li>
+</ul>
+<h3 id="优点">优点</h3>
+<ul>
+<li>占用内存少 压缩储存数据</li>
+<li>可进行快速方便的位运算</li>
+<li>快速查找使用</li>
+<li>快速排序去重</li>
+</ul>
+<h3 id="缺点">缺点</h3>
+<ul>
+<li>无法处理重复数据</li>
+<li>bitmap中的查询结果（value）能表达的状态有限</li>
+</ul>
+<h3 id="php实现">php实现</h3>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment"># 定义一个数据 开辟储存空间</span>
+<span class="hljs-variable">$arr</span>          = <span class="hljs-title function_ invoke__">array_fill</span>(<span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">0</span>);      <span class="hljs-comment">//申请一个整形数组, 50个元素, 初始化为整数0</span>
+<span class="hljs-variable">$int_bit_size</span> = PHP_INT_SIZE * <span class="hljs-number">8</span>; <span class="hljs-comment">// 每一个int占用的位数 (可储存标记的数量)</span>
+<span class="hljs-variable">$a</span>            = <span class="hljs-keyword">array</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">6</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>,<span class="hljs-number">1</span>,<span class="hljs-number">11</span>,<span class="hljs-number">105</span>,<span class="hljs-number">97</span>,<span class="hljs-number">31</span>,<span class="hljs-number">66</span>,<span class="hljs-number">58</span>,<span class="hljs-number">69</span>,<span class="hljs-number">25</span>); <span class="hljs-comment">// 乱序数组</span>
+
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$a</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$k</span> =&gt; <span class="hljs-variable">$v</span>)&#123;
+    <span class="hljs-variable">$row</span> = (<span class="hljs-keyword">int</span>) <span class="hljs-title function_ invoke__">floor</span> (<span class="hljs-variable">$v</span> / <span class="hljs-variable">$int_bit_size</span>);  <span class="hljs-comment">// 数据储存在第几行</span>
+    <span class="hljs-variable">$wei</span> = <span class="hljs-variable">$v</span> % <span class="hljs-variable">$int_bit_size</span>;                <span class="hljs-comment">// 数据储存在第几位</span>
+
+    <span class="hljs-comment">// 以下看不懂的 请看文章开头的 知识储备 位运算</span>
+    <span class="hljs-variable">$offset</span>    = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-variable">$wei</span>;            <span class="hljs-comment">// 1是 00000001 ； 得到的余数 （位） 假设为3  则左移3位 得到 00001000</span>
+    <span class="hljs-variable">$arr</span>[<span class="hljs-variable">$row</span>] = <span class="hljs-variable">$arr</span>[<span class="hljs-variable">$row</span>]  <span class="hljs-variable">$offset</span>; <span class="hljs-comment">// 将位改为1  标记储存数据 </span>
+&#125;</code></pre>
+<h3 id="演习就是实战">演习就是实战</h3>
+<p>需求：用户属性标签。 Siam拥有程序员、画画标签；仙士可拥有程序员、奶爸、有老婆标签。 Siam弟弟的做法：以用户为单位，储存标签。 <strong>用户表</strong></p>
+<p>u_id</p>
+<p>u_name</p>
+<p>u_tags</p>
+<p>1</p>
+<p>Siam</p>
+<p>1,2</p>
+<p>2</p>
+<p>仙士可</p>
+<p>1,3,4</p>
+<p><strong>标签表</strong></p>
+<p>tag_id</p>
+<p>tag_name</p>
+<p>1</p>
+<p>程序员</p>
+<p>2</p>
+<p>画画</p>
+<p>3</p>
+<p>奶爸</p>
+<p>4</p>
+<p>有老婆</p>
+<p>嗯 看起来好像没什么毛病 查询出u_tags再分割查询tag 正常显示 <strong>新需求来了</strong> 在后台 统计分析 拥有某个标签的用户数量 <code>what the f*ck?</code> emmmm… <strong>新版用户表</strong></p>
+<p>u_id</p>
+<p>u_name</p>
+<p>age</p>
+<p>job</p>
+<p>…</p>
+<p>1</p>
+<p>Siam</p>
+<p>20</p>
+<p>程序员</p>
+<p>…</p>
+<p>2</p>
+<p>仙士可</p>
+<p>NULL</p>
+<p>程序员</p>
+<p>…</p>
+<p>能统计了…但是?? 每个标签都要<code>预先创建好列</code> <strong>思维转换</strong> <strong>新版标签表 用户表还是用第一版</strong></p>
+<p>tag_id</p>
+<p>tag_name</p>
+<p>tag_users</p>
+<p>1</p>
+<p>程序员</p>
+<p>1,2</p>
+<p>2</p>
+<p>画画</p>
+<p>1</p>
+<p>3</p>
+<p>奶爸</p>
+<p>2</p>
+<p>4</p>
+<p>有老婆</p>
+<p>2</p>
+<p>如果直接以这样子的数据储存用户id，当用户量多了，数据就会非常的大，做分析的时候，占用了很多内存， 我们把tag_users字段的储存，用bitmap算法，压缩储存</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$arr</span> = []; <span class="hljs-comment">// 如果是做更新操作 原数组从储存中拿出</span>
+
+<span class="hljs-comment">// 先运算用户id在第几行和第几位  (一行是一个int，64位)</span>
+<span class="hljs-variable">$bitSize</span> = PHP_INT_SIZE * <span class="hljs-number">8</span>;
+
+<span class="hljs-variable">$uId</span>    = <span class="hljs-number">100</span>;
+<span class="hljs-variable">$row</span>    = (<span class="hljs-keyword">int</span>) <span class="hljs-title function_ invoke__">floor</span> ( <span class="hljs-variable">$uId</span> / <span class="hljs-variable">$bitSize</span> );
+<span class="hljs-variable">$column</span> = <span class="hljs-variable">$uId</span> % <span class="hljs-variable">$bitSize</span>;
+
+<span class="hljs-variable">$offset</span>    = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-variable">$column</span>;
+<span class="hljs-variable">$arr</span>[<span class="hljs-variable">$row</span>] = <span class="hljs-variable">$arr</span>[<span class="hljs-variable">$row</span>]  <span class="hljs-variable">$offset</span>;
+
+<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">json_encode</span>(<span class="hljs-variable">$arr</span>); <span class="hljs-comment">// 将json存入db</span></code></pre>
+<blockquote>
+<p>除了压缩储存的优势，在做用户群交集并集运算的时候，bitmap也有极大的便利优势。</p>
+</blockquote>
+<p><strong>数据取出筛选分析 (位运算)</strong></p>
+<blockquote>
+<p>以下代码比较多 请用心看完！</p>
+</blockquote>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// 先分别从db取出数据 伪代码</span>
+<span class="hljs-variable">$bitSize</span> = PHP_INT_SIZE * <span class="hljs-number">8</span>;
+
+<span class="hljs-comment">// 程序员</span>
+<span class="hljs-variable">$programmer</span> = [
+    <span class="hljs-number">0</span> =&gt; <span class="hljs-string">&#x27;6&#x27;</span>, <span class="hljs-comment">// 00000110  储存了用户1、2</span>
+    <span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;2199023255552&#x27;</span>, <span class="hljs-comment">// 储存了用户105</span>
+];
+
+<span class="hljs-comment">// 画画</span>
+<span class="hljs-variable">$draw</span> = [
+    <span class="hljs-number">0</span> =&gt; <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-comment">// 00000010 储存了用户1</span>
+    <span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;2199023255552&#x27;</span>, <span class="hljs-comment">// 储存了用户105</span>
+];
+
+<span class="hljs-comment">// 有老婆的</span>
+<span class="hljs-variable">$notSingleDog</span> = [
+    <span class="hljs-number">0</span> =&gt; <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-comment">// 00000100 储存了用户2</span>
+    <span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;0&#x27;</span>, 
+];
+
+<span class="hljs-comment">// 奶爸</span>
+<span class="hljs-variable">$father</span> = [
+    <span class="hljs-number">0</span> =&gt; <span class="hljs-string">&#x27;4&#x27;</span>, <span class="hljs-comment">// 00000100 储存了用户2</span>
+    <span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;0&#x27;</span>, 
+];
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 会画画的程序员 交集</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-variable">$tem</span> = [];
+<span class="hljs-comment">// 遍历程序员 看看哪些会画画</span>
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$programmer</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>)&#123;
+    <span class="hljs-comment">// 这里的一个key 等于一行 value是bitmap</span>
+    <span class="hljs-variable">$tem</span>[<span class="hljs-variable">$key</span>] = <span class="hljs-variable">$value</span> &amp; <span class="hljs-variable">$draw</span>[<span class="hljs-variable">$key</span>];
+&#125;
+
+
+<span class="hljs-comment">// 得到交集的bitmap  再解析成u_id</span>
+<span class="hljs-variable">$uId</span> = [];
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$tem</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$k</span> =&gt; <span class="hljs-variable">$v</span>)&#123;
+     <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span>=<span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-variable">$bitSize</span>; <span class="hljs-variable">$i</span>++)
+     &#123;
+        <span class="hljs-variable">$tmp</span>  = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-variable">$i</span>;
+        <span class="hljs-variable">$flag</span> = <span class="hljs-variable">$tmp</span> &amp; <span class="hljs-variable">$tem</span>[<span class="hljs-variable">$k</span>];
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$flag</span>) &#123;
+          <span class="hljs-variable">$uId</span>[] = <span class="hljs-variable">$k</span> * <span class="hljs-variable">$bitSize</span> + <span class="hljs-variable">$i</span>;
+        &#125;
+     &#125;
+&#125;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;会画画的程序员:&lt;br/&gt;&quot;</span>;
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$uId</span>);
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 有老婆的程序员 交集</span>
+<span class="hljs-comment"> */</span>
+
+<span class="hljs-variable">$tem</span> = [];
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$programmer</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>)&#123;
+    <span class="hljs-variable">$tem</span>[<span class="hljs-variable">$key</span>] = <span class="hljs-variable">$value</span> &amp; <span class="hljs-variable">$notSingleDog</span>[<span class="hljs-variable">$key</span>];
+&#125;
+
+<span class="hljs-variable">$uId</span> = [];
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$tem</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$k</span> =&gt; <span class="hljs-variable">$v</span>)&#123;
+     <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span>=<span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-variable">$bitSize</span>; <span class="hljs-variable">$i</span>++)
+     &#123;
+        <span class="hljs-variable">$tmp</span>  = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-variable">$i</span>;
+        <span class="hljs-variable">$flag</span> = <span class="hljs-variable">$tmp</span> &amp; <span class="hljs-variable">$tem</span>[<span class="hljs-variable">$k</span>];
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$flag</span>) &#123;
+          <span class="hljs-variable">$uId</span>[] = <span class="hljs-variable">$k</span> * <span class="hljs-variable">$bitSize</span> + <span class="hljs-variable">$i</span>;
+        &#125;
+     &#125;
+&#125;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;有老婆的程序员:&lt;br/&gt;&quot;</span>;
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$uId</span>);
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 有老婆又会画画的程序员 交集</span>
+<span class="hljs-comment"> */</span>
+
+<span class="hljs-variable">$tem</span> = [];
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$programmer</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>)&#123;
+  <span class="hljs-variable">$tem</span>[<span class="hljs-variable">$key</span>] = <span class="hljs-variable">$value</span> &amp; <span class="hljs-variable">$notSingleDog</span>[<span class="hljs-variable">$key</span>] &amp; <span class="hljs-variable">$draw</span>[<span class="hljs-variable">$key</span>];
+&#125;
+
+<span class="hljs-variable">$uId</span> = [];
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$tem</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$k</span> =&gt; <span class="hljs-variable">$v</span>)&#123;
+   <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span>=<span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-variable">$bitSize</span>; <span class="hljs-variable">$i</span>++)
+   &#123;
+      <span class="hljs-variable">$tmp</span>  = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-variable">$i</span>;
+      <span class="hljs-variable">$flag</span> = <span class="hljs-variable">$tmp</span> &amp; <span class="hljs-variable">$tem</span>[<span class="hljs-variable">$k</span>];
+
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable">$flag</span>) &#123;
+        <span class="hljs-variable">$uId</span>[] = <span class="hljs-variable">$k</span> * <span class="hljs-variable">$bitSize</span> + <span class="hljs-variable">$i</span>;
+      &#125;
+   &#125;
+&#125;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;有老婆又会画画的程序员:&lt;br/&gt;&quot;</span>;
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$uId</span>);
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 有老婆或者会画画的程序员 并集</span>
+<span class="hljs-comment"> */</span>
+
+<span class="hljs-variable">$tem</span> = [];
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$programmer</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>)&#123;
+  <span class="hljs-variable">$tem</span>[<span class="hljs-variable">$key</span>] = <span class="hljs-variable">$value</span> &amp; (<span class="hljs-variable">$notSingleDog</span>[<span class="hljs-variable">$key</span>]  <span class="hljs-variable">$draw</span>[<span class="hljs-variable">$key</span>]);
+&#125;
+
+<span class="hljs-variable">$uId</span> = [];
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$tem</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$k</span> =&gt; <span class="hljs-variable">$v</span>)&#123;
+   <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span>=<span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-variable">$bitSize</span>; <span class="hljs-variable">$i</span>++)
+   &#123;
+      <span class="hljs-variable">$tmp</span>  = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-variable">$i</span>;
+      <span class="hljs-variable">$flag</span> = <span class="hljs-variable">$tmp</span> &amp; <span class="hljs-variable">$tem</span>[<span class="hljs-variable">$k</span>];
+
+      <span class="hljs-keyword">if</span> (<span class="hljs-variable">$flag</span>) &#123;
+        <span class="hljs-variable">$uId</span>[] = <span class="hljs-variable">$k</span> * <span class="hljs-variable">$bitSize</span> + <span class="hljs-variable">$i</span>;
+      &#125;
+   &#125;
+&#125;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;有老婆或者会画画的程序员:&lt;br/&gt;&quot;</span>;
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$uId</span>);</code></pre>
+<pre><code class="hljs php">会画画的程序员:&lt;br/&gt;<span class="hljs-keyword">array</span>(<span class="hljs-number">2</span>) &#123;
+  [<span class="hljs-number">0</span>]=&gt;
+  <span class="hljs-keyword">int</span>(<span class="hljs-number">1</span>)
+  [<span class="hljs-number">1</span>]=&gt;
+  <span class="hljs-keyword">int</span>(<span class="hljs-number">105</span>)
+&#125;
+有老婆的程序员:&lt;br/&gt;<span class="hljs-keyword">array</span>(<span class="hljs-number">1</span>) &#123;
+  [<span class="hljs-number">0</span>]=&gt;
+  <span class="hljs-keyword">int</span>(<span class="hljs-number">2</span>)
+&#125;
+有老婆又会画画的程序员:&lt;br/&gt;<span class="hljs-keyword">array</span>(<span class="hljs-number">0</span>) &#123;
+&#125;
+有老婆或者会画画的程序员:&lt;br/&gt;<span class="hljs-keyword">array</span>(<span class="hljs-number">3</span>) &#123;
+  [<span class="hljs-number">0</span>]=&gt;
+  <span class="hljs-keyword">int</span>(<span class="hljs-number">1</span>)
+  [<span class="hljs-number">1</span>]=&gt;
+  <span class="hljs-keyword">int</span>(<span class="hljs-number">2</span>)
+  [<span class="hljs-number">2</span>]=&gt;
+  <span class="hljs-keyword">int</span>(<span class="hljs-number">105</span>)
+&#125;</code></pre>
+<blockquote>
+<p>然而 bitmap算法也存在着缺点：不能直接进行非运算</p>
+</blockquote>
+<p>如，想要获取不是程序员的用户数量，如果直接拿程序员标签的结果进行非运算，并不会得到准确的用户信息， 假设声明了一个64位的空间，其中只有3个用户是程序员，占用了1/2/3位，如果直接运行非运算，将会得到0/4/5/6…/63位的数据 但我们的系统可能没有64个用户，或者用户的id进行了跳跃，并不是连续的，所以得到了错误的列表。 我们需要借助全量用户的bitmap。 每有用户注册，不管他设置了什么标签，都需要往全量bitmap进行插入，这样子就可以用全量bitmap和程序员标签的bitmap进行运算，得到<code>非程序员用户</code>的列表</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/30/php/php%EF%BC%9Aphar%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E4%BD%BF%E7%94%A8.html">
+        <span class="nav-arrow">← </span>
+        
+          PHP：Phar的打包和使用
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/30/php/php%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E5%90%88%E6%88%90%E5%B1%85%E4%B8%AD.html">
+        
+          PHP图片文字合成居中
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%B8%80%E4%B8%AA%E5%AD%97%E8%8A%82%E5%8D%A0%E7%94%A88%E4%B8%AA%E4%BD%8D"><span class="toc-nav-text">一个字节占用8个位</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="toc-nav-text">位运算</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#php%E4%B8%ADint%E7%B1%BB%E5%9E%8B%E5%8D%A0%E7%94%A8%E5%A4%9A%E5%B0%91%E5%AD%97%E8%8A%82"><span class="toc-nav-text">php中int类型占用多少字节</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#bitmap%E7%AE%97%E6%B3%95"><span class="toc-nav-text">bitmap算法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%94%A8%E9%80%94"><span class="toc-nav-text">用途</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-nav-text">优点</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-nav-text">缺点</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#php%E5%AE%9E%E7%8E%B0"><span class="toc-nav-text">php实现</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%BC%94%E4%B9%A0%E5%B0%B1%E6%98%AF%E5%AE%9E%E6%88%98"><span class="toc-nav-text">演习就是实战</span></a>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/08/30/php/bitmap算法的php实现，快速去重排序，数据压缩储存.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "bitmap算法的PHP实现，快速去重排序，数据压缩储存",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

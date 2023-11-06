@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/06/18/fragment/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC.%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E5%A4%8D%E5%88%B6.%E6%95%B0%E6%8D%AE%E8%BF%87%E9%95%BF.html">油猴脚本,批量采集页面数据复制,数据过长 JS弹出新页面 自定义html代码</a>
+      </h2>
+      <p class="article-date">2022年6月18日</p>
+      
+        
+  <a href="/tags#代码片段" >
+    <span class="tag-code">代码片段</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          前言
+写了一个油猴脚本处理一些其他网站的订单采集到自己的系统，采集页面dom的数据,然后使用clipboard.min.js复制
+由于网站逻辑问题,不可以直接注入复制按钮,只可以JS逻辑处理后使用prompt()方法 把数据放在对话框中复制
+此时会有长度问题, 订单数量一旦超过一定数量，pr ...
+        
+      </div>
+      <a class="more" href="/2022/06/18/fragment/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC.%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E5%A4%8D%E5%88%B6.%E6%95%B0%E6%8D%AE%E8%BF%87%E9%95%BF.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/06/08/php/phpstorm-git-cherry-pick.html">phpstorm里操作git_cherry-pick</a>
+      </h2>
+      <p class="article-date">2022年6月8日</p>
+      
+        
+  <a href="/tags#项目管理" >
+    <span class="tag-code">项目管理</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+先切换checkout目标分支
+在GIT面板中 选中来源分支
+在来源分支的git commit 上右键 点击[优选]
+
+
+
+        
+      </div>
+      <a class="more" href="/2022/06/08/php/phpstorm-git-cherry-pick.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/06/07/fragment/%E5%AF%86%E7%A0%81%E5%BC%BA%E5%BA%A6%E6%A0%A1%E9%AA%8C.html">代码片段-密码强度校验</a>
+      </h2>
+      <p class="article-date">2022年6月7日</p>
+      
+        
+  <a href="/tags#代码片段" >
+    <span class="tag-code">代码片段</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          校验密码强度
+//1) 是否包含小写字母
+$pattern = &#x27;/[a-z]+/&#x27;;
+$res = preg_match($pattern, $password);
+//2) 是否包含大写字母
+$pattern = &#x27;/[A-Z]+/&#x27;;
+$res2 ...
+        
+      </div>
+      <a class="more" href="/2022/06/07/fragment/%E5%AF%86%E7%A0%81%E5%BC%BA%E5%BA%A6%E6%A0%A1%E9%AA%8C.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/05/23/php/%E5%AE%9D%E5%A1%94%E7%9A%84nginx.%E5%9C%A8Thinkphp%E4%BC%AA%E9%9D%99%E6%80%81%E6%83%85%E5%86%B5%E4%B8%8B%E9%85%8D%E7%BD%AE%E5%9B%BE%E7%89%87%E8%A3%81%E5%89%AA.html">宝塔的nginx.在Thinkphp伪静态情况下配置图片裁剪</a>
+      </h2>
+      <p class="article-date">2022年5月23日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>在宝塔的<code>网站--设置--伪静态</code> 写入以下代码</p>
+<p>注意：需要填写在thinkphp的伪静态隐藏index.php规则之前</p>
+<pre><code class="hljs plaintext">location ~* (.*)\.(gif|jpg|jpeg|png|bmp|swf)!(\d+)x(\d+)_(\d+)$ &#123;
+    expires      30d;
+    error_log /dev/null;
+    access_log /dev/null;
+
+    set $w $3;
+    set $h $4;
+
+    # crop裁剪 resize缩放
+    image_filter resize  $w $h;
+    image_filter_buffer  100M;
+    image_filter_jpeg_quality $5;
+    try_files /$1.$2 /404.jpg;
+&#125;</code></pre>
+<p>访问图片路径 就可以扩展为  <code>536de782104cc8edcdfc7e9bd29a3757.jpg!800x800_80</code>   自定义尺寸和压缩比例</p>
+        
+      </div>
+      <a class="more" href="/2022/05/23/php/%E5%AE%9D%E5%A1%94%E7%9A%84nginx.%E5%9C%A8Thinkphp%E4%BC%AA%E9%9D%99%E6%80%81%E6%83%85%E5%86%B5%E4%B8%8B%E9%85%8D%E7%BD%AE%E5%9B%BE%E7%89%87%E8%A3%81%E5%89%AA.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/03/01/dtm/dtm%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E2%80%94%E2%80%94%E8%A7%A3%E5%86%B3%E5%AF%BC%E5%85%A5RM%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%B1%E8%B4%A5.html">dtm分布式事务——解决导入RM数据库失败</a>
+      </h2>
+      <p class="article-date">2022年3月1日</p>
+      
+        
+  <a href="/tags#分布式事务" >
+    <span class="tag-code">分布式事务</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          问题背景
+dtm中的子事务屏障，需要与数据库交互，xa事务模式，也需要与数据库交互。
+根据部署文档RM数据库的导入教程，出现以下报错
+Specified key was too long; max key length is 1000 bytes
+解决
+创建表的mysql脚本没有指定存储引擎 ...
+        
+      </div>
+      <a class="more" href="/2022/03/01/dtm/dtm%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E2%80%94%E2%80%94%E8%A7%A3%E5%86%B3%E5%AF%BC%E5%85%A5RM%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%B1%E8%B4%A5.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/03/01/dtm/dtm%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E2%80%94%E2%80%94saga%E4%BA%8B%E5%8A%A1%E8%B6%85%E6%97%B6%E5%A4%9A%E6%AC%A1%E8%A7%A6%E5%8F%91.html">dtm分布式事务——saga事务超时多次触发</a>
+      </h2>
+      <p class="article-date">2022年3月1日</p>
+      
+        
+  <a href="/tags#分布式事务" >
+    <span class="tag-code">分布式事务</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          问题背景
+在使用saga分布式事务的时候，接口执行时间过长，导致 dtm-server多次重发 请求到节点
+在dtm文档中，关于超时的说明如下
+
+saga属于长事务，因此持续的时间跨度很大，可能是100ms到1天，因此saga没有默认的超时时间。
+dtm支持saga事务单独指定超时时间，到了 ...
+        
+      </div>
+      <a class="more" href="/2022/03/01/dtm/dtm%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E2%80%94%E2%80%94saga%E4%BA%8B%E5%8A%A1%E8%B6%85%E6%97%B6%E5%A4%9A%E6%AC%A1%E8%A7%A6%E5%8F%91.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/02/22/docker/docker%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%A4%B1%E8%B4%A5%E6%8E%92%E6%9F%A5.html">docker端口映射失败排查</a>
+      </h2>
+      <p class="article-date">2022年2月22日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>前言</h1>
+<p>win10下，docker启动了apisix dashboard容器，浏览器和CURL命令获取容器服务都<code>失败</code>, <code>curl http://127.0.0.1:9000</code></p>
+<h2 id="排查思路">排查思路</h2>
+<ul>
+<li>检查容器是否启动正常</li>
+<li>检查容器端口配置映射是否正常</li>
+<li>检查宿主机端口是否开启正常</li>
+<li>检查宿主机端口占用进程</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2022/02/22/docker/docker%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%A4%B1%E8%B4%A5%E6%8E%92%E6%9F%A5.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/02/16/queue/kafka%E5%92%8CrabbitMQ%E7%AE%80%E5%8D%95%E5%AF%B9%E6%AF%94%E7%AC%94%E8%AE%B0.html">kafka和rabbitMQ简单对比笔记</a>
+      </h2>
+      <p class="article-date">2022年2月16日</p>
+      
+        
+  <a href="/tags#架构" >
+    <span class="tag-code">架构</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>前言</h1>
+<p>一直在网上文章看到kafka是磁盘顺序写，所以效率更高，但是从磁盘的物理设计来考虑，又不可能真正的顺序，一直很纠结，找了一些资料，简单记录</p>
+<h2 id="kafka">kafka</h2>
+<p>因为Kafka消息在使用时不会被删除（就像在其他消息代理中一样）Kafka不会通过不断创建和删除许多变量长度来创建碎片文件系统文件。相反，它会创建段文件，然后附加到该文件，直到达到1GB（可配置的限制）</p>
+<p>建议最佳做法是将这些Kafka提交日志文件保存在专用文件系统上，以免其他应用程序读取和写入可变长度文件到同一文件系统中。</p>
+<h2 id="rabbitMQ">rabbitMQ</h2>
+<p>rabbitMQ对于可靠性的设计更好，有ack消息确认机制，当ack消息确认后，该消息从队列删除，不管是真正的磁盘删除还是修改消息状态，都要涉及到文件的<code>寻址</code>，所以会稍慢.</p>
+        
+      </div>
+      <a class="more" href="/2022/02/16/queue/kafka%E5%92%8CrabbitMQ%E7%AE%80%E5%8D%95%E5%AF%B9%E6%AF%94%E7%AC%94%E8%AE%B0.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/02/15/queue/%E4%BD%BF%E7%94%A8elk%E6%9B%BF%E6%8D%A2%E4%B8%9A%E5%8A%A1%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95.html">使用ELK替换业务日志记录</a>
+      </h2>
+      <p class="article-date">2022年2月15日</p>
+      
+        
+  <a href="/tags#架构" >
+    <span class="tag-code">架构</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>公司在快速开发阶段，将日志存入了Mysql，不利于做各做条件的检索查询。速度较慢。使用ELK方案，优化该部分逻辑。并开发toB日志自查系统，提供给客户快速对接。</p>
+<h1>ELK</h1>
+<p>Elasticsearch、Logstash 和 Kibana 三个软件的简称</p>
+<h2 id="简单架构图">简单架构图</h2>
+<p><img src="http://blog.siammm.cn/wp-content/uploads/2022/02/wp_editor_md_763628059c5ca787cf55fd1e6e5a9663.jpg" alt=""> 原文地址-&gt; <a href="https://blog.siammm.cn/archives/320">https://blog.siammm.cn/archives/320</a> 来自：siam博客。简单理解和笔记</p>
+<h2 id="资源记录">资源记录</h2>
+<ul>
+<li>Elasticsearch： <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/elasticsearch">https://www.elastic.co/cn/downloads/elasticsearch</a></li>
+<li>Logstash：<a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/logstash">https://www.elastic.co/cn/downloads/logstash</a></li>
+<li>Kibana：<a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/kibana">https://www.elastic.co/cn/downloads/kibana</a></li>
+<li>elasticsearch-head：<a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/elasticsearch-head/ffmkiejjmecolpfloofpjologoblkegm/">https://chrome.google.com/webstore/detail/elasticsearch-head/ffmkiejjmecolpfloofpjologoblkegm/</a></li>
+<li>Elasticsearch: 权威指南 ：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html">https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html</a></li>
+<li>Elasticsearch-php：<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/php/current/index.html">https://www.elastic.co/guide/cn/elasticsearch/php/current/index.html</a></li>
+</ul>
+<h3 id="Elasticsearch">Elasticsearch</h3>
+<p>这个不用说，必须安装</p>
+<h3 id="Logstash">Logstash</h3>
+<p>用于收集日志，在程序和ES之间，可以让程序产生的日志不用直接提交到ES，减少传输时间。 程序可以插入到Redis，Kafka Logstash相当于<code>队列消费者</code>，将日志写入ES</p>
+        
+      </div>
+      <a class="more" href="/2022/02/15/queue/%E4%BD%BF%E7%94%A8elk%E6%9B%BF%E6%8D%A2%E4%B8%9A%E5%8A%A1%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/10/27/script/%E8%93%9D%E5%A5%8F%E4%BA%91-%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD-%E6%B2%B9%E7%8C%B4.html">蓝奏云 批量下载 油猴</a>
+      </h2>
+      <p class="article-date">2021年10月27日</p>
+      
+        
+  <a href="/tags#代码片段" >
+    <span class="tag-code">代码片段</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          // ==UserScript==
+// @name         Siam蓝奏云批量下载
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  自用，需要弹窗等权限以及微调代码，不会 ...
+        
+      </div>
+      <a class="more" href="/2021/10/27/script/%E8%93%9D%E5%A5%8F%E4%BA%91-%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD-%E6%B2%B9%E7%8C%B4.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/3/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/5/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

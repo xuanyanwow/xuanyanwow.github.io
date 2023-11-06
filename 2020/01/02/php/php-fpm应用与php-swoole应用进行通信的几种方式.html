@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      php-fpm应用与php-swoole应用进行通信 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>php-fpm应用与php-swoole应用进行通信</h2>
+  <p class="post-date">2020-01-02</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1>基础要求</h1>
+<ul>
+<li>linux万物皆文件</li>
+<li>socket通信</li>
+<li>基础进制转换</li>
+</ul>
+<p>原文地址：<a href="https://blog.siammm.cn/archives/229" title="https://blog.siammm.cn/archives/229">https://blog.siammm.cn/archives/229</a></p>
+<h1>写在前面</h1>
+<p>这篇文章是自己练习的内容，主要想实现应用间的通信机制。</p>
+<h1>Workerman中提供的建议方案</h1>
+<blockquote>
+<p>与其它mvc框架结合建议以上图的方式(ThinkPHP为例)：<br>
+1、ThinkPHP与Workerman是两个独立的系统，独立部署(可部署在不同服务器)，互不干扰。<br>
+2、ThinkPHP以HTTP协议提供网页页面在浏览器渲染展示。<br>
+3、ThinkPHP提供的页面的js发起websocket连接，连接workerman<br>
+4、连接后给Workerman发送一个数据包(包含用户名密码或者某种token串)用于验证websocket连接属于哪个用户。<br>
+5、仅在ThinkPHP需要向浏览器推送数据时，才调用workerman的socket接口推送数据。<br>
+6、其余请求还是按照原本ThinkPHP的HTTP方式调用处理。<br>
+总结：<br>
+把Workerman作为一个可以向浏览器推送的通道，仅仅在需要向浏览器推送数据时才调用Workerman接口完成推送。业务逻辑全部在ThinkPHP中完成。</p>
+</blockquote>
+<p>我们使用swoole环境的常驻内存、协程特性来做一些其他事务，如：任务队列及其消费、缓存、异步执行等情况时 可以如建议中第5步所说，FPM环境调用Swoole环境提供的接口（可以用TCP/HTTP等方式）来开始一个任务</p>
+<h1>进程通信</h1>
+<p>上面的方案可以用在单机中，也可以用在集群部署中。 进程通信一般仅限于单机中使用 进程通信的方式有好几种，这里主要写明我测试的一种。</p>
+<h2 id="unix-socket-文件">unix socket 文件</h2>
+<p>在linux环境中，万物皆为文件，套接字也可以用文件来表示，然后一个进程（一般是swoole环境）监听它，其他进程（FPM环境）连接它，并且发送数据</p>
+<blockquote>
+<p>这里使用的是Easyswoole框架提供的一个基类，如果是纯Swoole环境可以下载框架源码并查看原理</p>
+</blockquote>
+<h3 id="EasySwoole部分">EasySwoole部分</h3>
+<p>继承了<code>AbstractUnixProcess</code>，封装好了很多内容，直接写明onAccept 接受数据做处理即可</p>
+<pre><code class="hljs php"><span class="hljs-keyword">namespace</span> <span class="hljs-title class_">App</span>\<span class="hljs-title class_">UnixSocket</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">EasySwoole</span>\<span class="hljs-title">Component</span>\<span class="hljs-title">Process</span>\<span class="hljs-title">Socket</span>\<span class="hljs-title">AbstractUnixProcess</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Swoole</span>\<span class="hljs-title">Coroutine</span>\<span class="hljs-title">Socket</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Siam</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractUnixProcess</span></span>
+<span class="hljs-class"></span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onAccept</span>(<span class="hljs-params">Socket <span class="hljs-variable">$socket</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-comment">// 收取包头4字节计算包长度 收不到4字节包头丢弃该包</span>
+        <span class="hljs-variable">$header</span> = <span class="hljs-variable">$socket</span>-&gt;<span class="hljs-title function_ invoke__">recvAll</span>(<span class="hljs-number">4</span>, <span class="hljs-number">1</span>);
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$header</span>) != <span class="hljs-number">4</span>) &#123;
+            <span class="hljs-variable">$socket</span>-&gt;<span class="hljs-title function_ invoke__">sendAll</span>(<span class="hljs-built_in">self</span>::<span class="hljs-title function_ invoke__">pack</span>(<span class="hljs-title function_ invoke__">json_encode</span>([
+                <span class="hljs-string">&#x27;res&#x27;</span> =&gt; <span class="hljs-string">&#x27;fail&#x27;</span>,
+                <span class="hljs-string">&#x27;msg&#x27;</span> =&gt; <span class="hljs-string">&#x27;长度有误&#x27;</span>,
+            ], <span class="hljs-number">256</span>)));
+            <span class="hljs-variable">$socket</span>-&gt;<span class="hljs-title function_ invoke__">close</span>();
+            <span class="hljs-keyword">return</span>;
+        &#125;
+
+        <span class="hljs-comment">// 收包头声明的包长度 包长一致进入命令处理流程</span>
+        <span class="hljs-comment">// 多处close是为了快速释放连接</span>
+        <span class="hljs-variable">$allLength</span> = <span class="hljs-built_in">self</span>::<span class="hljs-title function_ invoke__">packDataLength</span>(<span class="hljs-variable">$header</span>);
+        <span class="hljs-variable">$data</span> = <span class="hljs-variable">$socket</span>-&gt;<span class="hljs-title function_ invoke__">recvAll</span>(<span class="hljs-variable">$allLength</span>, <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$data</span>) == <span class="hljs-variable">$allLength</span>) &#123;
+            <span class="hljs-keyword">echo</span> <span class="hljs-variable">$data</span>;
+
+            <span class="hljs-comment">// 执行任务逻辑</span>
+
+            <span class="hljs-variable">$socket</span>-&gt;<span class="hljs-title function_ invoke__">sendAll</span>(<span class="hljs-built_in">self</span>::<span class="hljs-title function_ invoke__">pack</span>(<span class="hljs-title function_ invoke__">json_encode</span>([
+                <span class="hljs-string">&#x27;res&#x27;</span> =&gt; <span class="hljs-string">&#x27;ok&#x27;</span>,
+                <span class="hljs-string">&#x27;msg&#x27;</span> =&gt; <span class="hljs-string">&#x27;长度相同&#x27;</span>,
+            ], <span class="hljs-number">256</span>)));
+            <span class="hljs-variable">$socket</span>-&gt;<span class="hljs-title function_ invoke__">close</span>();
+        &#125;<span class="hljs-keyword">else</span>&#123;
+
+            <span class="hljs-variable">$socket</span>-&gt;<span class="hljs-title function_ invoke__">sendAll</span>(<span class="hljs-built_in">self</span>::<span class="hljs-title function_ invoke__">pack</span>(<span class="hljs-title function_ invoke__">json_encode</span>([
+                <span class="hljs-string">&#x27;res&#x27;</span> =&gt; <span class="hljs-string">&#x27;fail&#x27;</span>,
+                <span class="hljs-string">&#x27;msg&#x27;</span> =&gt; <span class="hljs-string">&#x27;长度不相等&#x27;</span>,
+            ], <span class="hljs-number">256</span>)));
+            <span class="hljs-variable">$socket</span>-&gt;<span class="hljs-title function_ invoke__">close</span>();
+        &#125;
+    &#125;
+
+    <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pack</span>(<span class="hljs-params"><span class="hljs-variable">$string</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">pack</span>(<span class="hljs-string">&#x27;N&#x27;</span>, <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$string</span>)) . <span class="hljs-variable">$string</span>;
+    &#125;
+
+    <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">packDataLength</span>(<span class="hljs-params"><span class="hljs-variable">$head</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">unpack</span>(<span class="hljs-string">&#x27;N&#x27;</span>, <span class="hljs-variable">$head</span>)[<span class="hljs-number">1</span>];
+    &#125;
+&#125;</code></pre>
+<p>写好了任务逻辑，还需要加入启动该进程</p>
+<pre><code class="hljs php">EasySwooleEvent.php文件
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mainServerCreate</span>(<span class="hljs-params">EventRegister <span class="hljs-variable">$register</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-variable">$config</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">UnixProcessConfig</span>();
+        <span class="hljs-variable">$config</span>-&gt;<span class="hljs-title function_ invoke__">setSocketFile</span>(EASYSWOOLE_ROOT.<span class="hljs-string">&quot;/Temp/siam_unix.sock&quot;</span>);
+        <span class="hljs-variable">$config</span>-&gt;<span class="hljs-title function_ invoke__">setProcessName</span>(<span class="hljs-string">&#x27;siam_unix&#x27;</span>);
+
+        <span class="hljs-variable">$siam</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Siam</span>(<span class="hljs-variable">$config</span>);
+        <span class="hljs-title class_">ServerManager</span>::<span class="hljs-title function_ invoke__">getInstance</span>()-&gt;<span class="hljs-title function_ invoke__">getSwooleServer</span>()-&gt;<span class="hljs-title function_ invoke__">addProcess</span>(<span class="hljs-variable">$siam</span>-&gt;<span class="hljs-title function_ invoke__">getProcess</span>());
+    &#125;</code></pre>
+<h3 id="普通环境发送数据">普通环境发送数据</h3>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$sock</span> = <span class="hljs-title function_ invoke__">dirname</span>(<span class="hljs-keyword">__FILE__</span>).<span class="hljs-string">&quot;/Temp/siam_unix.sock&quot;</span>;
+
+<span class="hljs-variable">$unixSock</span> = <span class="hljs-title function_ invoke__">stream_socket_client</span>(<span class="hljs-string">&quot;unix:///&quot;</span>.<span class="hljs-variable">$sock</span>);
+
+<span class="hljs-title function_ invoke__">fwrite</span>(<span class="hljs-variable">$unixSock</span>, <span class="hljs-title function_ invoke__">siam_pack</span>(<span class="hljs-string">&#x27;my name is siam&#x27;</span>));
+
+<span class="hljs-comment">//echo fread($unixSock, 4096).&quot;\n&quot;;</span>
+
+<span class="hljs-title function_ invoke__">fclose</span>(<span class="hljs-variable">$unixSock</span>);
+
+
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">siam_pack</span>(<span class="hljs-params"><span class="hljs-variable">$string</span></span>)</span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">pack</span>(<span class="hljs-string">&#x27;N&#x27;</span>, <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$string</span>)) . <span class="hljs-variable">$string</span>;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">packDataLength</span>(<span class="hljs-params"><span class="hljs-variable">$head</span></span>)</span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">unpack</span>(<span class="hljs-string">&#x27;N&#x27;</span>, <span class="hljs-variable">$head</span>)[<span class="hljs-number">1</span>];
+&#125;</code></pre></section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/12/18/php/php%E4%B8%AD%E8%A7%A3%E6%9E%90xml%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E5%BC%8F%EF%BC%8Cphp%E4%B8%AD%E8%A7%A3%E6%9E%90xml%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94.html">
+        <span class="nav-arrow">← </span>
+        
+          PHP中simplexml_load_string解析xml的正确方式
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2020/01/09/database/mysql%E4%BB%8E5-7%E8%BF%81%E7%A7%BB%E8%A1%A8%E7%BB%93%E6%9E%84%E5%88%B05-5%E6%8A%A5%E9%94%99-near-0-null-default-null.html">
+        
+          mysql从5.7迁移表结构到5.5报错 near &#39;(0) NULL DEFAULT NULL&#39;
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">基础要求</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">写在前面</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">Workerman中提供的建议方案</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">进程通信</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#unix-socket-%E6%96%87%E4%BB%B6"><span class="toc-nav-text">unix socket 文件</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#EasySwoole%E9%83%A8%E5%88%86"><span class="toc-nav-text">EasySwoole部分</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%99%AE%E9%80%9A%E7%8E%AF%E5%A2%83%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE"><span class="toc-nav-text">普通环境发送数据</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2020/01/02/php/php-fpm应用与php-swoole应用进行通信的几种方式.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "php-fpm应用与php-swoole应用进行通信",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

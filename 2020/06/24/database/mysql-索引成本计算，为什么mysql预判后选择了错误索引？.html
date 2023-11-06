@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="MYSQL 索引成本计算，为什么MYSQL预判后选择了错误索引？SQL 选用索引的执行成本如何计算 就如前文所述，在有多个索引的情况下， 在查询数据前，MySQL 会选择成本最小原则来选择使用对应的索引，这里的成本主要包含两个方面。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="mysql,索引,成本" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      MYSQL 索引成本计算，为什么MYSQL预判后选择了错误索引？ | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>MYSQL 索引成本计算，为什么MYSQL预判后选择了错误索引？</h2>
+  <p class="post-date">2020-06-24</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1>正文</h1>
+<p>SQL 选用索引的执行成本如何计算 就如前文所述，在有多个索引的情况下， 在查询数据前，MySQL 会选择成本最小原则来选择使用对应的索引，这里的成本主要包含两个方面。</p>
+<ul>
+<li>IO 成本: 即从磁盘把数据加载到内存的成本，默认情况下，读取数据页的 IO 成本是 1，MySQL 是以页的形式读取数据的，即当用到某个数据时，并不会只读取这个数据，而会把这个数据相邻的数据也一起读到内存中，这就是有名的程序局部性原理，所以 MySQL 每次会读取一整页，一页的成本就是 1。所以 IO 的成本主要和页的大小有关</li>
+<li>CPU 成本：将数据读入内存后，还要检测数据是否满足条件和排序等 CPU 操作的成本，显然它与行数有关，默认情况下，检测记录的成本是 0.2。 实例说明 为了根据以上两个成本来算出使用索引的最终成本，我们先准备一个表（以下操作基于 MySQL 5.7.18）</li>
+</ul>
+<pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `person` (
+  `id` <span class="hljs-type">bigint</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT,
+  `name` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  `score` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+  `create_time` <span class="hljs-type">timestamp</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span>,
+  <span class="hljs-keyword">PRIMARY</span> KEY (`id`),
+  KEY `name_score` (`name`(<span class="hljs-number">191</span>),`score`),
+  KEY `create_time` (`create_time`)
+) ENGINE<span class="hljs-operator">=</span>InnoDB <span class="hljs-keyword">DEFAULT</span> CHARSET<span class="hljs-operator">=</span>utf8mb4;</code></pre>
+<p>这个表除了主键索引之外，还有另外两个索引, name_score 及 create_time。然后我们在此表中插入 10 w 行数据，只要写一个存储过程调用即可，如下:</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">PROCEDURE</span> insert_person()
+<span class="hljs-keyword">begin</span>
+    <span class="hljs-keyword">declare</span> c_id <span class="hljs-type">integer</span> <span class="hljs-keyword">default</span> <span class="hljs-number">1</span>;
+    while c_id<span class="hljs-operator">&lt;=</span><span class="hljs-number">100000</span> do
+    <span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> person <span class="hljs-keyword">values</span>(c_id, concat(<span class="hljs-string">&#x27;name&#x27;</span>,c_id), c_id<span class="hljs-operator">+</span><span class="hljs-number">100</span>, date_sub(NOW(), <span class="hljs-type">interval</span> c_id <span class="hljs-keyword">second</span>));
+    <span class="hljs-keyword">set</span> c_id<span class="hljs-operator">=</span>c_id<span class="hljs-operator">+</span><span class="hljs-number">1</span>;
+    <span class="hljs-keyword">end</span> while;
+<span class="hljs-keyword">end</span></code></pre>
+<p>插入之后我们现在使用 EXPLAIN 来计算下统计总行数到底使用的是哪个索引</p>
+<pre><code class="hljs sql">EXPLAIN <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">FROM</span> person</code></pre>
+<p>从结果上看它选择了 create_time 辅助索引，显然 MySQL 认为使用此索引进行查询成本最小，这也是符合我们的预期，使用辅助索引来查询确实是性能最高的！ 我们再来看以下 SQL 会使用哪个索引</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> person <span class="hljs-keyword">WHERE</span> NAME <span class="hljs-operator">&gt;</span><span class="hljs-string">&#x27;name84059&#x27;</span> <span class="hljs-keyword">AND</span> create_time<span class="hljs-operator">&gt;</span><span class="hljs-string">&#x27;2020-05-23 14:39:18&#x27;</span></code></pre>
+<p>用了全表扫描！理论上应该用 name_score 或者 create_time 索引才对，从 WHERE 的查询条件来看确实都能命中索引，那是否是使用 SELECT * 造成的回表代价太大所致呢，我们改成覆盖索引的形式试一下</p>
+<pre><code class="hljs sql">explain <span class="hljs-keyword">SELECT</span> NAME <span class="hljs-keyword">FROM</span> person <span class="hljs-keyword">WHERE</span> NAME <span class="hljs-operator">&gt;</span> <span class="hljs-string">&#x27;name84059&#x27;</span></code></pre>
+<p>结果 MySQL 依然选择了全表扫描！这就比较有意思了，理论上采用了覆盖索引的方式进行查找性能肯定是比全表扫描更好的，为啥 MySQL 选择了全表扫描呢，既然它认为全表扫描比使用覆盖索引的形式性能更好，那我们分别用这两者执行来比较下查询时间吧 – 全表扫描执行时间: 4.0 ms</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> create_time <span class="hljs-keyword">FROM</span> person <span class="hljs-keyword">WHERE</span> NAME <span class="hljs-operator">&gt;</span><span class="hljs-string">&#x27;name84059&#x27;</span> <span class="hljs-keyword">AND</span> create_time<span class="hljs-operator">&gt;</span><span class="hljs-string">&#x27;2020-05-23 14:39:18&#x27;</span></code></pre>
+<p>-- 使用覆盖索引执行时间: 2.0 ms</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> create_time <span class="hljs-keyword">FROM</span> person force index(create_time) <span class="hljs-keyword">WHERE</span> NAME <span class="hljs-operator">&gt;</span><span class="hljs-string">&#x27;name84059&#x27;</span> <span class="hljs-keyword">AND</span> create_time<span class="hljs-operator">&gt;</span><span class="hljs-string">&#x27;2020-05-23 14:39:18&#x27;</span></code></pre>
+<p>从实际执行的效果看使用覆盖索引查询比使用全表扫描执行的时间快了一倍！说明 MySQL 在查询前做的成本估算不准！我们先来看看 MySQL 做全表扫描的成本有多少。 前面我们说了成本主要 IO 成本和 CPU 成本有关，对于全表扫描来说也就是分别和聚簇索引占用的页面数和表中的记录数。执行以下命令</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">TABLE</span> STATUS <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;person&#x27;</span></code></pre>
+<p>可以发现 行数是 100264，我们不是插入了 10 w 行的数据了吗，怎么算出的数据反而多了，其实这里的计算是估算，也有可能这里的行数统计出来比 10 w 少了，估算方式有兴趣大家去网上查找，这里不是本文重点，就不展开了。得知行数，那我们知道 CPU 成本是 100264 * 0.2 = 20052.8。 数据长度是 5783552，InnoDB 每个页面的大小是 16 KB，可以算出页面数量是 353。 也就是说全表扫描的成本是 20052.8 + 353 = 20406。 这个结果对不对呢，我们可以用一个工具验证一下。在 MySQL 5.6 及之后的版本中，我们可以用 optimizer trace 功能来查看优化器生成计划的整个过程 ，它列出了选择每个索引的执行计划成本以及最终的选择结果，我们可以依赖这些信息来进一步优化我们的 SQL。 optimizer_trace 功能使用如下</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">SET</span> optimizer_trace<span class="hljs-operator">=</span>&quot;enabled=on&quot;;
+<span class="hljs-keyword">SELECT</span> create_time <span class="hljs-keyword">FROM</span> person <span class="hljs-keyword">WHERE</span> NAME <span class="hljs-operator">&gt;</span><span class="hljs-string">&#x27;name84059&#x27;</span> <span class="hljs-keyword">AND</span> create_time <span class="hljs-operator">&gt;</span> <span class="hljs-string">&#x27;2020-05-23 14:39:18&#x27;</span>;
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> information_schema.OPTIMIZER_TRACE;
+<span class="hljs-keyword">SET</span> optimizer_trace<span class="hljs-operator">=</span>&quot;enabled=off&quot;;</code></pre>
+<p>执行之后我们主要观察使用 name_score，create_time 索引及全表扫描的成本。 先来看下使用 name_score 索引执行的的预估执行成本:</p>
+<pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;index&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;name_score&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;ranges&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-string">&quot;name84059 &lt;= name&quot;</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;index_dives_for_eq_ranges&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;rows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">25372</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;cost&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">30447</span>
+<span class="hljs-punctuation">&#125;</span></code></pre>
+<p>可以看到执行成本为 30447，高于我们之前算出来的全表扫描成本：20406。所以没选择此索引执行 注意：这里的 30447 是查询二级索引的 IO 成本和 CPU 成本之和，再加上回表查询聚簇索引的 IO 成本和 CPU 成本之和。 再来看下使用 create_time 索引执行的的预估执行成本:</p>
+<pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;index&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;create_time&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;ranges&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-string">&quot;0x5ec8c516 &lt; create_time&quot;</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;index_dives_for_eq_ranges&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;rows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">50132</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;cost&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">60159</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;cause&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cost&quot;</span>
+<span class="hljs-punctuation">&#125;</span></code></pre>
+<p>可以看到成本是 60159,远大于全表扫描成本 20406，自然也没选择此索引。 再来看计算出的全表扫描成本：</p>
+<pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;considered_execution_plans&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;plan_prefix&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;table&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;`person`&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;best_access_path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+          <span class="hljs-attr">&quot;considered_access_paths&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">&#123;</span>
+              <span class="hljs-attr">&quot;rows_to_scan&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100264</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;access_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;scan&quot;</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;resulting_rows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100264</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;cost&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20406</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;chosen&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+            <span class="hljs-punctuation">&#125;</span>
+          <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;condition_filtering_pct&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;rows_for_plan&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100264</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;cost_for_plan&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20406</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;chosen&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+      <span class="hljs-punctuation">&#125;</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre>
+<p>注意看 cost：20406，与我们之前算出来的完全一样！这个值在以上三者算出的执行成本中最小，所以最终 MySQL 选择了用全表扫描的方式来执行此 SQL。 实际上 optimizer trace 详细列出了覆盖索引，回表的成本统计情况，有兴趣的可以去研究一下。 从以上分析可以看出， MySQL 选择的执行计划未必是最佳的，原因有挺多，就比如上文说的行数统计信息不准，再比如 MySQL 认为的最优跟我们认为不一样，我们可以认为执行时间短的是最优的，但 MySQL 认为的成本小未必意味着执行时间短。 总结 本文通过一个例子深入剖析了 MySQL 的执行计划是如何选择的，以及为什么它的选择未必是我们认为的最优的，这也提醒我们，在生产中如果有多个索引的情况，使用 WHERE 进行过滤未必会选中你认为的索引，我们可以提前使用EXPLAIN, optimizer trace 来优化我们的查询语句。</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2020/06/24/other/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE-%E8%BD%A8%E9%81%93%E7%A7%BB%E5%8A%A8%EF%BC%8C%E5%B0%8F%E8%BD%A6.html">
+        <span class="nav-arrow">← </span>
+        
+          百度地图 轨道移动，小车
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2020/07/02/php/php-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E5%88%86-%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B-h5%E5%95%86%E5%9F%8E%E5%85%88%E4%BA%AB%E5%90%8E%E4%BB%98.html">
+        
+          php 微信支付分 开发过程 H5商城先享后付
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">正文</span></a></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2020/06/24/database/mysql-索引成本计算，为什么mysql预判后选择了错误索引？.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "MYSQL 索引成本计算，为什么MYSQL预判后选择了错误索引？",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

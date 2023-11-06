@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/04/basic/%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8C%96%E4%B9%8B%E5%8F%98%E9%87%8F%E5%90%8D%E9%95%BF%E7%9F%AD%E5%86%85%E5%AD%98%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80.html">程序优化之\"变量名长短\",内存逻辑地址,物理地址</a>
+      </h2>
+      <p class="article-date">2020年4月4日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>程序优化为何没有说明&quot;变量名长度&quot;</h1>
+<p>网上有着不少常见的程序优化点的文章，比如PHP中使用单引号、双引号的性能差别等等。 但这其中并没有说到&quot;变量名长度&quot;会影响性能，那么它为什么不会影响性能呢，就需要引入我们今天要讲的这篇文章的知识了。</p>
+<h1>编译过程内存地址</h1>
+<p>我们的程序代码在运行的时候（或者之前）需要先经过编译器的处理，编译成更为底层的代码。 编译时是不分配内存的。此时只是根据声明时的类型进行占位，到以后程序执行时分配内存才会正确。所以声明是给编译器看的。变量名在编译过后的程序中是以<code>内存地址</code>存在的。所以它的长度<code>不会影响程序性能，只会占用你的代码文件大小(基本可以忽略)</code> 引用一下文献说明</p>
+<blockquote>
+<p>接下来，汇编器会将汇编代码转换为二进制目标代码文件。目标代码文件是机器代码的一种形式，它包含所有指令的二进制表现，但是还没有填入全局值的地址。</p>
+</blockquote>
+<h1>原文博客</h1>
+<p><a href="https://blog.siammm.cn/archives/257" title="地址">地址</a></p>
+<h2 id="程序如何确认内存地址">程序如何确认内存地址</h2>
+<p>我们都知道，所有内存数据都是储存在我们硬件<code>内存条</code>上面的，那么它的空间是固定的，并且某个位置被占用的时候，应该是不能被其他程序使用的，否则将会内存冲突。 （一个空教室，小明已经坐了一个位置，其他同学不能坐在他大腿上了诶）</p>
+        
+      </div>
+      <a class="more" href="/2020/04/04/basic/%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8C%96%E4%B9%8B%E5%8F%98%E9%87%8F%E5%90%8D%E9%95%BF%E7%9F%AD%E5%86%85%E5%AD%98%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/25/php/%E3%80%90%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E3%80%91tp5%E8%AF%BB%E5%8F%96%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E8%BE%93%E5%87%BA%E5%90%8E%EF%BC%8C%E8%AE%BE%E7%BD%AEheader%E5%A4%B4%E6%97%A0%E6%95%88.html">【源码解读】TP5读取本地图片输出后，设置header头无效，图片乱码</a>
+      </h2>
+      <p class="article-date">2020年3月25日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>在Thinkphp程序中读取本地图片，做出加工处理（如合并二维码等水印），然后输出给客户端，一直输出图片内容乱码。 设置了header image/png 不生效。 写下这篇TP源码排查文章，看看问题到底出现在哪个步骤。</p>
+<h2 id="乱码">乱码</h2>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2020/03/3dc71e5f0bd67bfa20220a277fd8ba48.png" alt=""></p>
+<h2 id="设置响应头无效">设置响应头无效</h2>
+<pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>&#123;
+    <span class="hljs-comment">// 请求头不生效，还是乱码</span>
+    <span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Content-type: image/png&#x27;</span>);
+    <span class="hljs-variable">$file</span> = <span class="hljs-string">&quot;xxxxx\public\static\img/test.png&quot;</span>;
+    <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-variable">$file</span>);
+&#125;</code></pre>
+<h2 id="排查TP源码">排查TP源码</h2>
+<p>还记得我们这篇文章吗：TP为什么可以return就输出字符串或者模板内容等等，在原生PHP不行呢？ <a href="https://blog.siammm.cn/archives/168" title="https://blog.siammm.cn/archives/168">https://blog.siammm.cn/archives/168</a> 从这篇文章，大概的问题还是出现在这个控制器调度类里面，我继续查看该部分源码 还是这段熟悉的源码，一样的配方，不一样的问题（bug）。</p>
+        
+      </div>
+      <a class="more" href="/2020/03/25/php/%E3%80%90%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E3%80%91tp5%E8%AF%BB%E5%8F%96%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E8%BE%93%E5%87%BA%E5%90%8E%EF%BC%8C%E8%AE%BE%E7%BD%AEheader%E5%A4%B4%E6%97%A0%E6%95%88.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/25/php/php%E4%B8%8Egithook%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0.html">php与githook实现自动更新</a>
+      </h2>
+      <p class="article-date">2020年3月25日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          githook
+git系统仓库一般都会支持这个hook配置，在发生事件的时候触发执行，可以是https推送等通知形式。 我们使用gitee+php来达到自动更新项目代码的需求。
+用户组和权限
+
+php 是以 www 用户组运行在系统上的，
+
+如果我们使用php的函数 shell_exec(& ...
+        
+      </div>
+      <a class="more" href="/2020/03/25/php/php%E4%B8%8Egithook%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/24/other/apicloudapp%E5%BC%80%E5%8F%91-api-is-undefined.html">ApiCloudApp开发-$api is undefined</a>
+      </h2>
+      <p class="article-date">2020年3月24日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+在apicloud文档中 关于数据储存的部分，可以支持我们h5开发常用到的localStore模块 使用过程中遇到报错提示$api is undefined 记录遇到该问题及其解决方案
+文档
+文档demo如下
+$api.setStorage(&#x27;name&#x27;,&#x ...
+        
+      </div>
+      <a class="more" href="/2020/03/24/other/apicloudapp%E5%BC%80%E5%8F%91-api-is-undefined.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/22/php/wordpress%E4%BA%8C%E5%BC%80-%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E9%83%A8%E5%88%86%E9%9A%90%E8%97%8F.html">WordPress二开-文章内容部分隐藏</a>
+      </h2>
+      <p class="article-date">2020年3月22日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          原理
+在php从数据库读取文件出来之后，不要马上输出，先执行正则替换、删除的步骤即可
+修改文件地址
+WordPress是设计了模板主题的概念的，模板主题所在目录为：wordpress/wp-content/themes 在该目录下，每一套主题又有一个新的目录，假设我们使用的模板主题名字为si ...
+        
+      </div>
+      <a class="more" href="/2020/03/22/php/wordpress%E4%BA%8C%E5%BC%80-%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E9%83%A8%E5%88%86%E9%9A%90%E8%97%8F.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/21/other/apicloudapp%E5%BC%80%E5%8F%91-%E5%BF%AB%E9%80%9F%E8%B0%83%E8%AF%95.html">ApiCloudApp开发 - 快速调试</a>
+      </h2>
+      <p class="article-date">2020年3月21日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+
+快速监听、预览、复发 HTTP网络请求
+在USB连线开发时如何电脑查看console.log日志
+编译后无法运行的错误
+
+原文博客：http://blog.siammm.cn
+解决过程
+@@@ 在需要调试的页面引入vconsole 但每个页面都需要引入 换一种思路：封装一个con ...
+        
+      </div>
+      <a class="more" href="/2020/03/21/other/apicloudapp%E5%BC%80%E5%8F%91-%E5%BF%AB%E9%80%9F%E8%B0%83%E8%AF%95.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/18/other/%E8%BD%ACandroid%E4%B8%8B%E4%B8%80%E6%AC%A1oom%E8%B0%83%E8%AF%95%E8%BF%87%E7%A8%8B.html">转 - Android下一次OOM调试过程</a>
+      </h2>
+      <p class="article-date">2020年3月18日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          分享原因
+
+调试过程记录非常详细，是很好排查思路学习和锻炼的学习资料
+Android基于Linux内核，Linux对线程、进程、描述符等限制参数的功能
+技术文章
+
+可以导致OOM的原因有以下几种：
+
+文件描述符(fd)数目超限，即proc/pid/fd下文件数目突破/proc/pid/lim ...
+        
+      </div>
+      <a class="more" href="/2020/03/18/other/%E8%BD%ACandroid%E4%B8%8B%E4%B8%80%E6%AC%A1oom%E8%B0%83%E8%AF%95%E8%BF%87%E7%A8%8B.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/18/other/vue-cli%E5%BC%95%E5%85%A5vue-router.html">vue-cli引入vue-router</a>
+      </h2>
+      <p class="article-date">2020年3月18日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          vue ui
+开启图形页面 在浏览器中创建项目 右上角 项目管理器，新建项目成功后切换为新项目 在左侧选择插件 列表中则会显示当前已经安装的插件 同时在导航栏上方会有几个按钮，可以添加新的插件，如果我们之前没有安装过router插件，则会显示该按钮，点击安装即可。 原文Siam博客http: ...
+        
+      </div>
+      <a class="more" href="/2020/03/18/other/vue-cli%E5%BC%95%E5%85%A5vue-router.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/06/database/mysql-%E4%B9%98%E6%B3%95%E9%99%A4%E6%B3%95%E7%B2%BE%E5%BA%A6%E4%B8%8D%E4%B8%80%E8%87%B4%EF%BC%8C%E9%99%A4%E6%B3%95%E5%90%8E%E5%9B%9B%E4%BD%8D%E5%B0%8F%E6%95%B0.html">Mysql 乘法除法精度不一致，除法后四位小数</a>
+      </h2>
+      <p class="article-date">2020年3月6日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          问题
+今天在写项目功能的时候，有一个统计金额的情况，然后需要进行单位转换，所以写下了大概如下功能的语句，但得到的数据为小数点后4位精度，正常我们只需要2位就足够。
+select total_fee / 100 from orders
+继续排查寻找资料，进行精度转换，找了一圈的资料都不太满意， ...
+        
+      </div>
+      <a class="more" href="/2020/03/06/database/mysql-%E4%B9%98%E6%B3%95%E9%99%A4%E6%B3%95%E7%B2%BE%E5%BA%A6%E4%B8%8D%E4%B8%80%E8%87%B4%EF%BC%8C%E9%99%A4%E6%B3%95%E5%90%8E%E5%9B%9B%E4%BD%8D%E5%B0%8F%E6%95%B0.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/04/Swoole/swooleswoole-timer-tick-must-be-callable-array-given-%E6%8A%A5%E9%94%99%E5%BC%82%E5%B8%B8.html">swoole,swoole_timer_tick() must be callable, array given 报错异常</a>
+      </h2>
+      <p class="article-date">2020年3月4日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          报错提示
+
+Fatal error: Uncaught TypeError: Argument 2 passed to Swoole\Timer::swoole_timer_tick() must be callable, array given
+
+触发场景
+在easyswoole旧版的Co ...
+        
+      </div>
+      <a class="more" href="/2020/03/04/Swoole/swooleswoole-timer-tick-must-be-callable-array-given-%E6%8A%A5%E9%94%99%E5%BC%82%E5%B8%B8.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/6/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/8/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

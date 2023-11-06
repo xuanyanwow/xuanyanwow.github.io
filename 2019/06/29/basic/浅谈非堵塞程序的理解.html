@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="浅谈非堵塞程序的理解" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="非堵塞" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      浅谈非堵塞程序的理解 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>浅谈非堵塞程序的理解</h2>
+  <p class="post-date">2019-06-29</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>这篇文章，主要讲讲非堵塞编程带给程序的意义。 在我们谈到今天的主题之前，先来做一点基础知识的补充。</p>
+<h2 id="什么是I-O">什么是I/O</h2>
+<p>我们的计算机系统架构简易可看成如下，I/O接口连接其他硬件如：网卡、键盘鼠标、磁盘等。 I代表Input，输入数据。 O代表Output，输出数据。 <img src="https://blog.siammm.cn/wp-content/uploads/2019/06/3674cd0f72fc6b4f43522b703b9d3767.png" alt="计算机基础架构图"> 当程序需要发送网络请求或者从磁盘中读取文件等IO操作时 CPU发出指令，然后信号经过总线到达网卡或者磁盘 然后拿到数据，再经过总线到达主存中，CPU继续对主存中的数据进行操作。</p>
+<blockquote>
+<p>CPU的执行速率：主频 比如3GHz = 一秒钟有30亿个时钟脉冲，执行一条指令一般只需要几个时钟脉冲。也就是一秒可以执行的指令经常是以亿计算的。</p>
+</blockquote>
+<p>以网络请求为例（磁盘IO也是一样的原理），当CPU发出指令之后，想要得到结果需要经过很长的等待（比如网络延迟经常是几十ms时间，CPU都过了多少千万个时钟脉冲了）</p>
+<h2 id="同步、异步、堵塞、非堵塞的概念">同步、异步、堵塞、非堵塞的概念</h2>
+<p>相信看这篇文章的你也不是第一次看到这种概念，在很多文章中经常会以购物等场景做例子。 这里只做一个简单的介绍： <code>同步、异步</code>分为一组概念； <code>堵塞、非堵塞</code>分为一组概念； （同步、异步）：关注的是：数据的接收方式 （堵塞、非堵塞）：关注的是：是否等待结果返回 这是两个分组（因为它们的关注点不同） 但是往往<code>同步跟堵塞</code>是一起的，<code>异步跟非堵塞</code>是一起的。 如果我们需要同步接收数据，肯定要让当前程序暂停，等待数据返回再做处理。 如果我们选择了异步接收数据，程序还堵塞的话那就没什么意义了，所以非堵塞模式，一般会返回发送调用请求的结果，然后程序继续执行，直到结果准备好了，再通过回调函数等方式触发程序做处理。</p>
+<span id="more"></span>
+<h2 id="堵塞IO存在的不足">堵塞IO存在的不足</h2>
+<p>如果是堵塞IO的话，那么当前的进程会<code>暂停</code>执行，直到拿到数据才会继续执行。 <strong>文件锁堵塞</strong> 以PHP中自带的Session为例的<code>文件锁</code> Session以生成文件储存的，如果同一个用户同时发起多个请求，先获取文件锁的请求可以执行，后面的拿不到文件锁，所以一直堵塞等待，假设前面的请求过了10s才执行完，后续的请求是要10s后<code>才开始</code>执行。 <strong>socket堵塞</strong> 写过tcp服务器的应该都会遇到这个问题 我们可以监听机器的某个端口，当有请求连接进来的时候，我们可以accept这个连接，然后读取客户端发过来的数据、发送数据回客户端等处理。</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$socket</span> = <span class="hljs-title function_ invoke__">stream_socket_server</span>(<span class="hljs-string">&quot;tcp://0.0.0.0:8000&quot;</span>, <span class="hljs-variable">$errno</span>, <span class="hljs-variable">$errstr</span>);
+<span class="hljs-keyword">if</span> (!<span class="hljs-variable">$socket</span>) &#123;
+  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$errstr</span> (<span class="hljs-subst">$errno</span>)&lt;br /&gt;\n&quot;</span>;
+&#125; <span class="hljs-keyword">else</span> &#123;
+  <span class="hljs-comment">// 循环接收客户端的连接</span>
+  <span class="hljs-keyword">while</span> (<span class="hljs-variable">$conn</span> = <span class="hljs-title function_ invoke__">stream_socket_accept</span>(<span class="hljs-variable">$socket</span>)) &#123;
+      <span class="hljs-variable">$data</span> = <span class="hljs-title function_ invoke__">fread</span>(<span class="hljs-variable">$conn</span>, <span class="hljs-number">8192</span>); <span class="hljs-comment">// 读取客户端发送过来的数据 读不到就一直堵塞着</span>
+      <span class="hljs-title function_ invoke__">fwrite</span>(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;hello world\n&quot;</span>); <span class="hljs-comment">// 发送hello world</span>
+      <span class="hljs-title function_ invoke__">fclose</span>(<span class="hljs-variable">$conn</span>);
+  &#125;
+  <span class="hljs-title function_ invoke__">fclose</span>(<span class="hljs-variable">$socket</span>);
+&#125;</code></pre>
+<p>以上代码实现了一个建议的TCP服务器，但是因为没有解决堵塞IO的问题，所以只能处理一个客户端的请求。</p>
+<ul>
+<li>当A连接进来，accept到，然后开始fread从缓冲区读取数据。 堵塞住了，进程执行暂停，等待数据结果。</li>
+<li>此时B连接进来，因为进程已经被堵塞住，所以无法被accept，更无法读取、发送数据。</li>
+<li>A客户端发送了数据，进程恢复执行，开始读取，然后输出。</li>
+<li>然后才能accept B客户端（哪怕在此之前B已经发了很多数据，也只能从这个时候开始处理）。</li>
+</ul>
+<h2 id="非堵塞IO">非堵塞IO</h2>
+<p>为了让我们的网络服务器可以服务多个客户端，我们需要将程序改造为非堵塞的。 我们可以简单实现为：</p>
+<ul>
+<li>当A连接进来了，accept起来，存到一个列表中。</li>
+<li>继续等待监听，B连接进来了，accpet起来，存到一个列表中。</li>
+<li>多开一个线程，不断轮询连接列表，判断连接是否有发送数据过来，有的话就执行操作（比如发送数据、关闭连接）</li>
+<li>在PHP中默认没有线程操作，并且accept操作是堵塞的，但是可以设置<code>超时时间</code></li>
+</ul>
+<p>所以我们可以让程序每等待0.1s连接进来，然后就去轮询一次连接列表，读取数据然后操作。</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$socket</span> = <span class="hljs-title function_ invoke__">stream_socket_server</span>(<span class="hljs-string">&quot;tcp://0.0.0.0:8000&quot;</span>, <span class="hljs-variable">$errno</span>, <span class="hljs-variable">$errstr</span>);
+<span class="hljs-keyword">if</span> (!<span class="hljs-variable">$socket</span>) &#123;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$errstr</span> (<span class="hljs-subst">$errno</span>)&lt;br /&gt;\n&quot;</span>;
+&#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-variable">$conns</span> = [];<span class="hljs-comment">// 全局连接</span>
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;
+        <span class="hljs-variable">$conn</span> = @<span class="hljs-title function_ invoke__">stream_socket_accept</span>(<span class="hljs-variable">$socket</span>, <span class="hljs-number">0.1</span>); <span class="hljs-comment">// 0.1没有连接进来就不堵塞等待了 先检测有没有客户端发数据</span>
+        <span class="hljs-keyword">if</span>(<span class="hljs-variable">$conn</span>!== <span class="hljs-literal">false</span>)&#123;
+            <span class="hljs-variable">$conns</span>[] = <span class="hljs-variable">$conn</span>;
+            <span class="hljs-title function_ invoke__">stream_set_blocking</span>(<span class="hljs-variable">$conn</span>, <span class="hljs-literal">false</span>);
+        &#125;
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$conns</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span>=&gt;<span class="hljs-variable">$item</span>) &#123;
+            <span class="hljs-variable">$data</span> = <span class="hljs-title function_ invoke__">fread</span>(<span class="hljs-variable">$item</span>, <span class="hljs-number">8192</span>);
+            <span class="hljs-keyword">if</span> (<span class="hljs-variable">$data</span> !== <span class="hljs-string">&#x27;&#x27;</span>)&#123;
+                <span class="hljs-title function_ invoke__">fwrite</span>(<span class="hljs-variable">$item</span>, <span class="hljs-string">&quot;hello&quot;</span>);
+                <span class="hljs-title function_ invoke__">fclose</span>(<span class="hljs-variable">$item</span>);
+                <span class="hljs-keyword">unset</span>(<span class="hljs-variable">$conns</span>[<span class="hljs-variable">$key</span>]);
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-title function_ invoke__">fclose</span>(<span class="hljs-variable">$socket</span>);
+&#125;</code></pre>
+<p>以上的I/O模型是<code>同步非堵塞</code> ，当客户端连接数比较多的时候，以上代码还是有很大的问题。 我们还可以将对客户端的操作逻辑进行异步执行（因为我们的实际业务逻辑肯定不只是输出hello这么简单，还要数据库操作等等）</p>
+<blockquote>
+<p>将对客户连接的操作逻辑异步分离的话，但是accept连接还是堵塞同步的，因此可见，程序同步、异步、堵塞、非堵塞是相对的，需要按功能点和模块来分析。</p>
+</blockquote>
+<p>我们也可以依赖扩展，比如<code>Event</code>等，实现<code>异步非堵塞</code>模型。 当有客户连接、断开、读写数据时，底层扩展会通过我们设置的回调函数触发，而不需要我们在程序代码中accpet、read（堵塞或者轮询） 可以参考简单的demo。 <code>这不是完整的demo，并且需要安装扩展，大家了解一下使用的方式即可 有兴趣可以继续深入学习Event扩展的使用</code></p>
+<pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyListenerConnection</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-variable">$bev</span>, <span class="hljs-variable">$base</span>;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__destruct</span>(<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-variable language_">$this</span>-&gt;bev-&gt;<span class="hljs-title function_ invoke__">free</span>();
+    &#125;
+    <span class="hljs-comment">// 新链接进来 并且监听 这个时候就设置链接的事件回调</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"><span class="hljs-variable">$base</span>, <span class="hljs-variable">$fd</span></span>) </span>&#123;
+        <span class="hljs-variable language_">$this</span>-&gt;base = <span class="hljs-variable">$base</span>;
+        <span class="hljs-variable language_">$this</span>-&gt;bev = <span class="hljs-keyword">new</span> <span class="hljs-title class_">EventBufferEvent</span>(<span class="hljs-variable">$base</span>, <span class="hljs-variable">$fd</span>, <span class="hljs-title class_">EventBufferEvent</span>::<span class="hljs-variable constant_">OPT_CLOSE_ON_FREE</span>);
+        <span class="hljs-comment">// 设置回调事件</span>
+        <span class="hljs-variable language_">$this</span>-&gt;bev-&gt;<span class="hljs-title function_ invoke__">setCallbacks</span>(
+            <span class="hljs-keyword">array</span>(<span class="hljs-variable">$this</span>, <span class="hljs-string">&quot;echoReadCallback&quot;</span>),
+            <span class="hljs-keyword">array</span>(<span class="hljs-variable language_">$this</span>, <span class="hljs-string">&quot;writeCallback&quot;</span>),
+            <span class="hljs-keyword">array</span>(<span class="hljs-variable language_">$this</span>, <span class="hljs-string">&quot;echoEventCallback&quot;</span>),
+            <span class="hljs-literal">NULL</span>
+        );
+
+        <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">$this</span>-&gt;bev-&gt;<span class="hljs-title function_ invoke__">enable</span>(<span class="hljs-title class_">Event</span>::<span class="hljs-variable constant_">READ</span>)) &#123;
+            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Failed to enable READ\n&quot;</span>;
+            <span class="hljs-keyword">return</span>;
+        &#125;
+    &#125;
+    <span class="hljs-comment">// 读回调</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">echoReadCallback</span>(<span class="hljs-params"><span class="hljs-variable">$bev</span>, <span class="hljs-variable">$ctx</span></span>) </span>&#123;
+        <span class="hljs-comment">// 在这里处理 handleRequest $bev-&gt;input就是客户端发送的数据</span>
+        <span class="hljs-variable">$bev</span>-&gt;output-&gt;<span class="hljs-title function_ invoke__">addBuffer</span>(<span class="hljs-variable">$bev</span>-&gt;input);
+        <span class="hljs-comment">// $bev-&gt;output设置内容就是会发送给客户端的数据  这里原样返回</span>
+    &#125;
+    <span class="hljs-comment">// 写回调  是输出之后才回调的 而不是在输出之前 </span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">writeCallback</span>(<span class="hljs-params"><span class="hljs-variable">$bev</span>, <span class="hljs-variable">$ctx</span></span>)</span>&#123;
+        <span class="hljs-comment">// 释放监听 断开连接</span>
+        <span class="hljs-variable">$bev</span>-&gt;<span class="hljs-title function_ invoke__">free</span>();
+    &#125;
+
+    <span class="hljs-comment">// 除了读写之外其他事件的回调</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">echoEventCallback</span>(<span class="hljs-params"><span class="hljs-variable">$bev</span>, <span class="hljs-variable">$events</span>, <span class="hljs-variable">$ctx</span></span>) </span>&#123;
+        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$events</span> &amp; <span class="hljs-title class_">EventBufferEvent</span>::<span class="hljs-variable constant_">ERROR</span>) &#123;
+            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Error from bufferevent\n&quot;</span>;
+        &#125;
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$events</span> &amp; (<span class="hljs-title class_">EventBufferEvent</span>::<span class="hljs-variable constant_">EOF</span>  <span class="hljs-title class_">EventBufferEvent</span>::<span class="hljs-variable constant_">ERROR</span>)) &#123;
+            <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">__destruct</span>();
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>通过这种方式，我们写一个网络服务器就很简单了，只需要给事件设置回调事件，由底层维护客户端连接的可读写状态， 这种模型是I/O复用里的<code>epoll</code>模型。</p>
+<h2 id="总结">总结</h2>
+<p>通过上面文件锁、几种TCP服务器的写法，我们可以理解到堵塞和非堵塞程序之间的区别了。 再做一下小小的总结。</p>
+<ul>
+<li>同步和异步是指<code>决定结果返回的接收方式</code></li>
+<li>堵塞和非堵塞是指<code>是否需要等待结果返回</code></li>
+<li>如果发生磁盘IO等操作，因为CPU执行速率和总线信号传递、磁盘速率的不对等，CPU如果堵塞等待读取结果，就不能最大化地利用机器资源。</li>
+<li>非堵塞程序，可以提高机器的利用率，可以提高并发支持。</li>
+<li>常见的I/O模型有：阻塞式I/O；非阻塞式I/O；I/O复用（select和poll）；异步I/O；</li>
+</ul>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/06/23/basic/http%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84get%E3%80%81post%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB.html">
+        <span class="nav-arrow">← </span>
+        
+          HTTP协议中的GET、POST请求方法的区别
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/07/04/front/layui%E6%A8%A1%E5%9D%97%E5%8C%96%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E6%94%B9%E9%80%A0%E4%BC%A0%E7%BB%9Fjquery%E6%89%A9%E5%B1%95%E4%B8%BAlayui%E6%A8%A1%E5%9D%97.html">
+        
+          Layui模块化,改造传统jquery扩展为layui模块
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFI-O"><span class="toc-nav-text">什么是I&#x2F;O</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%E3%80%81%E5%A0%B5%E5%A1%9E%E3%80%81%E9%9D%9E%E5%A0%B5%E5%A1%9E%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-nav-text">同步、异步、堵塞、非堵塞的概念</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%A0%B5%E5%A1%9EIO%E5%AD%98%E5%9C%A8%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="toc-nav-text">堵塞IO存在的不足</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%9D%9E%E5%A0%B5%E5%A1%9EIO"><span class="toc-nav-text">非堵塞IO</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-nav-text">总结</span></a></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/06/29/basic/浅谈非堵塞程序的理解.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "浅谈非堵塞程序的理解",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

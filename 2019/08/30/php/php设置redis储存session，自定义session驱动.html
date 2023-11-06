@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      PHP设置Redis储存Session，自定义session驱动 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>PHP设置Redis储存Session，自定义session驱动</h2>
+  <p class="post-date">2019-08-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h3 id="思">思</h3>
+<p>我们在之前的文章已经讲到了session是将数据储存在本地文件中，并且将session_id返回给客户端（浏览器会储存在cookies里）。 那么当我们在负载均衡集群环境的时候，<code>负载调度部分负责把客户端的请求按照不同的策略分配给后端服务节点</code>。所以会出现我们在A机器设置了session，后面请求在B机器判断session依旧为空的情况。</p>
+<h3 id="常用的负载均衡环境处理session的策略">常用的负载均衡环境处理session的策略</h3>
+<p>PHP也可以配置将session保存在redis或者memcache中，在几种用来存储会话数据的方式。显然是Redis在效率上要更快些，而与memcached相比，因为有持久化，也更安全一些。 所以也是常用的负载均衡环境处理session的策略。 但因为是将信息储存在内存中，可能会出现内存不足、利用率不高等问题。 优点：效率高 缺点：信息储存在内存中，会产生大小不一的内存块，内存无法完全利用，并且可能出现内存不足。</p>
+<h3 id="设置session处理">设置session处理</h3>
+<p>php中除了可以通过简单修改配置项来设定使用其他的session处理方式，同时也提供了对应的接口以便于我们自定义session的处理逻辑。 接下来我们来通过自定义redis处理session的逻辑来了解接口。</p>
+<h3 id="session-set-save-handler函数">session_set_save_handler函数</h3>
+<p><code>session_set_save_handler()</code>该函数定义用户session逻辑，如写入、取出、关闭等。 该函数的传参如下：</p>
+<blockquote>
+<p>该函数有两种用法</p>
+</blockquote>
+<h5 id="在PHP5-4以前的用法">在PHP5.4以前的用法</h5>
+<blockquote>
+<p>bool session_set_save_hanler(callback open,callback close,callback read,callback write,callback destory,callback gc)</p>
+</blockquote>
+<p>可见该函数的几个参数接收都是以callback回调函数的形式的。</p>
+<p>参数</p>
+<p>描述</p>
+<p>open</p>
+<p>session打开时的回调函数。接收两个参数，第一个参数是保持session的路径，第二个参数是session的名字</p>
+<p>close</p>
+<p>当session操作完成时调用此函数。不接收参数。</p>
+<p>read</p>
+<p>以session_id作为参数。通过以session_id作为参数从数据存储方中取得数据，并返回此数据。如果数据为空，可以返回一个空字符串。此函数在调用session_start 前被触发</p>
+<p>write</p>
+<p>当数据存储时调用。接收两个参数，一个是session_id，另外一个是session的数据</p>
+<p>destory</p>
+<p>当调用session_destroy 函数时触发destroy函数。只有一个参数 session_id</p>
+<p>gc</p>
+<p>当php执行session垃圾回收机制时触发</p>
+<p>调用方式：</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> 
+
+<span class="hljs-comment">// 需要先引入自定义的SiamSession类（该类的实现逻辑于下面PHP5.4以后的实现相同），然后再设置到save_handler中去</span>
+<span class="hljs-comment">// 也可以直接在参数处传递闭包</span>
+
+<span class="hljs-variable">$siamSession</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SiamSession</span>();
+<span class="hljs-title function_ invoke__">session_set_save_handler</span>(
+  [<span class="hljs-variable">$siamSession</span>,<span class="hljs-string">&quot;open&quot;</span>],
+  [<span class="hljs-variable">$siamSession</span>,<span class="hljs-string">&quot;close&quot;</span>],
+  [<span class="hljs-variable">$siamSession</span>,<span class="hljs-string">&quot;read&quot;</span>],
+  [<span class="hljs-variable">$siamSession</span>,<span class="hljs-string">&quot;write&quot;</span>],
+  [<span class="hljs-variable">$siamSession</span>,<span class="hljs-string">&quot;destroy&quot;</span>],
+  [<span class="hljs-variable">$siamSession</span>,<span class="hljs-string">&quot;gc&quot;</span>]
+);
+
+<span class="hljs-comment">// 开启</span>
+<span class="hljs-title function_ invoke__">session_start</span>();</code></pre>
+<h2 id="※※※">※※※</h2>
+<h5 id="在PHP5-4以后的用法-也是推荐的用法">在PHP5.4以后的用法 也是推荐的用法</h5>
+<blockquote>
+<p>session_set_save_handler ( object $sessionhandler [, bool $register_shutdown = TRUE ] ) : bool</p>
+</blockquote>
+<p>参数</p>
+<p>描述</p>
+<p>sessionhandler</p>
+<p>实现了 （SessionHandlerInterface， SessionIdInterface）或 SessionUpdateTimestampHandlerInterface 接口的对象， 例如 <code>SessionHandler</code>。</p>
+<p>register_shutdown</p>
+<p>将函数 <code>session_write_close()</code> 注册为 register_shutdown_function() 函数。在PHP函数停止执行时可以触发。</p>
+<blockquote>
+<p>session_write_close()函数：结束当前会话并存储会话数据。</p>
+</blockquote>
+<p>调用方式：</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> 
+
+<span class="hljs-comment">// 需要先引入自定义的Session处理程序，然后再设置到save_handler中去</span>
+<span class="hljs-comment">// 也可以直接在参数处传递闭包</span>
+
+<span class="hljs-variable">$siamSession</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SiamSession</span>();
+<span class="hljs-title function_ invoke__">session_set_save_handler</span>(<span class="hljs-variable">$siamSession</span>, <span class="hljs-literal">true</span>);
+
+<span class="hljs-comment">// 开启</span>
+<span class="hljs-title function_ invoke__">session_start</span>();</code></pre>
+<p>我们看到第一个参数的描述，传入的参数应该是一个<code>实现了 SessionHandlerInterface 接口</code>的对象 同时还可以附属实现 <code>SessionIdInterface</code> 和 <code>SessionUpdateTimestampHandlerInterface</code> 接口 那么我们先来看看这几个接口需要实现什么方法</p>
+<h3 id="从SessionHandler理解几个接口实现">从SessionHandler理解几个接口实现</h3>
+<p>在描述中可以看到举例传入的参数可以为<code>SessionHandler</code>，也就是如果我们想要自定义Session处理程序，可以参考该类需要实现的方法。</p>
+<blockquote>
+<ul>
+<li>这个类是设计用于公开当前内部PHP Session处理程序，如果想要自己实现PHP Session处理程序，请实现 <code>SessionHandlerInterface</code>接口</li>
+<li>从SessionHandler继承的类，可以通过调用父类方法来重写覆盖具体操作，例如将数据加密储存。并且将新类通过session_set_save_handler()设置为PHP Session处理程序</li>
+</ul>
+</blockquote>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// SessionHandler 实现了SessionHandlerInterface和SessionIdInterface两个接口</span>
+<span class="hljs-comment">// 其中 SessionIdInterface 提供了 create_sid 接口，可以自定义session_id的生成规则</span>
+<span class="hljs-comment">// 其他的方法则由 SessionHandlerInterface 提供，主要是session的回调处理，如打开、关闭、gc、写入、读取</span>
+SessionHandler <span class="hljs-keyword">implements</span> SessionHandlerInterface , SessionIdInterface &#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * close方法，当session关闭的时候触发</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">close</span> ( <span class="hljs-keyword">void</span> ) : <span class="hljs-keyword">bool</span>
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * create_sid方法，返回一个新创建的session_id</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">create_sid</span> ( <span class="hljs-keyword">void</span> ) : <span class="hljs-keyword">string</span>
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * destroy方法，当调用session_destroy的时候触发</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">destroy</span> ( <span class="hljs-keyword">string</span> <span class="hljs-variable">$session_id</span> ) : <span class="hljs-keyword">bool</span>
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * gc方法，当php程序gc清理的时候触发，主要用于清除已经过期的session</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">gc</span> ( <span class="hljs-keyword">int</span> <span class="hljs-variable">$maxlifetime</span> ) : <span class="hljs-keyword">int</span>
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * open方法，当session打开的时候触发</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">open</span> ( <span class="hljs-keyword">string</span> <span class="hljs-variable">$save_path</span> , <span class="hljs-keyword">string</span> <span class="hljs-variable">$session_name</span> ) : <span class="hljs-keyword">bool</span>
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * read方法，读取session的处理逻辑，可以在这里解密储存数据</span>
+<span class="hljs-comment">     * 在session_start后会触发</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">read</span> ( <span class="hljs-keyword">string</span> <span class="hljs-variable">$session_id</span> ) : <span class="hljs-keyword">string</span>
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * write方法，将session数据写入到储存中，可以在这里加密数据</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">write</span> ( <span class="hljs-keyword">string</span> <span class="hljs-variable">$session_id</span> , <span class="hljs-keyword">string</span> <span class="hljs-variable">$session_data</span> ) : <span class="hljs-keyword">bool</span>
+&#125;</code></pre>
+<p>还有另一个接口是<code>SessionUpdateTimestampHandlerInterface</code> 我们看看它又提供了什么方法的接口</p>
+<pre><code class="hljs php">SessionUpdateTimestampHandlerInterface &#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 更新时间戳，即更新session过期时间的</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">updateTimestamp</span> ( <span class="hljs-keyword">string</span> <span class="hljs-variable">$key</span> , <span class="hljs-keyword">string</span> <span class="hljs-variable">$val</span> ) : <span class="hljs-keyword">bool</span>
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 验证session_id 是否还在线</span>
+<span class="hljs-comment">     */</span> 
+    <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">validateId</span> ( <span class="hljs-keyword">string</span> <span class="hljs-variable">$key</span> ) : <span class="hljs-keyword">bool</span>
+&#125;</code></pre>
+<blockquote>
+<p>SessionHandlerInterface 接口是PHP &gt;= 5.4.0 提供的 SessionIdInterface 接口是PHP &gt;= 5.5.1 提供的 SessionUpdateTimestampHandlerInterface 接口是PHP &gt;= 7.0 提供的</p>
+</blockquote>
+<hr>
+<p>接下来我们通过代码来实践一下，通过实现SessionHandlerInterface接口，来写一个redis的PHP Session处理程序</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SiamSession</span>  <span class="hljs-keyword">implements</span> \<span class="hljs-title">SessionHandlerInterface</span></span>
+<span class="hljs-class"></span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-variable">$redis</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-variable">$expTime</span> = <span class="hljs-number">30</span>; <span class="hljs-comment">// 默认超时时间 根据业务场景设置</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>&#123;
+        <span class="hljs-comment">// 连接redis</span>
+        <span class="hljs-variable language_">$this</span>-&gt;redis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Redis</span>();
+        <span class="hljs-variable language_">$this</span>-&gt;redis-&gt;<span class="hljs-title function_ invoke__">connect</span>(<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<span class="hljs-number">6379</span>);
+
+        <span class="hljs-comment">// 设置session处理回调 并且将session_write_close注册为register_shutdown_function函数</span>
+        <span class="hljs-title function_ invoke__">session_set_save_handler</span>(<span class="hljs-variable">$this</span>, <span class="hljs-literal">true</span>);
+
+        <span class="hljs-comment">// 开启</span>
+        <span class="hljs-title function_ invoke__">session_start</span>();
+
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">open</span>(<span class="hljs-params"><span class="hljs-variable">$path</span>, <span class="hljs-variable">$name</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">close</span>(<span class="hljs-params"></span>)</span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">read</span>(<span class="hljs-params"><span class="hljs-variable">$session_id</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-variable">$value</span> = <span class="hljs-variable language_">$this</span>-&gt;redis-&gt;<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&quot;siam_&quot;</span>.<span class="hljs-variable">$session_id</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-variable">$value</span>)&#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-variable">$value</span>;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">write</span>(<span class="hljs-params"><span class="hljs-variable">$session_id</span>, <span class="hljs-variable">$data</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">if</span>( <span class="hljs-variable language_">$this</span>-&gt;redis-&gt;<span class="hljs-title function_ invoke__">set</span>(<span class="hljs-string">&quot;siam_&quot;</span>.<span class="hljs-variable">$session_id</span>, <span class="hljs-variable">$data</span>) )&#123;
+            <span class="hljs-variable language_">$this</span>-&gt;redis-&gt;<span class="hljs-title function_ invoke__">expire</span>(<span class="hljs-string">&quot;siam_&quot;</span>.<span class="hljs-variable">$session_id</span>, <span class="hljs-variable">$this</span>-&gt;expTime);
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">destroy</span>(<span class="hljs-params"><span class="hljs-variable">$session_id</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">if</span> ( <span class="hljs-variable language_">$this</span>-&gt;redis-&gt;<span class="hljs-title function_ invoke__">delete</span>(<span class="hljs-string">&quot;siam_&quot;</span>.<span class="hljs-variable">$session_id</span>) )
+        &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">gc</span>(<span class="hljs-params"><span class="hljs-variable">$maxlifetime</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 因为redis设置了过期时间，不需要再gc回收</span>
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__destruct</span>(<span class="hljs-params"></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-title function_ invoke__">session_write_close</span>();
+    &#125;
+&#125;
+
+<span class="hljs-keyword">new</span> <span class="hljs-title class_">SiamSession</span>();</code></pre>
+<p>接着我们在另一个文件中写下测试代码</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">require_once</span> <span class="hljs-string">&quot;SiamSession.php&quot;</span>;
+
+<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;name&#x27;</span>] = <span class="hljs-string">&quot;siam&quot;</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;name&#x27;</span>];</code></pre>
+<p>可以看到浏览器正常出现了<code>siam</code> 那么我们进入phpredisadmin查看一下数据 可以看到类似图片的情况 <a href="#" title="phpredisadmin查看演示"><img src="http://yancoo.cn/uploads/images/201904/13_1.png" alt="phpredisadmin查看演示" title="phpredisadmin查看演示"></a></p>
+<blockquote>
+<p>其他的储存可以参考上面的处理，对数据进行处理，就可以实现自己的session处理器了</p>
+</blockquote>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/30/basic/http%E8%B7%A8%E5%9F%9F%E8%AF%A6%E8%A7%A3%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F.html">
+        <span class="nav-arrow">← </span>
+        
+          HTTP跨域详解和解决方式
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/30/php/php%EF%BC%9Aphar%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E4%BD%BF%E7%94%A8.html">
+        
+          PHP：Phar的打包和使用
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%80%9D"><span class="toc-nav-text">思</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%8E%AF%E5%A2%83%E5%A4%84%E7%90%86session%E7%9A%84%E7%AD%96%E7%95%A5"><span class="toc-nav-text">常用的负载均衡环境处理session的策略</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%AE%BE%E7%BD%AEsession%E5%A4%84%E7%90%86"><span class="toc-nav-text">设置session处理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#session-set-save-handler%E5%87%BD%E6%95%B0"><span class="toc-nav-text">session_set_save_handler函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E5%9C%A8PHP5-4%E4%BB%A5%E5%89%8D%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-nav-text">在PHP5.4以前的用法</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E2%80%BB%E2%80%BB%E2%80%BB"><span class="toc-nav-text">※※※</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E5%9C%A8PHP5-4%E4%BB%A5%E5%90%8E%E7%9A%84%E7%94%A8%E6%B3%95-%E4%B9%9F%E6%98%AF%E6%8E%A8%E8%8D%90%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-nav-text">在PHP5.4以后的用法 也是推荐的用法</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BB%8ESessionHandler%E7%90%86%E8%A7%A3%E5%87%A0%E4%B8%AA%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0"><span class="toc-nav-text">从SessionHandler理解几个接口实现</span></a></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/08/30/php/php设置redis储存session，自定义session驱动.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "PHP设置Redis储存Session，自定义session驱动",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

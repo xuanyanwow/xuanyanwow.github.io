@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/08/28/php/php-composer-test.html">调试本地composer包</a>
+      </h2>
+      <p class="article-date">2023年8月28日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          正文
+组件包测试
+在给 hyperf 框架贡献PR的时候，有时候改完想在本地起一个项目引入修改后的包来本地测试。操作过好多次，但每次都还是要去百度搜索…直接记录到博客一下
+在项目的composer.json设置仓库
+&#123;
+    &quot;repositories&quot;: & ...
+        
+      </div>
+      <a class="more" href="/2023/08/28/php/php-composer-test.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/06/28/docker/WSL_Docker.html">windows.WSL.一些坑</a>
+      </h2>
+      <p class="article-date">2023年6月28日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          WSL
+结束不掉
+wsl --shutdown
+卡住了没反应
+服务里重启LxssManager服务;
+如果LxssManager是stopping的状态无法重启, 执行:
+tasklist /svc /fi &quot;imagename eq svchost.exe&quot; | fin ...
+        
+      </div>
+      <a class="more" href="/2023/06/28/docker/WSL_Docker.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/04/17/queue/kafkaRebalance.html">Kafka rebalance 与滚动更新</a>
+      </h2>
+      <p class="article-date">2023年4月17日</p>
+      
+        
+  <a href="/tags#Kafka" >
+    <span class="tag-code">Kafka</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Kafka rebalance 与滚动更新
+rebalance 的场景
+Kafka的Rebalance机制是指在消费者组内有新的消费者加入或有某个消费者退出时，Kafka会重新分配分区给消费者以实现负载均衡。常见的会触发Rebalance的场景包括：
+
+新增Topic或Partition
+消 ...
+        
+      </div>
+      <a class="more" href="/2023/04/17/queue/kafkaRebalance.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/03/06/php/memory_leak.html">php-gc机制的补充</a>
+      </h2>
+      <p class="article-date">2023年3月6日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          php-gc
+高级语言的特征:内存gc机制，可以对内存空间自行管理释放，对程序员的心智负担少了很多。
+在php官网上 垃圾回收机制的地址是这个 -&gt; https://www.php.net/manual/zh/features.gc.php
+关于引用计数基本知识这些，相信大家都在官网或 ...
+        
+      </div>
+      <a class="more" href="/2023/03/06/php/memory_leak.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/02/28/other/law-ricardo.html">初遇李嘉图</a>
+      </h2>
+      <p class="article-date">2023年2月28日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          初遇李嘉图
+第一次&quot;见到&quot;李嘉图
+李嘉图 —— 英国伦敦人，他是古典经济学理论的完成者和最有影响力的代表之一。
+我第一次听到这个名字是在一本书中，关于知识《信息时代的定律》中。
+这一章节粗略以&quot;摩尔定律&quot;等其他定律开头，介绍了一些大家更常听到的定律，比 ...
+        
+      </div>
+      <a class="more" href="/2023/02/28/other/law-ricardo.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/02/26/queue/kafka-2.html">kafka:高可用和一致性,副本管理</a>
+      </h2>
+      <p class="article-date">2023年2月26日</p>
+      
+        
+  <a href="/tags#Kafka" >
+    <span class="tag-code">Kafka</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          高可用Kafka
+Kafka是一个分布式的消息中间件,集群中少不了的问题就是:数据一致性和服务可用性。
+
+数据一致性: 副本同步
+服务可用性: 对外服务节点的维护
+
+数据冗余
+Kafka实例启动后,会向zookeeper汇报自己的地址信息等,加入集群
+Kafka中每个分区都可以有多个副本，其 ...
+        
+      </div>
+      <a class="more" href="/2023/02/26/queue/kafka-2.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/02/26/queue/kafka-1.html">kafka:基本抽象层次概念</a>
+      </h2>
+      <p class="article-date">2023年2月26日</p>
+      
+        
+  <a href="/tags#Kafka" >
+    <span class="tag-code">Kafka</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Kafka
+
+第一讲,kafka的基本抽象层次概念,也就是Why kafka do like this?,理解了一部分这么设计的优点
+第二讲,kafka高可用:副本管理
+第三讲,elk中的kafka:流式应用
+
+
+broker与zookeeper
+
+broker: 运行中的kafka实例,一 ...
+        
+      </div>
+      <a class="more" href="/2023/02/26/queue/kafka-1.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/01/22/embedded-system/first.html">嵌入式开发（一）知识储备</a>
+      </h2>
+      <p class="article-date">2023年1月22日</p>
+      
+        
+  <a href="/tags#嵌入式开发" >
+    <span class="tag-code">嵌入式开发</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          嵌入式开发
+之前在广州上班的时候工作有小接触过嵌入式设备，当时的项目是一个智能超市、便利店系统。
+利用单片机改造控制门锁、RFID扫描器、摄像头、电子秤等设备。
+完成了图像识别智能冰箱售卖机、RFID无人值守超市等产品。
+那时候的单片机是其他同事完成开发的，我负责的是小程序前端和服务端程序的 ...
+        
+      </div>
+      <a class="more" href="/2023/01/22/embedded-system/first.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/01/10/other/quickly-github.html">github加jsdelivr!速度冲冲冲!</a>
+      </h2>
+      <p class="article-date">2023年1月10日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          前言
+今天在找前端的CDN，进入了jsdelivr的官网(以前都是直接复制一些src直接在html用了 没进入过官网)
+了解到还能加速github的项目，简单说一说它的应用
+jsdelivr的github url
+// 加载任何托管在 npm 上的项目
+https://cdn.jsdeliv ...
+        
+      </div>
+      <a class="more" href="/2023/01/10/other/quickly-github.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/12/29/database/time-zone.html">mysql与time_zone</a>
+      </h2>
+      <p class="article-date">2022年12月29日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          mysql 与 time_zone
+问题背景
+业务产生了时间不一致的问题，数据相差的特征值很明显，八个小时，很容易就想到了是时区的问题
+从中也了解到mysql 使用到的字段类型为timestamp的一些细节。翻阅了文档之后简单记录一下
+程序中哪里有 time_zone
+小小复习一下时间戳的定 ...
+        
+      </div>
+      <a class="more" href="/2022/12/29/database/time-zone.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a class="unvisible" href="/"><span class="page-arrow">←</span> 上一页</a>
+  
+  
+    <a href="/page/2/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Series | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Series</h2>
+  <p class="post-date">Series by Categories</p>
+</div>
+
+
+
+
+<main class="app-body">
+  <div id="category-cloud">
+      
+        <a class="category1" data-name="category-项目管理">项目管理</a>
+      
+        <a class="category1" data-name="category-运维">运维</a>
+      
+        <a class="category1" data-name="category-计算机基础">计算机基础</a>
+      
+        <a class="category2" data-name="category-计算机">计算机</a>
+      
+        <a class="category0" data-name="category-架构">架构</a>
+      
+        <a class="category2" data-name="category-杂谈">杂谈</a>
+      
+        <a class="category2" data-name="category-数据库">数据库</a>
+      
+        <a class="category2" data-name="category-开发层">开发层</a>
+      
+        <a class="category3" data-name="category-常见问题">常见问题</a>
+      
+        <a class="category3" data-name="category-嵌入式开发">嵌入式开发</a>
+      
+        <a class="category1" data-name="category-后端">后端</a>
+      
+        <a class="category0" data-name="category-前端">前端</a>
+      
+        <a class="category3" data-name="category-分享世界">分享世界</a>
+      
+        <a class="category2" data-name="category-代码片段">代码片段</a>
+      
+        <a class="category2" data-name="category-mysql">mysql</a>
+      
+        <a class="category2" data-name="category-easyswoole">easyswoole</a>
+      
+        <a class="category3" data-name="category-cache">cache</a>
+      
+        <a class="category3" data-name="category-aws">aws</a>
+      
+        <a class="category3" data-name="category-SWOOLE">SWOOLE</a>
+      
+        <a class="category3" data-name="category-PHP">PHP</a>
+      
+        <a class="category2" data-name="category-Kafka">Kafka</a>
+      
+        <a class="category2" data-name="category-Go">Go</a>
+      
+        <a class="category1" data-name="category-Docker">Docker</a>
+      
+  </div>
+    
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-项目管理">项目管理</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/07/version-controller/git程序配置文件管理忽略本地更改.html">git,程序配置文件管理,忽略本地更改</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/09/01/version-controller/git协作工作流方式.html">git协作工作流方式</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/09/02/project-manage/B端C端产品的对比.html">B端C端产品的对比</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/17/project-manage/压力测试笔记.html">压力测试笔记</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/12/08/version-controller/why-git.html">Why Git?</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-运维">运维</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/宝塔面板多php版本中编译安装升级swoole.html">宝塔面板多PHP版本中编译安装升级Swoole</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/17/php/【常见问题】宝塔面板如何安装最新版本的php扩展swoole.html">【常见问题】宝塔面板如何安装最新版本的php扩展swoole</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2021/06/21/php/宝塔备份大数据导入本地失败-max-allowed-packet.html">宝塔备份大数据sql导入本地失败 max_allowed_packet</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/02/15/queue/使用elk替换业务日志记录.html">使用ELK替换业务日志记录</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-计算机基础">计算机基础</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/06/12/basic/对象池、连接池的意义.html">对象池、连接池的意义</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/06/29/basic/浅谈非堵塞程序的理解.html">浅谈非堵塞程序的理解</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/07/18/basic/smtp邮件服务器原理解析php发送邮件swoole发送邮件.html">SMTP邮件服务器原理解析,php发送邮件,swoole发送邮件</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/07/30/basic/负载均衡方式的对比选择.html">负载均衡方式的对比选择</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/21/basic/《数据结构与算法基础》b站教学视频.html">《数据结构与算法基础》B站教学视频</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/04/04/basic/程序优化之变量名长短内存逻辑地址物理地址.html">程序优化之\"变量名长短\",内存逻辑地址,物理地址</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/05/basic/linux一切皆文件扩展笔记.html">linux一切皆文件扩展笔记</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/28/basic/对象存储vs文件存储.html">对象存储vs文件存储</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-计算机">计算机</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/bitmap算法的php实现，快速去重排序，数据压缩储存.html">bitmap算法的PHP实现，快速去重排序，数据压缩储存</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-架构">架构</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/02/16/queue/kafka和rabbitMQ简单对比笔记.html">kafka和rabbitMQ简单对比笔记</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/27/software_architect/7_架构模式.html">《架构师修炼之道》第七章--架构模式</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/27/software_architect/8_建立模型.html">《架构师修炼之道》第八章--建立模型，化繁为简</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-杂谈">杂谈</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/07/other/vcruntime140_1.ddl下载记录.html">vcruntime140_1.ddl下载记录</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/12/05/php/phpstorm.html">phpstorm食用指南(自用)</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/12/08/other/withMyIpad.html">我与我的ipad(ipad当win10副屏之路)</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2023/01/10/other/quickly-github.html">github加jsdelivr!速度冲冲冲!</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2023/02/28/other/law-ricardo.html">初遇李嘉图</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-数据库">数据库</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/07/18/database/mysql中varchar字符串的比较数字内容比较大小.html">Mysql中varchar字符串的比较,swoole预处理参数绑定</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/07/18/database/mysql索引优化，合理建立索引.html">Mysql合理建立索引,索引优化</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/07/18/database/【未完成】mysql索引降维.html">Mysql索引降维 优化查询 提高效率</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/23/database/mysql聚合统计数据查询缓慢优化方案.html">mysql聚合统计数据查询缓慢优化方案</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/database/数据分表分库的基本思路.html">数据分表分库的基本思路</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/14/database/mysql误删恢复数据binlog闪回宝塔面板.html">Mysql误删,恢复数据,binlog闪回,宝塔面板</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/16/php/navicat数据同步主键重复无法插入.html">Navicat数据同步,主键重复无法插入</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/25/php/宝塔面板数据库迁移一种小技巧方式.html">宝塔面板数据库迁移一种小技巧方式</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/01/09/database/mysql从5-7迁移表结构到5-5报错-near-0-null-default-null.html">mysql从5.7迁移表结构到5.5报错 near '(0) NULL DEFAULT NULL'</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/03/06/database/mysql-乘法除法精度不一致，除法后四位小数.html">Mysql 乘法除法精度不一致，除法后四位小数</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/06/24/database/mysql-索引成本计算，为什么mysql预判后选择了错误索引？.html">MYSQL 索引成本计算，为什么MYSQL预判后选择了错误索引？</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/11/25/database/三言两语记录mysql-for-update锁.html">三言两语记录mysql for update锁</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-开发层">开发层</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/02/22/docker/docker端口映射失败排查.html">docker端口映射失败排查</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/03/01/dtm/dtm分布式事务——saga事务超时多次触发.html">dtm分布式事务——saga事务超时多次触发</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/03/01/dtm/dtm分布式事务——解决导入RM数据库失败.html">dtm分布式事务——解决导入RM数据库失败</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-常见问题">常见问题</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/19/other/vmware-workstation客户端-centos系统-中文乱码-utf-8字符无法正常显示.html">VMware Workstation客户端 Centos系统 中文乱码 UTF-8字符无法正常显示</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/02/28/php/php解析markdown库parsedown扩展自定义语法.html">PHP解析Markdown库,parsedown扩展自定义语法</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/06/08/php/phpstorm-git-cherry-pick.html">phpstorm里操作git_cherry-pick</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-嵌入式开发">嵌入式开发</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2023/01/22/embedded-system/first.html">嵌入式开发（一）知识储备</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-后端">后端</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/06/23/basic/http协议中的get、post请求方法的区别.html">HTTP协议中的GET、POST请求方法的区别</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/07/23/php/【源码解读】为什么tp5中可以注入参数request也可以不传.html">【源码解读】TP框架参数注入，参数绑定</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/21/php/json序列化接口jsonserializable.html">JSON序列化接口,JsonSerializable</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/手把手教你写一个composer包.html">手把手教你写一个composer包</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/无限级子商户的查询优化方法.html">无限级子商户的查询优化方法</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/wechat/微信退款结果回调解密低版本以及7-1以上版本的使.html">微信退款结果回调解密,低版本以及7.1以上版本的使用方法</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/openssl-微信支付证书pfx分解成pem.html">Openssl -  微信支付证书pfx分解成pem</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/02/php/【源码解读】tp5return-json-encode-ajax自动被加上双引号.html">【源码解读】TP5return json_encode ajax自动被加上双引号</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/17/other/nginx重试机制，浏览器重复请求两次多次.html">Nginx重试机制，浏览器重复请求两次多次</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/18/php/md5加密介绍以及php中md5的漏洞.html">md5加密介绍以及php中md5的漏洞</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/18/php/md5在php中使用的注意事项.html">MD5在PHP中使用的注意事项</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/09/Swoole/easyswoole一键安装脚本宝塔安装错误.html">easyswoole一键安装脚本,宝塔安装错误</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/11/Swoole/easyswoole-mysql-pool连接池empty-null的问题.html">easyswoole mysql-pool连接池empty null的问题</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/29/Swoole/easyswoole安装，包含所有组件.html">EasySwoole安装，包含所有组件</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/03/25/php/【源码解读】tp5读取本地图片输出后，设置header头无效.html">【源码解读】TP5读取本地图片输出后，设置header头无效，图片乱码</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/11/21/wechat/微信公众号应用开发流程-免费内网穿透映射本地，.html">微信公众号应用开发流程 免费内网穿透映射本地，实现调试</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-前端">前端</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/07/04/front/layui模块化自定义模块改造传统jquery扩展为layui模块.html">Layui模块化,改造传统jquery扩展为layui模块</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/09/front/layui数据表格templet的数据无法合计.html">Layui数据表格templet的数据无法合计</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/10/other/chrome缓存锁，php非堵塞文件锁无效的问题详解追查.html">Chrome缓存锁，php非堵塞文件锁无效的问题详解追查</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/14/other/chrome浏览器开发工具之scheme入口.html">Chrome浏览器开发工具之scheme入口</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/basic/http跨域详解和解决方式.html">HTTP跨域详解和解决方式</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/front/layui数据表格checkbox设置部分不可选.html">layui数据表格checkbox设置部分不可选</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/other/根据浏览器生成用户标识，实现免登陆用户状态订.html">根据浏览器生成用户标识，实现免登陆用户状态订单储存。</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/other/多iframe版后台，在一个iframe切换到另一个iframe，同时刷新.html">多Iframe版后台，在一个iframe切换到另一个iframe，同时刷新</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/front/layui2-0数据表格导出复杂表头excel解决方案table2excel.html">layui2.0数据表格导出复杂表头EXCEL解决方案,table2excel</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/27/other/js的字符串插值，变量长文本换行.html">JS的字符串插值，变量长文本换行</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/25/other/仿新版微信转账页面-源码分享.html">仿新版微信转账页面 源码分享</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/01/14/other/vue-vant引入，tabbar封装使用示例.html">Vue vant引入，tabbar封装使用示例</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/03/18/other/vue-cli引入vue-router.html">vue-cli引入vue-router</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/03/18/other/转android下一次oom调试过程.html">转 - Android下一次OOM调试过程</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/03/21/other/apicloudapp开发-快速调试.html">ApiCloudApp开发 - 快速调试</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/03/22/php/wordpress二开-文章内容部分隐藏.html">WordPress二开-文章内容部分隐藏</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/03/24/other/apicloudapp开发-api-is-undefined.html">ApiCloudApp开发-$api is undefined</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/05/13/other/vue-vant-cdn引入方式，组件使用样式错乱.html">vue vant cdn引入方式，组件使用样式错乱</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/05/22/other/cocos-个人踩坑日记.html">COCOS 个人踩坑日记</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/06/24/other/百度地图-轨道移动，小车.html">百度地图 轨道移动，小车</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/07/30/wechat/微信小程序webview，a锚点跳转，回退时一直保留在原页.html">微信小程序webview，a锚点跳转，回退时一直保留在原页面</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2021/03/08/other/el-dialog里的数组不更新，在关闭的一瞬间更新了.html">el-dialog里的数组不更新，在关闭的一瞬间更新了</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2021/05/26/script/腾讯云杂货摊脚本.html">腾讯云杂货摊脚本</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2021/10/27/script/蓝奏云-批量下载-油猴.html">蓝奏云 批量下载 油猴</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-分享世界">分享世界</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/17/other/好视频.html">21个数学原理 gif图演示</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/18/read-book/《开讲啦》徐星-恐龙、科学、好奇心、孩童般.html">《开讲啦》徐星——恐龙、科学、好奇心、孩童般的快乐</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/10/28/read-book/《开讲啦》日本著名光化学科学家-藤岛昭.html">《开讲啦》日本著名光化学科学家——藤岛昭，幽默、科普、乐观主义、机会观念</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/11/21/read-book/《愿你历尽千帆，归来仍是少年》精美句子.html">《愿你历尽千帆，归来仍是少年》精美句子</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/05/26/read-book/中医-四虚诊断，及其食药膳.html">中医 四虚诊断，及其食药膳</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-代码片段">代码片段</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/06/07/fragment/密码强度校验.html">代码片段-密码强度校验</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/06/18/fragment/油猴脚本.批量采集页面数据复制.数据过长.html">油猴脚本,批量采集页面数据复制,数据过长 JS弹出新页面 自定义html代码</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-mysql">mysql</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/09/30/database/mysql加索引的时候到底会不会锁表.深入解析.html">mysql加索引的时候到底会不会锁表.深入解析</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/12/29/database/time-zone.html">mysql与time_zone</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-easyswoole">easyswoole</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/07/10/Swoole/swoole如何对ip限制访问频率.html">swoole如何对ip限制访问频率</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/11/12/php/php对象字段声明easyswoole-orm-快速生成注释.html">php对象字段声明,easyswoole ORM 快速生成注释</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/01/02/php/php-fpm应用与php-swoole应用进行通信的几种方式.html">php-fpm应用与php-swoole应用进行通信</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/03/04/Swoole/swooleswoole-timer-tick-must-be-callable-array-given-报错异常.html">swoole,swoole_timer_tick() must be callable, array given 报错异常</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-cache">cache</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/01/cache/redis笔记一，数据类型.html">Redis笔记一，数据类型</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-aws">aws</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/12/07/aws/aws-assumeRole.html">AWS-assumeRole.控制不同token访问不同目录</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-SWOOLE">SWOOLE</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/13/Swoole/swoole-cli常见问题.html">swoole-cli常见问题</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/12/10/Swoole/hyperf-command-coroutine.html">hyperf命令行与协程</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-PHP">PHP</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/06/19/php/php异常处理函数thinkphp调试.html">PHP异常处理函数,Thinkphp调试</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/07/13/php/thinkphp中模型的正确使用方式orm的思想概念.html">Thinkphp中模型的正确使用方式,ORM的思想概念</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/04/php/php类，魔术方法.html">PHP类，魔术方法</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/06/php/php中的进制.html">php中的进制和编码</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/11/php/php解析json、xml错误.html">PHP解析json、xml错误</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/12/php/php中对象的序列化和反序列化.html">PHP中对象的序列化和反序列化</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/24/php/php-path-infothinkphp-controller-not-exists-indexphp.html">PHP path_info,Thinkphp controller not exists index\php</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/php自动加载与composer自动加载.html">PHP自动加载与composer自动加载</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/php设置redis储存session，自定义session驱动.html">PHP设置Redis储存Session，自定义session驱动</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/php：phar的打包和使用.html">PHP：Phar的打包和使用</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/php图片文字合成居中.html">PHP图片文字合成居中</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/phpspreadsheet导出excel表格，长数字自动转科学计数法.html">PhpSpreadsheet导出Excel表格，长数字自动转科学计数法</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/session在浏览器关闭时进行何处理以及回收机制.html">session在浏览器关闭时进行何处理?以及回收机制</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/php生成不重复的订单号.html">PHP生成不重复的订单号</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/php/tp5-0-20-tp5更改网站目录为-public-后运行出错解决.html">TP5.0.20 - TP5更改网站目录为/public 后运行出错解决</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/17/php/php计算两个日期之间的间隔避免导出大量数据.html">php计算两个日期之间的间隔,避免导出大量数据</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/09/20/php/php定期拉取数据对比.html">php定期拉取数据对比</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/12/18/php/php中解析xml的正确方式，php中解析xml的方式对比.html">PHP中simplexml_load_string解析xml的正确方式</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/03/25/php/php与githook实现自动更新.html">php与githook实现自动更新</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/05/21/php/phpstome-idea-忽略指定文件夹里的todo，代码任务管理.html">phpstome/idea 忽略指定文件夹里的todo，代码任务管理</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/07/02/php/php-微信支付分-开发过程-h5商城先享后付.html">php 微信支付分 开发过程 H5商城先享后付</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/11/16/php/php-easywechat-sdk-微信公众号原页面获取用户信息.html">PHP EasyWechat SDK 微信公众号原页面获取用户信息</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/12/01/php/tp5-0安装testing-单元测试-报错.html">TP5.0安装testing 单元测试 报错</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2020/12/02/php/php数组排序-解决数值型版本号排序错乱.html">PHP数组排序 解决数值型版本号排序错乱</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2021/04/30/php/thinkphp6，注解注释生成api列表.html">Thinkphp6，注解注释生成api列表</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2021/07/05/php/php-cli-web-server-with-rewrite-router.html">php cli web server with rewrite router</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2021/09/06/php/php一份代码分层规范.html">php一份代码分层规范</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2021/10/25/php/tp6-新出的虚拟模型怎么用.html">TP6 新出的“虚拟模型”怎么用?</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/05/23/php/宝塔的nginx.在Thinkphp伪静态情况下配置图片裁剪.html">宝塔的nginx.在Thinkphp伪静态情况下配置图片裁剪</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/07/php/php新语法.html">php新语法</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2023/03/06/php/memory_leak.html">php-gc机制的补充</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2023/08/28/php/php-composer-test.html">调试本地composer包</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-Kafka">Kafka</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2023/02/26/queue/kafka-1.html">kafka:基本抽象层次概念</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2023/02/26/queue/kafka-2.html">kafka:高可用和一致性,副本管理</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2023/04/17/queue/kafkaRebalance.html">Kafka rebalance 与滚动更新</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-Go">Go</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/13/Go/github_actions_build_go.html">go项目.github actions自动打包exe发布版本</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/13/Go/go_build_exe.cgo_error.html">go在ubuntu交叉编译windows应用.cgo错误</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+    <div class="category-list">
+      <h3 class="category-name" id="category-Docker">Docker</h3>
+      
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/docker/入门-docker将nginx容器和php容器关联起来.html">入门 - Docker将nginx容器和php容器关联起来</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/docker/入门-docker容器数据储存和转移.html">入门 - Docker容器数据储存和转移</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/docker/实战多容器nginx容器灵活切换php版本同时运行多个php容.html">实战 - 多容器,Nginx容器灵活切换PHP版本!同时运行多个PHP容器</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/docker/实战docker-compose搭建基本的nginxphp环境.html">实战 - docker-compose搭建基本的nginx+php环境</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2019/08/30/docker/讨论为什么要使用docker和docker-compose.html">讨论 - 为什么要使用docker和docker-compose</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/17/docker/docker自用小手册.html">docker自用小手册</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2022/11/20/docker/wsl_error.html">windows.Docker.安装运行失败</a>
+          </li>
+        </ul>
+      
+        <ul class="category-preview">
+          <li>
+            <a href="/2023/06/28/docker/WSL_Docker.html">windows.WSL.一些坑</a>
+          </li>
+        </ul>
+      
+    </div>
+  
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/series/index.html'
+    $('#article-banner').geopattern(url)
+    $('.header').removeClass('fixed-header')
+
+    var category = location.hash.replace('#', '')
+    if (category) {
+      var categoryId = "#category-" + category;
+      $("html, body").animate({
+        scrollTop: $(categoryId).offset().top 
+      }, 400)
+    }
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

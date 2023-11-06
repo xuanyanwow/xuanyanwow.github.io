@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      PHP类，魔术方法 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>PHP类，魔术方法</h2>
+  <p class="post-date">2019-08-04</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>以下方法在 PHP 中被称为魔术方法（Magic methods）</p>
+<pre><code class="hljs php"><span class="hljs-title function_ invoke__">__construct</span>()
+<span class="hljs-title function_ invoke__">__destruct</span>()
+<span class="hljs-title function_ invoke__">__call</span>()
+<span class="hljs-title function_ invoke__">__callStatic</span>()
+<span class="hljs-title function_ invoke__">__get</span>()
+<span class="hljs-title function_ invoke__">__set</span>()
+<span class="hljs-title function_ invoke__">__isset</span>()
+<span class="hljs-title function_ invoke__">__unset</span>()
+<span class="hljs-title function_ invoke__">__sleep</span>()
+<span class="hljs-title function_ invoke__">__wakeup</span>()
+<span class="hljs-title function_ invoke__">__toString</span>()
+<span class="hljs-title function_ invoke__">__invoke</span>()
+<span class="hljs-title function_ invoke__">__set_state</span>()
+<span class="hljs-title function_ invoke__">__clone</span>()
+<span class="hljs-title function_ invoke__">__debugInfo</span>()</code></pre>
+<p>在命名自己的类方法时不能使用这些方法名，除非是想使用其魔术功能。 下面介绍每个方法的作用</p>
+<h1>__construct</h1>
+<p>构造函数，在实例化类的时候会隐式调用该方法，<code>可以接收传参</code>。如：</p>
+<pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"><span class="hljs-variable">$size</span></span>) </span>&#123;
+        <span class="hljs-variable language_">$this</span>-&gt;maxSize = <span class="hljs-variable">$size</span>; <span class="hljs-comment">// 做一些初始化设置等等</span>
+        <span class="hljs-keyword">echo</span> <span class="hljs-variable language_">$this</span>-&gt;maxSize;
+    &#125;
+&#125;
+
+<span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">A</span>(<span class="hljs-number">3</span>);</code></pre>
+<p>如果有一个类B继承了上面的类A ，如</p>
+<pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">A</span></span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"><span class="hljs-variable">$size</span></span>) </span>&#123;
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;hello&quot;</span>;
+    &#125;
+&#125;
+
+<span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">B</span>(<span class="hljs-number">3</span>);</code></pre>
+<p>在此例子中，不会设置和输出maxSize属性，只会输出hello。</p>
+<blockquote>
+<p>因为在子类重写构造方法时，需要<code>显式</code>调用父类构造函数 <code>parent::__construct()</code></p>
+</blockquote>
+<p>注意</p>
+<blockquote>
+<p>如果在A类的构造函数，不是写为<code>public</code>，而是private，则无法被子类继承使用。</p>
+</blockquote>
+<h1>__destruct</h1>
+<p>析构函数，当类被手动销毁，或者脚本结束时，gc回收触发。可以执行一些后置操作，比如删除临时目录下的文件。</p>
+<blockquote>
+<p>注意</p>
+</blockquote>
+<ul>
+<li>哪怕脚本调用exit(),die() 类的析构函数也会被执行</li>
+<li>如果在析构函数中调用exit() 则该函数内部的逻辑后续不再执行</li>
+</ul>
+<pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-title function_ invoke__">__destruct</span>()
+&#123;
+    <span class="hljs-keyword">echo</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">exit</span>();
+    <span class="hljs-keyword">echo</span> <span class="hljs-number">2</span>;<span class="hljs-comment">// 不会输出</span>
+&#125;</code></pre>
+<ul>
+<li>与构造函数相同，子类继承后需要显式调用父类的析构函数</li>
+<li>试图在析构函数（在脚本终止时被调用）中抛出一个异常会导致致命错误。</li>
+</ul>
+<h1>__call</h1>
+<p>当调用一个对象中的不能用的方法的时候就会执行这个函数。有两个参数：</p>
+<pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__call</span>(<span class="hljs-params"><span class="hljs-variable">$function_name</span>, <span class="hljs-variable">$args</span></span>)</span></code></pre>
+<p>测试</p>
+<pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__call</span>(<span class="hljs-params"><span class="hljs-variable">$funcname</span>, <span class="hljs-variable">$args</span></span>)</span>&#123;
+        <span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$funcname</span>);
+        <span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$args</span>);
+    &#125;
+&#125;
+
+<span class="hljs-variable">$a</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">A</span>();
+<span class="hljs-variable">$a</span>-&gt;<span class="hljs-title function_ invoke__">one</span>();
+<span class="hljs-variable">$a</span>-&gt;<span class="hljs-title function_ invoke__">tow</span>(<span class="hljs-string">&#x27;一个参数&#x27;</span>);
+
+<span class="hljs-comment">// 以下是输出</span>
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">string(3) &quot;one&quot;</span>
+<span class="hljs-comment">array(0) &#123;</span>
+<span class="hljs-comment">&#125;</span>
+<span class="hljs-comment">string(3) &quot;tow&quot;</span>
+<span class="hljs-comment">array(1) &#123;</span>
+<span class="hljs-comment">  [0]=&gt;</span>
+<span class="hljs-comment">  string(12) &quot;一个参数&quot;</span>
+<span class="hljs-comment">&#125;</span>
+<span class="hljs-comment">string(5) &quot;three&quot;</span>
+<span class="hljs-comment">array(2) &#123;</span>
+<span class="hljs-comment">  [0]=&gt;</span>
+<span class="hljs-comment">  string(12) &quot;一个参数&quot;</span>
+<span class="hljs-comment">  [1]=&gt;</span>
+<span class="hljs-comment">  string(12) &quot;两个参数&quot;</span>
+<span class="hljs-comment">&#125;</span>
+<span class="hljs-comment">*/</span></code></pre>
+<h1>__callStatic</h1>
+<p>跟__call一样，但是该函数触发的是调用的静态方法。</p>
+<pre><code class="hljs plaintext">A::test();</code></pre>
+<h1>__get</h1>
+<p>读取不可访问属性的值时，__get() 会被调用。 猜想：在thinkphp框架的ORM中，关联模型 先在Orders模型中设置大概如下的方法</p>
+<pre><code class="hljs plaintext">// 本模型的user ，代表要关联Users模型的一个数据，本模型的u_id = Users模型的id
+public function user()
+&#123;
+    return $this-&gt;belongTo(&#x27;Users&#x27;, &#x27;u_id&#x27;, &#x27;id&#x27;);
+&#125;</code></pre>
+<p>当在程序中调用，因为本身的Orders模型没有该属性，所以会尝试是否有设置该关系的方法，有则调用，然后返回Users的信息。</p>
+<pre><code class="hljs plaintext">$orders = Orders::get(1);
+var_dump(orders-&gt;user);</code></pre>
+<h1>__set</h1>
+<p>在给不可访问属性赋值时，__set() 会被调用。</p>
+<h1>__isset</h1>
+<p>当对不可访问属性调用 isset() 或 empty() 时，__isset() 会被调用。</p>
+<h1>__unset</h1>
+<p>当对不可访问属性调用 unset() 时，__unset() 会被调用。</p>
+<h1>__sleep</h1>
+<h1>__wakeup</h1>
+<p>这两个魔术方法是 <code>类的序列化</code> 使用的，后续会有一篇专门的文章讲解。</p>
+<h1>__toString</h1>
+<p><code>__toString()</code> 方法用于一个类被当成字符串时应怎样回应。 比如，在我们接入微信支付的时候，经常需要把参数排序、拼接成url格式 我们完全可以定义一个类，然后在toString魔术方法中，写明排序、转换为url格式的操作。</p>
+<pre><code class="hljs php"><span class="hljs-comment">// 伪代码</span>
+
+<span class="hljs-variable">$params</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SiamWechatParams</span>();
+<span class="hljs-variable">$params</span>-&gt;appid = <span class="hljs-string">&#x27;1&#x27;</span>;
+<span class="hljs-variable">$params</span>-&gt;total_fee = <span class="hljs-number">200</span>;
+
+<span class="hljs-comment">// http请求</span>
+<span class="hljs-title class_">Curl</span>::<span class="hljs-title function_ invoke__">send</span>(<span class="hljs-built_in">self</span>::<span class="hljs-variable constant_">url</span>, <span class="hljs-variable">$params</span>-&gt;<span class="hljs-title function_ invoke__">__toString</span>());
+
+<span class="hljs-comment">// 其他地方直接输出，不手动显式调用</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$params</span>;</code></pre>
+<h1>__invoke</h1>
+<p>当尝试以调用函数的方式调用一个对象时，__invoke() 方法会被自动调用。</p>
+<pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>
+<span class="hljs-class"></span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__invoke</span>(<span class="hljs-params"><span class="hljs-variable">$params</span></span>) </span>&#123;
+        <span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$params</span>);
+    &#125;
+&#125;
+<span class="hljs-variable">$obj</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">A</span>();
+<span class="hljs-variable">$obj</span>(<span class="hljs-number">5</span>);
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">is_callable</span>(<span class="hljs-variable">$obj</span>));</code></pre>
+<h1>__set_state</h1>
+<p>自 PHP 5.1.0 起当调用 var_export() 导出类时，此静态 方法会被调用。</p>
+<h1>__clone</h1>
+<p>当对象复制完成时调用</p>
+<h1>__debugInfo</h1>
+<p>当调用var_dump函数时候，定义需要显示的属性列表 如果没有在对象上定义该方法，那么将显示所有公共、受保护和私有属性。</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/01/cache/redis%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html">
+        <span class="nav-arrow">← </span>
+        
+          Redis笔记一，数据类型
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/06/php/php%E4%B8%AD%E7%9A%84%E8%BF%9B%E5%88%B6.html">
+        
+          php中的进制和编码
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__construct</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__destruct</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__call</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__callStatic</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__get</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__set</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__isset</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__unset</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__sleep</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__wakeup</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__toString</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__invoke</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__set_state</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__clone</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">__debugInfo</span></a></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/08/04/php/php类，魔术方法.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "PHP类，魔术方法",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

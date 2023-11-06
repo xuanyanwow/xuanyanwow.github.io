@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Thinkphp中模型的正确使用方式,ORM的思想概念 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>Thinkphp中模型的正确使用方式,ORM的思想概念</h2>
+  <p class="post-date">2019-07-13</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>在Thinkphp的文档中关于框架特性的描述，有这么一句话</p>
+<blockquote>
+<p>ORM：重构的数据库、模型及关联，MongoDb支持；</p>
+</blockquote>
+<p>从这句话可以得知，Thinkphp中的数据库、模型，基于的ORM概念来完成。</p>
+<h2 id="ORM是什么？">ORM是什么？</h2>
+<p>对象-关系映射（OBJECT-RELATIONAL MAPPING，简称ORM） 这是在<code>面向对象</code>编程发展过程中演变出来的一种思想、行为概念。 主要用途是：<code>把对象模型表示的对象映射到基于sql的关系模型数据库结构中去。</code> 当改变这个对象自身的属性或者调用该对象的方法时，相对应的是执行某些sql语句。 这样子编写代码的人员就可以更好地编写业务逻辑，而非重复地编写增删改查sql语句。</p>
+<h2 id="thinkphp中的运用示例">thinkphp中的运用示例</h2>
+<p>TP框架中关于数据库操作有两个模块：</p>
+<ul>
+<li>数据库</li>
+<li>模型</li>
+</ul>
+<h3 id="tp中的数据库模块">tp中的数据库模块</h3>
+<p>引用一句文档的特性描述</p>
+<blockquote>
+<p>拆分为Connection（连接器）/Query（查询器）/Builder（SQL生成器）</p>
+</blockquote>
+<ul>
+<li>Connection连接器主要是用来连接数据库的，可以使用不同的驱动连接不同类型的数据库。</li>
+<li>Query查询器则是用来运行sql语句，处理结果，映射到<code>数据集</code>中。</li>
+<li>Builder生成器则是用来把我们传递进去的条件、排序等转换成sql语句。</li>
+</ul>
+<p>在这3个步骤中，我们可以知道，如果有运用到ORM思想抽象映射的，那就只可能是Query查询器模块，但是我们可以细查<code>TP文档中关于数据集的描述</code>。 它更多的是封装提供对于数据的处理方法，比如： (以下是从文档复制过来的 一小部分)</p>
+<pre><code class="hljs plaintext">toArray     将数据集的数据转为数组
+merge   合并其它数据
+diff    比较数组，返回差集
+flip    交换数据中的键和值
+intersect   比较数组，返回交集
+keys    返回数据中的所有键名
+pop 删除数据中的最后一个元素
+shift   删除数据中的第一个元素
+unshift 在数据开头插入一个元素
+reduce  通过使用用户自定义函数，以字符串返回数组</code></pre>
+<p>但是却没有提供反向映射的关系操作，比如我们操作数据集，自动更新数据库中的数据。 所以在我的理解中，<code>数据库模块</code>中的ORM思想并不多，重点还是要了解和运用<code>模型</code></p>
+<h3 id="tp中的模型">tp中的模型</h3>
+<h5 id="定义模型文件"><strong>定义模型文件</strong></h5>
+<pre><code class="hljs php"><span class="hljs-keyword">namespace</span> <span class="hljs-title class_">app</span>\<span class="hljs-title class_">index</span>\<span class="hljs-title class_">model</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">think</span>\<span class="hljs-title">Model</span>;
+
+<span class="hljs-comment">// 设置类名 需要遵循转换规则，蛇形转为大驼峰</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span></span>
+<span class="hljs-class"></span>&#123;
+    <span class="hljs-comment">// 设置主键字段名</span>
+    <span class="hljs-keyword">protected</span> <span class="hljs-variable">$pk</span> = <span class="hljs-string">&#x27;u_id&#x27;</span>;
+
+    <span class="hljs-comment">// 开启自动维护时间戳字段 (什么时间插入 什么时间更新)</span>
+    <span class="hljs-keyword">protected</span> <span class="hljs-variable">$autoWriteTimestamp</span> = <span class="hljs-literal">true</span>;
+
+    <span class="hljs-comment">// 软删除 开启之后 删除数据只是用一个字段来标识为删除状态 方便查询、备份等</span>
+    <span class="hljs-keyword">use</span> <span class="hljs-title">SoftDelete</span>;
+    <span class="hljs-keyword">protected</span> <span class="hljs-variable">$deleteTime</span> = <span class="hljs-string">&#x27;delete_time&#x27;</span>;
+
+&#125;</code></pre>
+<p>以上代码比文档中第一章节<code>模型初始化</code>要多了一些内容，这是为了突出 <code>模型可以完成很多功能</code> 这也是ORM出现的原因：将sql的执行，抽象映射为面向对象编程中的对象。 我们可以理解为：表中的一行数据，代表我们代码中new一个对象，改变对象，则自动更新表中对应的行。</p>
+<h5 id="使用模型"><strong>使用模型</strong></h5>
+<p>演示的代码是比较简单的，实际是可以很灵活的 比如查询用非主键的条件来查询、查询多行记录等等</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// *******快速查询、更新*******</span>
+<span class="hljs-comment">// 查询主键=1的数据</span>
+<span class="hljs-variable">$user</span> = <span class="hljs-title class_">User</span>::<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-number">1</span>);
+<span class="hljs-comment">// 然后更改它的name字段为新的值</span>
+<span class="hljs-variable">$user</span>-&gt;name = <span class="hljs-string">&#x27;thinkphp&#x27;</span>;
+<span class="hljs-comment">// 保存，自己去数据库给我更新吧~</span>
+<span class="hljs-variable">$user</span>-&gt;<span class="hljs-title function_ invoke__">save</span>();
+
+<span class="hljs-comment">// *******插入新的一行数据*******</span>
+<span class="hljs-comment">// 新建一个对象(相对应的操作就是新创建一行)</span>
+<span class="hljs-variable">$user</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>;
+<span class="hljs-comment">// 设置字段的值  有多个字段就多个设置</span>
+<span class="hljs-variable">$user</span>-&gt;name= <span class="hljs-string">&#x27;thinkphp&#x27;</span>;
+<span class="hljs-comment">// 保存，自己去插入吧~</span>
+<span class="hljs-variable">$user</span>-&gt;<span class="hljs-title function_ invoke__">save</span>();</code></pre>
+<h5 id="误区"><strong>误区</strong></h5>
+<p>看了使用之后，很多初学者就开始写代码了，然而却使用了不太正确的方式。 ① model只当为Db类用 虽然model可以看成db类的超集，但是如果只是把它当成简单的DB类使用，而不是<code>使用ORM思想去编写</code>。那么就没什么必要使用它了。。 如果使用不对，不仅不能提高效率，反而会影响自己。（比如代码规范不统一、新增表还要新增对应的模型文件等等） 代码演示：</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$userModel</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(); <span class="hljs-comment">// 这里就相当于初始化Db类</span>
+<span class="hljs-variable">$userOneInfo</span> = <span class="hljs-variable">$userModel</span>-&gt;<span class="hljs-title function_ invoke__">where</span>([<span class="hljs-string">&#x27;u_id&#x27;</span> =&gt; <span class="hljs-number">1</span>])-&gt;<span class="hljs-title function_ invoke__">find</span>();
+
+<span class="hljs-variable">$userTwoInfo</span> = <span class="hljs-variable">$userModel</span>-&gt;<span class="hljs-title function_ invoke__">where</span>([<span class="hljs-string">&#x27;u_id&#x27;</span> =&gt; <span class="hljs-number">2</span>])-&gt;<span class="hljs-title function_ invoke__">find</span>();
+<span class="hljs-comment">// ... 执行其他逻辑 比如判断上下级 操作权限等等</span>
+
+<span class="hljs-comment">// 业务需求不只是读取用户的数据这么简单</span>
+<span class="hljs-comment">// 还要扣除余额(就是更新数据库)</span>
+<span class="hljs-variable">$userOneRes</span> = <span class="hljs-variable">$userModel</span>-&gt;<span class="hljs-title function_ invoke__">where</span>([<span class="hljs-string">&#x27;u_id&#x27;</span> =&gt; <span class="hljs-number">1</span>])-&gt;<span class="hljs-title function_ invoke__">update</span>([<span class="hljs-string">&#x27;u_balance&#x27;</span> =&gt; <span class="hljs-string">&#x27;xxxx&#x27;</span>]);
+
+<span class="hljs-comment">// ... 执行其他逻辑 </span></code></pre>
+<p>看到这里，先停下来思考一下。。你的代码有出现过这样子的吗？ 我相信还是有些人会这样子用的吧！因为我以前也是这样子用的。 那么我们看看正确的使用方法(我认为的，如果觉得不对或者有更好的，欢迎评论交流)</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-variable">$userOneInfo</span> = <span class="hljs-title class_">User</span>::<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// 这里演示使用非主键条件查询的情况！！</span>
+<span class="hljs-comment">// 查询一个1用户的下级出来</span>
+<span class="hljs-variable">$userTwoInfo</span> = <span class="hljs-title class_">User</span>::<span class="hljs-title function_ invoke__">get</span>(function(<span class="hljs-variable">$query</span>)&#123;
+    <span class="hljs-variable">$query</span>-&gt;<span class="hljs-title function_ invoke__">where</span>([<span class="hljs-string">&#x27;p_uid&#x27;</span> =&gt; <span class="hljs-number">1</span>]);
+&#125;);
+
+<span class="hljs-comment">// ... 执行其他逻辑 比如判断上下级 操作权限等等</span>
+
+<span class="hljs-comment">// 业务需求不只是读取用户的数据这么简单</span>
+<span class="hljs-comment">// 还要扣除余额(就是更新数据库)</span>
+<span class="hljs-variable">$userOneInfo</span>-&gt;u_balance = <span class="hljs-number">0</span>;
+<span class="hljs-variable">$userOneRes</span> = <span class="hljs-variable">$userOneInfo</span>-&gt;<span class="hljs-title function_ invoke__">save</span>();
+
+<span class="hljs-variable">$userTwoInfo</span>-&gt;u_balance = <span class="hljs-number">0</span>;
+<span class="hljs-variable">$userTwoRes</span> =  <span class="hljs-variable">$userTwoInfo</span>-&gt;<span class="hljs-title function_ invoke__">save</span>();
+
+<span class="hljs-comment">// ... 执行其他逻辑</span></code></pre>
+<p>因为<code>一个对象映射一条数据</code>，所以我们在操作同样where条件的数据，直接操作对象就可以了， 就不用反复编写where u_id =1更新， u_id = 1 要删除 使用模型，还有很多用处，（得益于开源团队的奉献，为我们封装了大量的功能） 比如： - 用户表新增一条数据，另一个附属表也要用该用户id初始化一行。 - 自动转换数据格式（储存时间戳，查询出来为2019-7-13 19:53:04格式）。 - 自动校验数据，自动完成数据（操作的时候默认取操作人ip 权限等储存）。 - 关联查询（TP中非常强大的功能，在模型中定义好与另一个模型的关系，比如店铺表中的u_id 可以用来查询出店铺所属用户的信息 相当于店铺模型和用户模型的关联 自动join数据 合并 返回给我们使用） - 等等</p>
+<h2 id="总结">总结</h2>
+<ul>
+<li>ORM是一种思想，概念，代表 对象-关系映射（数据库-对象 映射）</li>
+<li>ORM使得对数据的操作抽象为对对象的操作。</li>
+<li>要学会思想的改变，利用好框架提供的特性，编写更好地代码。</li>
+<li>TP中的模型非常强大，封装了大量的逻辑。</li>
+</ul>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/07/10/Swoole/swoole%E5%A6%82%E4%BD%95%E5%AF%B9ip%E9%99%90%E5%88%B6%E8%AE%BF%E9%97%AE%E9%A2%91%E7%8E%87.html">
+        <span class="nav-arrow">← </span>
+        
+          swoole如何对ip限制访问频率
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/07/18/basic/smtp%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90php%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6swoole%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6.html">
+        
+          SMTP邮件服务器原理解析,php发送邮件,swoole发送邮件
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ORM%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-nav-text">ORM是什么？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#thinkphp%E4%B8%AD%E7%9A%84%E8%BF%90%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-nav-text">thinkphp中的运用示例</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tp%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A8%A1%E5%9D%97"><span class="toc-nav-text">tp中的数据库模块</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tp%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-nav-text">tp中的模型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B%E6%96%87%E4%BB%B6"><span class="toc-nav-text">定义模型文件</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="toc-nav-text">使用模型</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E8%AF%AF%E5%8C%BA"><span class="toc-nav-text">误区</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-nav-text">总结</span></a></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/07/13/php/thinkphp中模型的正确使用方式orm的思想概念.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "Thinkphp中模型的正确使用方式,ORM的思想概念",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

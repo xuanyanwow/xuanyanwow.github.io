@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/front/layui%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BCcheckbox%E8%AE%BE%E7%BD%AE%E9%83%A8%E5%88%86%E4%B8%8D%E5%8F%AF%E9%80%89.html">layui数据表格checkbox设置部分不可选</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h3 id="问题">问题</h3>
+<p>在layui数据表格中设置了字段为<code>type:checkbox</code> 但是想要实现部分不显示，不可选的功能。 <a href="#" title="layui数据表格"><img src="http://www.yancoo.cn/uploads/images/201905/30_01_layuitable.png" alt="layui数据表格" title="layui数据表格"></a> layui内置没有该功能，所以只能自己实现。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/front/layui%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BCcheckbox%E8%AE%BE%E7%BD%AE%E9%83%A8%E5%88%86%E4%B8%8D%E5%8F%AF%E9%80%89.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/docker/%E8%AE%A8%E8%AE%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8docker%E5%92%8Cdocker-compose.html">讨论 - 为什么要使用docker和docker-compose</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>优点总结(后面进行讨论)</h1>
+<h2 id="更高效的利用系统资源">更高效的利用系统资源</h2>
+<h2 id="更快速的启动时间">更快速的启动时间</h2>
+<h2 id="一致的运行环境">一致的运行环境</h2>
+<h2 id="持续交付和部署">持续交付和部署</h2>
+<h2 id="更轻松的迁移">更轻松的迁移</h2>
+<h2 id="更轻松的维护和扩展">更轻松的维护和扩展</h2>
+<p>讨论 ===== 更高效？</p>
+<hr>
+<p>docker是容器型虚拟化，不需要进行硬件虚拟、运行完整操作系统等额外的开销。所以提高了对系统资源的利用率 简单来说：可以在同样配置的机器上虚拟运行更多的应用。</p>
+<h2 id="更快速？">更快速？</h2>
+<p>因为docker不需要运行完成的操作系统，而是直接运行宿主机的内核，因此可以做到秒级甚至毫秒级的启动关闭。 简单来说：加载1万个文件和100个文件的速度区别</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/docker/%E8%AE%A8%E8%AE%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8docker%E5%92%8Cdocker-compose.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/docker/%E5%AE%9E%E6%88%98docker-compose%E6%90%AD%E5%BB%BA%E5%9F%BA%E6%9C%AC%E7%9A%84nginxphp%E7%8E%AF%E5%A2%83.html">实战 - docker-compose搭建基本的nginx+php环境</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>安装docker-compose</h1>
+<p>简单说几句，具体可以参照官网的详细教程。</p>
+<ul>
+<li>
+<p>确保已经安装docker</p>
+</li>
+<li>
+<p>从github拉取docker-compose</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/docker/%E5%AE%9E%E6%88%98docker-compose%E6%90%AD%E5%BB%BA%E5%9F%BA%E6%9C%AC%E7%9A%84nginxphp%E7%8E%AF%E5%A2%83.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/docker/%E5%AE%9E%E6%88%98%E5%A4%9A%E5%AE%B9%E5%99%A8nginx%E5%AE%B9%E5%99%A8%E7%81%B5%E6%B4%BB%E5%88%87%E6%8D%A2php%E7%89%88%E6%9C%AC%E5%90%8C%E6%97%B6%E8%BF%90%E8%A1%8C%E5%A4%9A%E4%B8%AAphp%E5%AE%B9.html">实战 - 多容器,Nginx容器灵活切换PHP版本!同时运行多个PHP容器</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>容器link原理 =========== 在前面一章中，我们使用 <code>--link</code>来将php容器和nginx容器关联在一起，并在nginx容器中的配置写下了如下代码，写下的php001就是我们在–link中设置的别名，其实这是通过本地host实现的。</p>
+<pre><code class="hljs plaintext">&#123;
+    try_files $uri =404;
+    fastcgi_pass php001:9000;   #极其重要
+    fastcgi_index index.php;
+    include /etc/nginx/conf.d/fastcgi_params;  #这里也是需要注意的，之前就是在这里还惨我了，需要绝对路径。不然路径默认从nginx的配置目录开始。
+&#125;</code></pre>
+        
+      </div>
+      <a class="more" href="/2019/08/30/docker/%E5%AE%9E%E6%88%98%E5%A4%9A%E5%AE%B9%E5%99%A8nginx%E5%AE%B9%E5%99%A8%E7%81%B5%E6%B4%BB%E5%88%87%E6%8D%A2php%E7%89%88%E6%9C%AC%E5%90%8C%E6%97%B6%E8%BF%90%E8%A1%8C%E5%A4%9A%E4%B8%AAphp%E5%AE%B9.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/docker/%E5%85%A5%E9%97%A8-docker%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E5%82%A8%E5%AD%98%E5%92%8C%E8%BD%AC%E7%A7%BB.html">入门 - Docker容器数据储存和转移</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>容器和层</h1>
+<p>容器和镜像之间的主要区别是顶部的可写层。所有对容器添加新的或修改现有数据的内容都存储在该可写层中。当容器被删除时，可写层也被删除。底层镜像保持不变。 同一个镜像可以被创建多个同时运行的容器，相当于最上层的可写层不同而已，Docker版“披上羊皮的狼”。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/docker/%E5%85%A5%E9%97%A8-docker%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E5%82%A8%E5%AD%98%E5%92%8C%E8%BD%AC%E7%A7%BB.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/docker/%E5%85%A5%E9%97%A8-docker%E5%B0%86nginx%E5%AE%B9%E5%99%A8%E5%92%8Cphp%E5%AE%B9%E5%99%A8%E5%85%B3%E8%81%94%E8%B5%B7%E6%9D%A5.html">入门 - Docker将nginx容器和php容器关联起来</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>概念教程和介绍有一大堆，我就不多说了。主要记录一下操作，方便你我查阅。 首先是在菜鸟教程里看的教程，里面把各种镜像、容器的概念和基本操作都说了。但是每一步都直到怎么测试运行起来。 如：nginx，运行成功了，然后呢？没了。其他环境要怎么弄？ 在百度上找教程，看到有人先是开了一个centos镜像的容器，然后在上面跟一个基本服务器一样去yum各种环境，如php、nginx、mysql。 然后再把镜像更新commit，说是环境就搭建好了。方法① 但这样子的话，主机上pull下来的php和nginx又有什么用？（按着菜鸟教程走下来的时候pull的） 于是请教前辈，是按方法①去操作还是php,nginx各开一个容器再去连接方法②，得到了方法②的回复，于是开始了漫长的道路。</p>
+<ul>
+<li>单容器易于分发、维护。因为它们是独立的，所有的东西都运行在同一个容器中，这点就像是一个虚拟机。但这也意味着，当你要升级其中的某样东西（比如PHP新版本）的时候，需要重新构建整个容器。</li>
+<li>多容器可以在添加组件时提供更好的模块化。因为每个容器包含了堆栈的一部分：Web、PHP、MySQL等，这样可以单独扩展每个服务或者添加服务，并且不需要重建所有的东西。</li>
+</ul>
+<p>需要先把php镜像和nginx镜像pull下来。查看已有镜像 docker images  先新建一个php容器</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/docker/%E5%85%A5%E9%97%A8-docker%E5%B0%86nginx%E5%AE%B9%E5%99%A8%E5%92%8Cphp%E5%AE%B9%E5%99%A8%E5%85%B3%E8%81%94%E8%B5%B7%E6%9D%A5.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%A4%9Aphp%E7%89%88%E6%9C%AC%E4%B8%AD%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E5%8D%87%E7%BA%A7swoole.html">宝塔面板多PHP版本中编译安装升级Swoole</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>今天在使用最新版easyswole框架的过程中，需要依赖的swoole版本必须<code>&gt;= 4.2.13</code>，到2019-2-25，宝塔面板能支持安装的swoole版本只有4.2.10，所以就看一下如何自己安装编译swoole扩展吧~</p>
+<h4 id="swoole-下载地址">swoole 下载地址</h4>
+<pre><code class="hljs plaintext">https://github.com/swoole/swoole-src/releases
+http://pecl.php.net/package/swoole
+http://git.oschina.net/swoole/swoole</code></pre>
+<p>首先我们下载4.2.13版本的包，进入目录。</p>
+<pre><code class="hljs plaintext">cd swoole</code></pre>
+<p>侦测php</p>
+<pre><code class="hljs plaintext">sudo phpize （原文档）</code></pre>
+<p>因为我们安装多PHP版本，所以我们指定一下php的路径</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%A4%9Aphp%E7%89%88%E6%9C%AC%E4%B8%AD%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E5%8D%87%E7%BA%A7swoole.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/openssl-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E8%AF%81%E4%B9%A6pfx%E5%88%86%E8%A7%A3%E6%88%90pem.html">Openssl -  微信支付证书pfx分解成pem</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#微信" >
+    <span class="tag-code">微信</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          事件起因：做香港本地微信支付（香港公司收取香港用户钱包）申请的商户只提供了cert.pem和一个pfx的文件。程序使用pem需要cert和key两个文件，所以需要从pfx文件中提取cert和key文件。 下载OpenSSL：http://gnuwin32.sourceforge.net/pa ...
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/openssl-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E8%AF%81%E4%B9%A6pfx%E5%88%86%E8%A7%A3%E6%88%90pem.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/wechat/%E5%BE%AE%E4%BF%A1%E9%80%80%E6%AC%BE%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83%E8%A7%A3%E5%AF%86%E4%BD%8E%E7%89%88%E6%9C%AC%E4%BB%A5%E5%8F%8A7-1%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E7%9A%84%E4%BD%BF.html">微信退款结果回调解密,低版本以及7.1以上版本的使用方法</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#微信" >
+    <span class="tag-code">微信</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>微信的退款结果回调，数据是加密的。我们需要解密之后才能得到订单信息和结果信息，进行处理。 再次吐槽微信，官方demo都藏得贼吉尔深，一般人没有点狗屎运都找不到。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/wechat/%E5%BE%AE%E4%BF%A1%E9%80%80%E6%AC%BE%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83%E8%A7%A3%E5%AF%86%E4%BD%8E%E7%89%88%E6%9C%AC%E4%BB%A5%E5%8F%8A7-1%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E7%9A%84%E4%BD%BF.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/tp5-0-20-tp5%E6%9B%B4%E6%94%B9%E7%BD%91%E7%AB%99%E7%9B%AE%E5%BD%95%E4%B8%BA-public-%E5%90%8E%E8%BF%90%E8%A1%8C%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3.html">TP5.0.20 - TP5更改网站目录为/public 后运行出错解决</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          今天在部署TP5的时候，把网站根目录指向到public目录下，运行后产生以下错误
+Warning: require(): open_basedir restriction in effect. File(/www/wwwroot/xx/thinkphp/start.php) is not w ...
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/tp5-0-20-tp5%E6%9B%B4%E6%94%B9%E7%BD%91%E7%AB%99%E7%9B%AE%E5%BD%95%E4%B8%BA-public-%E5%90%8E%E8%BF%90%E8%A1%8C%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/10/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/12/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

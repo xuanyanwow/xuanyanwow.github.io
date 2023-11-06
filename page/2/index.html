@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/12/10/Swoole/hyperf-command-coroutine.html">hyperf命令行与协程</a>
+      </h2>
+      <p class="article-date">2022年12月10日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          hyperf命令行与协程
+背景
+需要自定义命令行Command 启动附属的Server服务
+记录一下引发的几个问题
+无法启动
+产生报错
+Swoole\Server::start(): eventLoop has already been created, unable to start Sw ...
+        
+      </div>
+      <a class="more" href="/2022/12/10/Swoole/hyperf-command-coroutine.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/12/08/other/withMyIpad.html">我与我的ipad(ipad当win10副屏之路)</a>
+      </h2>
+      <p class="article-date">2022年12月8日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Ipad副屏之路
+背景
+关于我
+
+身份：穷
+物品：台式i5-4代老破旧 + ipad 2019 小卑微
+习惯：公司双屏working
+梦想：在家里也能过上双屏的日子
+
+尝试
+ScreenTask
+
+软件来源：github
+技术思路：脚本不断截屏，监听http server，ipad打开网页  ...
+        
+      </div>
+      <a class="more" href="/2022/12/08/other/withMyIpad.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/12/08/version-controller/why-git.html">Why Git?</a>
+      </h2>
+      <p class="article-date">2022年12月8日</p>
+      
+        
+  <a href="/tags#项目管理" >
+    <span class="tag-code">项目管理</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Why Git
+
+代码备份：依赖gitee,github 免费在线备份自己代码，在公司和家里实现代码copy
+版本管理：核心功能 修修改改 反反复复
+多人协作：核心功能
+CI/CD：依靠tag和release，实现自动化按版本切换线上功能版本，自动测试，自动上线代码等
+交流存档：依靠PR,I ...
+        
+      </div>
+      <a class="more" href="/2022/12/08/version-controller/why-git.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/12/07/aws/aws-assumeRole.html">AWS-assumeRole.控制不同token访问不同目录</a>
+      </h2>
+      <p class="article-date">2022年12月7日</p>
+      
+        
+  <a href="/tags#aws" >
+    <span class="tag-code">aws</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          aws
+问题背景
+应用程序需要做sessionToken，提供给用户访问S3的存储资源，但是需要做用户隔离（只能访问自己应用内的资源，不能访问别的用户的资源）
+思路：
+基本条件 S3资源库都设为私有
+
+方案一，每次获取资源前都来server接口获取临时下载token
+方案二，生成短时间内有效 ...
+        
+      </div>
+      <a class="more" href="/2022/12/07/aws/aws-assumeRole.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/12/05/php/phpstorm.html">phpstorm食用指南(自用)</a>
+      </h2>
+      <p class="article-date">2022年12月5日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+    .markdown-content p{
+        padding: 2px 0px;
+    }
+    .markdown-content ul li{
+        padding:0px;
+    }
+
+phpstorm
+快捷键
+
+
+Ctrl + Alt + Lef ...
+        
+      </div>
+      <a class="more" href="/2022/12/05/php/phpstorm.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/11/28/basic/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8vs%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8.html">对象存储vs文件存储</a>
+      </h2>
+      <p class="article-date">2022年11月28日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          对象存储vs文件存储
+使用对象存储时，我们不知道也不关心文件存在哪里（哪个文件夹下），我们只需要记住这个文件对应的Key（一串字符）就可以找到我们保存的文件。
+而使用文件存储时，我们需要明确地知道文件保存的路径，找回文件时需要按文件夹的路径依次找到文件。
+容易造成混淆的原因如下：
+
+对象存储 ...
+        
+      </div>
+      <a class="more" href="/2022/11/28/basic/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8vs%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/11/27/software_architect/8_%E5%BB%BA%E7%AB%8B%E6%A8%A1%E5%9E%8B.html">《架构师修炼之道》第八章--建立模型，化繁为简</a>
+      </h2>
+      <p class="article-date">2022年11月27日</p>
+      
+        
+  <a href="/tags#架构" >
+    <span class="tag-code">架构</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          建立模型，化繁为简
+项目进入了开发阶段，我们发现团队成员描述同一架构元素时使用的词汇各不相同。我们的设计决策表面上取得了一致意见，但大家实际各有各的理解。
+我们临时召开涂鸦会议，提炼出通用的元模型，对模型中的概念、元素、关系进行了合理的命名。然后开始重构代码，好在我们的系统刚刚起步。
+但在此 ...
+        
+      </div>
+      <a class="more" href="/2022/11/27/software_architect/8_%E5%BB%BA%E7%AB%8B%E6%A8%A1%E5%9E%8B.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/11/27/software_architect/7_%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F.html">《架构师修炼之道》第七章--架构模式</a>
+      </h2>
+      <p class="article-date">2022年11月27日</p>
+      
+        
+  <a href="/tags#架构" >
+    <span class="tag-code">架构</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          架构模式
+架构模式是针对特定问题的可复用解决方案 ，通过特定的结构组合提升某方面的质量属性。
+架构模式 vs 设计模式
+设计模式可以提高面向对象程序的可复用性和可维护性
+架构模式有所不同，定义了各种质量属性场景（包括设计属性、运行属性、感知属性）的解决方案，常常涉及软件系统的多个组件。
+分层 ...
+        
+      </div>
+      <a class="more" href="/2022/11/27/software_architect/7_%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/11/20/docker/wsl_error.html">windows.Docker.安装运行失败</a>
+      </h2>
+      <p class="article-date">2022年11月20日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Docker
+问题报错
+Failed to set version to docker-desktop:exit code: -1
+
+百度排查
+资料一：因为我把openvpn设置为自启动了，代理软件和wsl2之间的端口有冲突，所以导致无法启动docker。
+资料二：以管理员模式进入power ...
+        
+      </div>
+      <a class="more" href="/2022/11/20/docker/wsl_error.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/11/17/docker/docker%E8%87%AA%E7%94%A8%E5%B0%8F%E6%89%8B%E5%86%8C.html">docker自用小手册</a>
+      </h2>
+      <p class="article-date">2022年11月17日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Docker
+纯环境 没有程序 启动后马上退出
+1、docker容器运行必须有一个前台进程， 如果没有前台进程执行，容器认为空闲，就会自行退出
+2、容器运行的命令如果不是那些一直挂起的命令（ 运行top，tail、循环等），就是会自动退出
+3、这个是 docker 的机制问题
+解决方法：
+d ...
+        
+      </div>
+      <a class="more" href="/2022/11/17/docker/docker%E8%87%AA%E7%94%A8%E5%B0%8F%E6%89%8B%E5%86%8C.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/3/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Openssl -  微信支付证书pfx分解成pem | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>Openssl -  微信支付证书pfx分解成pem</h2>
+  <p class="post-date">2019-08-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>事件起因：做香港本地微信支付（香港公司收取香港用户钱包）申请的商户只提供了cert.pem和一个pfx的文件。程序使用pem需要cert和key两个文件，所以需要从pfx文件中提取cert和key文件。 下载OpenSSL：<a target="_blank" rel="noopener" href="http://gnuwin32.sourceforge.net/packages/openssl.htm">http://gnuwin32.sourceforge.net/packages/openssl.htm</a> 解压Binaries.zip中openssl.exe，可单独运行 打开CMD窗口 进入OpenSSL安装目录 输入命令 ：openssl 进入openssl模式，把xxx.pfx文件放到openssl安装目录中，开始转换文件 提取cert证书：</p>
+<pre><code class="hljs plaintext">pkcs12 -in xxxxx.pfx -clcerts -nokeys -out cert.pem</code></pre>
+<p>提取证书key：</p>
+<pre><code class="hljs plaintext">pkcs12 -in xxxxx.pfx -nocerts -out key.pem</code></pre>
+<p>过程中需要输入证书密码 微信证书密码默认是商户号， 提取证书key的时候需要设置新密码，如果不需要设置新密码 则运行：</p>
+<pre><code class="hljs plaintext">pkcs12 -in xxxxx.pfx -nocerts -nodes -out key.pem</code></pre>
+<p>在openssl安装目录里就多了两个新文件了 copy使用即可 附 openssl  pkcs12参数选项：</p>
+<h3 id="用途：">用途：</h3>
+<p>pkcs12文件工具，能生成和分析pkcs12文件。PKCS#12文件可以被用于多个项目，例如包含Netscape、 MSIE 和 MS Outlook。</p>
+<h3 id="用法：">用法：</h3>
+<p>openssl pkcs12 [-export] [-chain] [-inkey filename] [-certfile filename] [-CApath arg] [-CAfile arg] <br>
+[-name name] [-caname name] [-in filename] [-out filename] [-noout] [-nomacver] [-nocerts] <br>
+[-clcerts] [-cacerts] [-nokeys] [-info] [-noiter] [-maciter] [-nomaciter] [-nomac] [-twopass] [-descert] <br>
+[-certpbe alg] [-keypbe alg] [-macalg digest] [-keyex] [-keysig] [-password arg] [-passin arg] [-passout arg] <br>
+[-rand file(s)] [-LMK] [-CSP name][-engine e] [-des] [-des3] [-aes128] [-aes192] [-aes256] [-idea] <br>
+[-camellia128] [-camellia192] [-camellia256] [-nodes]</p>
+<h3 id="选项说明：">选项说明：</h3>
+<p>PKCS#12文件在创建或分析的时候要依赖有一些选项。默认的是分析一个PKCS#12文件。一个PKCS#12文件可以用B&lt;-export&gt;选项来创建。</p>
+<h3 id="分析选项：">分析选项：</h3>
+<p>-in filename：指定私钥和证书读取的文件，默认为标准输入。必须为PEM格式。 -out filename：指定输出的pkcs12文件，默认为标准输出。 -password arg：指定导入导出口令来源。 -passin arg：输入文件保护口令来源。 -passout arg：指定所有输出私钥保护口令来源。 -noout：不打印参数编码的版本信息。 -clcerts：仅仅输出客户端证书，不输出CA证书。 -cacerts：仅仅输出CA证书，不输出客户端证书。 -nocerts：不输出任何证书。 -nokeys：不输出任何私钥信息值。 -info：输出PKCS#12文件结构的附加信息值。例如用的算法信息以及迭代次数。 -des：在输出之前用DES算法加密私钥值。 -des3：在输出之前用3DES算法加密私钥值。此项为默认。 -idea：在输出之前用IDEA算法加密私钥值。 -aes128、-aes192、-aes256：在输出之前用AES算法加密私钥值。 -camellia128、-camellia192、-camellia256：在输出之前用camellia算法加密私钥值。 -nodes：一直对私钥不加密。 -nomacver：读取文件时不验证MAC值的完整性。 -twopass：需要用户分别指定MAC口令和加密口令。 文件创建选项： -export：这个选项指定了一个PKCS#12文件将会被创建。 -in filename：指定私钥和证书读取的文件，默认为标准输入。必须为PEM格式。 -out filename：指定输出的pkcs12文件，默认为标准输出。 -inkey filename：指定私钥文件的位置。如果没有被指定，私钥必须在-in filename中指定。 -name name：指定证书以及私钥的友好名字。当用软件导入这个文件时，这个名字将被显示出来。 -certfilefilename：添加filename中所有的证书信息值。 -caname name：指定其它证书的友好名字。这个选项可以被用于多次。 -password arg：指定导入导出口令来源。 -passin arg：输入文件保护口令来源。 -passout arg：指定所有输出私钥保护口令来源。 -chain：如果这个选项被提出，则添加用户证书的证书链。标准CA中心用它来搜索。如果搜索失败，则是一个重大的错误。 -descert：用3DES对PKCS12进行加密，这样杨浦可能会导致PKCS12文件被一些“export grade”软件不能够读取。默认的是用3DES对私钥文件进行加密，用40位的RC2对证书公钥文件进行加密。 -certpbealg：该选项允许指定证书的加密算法。任何PKCS#5 v1.5或 PKCS#12 PBE类型的算法都可以被使用。默认使用的是40位的RC2。 -keypbe alg：该选项允许指定证书私钥的加密算法。任何PKCS#5 v1.5或 PKCS#12 PBE类型的算法都可以被使用。默认使用的是3DES。 -keyex：设置私钥仅仅被用于密钥交换。 -keysig：设置私钥仅仅被用于数字签名。 -macalg digest：指定MAC摘要算法。如果没有被指定，则默认使用sha1。 -nomaciter、-noiter：这个选项影响MAC值和密钥算法的迭代次数。除非你希望产生的文件能与MSIE 4.0相兼容，可以把这两个选项丢弃一边。 -maciter：加强完整性保护，多次计算MAC。 -nomac：不去规定MAC值的完整性。 -rand file(s)：指定随机数种子文件，多个文件间用分隔符分开，windows用“;”，OpenVMS用“,“，其他系统用“：”。 -CApatharg：指定CA目录。该目录必须是一个标准证书目录：每个CA文件的文件名为XXXX.0，XXXX为其持有者摘要值。 -CAfile arg：指定CA文件。  -LMK：添加本地的机械属性到私钥中。 -CSP name：微软的CSP的名字。 -engine id：指定硬件引擎。</p>
+<h3 id="注意：">注意：</h3>
+<p>有一大部分选项将不会使用。对PKCS#12文件来说，仅仅B&lt;-in&gt;和 B&lt;-out&gt;需要被使用。对文件创建来说，B&lt;-export&gt;和 B&lt;-name&gt;使用。 如果B&lt;-clcerts&gt;、B&lt;-cacerts&gt;或 B&lt;-nocerts&gt;没有存在，所有的证书将会被依附到PKCS#12文件将会被输出。没有保证的是提出的第一个证书不一定匹配私钥。某些软件需要一个私钥和证书，来承担在文件中的第一个证书匹配私钥：经常没有这种情况。用B&lt;-clcerts&gt;选项能够解决问题，因为这个选项要输出与私钥文件相匹配的证书。如果CA证书是必需的，用B&lt;-nokeys -cacerts&gt;选项来输出文件，仅仅输出CA证书。 B&lt;-keypbe&gt; 和 B&lt;-certpbe&gt;算法允许明确的私钥加密算法和证书的详细说明。通常的默认是好的，但是偶尔的软件不能够处理经过3DES加密了的私钥。选项B&lt;-keypbe PBE-SHA1-RC2-40&gt;可以被用于减少40字节的RC2私钥加密。一个完整的所有算法的描述包含在B手册中。</p>
+<h3 id="实例：">实例：</h3>
+<p>分析一个PKCS#12文件和输出到文件中： openssl pkcs12 -in file.p12 -out file.pem 仅仅输出客户端证书到文件中： openssl pkcs12 -in file.p12 -clcerts -out file.pem 不加密私钥文件： openssl pkcs12 -in file.p12 -out file.pem -nodes 打印PKCS#12格式的信息值： openssl pkcs12 -in file.p12 -info -noout 生成pkcs12文件，但不包含CA证书： openssl pkcs12 -export -inkey ocspserverkey.pem -in ocspservercert.pem  -out ocspserverpkcs12.pfx 生成pcs12文件，包含CA证书： openssl pkcs12 -export -inkey ocspserverkey.pem -in ocspservercert.pem -CAfile demoCA/cacert.pem -chain -out ocsp1.pfx 将pcks12中的信息分离出来，写入文件： openssl pkcs12 –in ocsp1.pfx -out certandkey.pem 显示pkcs12信息： openssl pkcs12 –in ocsp1.pfx -info</p>
+<h3 id="BUGS：">BUGS：</h3>
+<p>有一些争论是PKCS#12的标准是一个大的BUG。 OpenSSL 0.9.6a以前的版本在PKCS#12的产生过程中有一个bug。在稀有的情况下用一个无效的密钥来加密并产生PKCS#12文件。这样做的结果是一些PKCS#12文件被其它的应用程序（MSIE或Netscape）会触发这个bug。因为他们不会被OpenSSL或相似的OpenSSL在产生PKCS#12文件时不能够被加密。产生的通道相当的小：在256中比1还小。 一方面这个Bug的固定影响是老的无效的加密了的PKCS#12文件不能够被固定的版本所分析。在这种情况下，B会报告’ the MAC is OK but fail with a decryption error when extracting private keys’错误。 这个问题的解决方法是用老的OpenSSL版本从PKCS#12中来提起私钥文件和证书，用新的版本、提取到的证书、私钥来重新创建PKCS#12文件。例如： old-openssl -in bad.p12 -out keycerts.pem<br>
+openssl -in keycerts.pem -export -name “My PKCS#12 file” -out fixed.p12</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#微信" >
+    <span class="tag-code">微信</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/30/wechat/%E5%BE%AE%E4%BF%A1%E9%80%80%E6%AC%BE%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83%E8%A7%A3%E5%AF%86%E4%BD%8E%E7%89%88%E6%9C%AC%E4%BB%A5%E5%8F%8A7-1%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E7%9A%84%E4%BD%BF.html">
+        <span class="nav-arrow">← </span>
+        
+          微信退款结果回调解密,低版本以及7.1以上版本的使用方法
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/30/php/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%A4%9Aphp%E7%89%88%E6%9C%AC%E4%B8%AD%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E5%8D%87%E7%BA%A7swoole.html">
+        
+          宝塔面板多PHP版本中编译安装升级Swoole
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%94%A8%E9%80%94%EF%BC%9A"><span class="toc-nav-text">用途：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="toc-nav-text">用法：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%80%89%E9%A1%B9%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-nav-text">选项说明：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%88%86%E6%9E%90%E9%80%89%E9%A1%B9%EF%BC%9A"><span class="toc-nav-text">分析选项：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="toc-nav-text">注意：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="toc-nav-text">实例：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#BUGS%EF%BC%9A"><span class="toc-nav-text">BUGS：</span></a></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/08/30/php/openssl-微信支付证书pfx分解成pem.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "Openssl -  微信支付证书pfx分解成pem",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

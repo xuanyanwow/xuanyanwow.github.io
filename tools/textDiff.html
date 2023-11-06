@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      文本对比 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    
+<!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+</style>
+<div id="article-banner">
+  <h2>文本对比</h2>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.13/lib/theme-chalk/index.css">
+  <style>
+    #app {
+      width:100%;
+    }
+    table,tr{
+        width:100%;
+        white-space: pre-wrap;
+        font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+        min-height:20px;
+        font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+        font-size: 12px;
+        line-height: 20px;
+    }
+    tr th{
+        width:50%;
+    }
+    tr td{
+        height:20px;
+        overflow-wrap: anywhere;
+    }
+    .added{
+        background-color: #e6ffec;
+    }
+    tr.hidden{
+        display:none;
+    }
+    .removed{
+        background-color: #ffebe9;
+    }
+    .added-num{
+        background-color: #ccffd8;
+    }
+    .removed-num{
+        background-color: #ffd7d5;
+        color:#24292f;
+        font-size:12px;
+        line-height:20px;
+    }
+    .lineNumber{
+        position: relative;
+        width: 1%;
+        white-space: nowrap;
+        vertical-align: top;
+        text-align: right;
+        min-width: 50px;
+        padding-right: 10px;
+        padding-left: 10px;
+        color: var(--color-fg-subtle);
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    .lineCode{
+        width:calc(49% - 6px);
+        padding-left:5px;
+    }
+    #diffTable{
+        border-collapse: collapse;
+        border: 1px solid #d0d7de;
+        border-radius: 6px;
+        margin-top:20px;
+    }
+    .alert{
+        padding:10px 15px;
+        color: #E6A23C;
+        background-color: #fdf6ec;
+        font-size: 12px;
+    }
+    .alert .title{
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 18px;
+    }
+    .hljs {
+        background: #333 !important;
+        color: #fff;
+    }
+    .markdown-content figure, .article-summary figure {
+        background: #333333 !important;
+    }
+  </style>
+</head>
+<main class="app-body flex-box">
+<article class="post-article">
+<section class="markdown-content">
+<div id="app">
+    <div class="alert">
+        <div class="title">超级强的文本对比工具</div>
+        使用场景: <br/> * 报名名单比较  <br/> * url传参比较排查 <br/> * JSON结构差异比较 <br/>
+    </div>
+    <br/>
+    <el-switch
+        v-model="beforeSort"
+        active-color="#13ce66"
+        inactive-text="先按行排序"
+                    @change="handle"
+        inactive-color="#ff4949">
+    </el-switch>
+    <el-switch
+        v-model="beforeSplit"
+        active-color="#13ce66"
+        inactive-text="先按符号分割"
+                    @change="handle"
+        inactive-color="#ff4949">
+    </el-switch>
+    <div style="display:inline-block;width:80px;"  v-show="beforeSplit">
+        <el-input v-model="beforSplitInput" placeholder="分割符" size="mini" @change="handle"></el-input>
+    </div>
+    <el-switch
+        v-model="onlyShowDiff"
+        active-color="#13ce66"
+        inactive-text="不展示相同文本"
+        inactive-color="#ff4949">
+    </el-switch>
+    <br/>
+    <el-switch
+        v-model="onlyStruct"
+        active-color="#13ce66"
+        inactive-text="只比较结构(url/json支持)"
+                    @change="handle"
+        inactive-color="#ff4949">
+    </el-switch>
+    <br/>
+    <br/>
+    <el-row :gutter="20">
+        <el-col :span="12">
+            <el-input
+            type="textarea"
+            :rows="10"
+            placeholder=""
+            v-model="text1"
+                    @change="handle"
+            >
+        </el-col>
+        <el-col :span="12">
+            <el-input
+            type="textarea"
+            :rows="10"
+            placeholder=""
+            v-model="text2"
+                    @change="handle"
+            >
+        </el-col>
+    </el-row>
+    <div style="">
+    <table id="diffTable">
+        <tr style="border-bottom:1px solid #d0d7de">
+            <th class="lineNumber"></th>
+            <th>文本A</th>
+            <th class="lineNumber"></th>
+            <th>文本B</th>
+        </tr>
+        <tr v-for="(item, i) in diffArray" :class="diffResultClass(item)">
+            <td :class="diffResultClass(item) + '-num lineNumber'"><span  v-if="diffRowNum(item,'left')">{{i + 1}}</span></td>
+            <td :class="diffResultClass(item) + ' lineCode'">{{diffResultText(item,'left')}}</td>
+            <td :class="diffResultClass(item) + '-num lineNumber'"><span  v-if="diffRowNum(item,'right')">{{i + 1}}</td>
+            <td :class="diffResultClass(item) + ' lineCode'">{{diffResultText(item,'right')}}</td>
+        </tr>
+    </table>
+    <br/><br/><br/><br/><br/><br/>
+    </div>
+<h2 id="使用示例">使用示例</h2>
+<h3 id="先按行排序">先按行排序</h3>
+<p>用途：报名名单、订单资料比较等</p>
+<p>场景：部门活动让员工填写电子表格报名（员工填写顺序不固定），需要找出还未报名的同事。</p>
+<p>操作：填入固定的部门名单，右侧填入员工报名的电子表格；先排序 再对比 即可比较出还未报名的员工名单</p>
+<h3 id="先按符号分割">先按符号分割</h3>
+<p>场景：对接接口的时候，同事调不通，可以对比一下参数哪里有差异。</p>
+<p>操作：填入query string，如 <code>name=siam&amp;age=18</code> 按 <code>&amp;</code> 分割，即可让参数一行一条 方便查看对比</p>
+<h3 id="json-url结构比较">json/url结构比较</h3>
+<p>场景：如上，对接接口 对比参数差异。但是只关系结构（key是否存在）而不在意内容（比如每次调用接口的sign都不一样）</p>
+<p>示例数据1</p>
+<pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;siam&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;friend&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;friend1&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">18</span>
+    <span class="hljs-punctuation">&#125;</span>
+<span class="hljs-punctuation">&#125;</span></code></pre>
+<pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;小明&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;friend&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;friend2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">18</span>
+    <span class="hljs-punctuation">&#125;</span>
+<span class="hljs-punctuation">&#125;</span></code></pre>
+<p>示例数据2</p>
+<pre><code class="hljs plaintext">name=siam&amp;money=189789&amp;sign=jklj3k2lj535980al</code></pre>
+<pre><code class="hljs plaintext">name=siam&amp;money=9871526&amp;sign=j329879zj3432421l</code></pre>
+</div>
+</section>
+</article>
+</main>
+<!-- import Vue before Element -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.13/lib/index.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: function() {
+    return { 
+        text1: "",
+        text2:'',
+        diffArray:[],
+        beforeSort:false,
+        onlyStruct:false,
+        onlyShowDiff:false,
+        beforeSplit:false,
+        beforSplitInput:"&",
+    }
+  },
+  methods:{
+    handle(string){
+        // if(this.text1.length == 0) return 
+        // if(this.text2.length == 0) return 
+        let text1 = this.text1
+        let text2 = this.text2
+        // before sort
+        if (this.beforeSort){
+            text1 = text1.split("\n").sort().join("\n")
+            text2 = text2.split("\n").sort().join("\n")
+        }
+        // before split
+        if (this.beforeSplit){
+            text1 = text1.split(this.beforSplitInput).join("\n")
+            text2 = text2.split(this.beforSplitInput).join("\n")
+        }
+        // only struct
+        if (this.onlyStruct){
+            text1 = this.transferStruct(text1)
+            text2 = this.transferStruct(text2)
+        }
+        const diff = Diff.diffLines(text1, text2);
+        // const diff = Diff.diffChars(this.text1, this.text2);
+        let newDiff =[];
+        diff.forEach((part) => {
+            let tempArray
+            tempArray = part.value.split("\n");
+            if (tempArray[tempArray.length - 1] == "") {
+                tempArray.splice(tempArray.length - 1,1)
+            }
+            // tempArray = [part.value];
+            tempArray.forEach((temp) => {
+                newDiff.push({
+                    count: temp.length,
+                    value: temp,
+                    added: part.added,
+                    removed: part.removed,
+                })
+            })
+        });
+        this.diffArray = newDiff
+    },
+    diffResultClass(item){
+        if (!item.added && !item.removed) {
+            if (this.onlyShowDiff) return "hidden"
+            return 'common'
+        }
+        if (item.added) return "added"
+        return "removed"
+    },
+    diffResultText(item, leftOrRight){
+        if (!item.added && !item.removed) return item.value
+        if (item.removed && leftOrRight == 'left') return item.value
+        if (item.removed && leftOrRight == 'right') {
+            return !!item.originText ? item.originText : ''
+        }
+        if (item.added && leftOrRight == 'left'){
+            return !!item.originText ? item.originText : ''
+        }
+        if (item.added && leftOrRight == 'right') return item.value
+    },
+    diffRowNum(item, leftOrRight){
+        if (item.added && leftOrRight == 'right') return true
+        if (item.removed && leftOrRight == 'left') return true
+        if (!item.added && !item.removed) return true
+        return false;
+    },
+    transferStruct(text){
+        // json则所有值变为true
+        // 其他则把=..&的值都去掉
+        if (this.checkIsJSON(text)){
+            let object = JSON.parse(text)
+            text = JSON.stringify(this.transferJson(object), null,4)
+            // 去掉每一行最后的一个,
+            let newTextArray = []
+            text.split("\n").forEach((line)=>{
+                newTextArray.push((line.substring(line.length - 1) == ',') ? line.substring(0, line.length - 1) : line)
+            })
+            text = newTextArray.join("\n")
+            return text
+        }
+        if(this.checkIsKeyValueString(text)){
+            return this.transferUrl(text.split("&")).join("\n")
+        }
+        this.$message({
+            type: 'error',
+            message: `输入数据非 json/url 格式`,
+            offset: 300
+        });
+        throw '输入数据非 json/url 格式';
+        return text
+    },
+    checkIsJSON: function (str) {
+        if (typeof str == 'string') {
+            try {
+                var obj = JSON.parse(str);
+                return (typeof obj == 'object' && obj)
+            } catch (e) {
+                return false;
+            }
+        }
+        return false;
+    },
+    checkIsKeyValueString:function(str){
+        return str.indexOf("=") !== -1
+    },
+    transferJson:function(obj){
+        let newStruct = {}
+        for(key in obj){
+            let value = obj[key]
+            if(value  instanceof Array){
+                newStruct[key] = []
+            } else if (typeof value == 'object') {
+                newStruct[key] = this.transferJson(value)
+            } else if (typeof value == 'number') {
+                newStruct[key] = 0
+            } else if (typeof value == 'string') {
+                newStruct[key] = ""
+            } else {
+                newStruct[key] = true
+            }
+        }
+        return newStruct
+    },
+    transferUrl:function(keyValueArray){
+        let newStruct = []
+        keyValueArray.forEach((temp) => {
+            newStruct.push(temp.replace(/=(.*)/, ''))
+        })
+        return newStruct
+    },
+  }
+})
+</script>
+
+
+<script>
+    $(function () {
+      var url = 'https://blog.siammm.cn/tools/textDiff.html';
+      $('#article-banner').geopattern(url)
+    });
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/02/28/php/php%E8%A7%A3%E6%9E%90markdown%E5%BA%93parsedown%E6%89%A9%E5%B1%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E6%B3%95.html">PHP解析Markdown库,parsedown扩展自定义语法</a>
+      </h2>
+      <p class="article-date">2020年2月28日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+在开发系统过程中，有些信息编写储存是使用Markdown通用语法，但由于各个平台的会新增一些独特规范，一般的解析库都是只包含了标准语法，对于自定义语法是不支持解析的（如vuepress文档系统中的::: tip 提示语块） 我们从vuepress迁移文档系统到自己实现的文档系统时， ...
+        
+      </div>
+      <a class="more" href="/2020/02/28/php/php%E8%A7%A3%E6%9E%90markdown%E5%BA%93parsedown%E6%89%A9%E5%B1%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E6%B3%95.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/01/14/other/vue-vant%E5%BC%95%E5%85%A5%EF%BC%8Ctabbar%E5%B0%81%E8%A3%85%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B.html">Vue vant引入，tabbar封装使用示例</a>
+      </h2>
+      <p class="article-date">2020年1月14日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Vant
+tabbar使用教程：https://youzan.github.io/vant/#/zh-CN/tabbar 关于基本的安装、引入组件就不再详细讲解，请自行按照文档安装章节进行。
+封装Tabbar
+在不同页面显示tabbar，如果tabbar修改，则需要变动多个页面 封装成组件后 ...
+        
+      </div>
+      <a class="more" href="/2020/01/14/other/vue-vant%E5%BC%95%E5%85%A5%EF%BC%8Ctabbar%E5%B0%81%E8%A3%85%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/01/09/database/mysql%E4%BB%8E5-7%E8%BF%81%E7%A7%BB%E8%A1%A8%E7%BB%93%E6%9E%84%E5%88%B05-5%E6%8A%A5%E9%94%99-near-0-null-default-null.html">mysql从5.7迁移表结构到5.5报错 near '(0) NULL DEFAULT NULL'</a>
+      </h2>
+      <p class="article-date">2020年1月9日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          问题由来
+问题如标题所示，在开发过程的时候，需要创建一张表，从另一个环境导出的表结构sql文件，在我电脑上导入，遇到该报错
+You have an error in your SQL syntax; check the manual that corresponds to your MySQ ...
+        
+      </div>
+      <a class="more" href="/2020/01/09/database/mysql%E4%BB%8E5-7%E8%BF%81%E7%A7%BB%E8%A1%A8%E7%BB%93%E6%9E%84%E5%88%B05-5%E6%8A%A5%E9%94%99-near-0-null-default-null.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/01/02/php/php-fpm%E5%BA%94%E7%94%A8%E4%B8%8Ephp-swoole%E5%BA%94%E7%94%A8%E8%BF%9B%E8%A1%8C%E9%80%9A%E4%BF%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F.html">php-fpm应用与php-swoole应用进行通信</a>
+      </h2>
+      <p class="article-date">2020年1月2日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          基础要求
+
+linux万物皆文件
+socket通信
+基础进制转换
+
+原文地址：https://blog.siammm.cn/archives/229
+写在前面
+这篇文章是自己练习的内容，主要想实现应用间的通信机制。
+Workerman中提供的建议方案
+
+与其它mvc框架结合建议以上图的方式( ...
+        
+      </div>
+      <a class="more" href="/2020/01/02/php/php-fpm%E5%BA%94%E7%94%A8%E4%B8%8Ephp-swoole%E5%BA%94%E7%94%A8%E8%BF%9B%E8%A1%8C%E9%80%9A%E4%BF%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/18/php/php%E4%B8%AD%E8%A7%A3%E6%9E%90xml%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E5%BC%8F%EF%BC%8Cphp%E4%B8%AD%E8%A7%A3%E6%9E%90xml%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94.html">PHP中simplexml_load_string解析xml的正确方式</a>
+      </h2>
+      <p class="article-date">2019年12月18日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          前言
+为什么写这篇文章，因为他娘的宣言又踩坑了。 在对接别人接口时，他们使用的是xml格式交互的。 其中的格式可能如下
+&lt;RSP2003&gt;
+  &lt;TotalNum&gt;39&lt;/TotalNum&gt;
+  &lt;CityList&gt;
+    &lt;CityC ...
+        
+      </div>
+      <a class="more" href="/2019/12/18/php/php%E4%B8%AD%E8%A7%A3%E6%9E%90xml%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E5%BC%8F%EF%BC%8Cphp%E4%B8%AD%E8%A7%A3%E6%9E%90xml%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/11/21/read-book/%E3%80%8A%E6%84%BF%E4%BD%A0%E5%8E%86%E5%B0%BD%E5%8D%83%E5%B8%86%EF%BC%8C%E5%BD%92%E6%9D%A5%E4%BB%8D%E6%98%AF%E5%B0%91%E5%B9%B4%E3%80%8B%E7%B2%BE%E7%BE%8E%E5%8F%A5%E5%AD%90.html">《愿你历尽千帆，归来仍是少年》精美句子</a>
+      </h2>
+      <p class="article-date">2019年11月21日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h2 id="素心人的坚守">素心人的坚守</h2>
+<ul>
+<li>我越来越强烈地感到，每天都汲汲于生或是汲汲于死的人们，大多掩饰不住越发强烈的渴望、迷惘和焦虑，逐渐作茧自缚，只有依靠外在物质的刺激，才能重新快乐起来。而那些多年来通过读书、探讨形成的思维方式和行为习惯，也正在悄悄滋润着另一些并不那么光鲜、奢华的简单生命。</li>
+</ul>
+<h2 id="上善若水">上善若水</h2>
+<ul>
+<li>毕竟，无论饥馑还是富足，多了一份陪伴，人就不再孤单。</li>
+<li>上善若水，水利万物而不争。</li>
+</ul>
+<h2 id="夏天的雨和梦魇">夏天的雨和梦魇</h2>
+<ul>
+<li>那么，走那么远，究竟图个什么？ 大概是一定得找到那个在夏夜里不会幽怨地下午的乐土，然后安稳地住下去。 亦或遇到一个灵魂契合的赏雨之人，温一壶月光作酒，开怀对饮。</li>
+</ul>
+<h2 id="冬">冬</h2>
+<ul>
+<li>突然就好想写点什么，因为生老病死，轮回不息。美好，伤痛，遗憾，满足…没有什么是永恒的。</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2019/11/21/read-book/%E3%80%8A%E6%84%BF%E4%BD%A0%E5%8E%86%E5%B0%BD%E5%8D%83%E5%B8%86%EF%BC%8C%E5%BD%92%E6%9D%A5%E4%BB%8D%E6%98%AF%E5%B0%91%E5%B9%B4%E3%80%8B%E7%B2%BE%E7%BE%8E%E5%8F%A5%E5%AD%90.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/11/12/php/php%E5%AF%B9%E8%B1%A1%E5%AD%97%E6%AE%B5%E5%A3%B0%E6%98%8Eeasyswoole-orm-%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90%E6%B3%A8%E9%87%8A.html">php对象字段声明,easyswoole ORM 快速生成注释</a>
+      </h2>
+      <p class="article-date">2019年11月12日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          ide提示
+在PHPSTORM IDE中，我们可以通过注释给类写明可调用字段名，这样子才有语法提示。 比如在Thinkphp中，虽然允许我们可以通过对象属性方式去调用，但是并没有语法提示。 添加注释后 就舒服很多了。 格式如下
+/**
+ * Class RefundDetail
+ * @pr ...
+        
+      </div>
+      <a class="more" href="/2019/11/12/php/php%E5%AF%B9%E8%B1%A1%E5%AD%97%E6%AE%B5%E5%A3%B0%E6%98%8Eeasyswoole-orm-%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90%E6%B3%A8%E9%87%8A.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/29/Swoole/easyswoole%E5%AE%89%E8%A3%85%EF%BC%8C%E5%8C%85%E5%90%AB%E6%89%80%E6%9C%89%E7%BB%84%E4%BB%B6.html">EasySwoole安装，包含所有组件</a>
+      </h2>
+      <p class="article-date">2019年10月29日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          所有组件可以直接用，无需再一个一个引入，总大小8.6Mb
+&#123;
+    &quot;repositories&quot;: &#123;
+        &quot;packagist&quot;: &#123;
+            &quot;type&quot;: &quot ...
+        
+      </div>
+      <a class="more" href="/2019/10/29/Swoole/easyswoole%E5%AE%89%E8%A3%85%EF%BC%8C%E5%8C%85%E5%90%AB%E6%89%80%E6%9C%89%E7%BB%84%E4%BB%B6.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/28/read-book/%E3%80%8A%E5%BC%80%E8%AE%B2%E5%95%A6%E3%80%8B%E6%97%A5%E6%9C%AC%E8%91%97%E5%90%8D%E5%85%89%E5%8C%96%E5%AD%A6%E7%A7%91%E5%AD%A6%E5%AE%B6-%E8%97%A4%E5%B2%9B%E6%98%AD.html">《开讲啦》日本著名光化学科学家——藤岛昭，幽默、科普、乐观主义、机会观念</a>
+      </h2>
+      <p class="article-date">2019年10月28日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>原文链接</h1>
+<p><a target="_blank" rel="noopener" href="http://tv.cctv.com/2019/10/20/VIDENh1UwrPrR6prBvh1frHp191020.shtml?spm=C31267.PosekSpq74e8.EuKJr2VI3VlW.215" title="原文链接《开讲啦》">原文链接《开讲啦》</a></p>
+<blockquote>
+<p>本期嘉宾，藤岛昭，中国工程院外籍院士、日本著名光化学科学家。一个亲中的日本人，也是一个伟大的科学家，在光化学领域探索的前辈。培育了38名中国留学生，是中日文化、科学交流的桥梁。</p>
+</blockquote>
+<h1>推荐原因</h1>
+<p>不知道是否因为日语独特的语气和词语，教授上台第一件事就是开始做实验，并且“自带配音”，第一印象是非常幽默可爱。 通过两三个简单的小实验，配合开讲啦精心制作的小短片，科普了光化学作用的原理和知识，能实实在在学到一点东西。 在提问过程中，我国青年代表有问到——光吸收甲醛的问题，学习到现在暂时没有靠谱的光化学产品上市出售；如果在室内装紫外线灯+光催化材料可以吸收甲醛，也可以在空调等地方加装，节约经济。 最重要的一点原因，是日本青年代表提问：如果在科学实验过程中不顺利，需要怎么做？ “那就是机会啊，如果实验一切都很顺利，那代表着这没什么大不了的，只是一件普通的事。如果遇到问题，所有人都无法解决，那么这就是你的机会所在”</p>
+        
+      </div>
+      <a class="more" href="/2019/10/28/read-book/%E3%80%8A%E5%BC%80%E8%AE%B2%E5%95%A6%E3%80%8B%E6%97%A5%E6%9C%AC%E8%91%97%E5%90%8D%E5%85%89%E5%8C%96%E5%AD%A6%E7%A7%91%E5%AD%A6%E5%AE%B6-%E8%97%A4%E5%B2%9B%E6%98%AD.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/25/other/%E4%BB%BF%E6%96%B0%E7%89%88%E5%BE%AE%E4%BF%A1%E8%BD%AC%E8%B4%A6%E9%A1%B5%E9%9D%A2-%E6%BA%90%E7%A0%81%E5%88%86%E4%BA%AB.html">仿新版微信转账页面 源码分享</a>
+      </h2>
+      <p class="article-date">2019年10月25日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>截图预览</h1>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/10/61f54bc11a4a4013bc37cb1e3f97cb7b.png" alt="微信转账页面模板"><br>
+<img src="https://blog.siammm.cn/wp-content/uploads/2019/10/92f1d693e976107f54a083ef1143e932.png" alt="仿新版微信转账页面 首页"><br>
+<img src="https://blog.siammm.cn/wp-content/uploads/2019/10/3c54b4f07c2839dfbe4483ecc828a0a3.png" alt="仿新版微信转账页面 输入金额"></p>
+<h1>介绍</h1>
+<p>主要用途：</p>
+<ul>
+<li>支付系统页面 商户收款系统</li>
+<li>门店系统的支付页面</li>
+<li>支付成功后跳转广告页</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2019/10/25/other/%E4%BB%BF%E6%96%B0%E7%89%88%E5%BE%AE%E4%BF%A1%E8%BD%AC%E8%B4%A6%E9%A1%B5%E9%9D%A2-%E6%BA%90%E7%A0%81%E5%88%86%E4%BA%AB.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/7/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/9/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

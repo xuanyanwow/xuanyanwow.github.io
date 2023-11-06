@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      PHP中simplexml_load_string解析xml的正确方式 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>PHP中simplexml_load_string解析xml的正确方式</h2>
+  <p class="post-date">2019-12-18</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1>前言</h1>
+<p>为什么写这篇文章，因为他娘的宣言又踩坑了。 在对接别人接口时，他们使用的是xml格式交互的。 其中的格式可能如下</p>
+<pre><code class="hljs markup">&lt;RSP2003&gt;
+  &lt;TotalNum&gt;39&lt;/TotalNum&gt;
+  &lt;CityList&gt;
+    &lt;CityCode&gt;N1127&lt;/CityCode&gt;
+    &lt;CityName&gt;三水四会&lt;/CityName&gt;
+    &lt;CityTypeCode&gt;3&lt;/CityTypeCode&gt;
+    &lt;CityTypeName&gt;内陆城市&lt;/CityTypeName&gt;
+    &lt;PinyinJX&gt;SSSH&lt;/PinyinJX&gt;
+    &lt;PinyinQP&gt;Sanshuisihui&lt;/PinyinQP&gt;
+    &lt;CityOrder&gt;207&lt;/CityOrder&gt;
+    &lt;CityOperationType&gt;2&lt;/CityOperationType&gt;
+  &lt;/CityList&gt;
+  // 这是一个list  如果还有更多元素 就在下面继续
+  &lt;CityList&gt;
+    &lt;CityCode&gt;N1127&lt;/CityCode&gt;
+    &lt;CityName&gt;三水四会&lt;/CityName&gt;
+    &lt;CityTypeCode&gt;3&lt;/CityTypeCode&gt;
+    &lt;CityTypeName&gt;内陆城市&lt;/CityTypeName&gt;
+    &lt;PinyinJX&gt;SSSH&lt;/PinyinJX&gt;
+    &lt;PinyinQP&gt;Sanshuisihui&lt;/PinyinQP&gt;
+    &lt;CityOrder&gt;207&lt;/CityOrder&gt;
+    &lt;CityOperationType&gt;2&lt;/CityOperationType&gt;
+  &lt;/CityList&gt;
+&lt;/RSP2003&gt;</code></pre>
+<p>有的情况下，<code>CityList里只有一个元素</code>，一般情况下是<code>多个</code> 一开始写的php程序如下</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$xml</span> = <span class="hljs-string">&#x27;伪代码 xml字符串如上&#x27;</span>;
+
+<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">json_encode</span>(<span class="hljs-title function_ invoke__">simplexml_load_string</span>(<span class="hljs-variable">$xml</span>, <span class="hljs-string">&#x27;SimpleXMLElement&#x27;</span>, LIBXML_NOCDATA));</code></pre>
+<h2 id="只有一个元素的时候">只有一个元素的时候</h2>
+<pre><code class="hljs json"><span class="hljs-attr">&quot;RSP2003&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;TotalNum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;39&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;CityList&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;CityCode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;N1127&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\u4e09\u6c34\u56db\u4f1a&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityTypeCode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityTypeName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\u5185\u9646\u57ce\u5e02&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;PinyinJX&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SSSH&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;PinyinQP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Sanshuisihui&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityOrder&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;207&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityOperationType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2&quot;</span>
+    <span class="hljs-punctuation">&#125;</span>
+<span class="hljs-punctuation">&#125;</span></code></pre>
+<h2 id="多个元素的时候">多个元素的时候</h2>
+<pre><code class="hljs json"><span class="hljs-attr">&quot;RSP2003&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;TotalNum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;39&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;CityList&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;CityCode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;N1127&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\u4e09\u6c34\u56db\u4f1a&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityTypeCode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityTypeName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\u5185\u9646\u57ce\u5e02&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;PinyinJX&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SSSH&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;PinyinQP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Sanshuisihui&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityOrder&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;207&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityOperationType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2&quot;</span>
+    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span> <span class="hljs-punctuation">&#123;</span>
+        <span class="hljs-attr">&quot;CityCode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;N1128&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\u5927\u6ca5\u76d0\u6b65&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityTypeCode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityTypeName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\u5185\u9646\u57ce\u5e02&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;PinyinJX&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DLYB&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;PinyinQP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;daliyanbu&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityOrder&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;208&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;CityOperationType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2&quot;</span>
+    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span></code></pre>
+<h2 id="问题所在">问题所在</h2>
+<p>对接我php接口的是安卓客户端，json字符串中在一个元素的时候是对象类型，多个元素的时候是数组类型，安卓客户端解析就失败了。 所以引申出这篇文章，详细测试、记录一下php中解析xml方式和细节</p>
+<h1>simplexml_load_string</h1>
+<p><code>simplexml_load_string</code>函数将会把<code>每一个节点</code>都解析成一个<code>SimpleXMLElement</code>对象 php官方文档地址：<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/class.simplexmlelement.php">https://www.php.net/manual/zh/class.simplexmlelement.php</a> 注意这里我描述的是：每一个节点。 首先我们先来解析一个最简单的例子</p>
+<pre><code class="hljs php"><span class="hljs-variable">$xml</span> = <span class="hljs-string">&lt;&lt;&lt;xml</span>
+<span class="hljs-string">&lt;?xml</span> version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span>
+&lt;RSP2003&gt;
+    &lt;TotalNum&gt;<span class="hljs-number">39</span>&lt;/TotalNum&gt;
+&lt;/RSP2003&gt;
+xml;
+<span class="hljs-variable">$object</span> = <span class="hljs-title function_ invoke__">simplexml_load_string</span>(<span class="hljs-variable">$xml</span>, <span class="hljs-string">&#x27;SimpleXMLElement&#x27;</span>, LIBXML_NOCDATA);
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$object</span>);</code></pre>
+<p>输出内容</p>
+<pre><code class="hljs plaintext">object(SimpleXMLElement)#1 (1) &#123;
+  [&quot;TotalNum&quot;]=&gt;
+  string(2) &quot;39&quot;
+&#125;</code></pre>
+<p>可以看到，这里是一个对象，我们需要怎么获取里面的TotalNum节点呢，TotalNum这个值又是什么类型的？ <code>在这一步打印出来它是一个string类型</code> 我们接着看吧</p>
+<pre><code class="hljs php"><span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$object</span>-&gt;TotalNum);</code></pre>
+<p>输出 TotalNum又是一个SimpleXMLElement对象，它的值储存在[0]中 <code>我们写数组的下标</code></p>
+<pre><code class="hljs plaintext">object(SimpleXMLElement)#2 (1) &#123;
+  [0]=&gt;
+  string(2) &quot;39&quot;
+&#125;</code></pre>
+<p>继续取出</p>
+<pre><code class="hljs plaintext">var_dump($object-&gt;TotalNum[0]);</code></pre>
+<p>输出内容 <code>注意哈。这里是真实的运行结果，不是我复制重复了(对象的编号已经增加了)，自己可以去测试一下</code></p>
+<pre><code class="hljs plaintext">object(SimpleXMLElement)#4 (1) &#123;
+  [0]=&gt;
+  string(2) &quot;39&quot;
+&#125;</code></pre>
+<p>那么我们这个值到底怎么取出呢！！</p>
+<h2 id="取出SimpleXMLElement对象的值">取出SimpleXMLElement对象的值</h2>
+<pre><code class="hljs plaintext">var_dump($object-&gt;TotalNum-&gt;__toString());</code></pre>
+<p>回到我们最开始的问题，怎么解析xml列表</p>
+<h2 id="解析列表，（只有一个元素也为数组）">解析列表，（只有一个元素也为数组）</h2>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-variable">$xml</span> = <span class="hljs-string">&lt;&lt;&lt;xml</span>
+<span class="hljs-string">&lt;?xml</span> version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span>
+&lt;RSP2003&gt;
+    &lt;TotalNum&gt;<span class="hljs-number">39</span>&lt;/TotalNum&gt;
+    &lt;CityList&gt;
+        &lt;CityName&gt;第一个城市&lt;/CityName&gt;
+    &lt;/CityList&gt;
+    &lt;CityList&gt;
+        &lt;CityName&gt;第二个城市&lt;/CityName&gt;
+    &lt;/CityList&gt;
+&lt;/RSP2003&gt;
+xml;
+
+<span class="hljs-variable">$object</span> = <span class="hljs-title function_ invoke__">simplexml_load_string</span>(<span class="hljs-variable">$xml</span>, <span class="hljs-string">&#x27;SimpleXMLElement&#x27;</span>, LIBXML_NOCDATA);
+
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">count</span>(<span class="hljs-variable">$object</span>-&gt;TotalNum)); <span class="hljs-comment">// 1</span>
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">count</span>(<span class="hljs-variable">$object</span>-&gt;CityList)); <span class="hljs-comment">// 2</span>
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$object</span>-&gt;CityList-&gt;<span class="hljs-title function_ invoke__">count</span>()); <span class="hljs-comment">// 2</span>
+
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$object</span>-&gt;CityList[<span class="hljs-number">0</span>]);
+<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$object</span>-&gt;CityList[<span class="hljs-number">1</span>]);</code></pre>
+<h2 id="用法探讨">用法探讨</h2>
+<p>尝试了挺多种逻辑，都无法用函数封装成自动解析（因为每一个节点都是平等的，怎么知道它要解析成数组还是对象呢？） <code>如果你有好想法，希望能留言一起讨论</code> 我觉得只能面向过程式地手动组装成数组，然后输出api结果</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/11/21/read-book/%E3%80%8A%E6%84%BF%E4%BD%A0%E5%8E%86%E5%B0%BD%E5%8D%83%E5%B8%86%EF%BC%8C%E5%BD%92%E6%9D%A5%E4%BB%8D%E6%98%AF%E5%B0%91%E5%B9%B4%E3%80%8B%E7%B2%BE%E7%BE%8E%E5%8F%A5%E5%AD%90.html">
+        <span class="nav-arrow">← </span>
+        
+          《愿你历尽千帆，归来仍是少年》精美句子
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2020/01/02/php/php-fpm%E5%BA%94%E7%94%A8%E4%B8%8Ephp-swoole%E5%BA%94%E7%94%A8%E8%BF%9B%E8%A1%8C%E9%80%9A%E4%BF%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F.html">
+        
+          php-fpm应用与php-swoole应用进行通信
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">前言</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E6%97%B6%E5%80%99"><span class="toc-nav-text">只有一个元素的时候</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%A4%9A%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E6%97%B6%E5%80%99"><span class="toc-nav-text">多个元素的时候</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%97%AE%E9%A2%98%E6%89%80%E5%9C%A8"><span class="toc-nav-text">问题所在</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">simplexml_load_string</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%8F%96%E5%87%BASimpleXMLElement%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%80%BC"><span class="toc-nav-text">取出SimpleXMLElement对象的值</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%A7%A3%E6%9E%90%E5%88%97%E8%A1%A8%EF%BC%8C%EF%BC%88%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E4%B9%9F%E4%B8%BA%E6%95%B0%E7%BB%84%EF%BC%89"><span class="toc-nav-text">解析列表，（只有一个元素也为数组）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%94%A8%E6%B3%95%E6%8E%A2%E8%AE%A8"><span class="toc-nav-text">用法探讨</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/12/18/php/php中解析xml的正确方式，php中解析xml的方式对比.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "PHP中simplexml_load_string解析xml的正确方式",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

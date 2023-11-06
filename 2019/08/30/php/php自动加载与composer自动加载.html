@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      PHP自动加载与composer自动加载 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>PHP自动加载与composer自动加载</h2>
+  <p class="post-date">2019-08-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>当我们编写面向对象的程序时，通常是将类分别放在<code>不同的文件中</code>。但这样一来，当我们调用其他类的时候，则需要先手动引入该文件（否则会因为当前程序中没有该类名的类而报错） 久而久之加载的列表就会<code>很混乱复杂</code>，不方便管理。</p>
+<pre><code class="hljs php">文件A.php
+<span class="hljs-meta">&lt;?php</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>)</span>&#123;
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;这是在A类中的方法&quot;</span>;
+    &#125;
+&#125;
+<span class="hljs-meta">?&gt;</span>
+
+文件B.php
+<span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&quot;A.php&quot;</span>; <span class="hljs-comment">// 在这里需要先加载A.php文件</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span></span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>)</span>&#123;
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;这是在B类中的方法&quot;</span>;
+        <span class="hljs-variable">$A</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">A</span>();
+        <span class="hljs-variable">$A</span>-&gt;<span class="hljs-title function_ invoke__">run</span>();
+    &#125;
+&#125;</code></pre>
+<blockquote>
+<p>所幸，在PHP中我们可以定义<code>自动加载器</code>，自动加载需要使用的文件。</p>
+</blockquote>
+<p>在讲自动加载器之前，我们先简单说说php中加载文件的几个函数的区别 以及 自动加载所需要的一些知识。</p>
+<h3 id="include和require">include和require</h3>
+<p>这两个都是php用来包含其他文件的，它们大部分的功能特性都一样，但也有一小部分的区别。 ** include有的特性require都有 **</p>
+<ul>
+<li>加载成功会返回<code>1</code>，可以在被包含文件中通过return改变</li>
+<li>当一个文件被包含时，其中所包含的代码继承了 使用包含语句所在行的变量范围，比如在函数中包含其他文件，则被包含文件中定义的变量也是函数内的作用域</li>
+<li>包含是语法结构，而不是函数。不需要使用()包裹文件名</li>
+</ul>
+<p>** include和require的不同 ** 它们只有处理失败的方式不同。 require 在出错时产生 E_COMPILE_ERROR 级别的错误。换句话说将导致脚本中止。（在框架或者其他业务逻辑中，建议使用require，这样子可以提高脚本的完整性和稳定性） 而 include 只产生警告 E_WARNING ，脚本会继续运行。</p>
+<blockquote>
+<p>网上有的古老文章说require是无条件加载 即 if (false) require “test.php”; 也会正常执行加载，测试5.6,7.2都是不会加载的，从一小篇文章找到说是php4的情况</p>
+</blockquote>
+<p>还有另外的<code>include_once</code>和<code>require_once</code>，这两个方法的区别跟它的普通方法一样，只是会检测加载的文件是否已经被加载过，如果是则不会再次加载（多了一个判断过程，稍微损耗一点性能）</p>
+<h4 id="命名空间">命名空间</h4>
+<p>在面向对象的程序中，大部分的情况都是需要使用命名空间的。我们先了解命名空间的知识，在后续也会结合命名空间实现自动加载 在我们使用计算机的过程，如果想在同一个路径目录下新建两个同名的文件，将会得到错误提示，当前目录下已经存在该文件名的文件。 在php程序中也是如此，我们没办法在同一个空间下声明两个一样类名的文件，否则会得到报错提示 <code>Cannot declare class A, because the name is already in use</code></p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>&#123;
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;第一个&quot;</span>;
+    &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>&#123;
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;第二个&quot;</span>;
+    &#125;
+&#125;</code></pre>
+<p>在不同的目录中新建两个一样文件名的操作是被允许的，在程序中我们也可以通过命名空间来给代码划分<code>目录</code> 将不同的代码划分到不同的空间中，两个空间的代码将相对独立开来 新建两个文件 A1.php 和 A2.php</p>
+<pre><code class="hljs plaintext">A1.php
+&lt;?php
+namespace Siam;  // 声明命名空间使用该语法
+class A&#123;
+    function __construct()
+    &#123;
+        echo &quot;这是在Siam空间下的A类&quot;;
+    &#125;
+&#125;</code></pre>
+<pre><code class="hljs plaintext">A2.php
+&lt;?php
+// 没有声明命名空间，则是在根空间下
+class A&#123;
+    function __construct()
+    &#123;
+        echo &quot;这是在根空间下的A类&quot;;
+    &#125;
+&#125;
+
+// 此时我们可以通过普通的require引入A1.php
+require &quot;A1.php&quot;;
+$A1 = new A();</code></pre>
+<p>运行A2，但是却得到结果： <code>这是在根空间下的A类</code></p>
+<blockquote>
+<p>此时没有报错相同类名，所以可以看到使用了命名空间，将代码放到不同空间内，可以定义相同类名的类</p>
+</blockquote>
+<p>那是因为，虽然我们已经引入了Siam\A 但是在使用的时候<code>没有说明</code>我们使用的是Siam空间下的A 当我们在某个命名空间下(如Siam)声明类的时候，该类的完整类名将是<code>命名空间+类名</code>如(Siam\A) 所以默认调用根的A类，我们将代码改成</p>
+<pre><code class="hljs plaintext">require &quot;A1.php&quot;;
+$A1 = new Siam\A();</code></pre>
+<p>得到结果：<code>这是在Siam空间下的A类</code> 除了这种在调用的时候写名完整类名的方式，我们还可以提前声明，出现的所有名字为A的类，都是使用某个命名空间下的。 ** 先有定义命名空间，其他地方才能use ** 这个声明使用<code>use</code> 关键字，通常写在文件的开头，use需要写明完整类名。 新建一个文件</p>
+<pre><code class="hljs plaintext">&lt;?php
+require &quot;A1.php&quot;; // 引入Siam空间下的A类文件
+require &quot;A1.php&quot;; // 引入根空间下的A类文件
+
+use Siam\A;  // 已经声明程序中使用的是Siam空间下的A类
+
+$A1 = new A(); 
+// 输出   这是在Siam空间下的A类
+
+$A2 = new \A(); // 通过完整的类名，来调用根空间下的类
+// 输出   这是在根空间下的A类</code></pre>
+<p>在使用use的时候还可以给类设置别名，防止当前脚本也有其他同名的类而导致的冲突 调用的时候值需要调用设置的别名即可</p>
+<pre><code class="hljs plaintext">&lt;?php
+require &quot;A1.php&quot;; // 引入Siam空间下的A类文件
+require &quot;A1.php&quot;; // 引入根空间下的A类文件
+
+use Siam\A AS S_A;  // 已经声明程序中使用的是Siam空间下的A类，并且升值一个别名
+
+$A1 = new S_A(); 
+// 输出   这是在Siam空间下的A类
+
+new A();  // 当前运行脚本没有声明namespace  所以是根空间  写的类名也不是完整类名，所以调用当前空间下的类  
+// 输出   这是在根空间下的A类
+
+$A2 = new \A(); // 通过完整的类名，来调用根空间下的类
+// 输出   这是在根空间下的A类</code></pre>
+<h3 id="自动加载的原理">自动加载的原理</h3>
+<pre><code class="hljs plaintext">index.php
+&lt;?php
+new A();</code></pre>
+<p>当我们使用当前程序未定义的类时，会产生一个报错 <code>Class 'A' not found</code>。 在调用类的过程中，php会先检查当前程序内是否有该类，若没有则通过调用 <code>__autoload</code>函数引入该类的文件。 <code>__autoload ( string $class ) : void</code></p>
+<blockquote>
+<p>该方法在 php &gt;= 7.2就被废弃了，如果使用的是&gt;=7.2的版本可以继续看下面部分的内容</p>
+</blockquote>
+<pre><code class="hljs plaintext">index.php
+&lt;?php
+function __autoload($className)&#123;
+    echo &quot;正在尝试autoload方法\n&quot;;
+    if (file_exists(&quot;$className.php&quot;))&#123;
+        require &quot;$className.php&quot;;
+    &#125;
+&#125;
+
+new A();</code></pre>
+<p>可以得到结果： 正在尝试autoload方法 Fatal error: Uncaught Error: Class ‘A’ not found in ** 那是因为我们现在还没有写A文件，我们创建一个A.php文件，里面声明A类 **</p>
+<pre><code class="hljs php">A.php
+<span class="hljs-meta">&lt;?php</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>
+<span class="hljs-class"></span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;A被实例化了\n&quot;</span>;
+    &#125;
+&#125;</code></pre>
+<p>此时可以得到结果： <code>正在尝试autoload方法</code> <code>A被实例化了</code> 至此就完成了一个简单的自动加载器的声明。我们实际的应用往往不会这么简单，这就需要我们对自动加载器的功能进一步完善才能灵活使用。 常见的加载器可以设计为： * 定义类名与文件地址的映射 * 根据命名空间与目录层级的稳定关系追寻文件 ** 第一种加载器 定义类名与文件地址的映射 **</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__autoload</span>(<span class="hljs-params"><span class="hljs-variable">$className</span></span>)</span>&#123;
+    <span class="hljs-comment">// 定义一个映射关系数组 如果是有使用命名空间，则要填写完整类名</span>
+    <span class="hljs-variable">$map</span> = [
+        <span class="hljs-string">&#x27;A&#x27;</span> =&gt; <span class="hljs-string">&#x27;Lib/A.php&#x27;</span>,
+    ];
+
+    <span class="hljs-keyword">if</span> ( !<span class="hljs-keyword">empty</span>(<span class="hljs-variable">$map</span>[<span class="hljs-variable">$className</span>]) )&#123;
+        <span class="hljs-keyword">require</span> <span class="hljs-variable">$map</span>[<span class="hljs-variable">$className</span>];
+    &#125;
+&#125;
+
+<span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">A</span>();</code></pre>
+<p>** 第二种加载器 根据命名空间与目录层级的稳定关系追寻文件 **</p>
+<pre><code class="hljs plaintext">&lt;?php
+function __autoload($className)&#123;
+    var_dump($className);
+&#125;
+
+new Siam\A();</code></pre>
+<p>运行可以得到结果<code>string(6) &quot;Siam\A&quot;</code> 我们依旧可以像第一种自动加载器一样定义map映射，同时我们可以根据命名空间的层级创建<code>对应</code>的目录，这样子就可以根据命名空间找到最终储存的目录路径了</p>
+<pre><code class="hljs plaintext">&lt;?php
+function __autoload($className)&#123;
+    if (file_exists(&quot;$className.php&quot;))&#123;
+        require &quot;$className.php&quot;;
+    &#125;
+&#125;
+
+new Siam\A();  // 此时要把Siam\A的类放到  Siam目录下的A文件中</code></pre>
+<p>可以正常运行得到结果：<code>这是在Siam空间下的A类</code></p>
+<blockquote>
+<p>在不同操作系统中，目录分隔符会不同，以上代码可能不能正常运行，需要根据命名空间的\ 替换成系统的目录分隔符</p>
+</blockquote>
+<p>这种要求<code>类文件根据命名空间存放在对应的目录层级中</code>的约束，叫做PSR规范。（目前是第四个版本，更详细的资料可以通过其他方式了解） PSR-4规范不要求改变代码的实现方式，只建议如何使用文件系统目录结构和PHP命名空间组织代码，PSR-4规范以来PHP命名空间和文件系统目录结构查找并加载PHP类、接口和Traits。</p>
+<h3 id="php新版的自动加载器-spl-autoload-※※※-推荐使用的方式">php新版的自动加载器 spl_autoload ※※※ 推荐使用的方式</h3>
+<p>我们上面介绍了<code>__autoload</code>方法，随着语言的发展，该方式并不能很好的为我们提供服务了。 我们有的时候会使用别人封装的类，或者将类文件放在不同的根目录中。如果此时我们使用该方法来加载，则是这样子的运行流程：</p>
+<pre><code class="hljs plaintext">if ( 类文件是否存在A目录 )&#123;
+    加载A目录下的该类文件
+&#125; else if ( 类文件是否存在B目录) &#123;
+    加载B目录下的该类文件
+&#125;...</code></pre>
+<p>会随着系统的扩展而越来越臃肿，所以出现了一种新的注册自动加载器的方式<code>spl_autoload_register</code> 该方式可以支持我们注册多个自动加载器，会按照注册的顺序寻找加载类，如果中途找到则加载并停止，否则将找到结束。 该函数需要传参，可以为<code>callback，类与方法名，函数名等</code> 如</p>
+<pre><code class="hljs plaintext">class Foo &#123;
+    static public function test($name) &#123;
+        print &#x27;[[&#x27;. $name .&#x27;]]&#x27;;
+    &#125;
+&#125;
+spl_autoload_register(&#x27;\Foo::test&#x27;); // 自 PHP 5.3.0 起 将类的一个方法作为加载器的入口
+
+
+
+function my_autoloader($class) &#123;
+    include &#x27;classes/&#x27; . $class . &#x27;.class.php&#x27;;
+&#125;
+
+spl_autoload_register(&#x27;my_autoloader&#x27;);  // 将一个函数作为加载器的入口
+
+
+
+// 或者，自 PHP 5.3.0 起可以使用一个匿名函数
+spl_autoload_register(function ($class) &#123;
+    include &#x27;classes/&#x27; . $class . &#x27;.class.php&#x27;;
+&#125;);</code></pre>
+<p>使用方式跟<code>__autoload</code>其实基本一样。只是可以更加灵活地扩展。</p>
+<h3 id="composer的自动加载">composer的自动加载</h3>
+<p>在我们<code>另一篇文章</code>中已经很详细地介绍了composer：<a target="_blank" rel="noopener" href="http://www.yancoo.cn/index/article/show/id/65.html" title="原文地址">原文地址</a> 除了管理依赖包的功能之外，自动加载也是composer的很重要的一个功能， 我们在使用依赖包的时候，并不需要每一个文件都去加载，而是引入composer的入口文件即可调用所有依赖类。 这就是composer已经为我们实现了自动加载的功能。 我们打开一个使用了composer的目录 <a href="#" title="composer目录结构"><img src="http://yancoo.cn/uploads/images/201905/17_01_composer.png" alt="composer目录结构" title="composer目录结构"></a> 在composer的核心中，存在着几个以autoload开头的文件，都是用来提供自动加载的功能的。</p>
+<ul>
+<li>autoload_classmap.php 存放类与文件路径的映射</li>
+<li>autoload_namespaces.php 存放命名空间与目录路径的映射</li>
+<li>autoload_psr4.php 存放符合psr4规范的映射关系</li>
+</ul>
+<p>还有其他几个是加载的逻辑的处理等等，这里就先不详细讲，主要处理是从上面几个映射关系中寻找类文件并加载。</p>
+<blockquote>
+<p>当我们更新依赖包，新增依赖包，删除依赖包的时候。composer都会更新它维护的那几个映射文件。</p>
+</blockquote>
+<p>composer也提供了我们<code>自己定义映射</code>的功能，我们在composer.json中可以设置配置项。</p>
+<h4 id="当前提供PSR-0，-PSR-4-classmap，files-四种加载方式的配置">当前提供PSR-0， PSR-4, classmap，files 四种加载方式的配置</h4>
+<blockquote>
+<p>注意注意注意！！！ 更新了配置文件都需要执行一下命令才能生效 <code>composer dumpautoload</code></p>
+</blockquote>
+<p>** files ** 如果你想要明确的指定，在每次请求时都要载入某些文件，那么你可以使用’files’ autoloading。通常作为函数库的载入方式（而非类库）</p>
+<pre><code class="hljs plaintext">&#123;
+    &quot;autoload&quot;: &#123;
+        &quot;files&quot;: [&quot;src/common/functions.php&quot;]
+    &#125;
+&#125;</code></pre>
+<p>** classmap ** 当我们在使用一些不符合psr规范的类库时，比如老版的phpqrcode，它并没有使用命名空间。 这个时候我们将这类型的类文件放在一个目录中，并使用classmap方法设置在加载类文件的时候搜索这些目录。</p>
+<pre><code class="hljs plaintext">&#123;
+    &quot;autoload&quot;: &#123;
+        &quot;classmap&quot;: [&quot;src/&quot;, &quot;lib/&quot;]
+    &#125;
+&#125;</code></pre>
+<p>** psr4映射设置 ** PSR-4和PSR-0最大的<code>区别</code>是对<code>下划线</code>的定义不同。PSR-4中，在类名中使用下划线没有任何特殊含义。而PSR-0则规定类名中的下划线会被转化成目录分隔符。 现在一般都是使用PSR-4规范。</p>
+<pre><code class="hljs plaintext">在composer.json中添加以下模块
+&quot;autoload&quot;: &#123;
+    &quot;psr-4&quot;: &#123;
+        &quot;Siam\\&quot;: &quot;Lib/Siam&quot;,
+        &quot;Monolog\\&quot;: [&quot;src/&quot;, &quot;lib/&quot;],  // 如果需要尝试在多个目录下寻找某个命名空间 则使用数组
+    &#125;
+&#125;,
+</code></pre>
+<p>上面代表了Siam命名空间是对应Lib/Siam目录，以Siam为命名空间的类，会尝试从该路径中加载。 Monolog命名空间下的类可能在src目录下也可能在lib目录下，会尝试从这些路径中加载。</p>
+<blockquote>
+<p>设置的命名空间必须以\结束</p>
+</blockquote>
+<p>本文的讲解就到这里。</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/24/php/php-path-infothinkphp-controller-not-exists-indexphp.html">
+        <span class="nav-arrow">← </span>
+        
+          PHP path_info,Thinkphp controller not exists index\php
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/30/basic/http%E8%B7%A8%E5%9F%9F%E8%AF%A6%E8%A7%A3%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F.html">
+        
+          HTTP跨域详解和解决方式
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#include%E5%92%8Crequire"><span class="toc-nav-text">include和require</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-nav-text">命名空间</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-nav-text">自动加载的原理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#php%E6%96%B0%E7%89%88%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E5%99%A8-spl-autoload-%E2%80%BB%E2%80%BB%E2%80%BB-%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-nav-text">php新版的自动加载器 spl_autoload ※※※ 推荐使用的方式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#composer%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD"><span class="toc-nav-text">composer的自动加载</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E5%BD%93%E5%89%8D%E6%8F%90%E4%BE%9BPSR-0%EF%BC%8C-PSR-4-classmap%EF%BC%8Cfiles-%E5%9B%9B%E7%A7%8D%E5%8A%A0%E8%BD%BD%E6%96%B9%E5%BC%8F%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-nav-text">当前提供PSR-0， PSR-4, classmap，files 四种加载方式的配置</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/08/30/php/php自动加载与composer自动加载.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "PHP自动加载与composer自动加载",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

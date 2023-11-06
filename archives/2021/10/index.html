@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Archives</h2>
+  <p class="post-date">Archives</p>
+</div>
+<main class="app-body" id="archives">
+  
+  
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2023
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2023/08/28/php/php-composer-test.html" class="archive-title">调试本地composer包</a>
+        <p class="archive-date">08-28</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2023/06/28/docker/WSL_Docker.html" class="archive-title">windows.WSL.一些坑</a>
+        <p class="archive-date">06-28</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2023/04/17/queue/kafkaRebalance.html" class="archive-title">Kafka rebalance 与滚动更新</a>
+        <p class="archive-date">04-17</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2023/03/06/php/memory_leak.html" class="archive-title">php-gc机制的补充</a>
+        <p class="archive-date">03-06</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2023/02/28/other/law-ricardo.html" class="archive-title">初遇李嘉图</a>
+        <p class="archive-date">02-28</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2023/02/26/queue/kafka-2.html" class="archive-title">kafka:高可用和一致性,副本管理</a>
+        <p class="archive-date">02-26</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2023/02/26/queue/kafka-1.html" class="archive-title">kafka:基本抽象层次概念</a>
+        <p class="archive-date">02-26</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2023/01/22/embedded-system/first.html" class="archive-title">嵌入式开发（一）知识储备</a>
+        <p class="archive-date">01-22</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2023/01/10/other/quickly-github.html" class="archive-title">github加jsdelivr!速度冲冲冲!</a>
+        <p class="archive-date">01-10</p>
+      </div>
+    
+  </div>
+</section>
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2022
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2022/12/29/database/time-zone.html" class="archive-title">mysql与time_zone</a>
+        <p class="archive-date">12-29</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/12/10/Swoole/hyperf-command-coroutine.html" class="archive-title">hyperf命令行与协程</a>
+        <p class="archive-date">12-10</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/12/08/other/withMyIpad.html" class="archive-title">我与我的ipad(ipad当win10副屏之路)</a>
+        <p class="archive-date">12-08</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/12/08/version-controller/why-git.html" class="archive-title">Why Git?</a>
+        <p class="archive-date">12-08</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/12/07/aws/aws-assumeRole.html" class="archive-title">AWS-assumeRole.控制不同token访问不同目录</a>
+        <p class="archive-date">12-07</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/12/05/php/phpstorm.html" class="archive-title">phpstorm食用指南(自用)</a>
+        <p class="archive-date">12-05</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/28/basic/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8vs%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8.html" class="archive-title">对象存储vs文件存储</a>
+        <p class="archive-date">11-28</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/27/software_architect/8_%E5%BB%BA%E7%AB%8B%E6%A8%A1%E5%9E%8B.html" class="archive-title">《架构师修炼之道》第八章--建立模型，化繁为简</a>
+        <p class="archive-date">11-27</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/27/software_architect/7_%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F.html" class="archive-title">《架构师修炼之道》第七章--架构模式</a>
+        <p class="archive-date">11-27</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/20/docker/wsl_error.html" class="archive-title">windows.Docker.安装运行失败</a>
+        <p class="archive-date">11-20</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/17/docker/docker%E8%87%AA%E7%94%A8%E5%B0%8F%E6%89%8B%E5%86%8C.html" class="archive-title">docker自用小手册</a>
+        <p class="archive-date">11-17</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/17/project-manage/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0.html" class="archive-title">压力测试笔记</a>
+        <p class="archive-date">11-17</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/13/Swoole/swoole-cli%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html" class="archive-title">swoole-cli常见问题</a>
+        <p class="archive-date">11-13</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/13/Go/go_build_exe.cgo_error.html" class="archive-title">go在ubuntu交叉编译windows应用.cgo错误</a>
+        <p class="archive-date">11-13</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/13/Go/github_actions_build_go.html" class="archive-title">go项目.github actions自动打包exe发布版本</a>
+        <p class="archive-date">11-13</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/07/php/php%E6%96%B0%E8%AF%AD%E6%B3%95.html" class="archive-title">php新语法</a>
+        <p class="archive-date">11-07</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/07/other/vcruntime140_1.ddl%E4%B8%8B%E8%BD%BD%E8%AE%B0%E5%BD%95.html" class="archive-title">vcruntime140_1.ddl下载记录</a>
+        <p class="archive-date">11-07</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/11/05/basic/linux%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E7%AC%94%E8%AE%B0.html" class="archive-title">linux一切皆文件扩展笔记</a>
+        <p class="archive-date">11-05</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/09/30/database/mysql%E5%8A%A0%E7%B4%A2%E5%BC%95%E7%9A%84%E6%97%B6%E5%80%99%E5%88%B0%E5%BA%95%E4%BC%9A%E4%B8%8D%E4%BC%9A%E9%94%81%E8%A1%A8.%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90.html" class="archive-title">mysql加索引的时候到底会不会锁表.深入解析</a>
+        <p class="archive-date">09-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/09/02/project-manage/B%E7%AB%AFC%E7%AB%AF%E4%BA%A7%E5%93%81%E7%9A%84%E5%AF%B9%E6%AF%94.html" class="archive-title">B端C端产品的对比</a>
+        <p class="archive-date">09-02</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/09/01/version-controller/git%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%96%B9%E5%BC%8F.html" class="archive-title">git协作工作流方式</a>
+        <p class="archive-date">09-01</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/06/18/fragment/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC.%E6%89%B9%E9%87%8F%E9%87%87%E9%9B%86%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E5%A4%8D%E5%88%B6.%E6%95%B0%E6%8D%AE%E8%BF%87%E9%95%BF.html" class="archive-title">油猴脚本,批量采集页面数据复制,数据过长 JS弹出新页面 自定义html代码</a>
+        <p class="archive-date">06-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/06/08/php/phpstorm-git-cherry-pick.html" class="archive-title">phpstorm里操作git_cherry-pick</a>
+        <p class="archive-date">06-08</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/06/07/fragment/%E5%AF%86%E7%A0%81%E5%BC%BA%E5%BA%A6%E6%A0%A1%E9%AA%8C.html" class="archive-title">代码片段-密码强度校验</a>
+        <p class="archive-date">06-07</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/05/23/php/%E5%AE%9D%E5%A1%94%E7%9A%84nginx.%E5%9C%A8Thinkphp%E4%BC%AA%E9%9D%99%E6%80%81%E6%83%85%E5%86%B5%E4%B8%8B%E9%85%8D%E7%BD%AE%E5%9B%BE%E7%89%87%E8%A3%81%E5%89%AA.html" class="archive-title">宝塔的nginx.在Thinkphp伪静态情况下配置图片裁剪</a>
+        <p class="archive-date">05-23</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/03/01/dtm/dtm%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E2%80%94%E2%80%94%E8%A7%A3%E5%86%B3%E5%AF%BC%E5%85%A5RM%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%B1%E8%B4%A5.html" class="archive-title">dtm分布式事务——解决导入RM数据库失败</a>
+        <p class="archive-date">03-01</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/03/01/dtm/dtm%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E2%80%94%E2%80%94saga%E4%BA%8B%E5%8A%A1%E8%B6%85%E6%97%B6%E5%A4%9A%E6%AC%A1%E8%A7%A6%E5%8F%91.html" class="archive-title">dtm分布式事务——saga事务超时多次触发</a>
+        <p class="archive-date">03-01</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/02/22/docker/docker%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%A4%B1%E8%B4%A5%E6%8E%92%E6%9F%A5.html" class="archive-title">docker端口映射失败排查</a>
+        <p class="archive-date">02-22</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/02/16/queue/kafka%E5%92%8CrabbitMQ%E7%AE%80%E5%8D%95%E5%AF%B9%E6%AF%94%E7%AC%94%E8%AE%B0.html" class="archive-title">kafka和rabbitMQ简单对比笔记</a>
+        <p class="archive-date">02-16</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2022/02/15/queue/%E4%BD%BF%E7%94%A8elk%E6%9B%BF%E6%8D%A2%E4%B8%9A%E5%8A%A1%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95.html" class="archive-title">使用ELK替换业务日志记录</a>
+        <p class="archive-date">02-15</p>
+      </div>
+    
+  </div>
+</section>
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2021
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2021/10/27/script/%E8%93%9D%E5%A5%8F%E4%BA%91-%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD-%E6%B2%B9%E7%8C%B4.html" class="archive-title">蓝奏云 批量下载 油猴</a>
+        <p class="archive-date">10-27</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2021/10/25/php/tp6-%E6%96%B0%E5%87%BA%E7%9A%84%E8%99%9A%E6%8B%9F%E6%A8%A1%E5%9E%8B%E6%80%8E%E4%B9%88%E7%94%A8.html" class="archive-title">TP6 新出的“虚拟模型”怎么用?</a>
+        <p class="archive-date">10-25</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2021/09/06/php/php%E4%B8%80%E4%BB%BD%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E8%A7%84%E8%8C%83.html" class="archive-title">php一份代码分层规范</a>
+        <p class="archive-date">09-06</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2021/07/05/php/php-cli-web-server-with-rewrite-router.html" class="archive-title">php cli web server with rewrite router</a>
+        <p class="archive-date">07-05</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2021/06/21/php/%E5%AE%9D%E5%A1%94%E5%A4%87%E4%BB%BD%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E6%9C%AC%E5%9C%B0%E5%A4%B1%E8%B4%A5-max-allowed-packet.html" class="archive-title">宝塔备份大数据sql导入本地失败 max_allowed_packet</a>
+        <p class="archive-date">06-21</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2021/05/26/script/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9D%82%E8%B4%A7%E6%91%8A%E8%84%9A%E6%9C%AC.html" class="archive-title">腾讯云杂货摊脚本</a>
+        <p class="archive-date">05-26</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2021/04/30/php/thinkphp6%EF%BC%8C%E6%B3%A8%E8%A7%A3%E6%B3%A8%E9%87%8A%E7%94%9F%E6%88%90api%E5%88%97%E8%A1%A8.html" class="archive-title">Thinkphp6，注解注释生成api列表</a>
+        <p class="archive-date">04-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2021/03/08/other/el-dialog%E9%87%8C%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8D%E6%9B%B4%E6%96%B0%EF%BC%8C%E5%9C%A8%E5%85%B3%E9%97%AD%E7%9A%84%E4%B8%80%E7%9E%AC%E9%97%B4%E6%9B%B4%E6%96%B0%E4%BA%86.html" class="archive-title">el-dialog里的数组不更新，在关闭的一瞬间更新了</a>
+        <p class="archive-date">03-08</p>
+      </div>
+    
+  </div>
+</section>
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2020
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2020/12/02/php/php%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F-%E8%A7%A3%E5%86%B3%E6%95%B0%E5%80%BC%E5%9E%8B%E7%89%88%E6%9C%AC%E5%8F%B7%E6%8E%92%E5%BA%8F%E9%94%99%E4%B9%B1.html" class="archive-title">PHP数组排序 解决数值型版本号排序错乱</a>
+        <p class="archive-date">12-02</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/12/01/php/tp5-0%E5%AE%89%E8%A3%85testing-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E6%8A%A5%E9%94%99.html" class="archive-title">TP5.0安装testing 单元测试 报错</a>
+        <p class="archive-date">12-01</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/11/25/database/%E4%B8%89%E8%A8%80%E4%B8%A4%E8%AF%AD%E8%AE%B0%E5%BD%95mysql-for-update%E9%94%81.html" class="archive-title">三言两语记录mysql for update锁</a>
+        <p class="archive-date">11-25</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/11/21/wechat/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B-%E5%85%8D%E8%B4%B9%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%98%A0%E5%B0%84%E6%9C%AC%E5%9C%B0%EF%BC%8C.html" class="archive-title">微信公众号应用开发流程 免费内网穿透映射本地，实现调试</a>
+        <p class="archive-date">11-21</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/11/16/php/php-easywechat-sdk-%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%8E%9F%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF.html" class="archive-title">PHP EasyWechat SDK 微信公众号原页面获取用户信息</a>
+        <p class="archive-date">11-16</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/07/30/wechat/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Fwebview%EF%BC%8Ca%E9%94%9A%E7%82%B9%E8%B7%B3%E8%BD%AC%EF%BC%8C%E5%9B%9E%E9%80%80%E6%97%B6%E4%B8%80%E7%9B%B4%E4%BF%9D%E7%95%99%E5%9C%A8%E5%8E%9F%E9%A1%B5.html" class="archive-title">微信小程序webview，a锚点跳转，回退时一直保留在原页面</a>
+        <p class="archive-date">07-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/07/02/php/php-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E5%88%86-%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B-h5%E5%95%86%E5%9F%8E%E5%85%88%E4%BA%AB%E5%90%8E%E4%BB%98.html" class="archive-title">php 微信支付分 开发过程 H5商城先享后付</a>
+        <p class="archive-date">07-02</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/06/24/database/mysql-%E7%B4%A2%E5%BC%95%E6%88%90%E6%9C%AC%E8%AE%A1%E7%AE%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88mysql%E9%A2%84%E5%88%A4%E5%90%8E%E9%80%89%E6%8B%A9%E4%BA%86%E9%94%99%E8%AF%AF%E7%B4%A2%E5%BC%95%EF%BC%9F.html" class="archive-title">MYSQL 索引成本计算，为什么MYSQL预判后选择了错误索引？</a>
+        <p class="archive-date">06-24</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/06/24/other/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE-%E8%BD%A8%E9%81%93%E7%A7%BB%E5%8A%A8%EF%BC%8C%E5%B0%8F%E8%BD%A6.html" class="archive-title">百度地图 轨道移动，小车</a>
+        <p class="archive-date">06-24</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/05/26/read-book/%E4%B8%AD%E5%8C%BB-%E5%9B%9B%E8%99%9A%E8%AF%8A%E6%96%AD%EF%BC%8C%E5%8F%8A%E5%85%B6%E9%A3%9F%E8%8D%AF%E8%86%B3.html" class="archive-title">中医 四虚诊断，及其食药膳</a>
+        <p class="archive-date">05-26</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/05/22/other/cocos-%E4%B8%AA%E4%BA%BA%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0.html" class="archive-title">COCOS 个人踩坑日记</a>
+        <p class="archive-date">05-22</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/05/21/php/phpstome-idea-%E5%BF%BD%E7%95%A5%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E7%9A%84todo%EF%BC%8C%E4%BB%A3%E7%A0%81%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86.html" class="archive-title">phpstome/idea 忽略指定文件夹里的todo，代码任务管理</a>
+        <p class="archive-date">05-21</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/05/13/other/vue-vant-cdn%E5%BC%95%E5%85%A5%E6%96%B9%E5%BC%8F%EF%BC%8C%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%A0%B7%E5%BC%8F%E9%94%99%E4%B9%B1.html" class="archive-title">vue vant cdn引入方式，组件使用样式错乱</a>
+        <p class="archive-date">05-13</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/04/04/basic/%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8C%96%E4%B9%8B%E5%8F%98%E9%87%8F%E5%90%8D%E9%95%BF%E7%9F%AD%E5%86%85%E5%AD%98%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80.html" class="archive-title">程序优化之\&#34;变量名长短\&#34;,内存逻辑地址,物理地址</a>
+        <p class="archive-date">04-04</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/03/25/php/%E3%80%90%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E3%80%91tp5%E8%AF%BB%E5%8F%96%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E8%BE%93%E5%87%BA%E5%90%8E%EF%BC%8C%E8%AE%BE%E7%BD%AEheader%E5%A4%B4%E6%97%A0%E6%95%88.html" class="archive-title">【源码解读】TP5读取本地图片输出后，设置header头无效，图片乱码</a>
+        <p class="archive-date">03-25</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/03/25/php/php%E4%B8%8Egithook%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0.html" class="archive-title">php与githook实现自动更新</a>
+        <p class="archive-date">03-25</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/03/24/other/apicloudapp%E5%BC%80%E5%8F%91-api-is-undefined.html" class="archive-title">ApiCloudApp开发-$api is undefined</a>
+        <p class="archive-date">03-24</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/03/22/php/wordpress%E4%BA%8C%E5%BC%80-%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E9%83%A8%E5%88%86%E9%9A%90%E8%97%8F.html" class="archive-title">WordPress二开-文章内容部分隐藏</a>
+        <p class="archive-date">03-22</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/03/21/other/apicloudapp%E5%BC%80%E5%8F%91-%E5%BF%AB%E9%80%9F%E8%B0%83%E8%AF%95.html" class="archive-title">ApiCloudApp开发 - 快速调试</a>
+        <p class="archive-date">03-21</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/03/18/other/%E8%BD%ACandroid%E4%B8%8B%E4%B8%80%E6%AC%A1oom%E8%B0%83%E8%AF%95%E8%BF%87%E7%A8%8B.html" class="archive-title">转 - Android下一次OOM调试过程</a>
+        <p class="archive-date">03-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/03/18/other/vue-cli%E5%BC%95%E5%85%A5vue-router.html" class="archive-title">vue-cli引入vue-router</a>
+        <p class="archive-date">03-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/03/06/database/mysql-%E4%B9%98%E6%B3%95%E9%99%A4%E6%B3%95%E7%B2%BE%E5%BA%A6%E4%B8%8D%E4%B8%80%E8%87%B4%EF%BC%8C%E9%99%A4%E6%B3%95%E5%90%8E%E5%9B%9B%E4%BD%8D%E5%B0%8F%E6%95%B0.html" class="archive-title">Mysql 乘法除法精度不一致，除法后四位小数</a>
+        <p class="archive-date">03-06</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/03/04/Swoole/swooleswoole-timer-tick-must-be-callable-array-given-%E6%8A%A5%E9%94%99%E5%BC%82%E5%B8%B8.html" class="archive-title">swoole,swoole_timer_tick() must be callable, array given 报错异常</a>
+        <p class="archive-date">03-04</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/02/28/php/php%E8%A7%A3%E6%9E%90markdown%E5%BA%93parsedown%E6%89%A9%E5%B1%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E6%B3%95.html" class="archive-title">PHP解析Markdown库,parsedown扩展自定义语法</a>
+        <p class="archive-date">02-28</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/01/14/other/vue-vant%E5%BC%95%E5%85%A5%EF%BC%8Ctabbar%E5%B0%81%E8%A3%85%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B.html" class="archive-title">Vue vant引入，tabbar封装使用示例</a>
+        <p class="archive-date">01-14</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/01/09/database/mysql%E4%BB%8E5-7%E8%BF%81%E7%A7%BB%E8%A1%A8%E7%BB%93%E6%9E%84%E5%88%B05-5%E6%8A%A5%E9%94%99-near-0-null-default-null.html" class="archive-title">mysql从5.7迁移表结构到5.5报错 near &#39;(0) NULL DEFAULT NULL&#39;</a>
+        <p class="archive-date">01-09</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2020/01/02/php/php-fpm%E5%BA%94%E7%94%A8%E4%B8%8Ephp-swoole%E5%BA%94%E7%94%A8%E8%BF%9B%E8%A1%8C%E9%80%9A%E4%BF%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F.html" class="archive-title">php-fpm应用与php-swoole应用进行通信</a>
+        <p class="archive-date">01-02</p>
+      </div>
+    
+  </div>
+</section>
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2019
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2019/12/18/php/php%E4%B8%AD%E8%A7%A3%E6%9E%90xml%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%96%B9%E5%BC%8F%EF%BC%8Cphp%E4%B8%AD%E8%A7%A3%E6%9E%90xml%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94.html" class="archive-title">PHP中simplexml_load_string解析xml的正确方式</a>
+        <p class="archive-date">12-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/11/21/read-book/%E3%80%8A%E6%84%BF%E4%BD%A0%E5%8E%86%E5%B0%BD%E5%8D%83%E5%B8%86%EF%BC%8C%E5%BD%92%E6%9D%A5%E4%BB%8D%E6%98%AF%E5%B0%91%E5%B9%B4%E3%80%8B%E7%B2%BE%E7%BE%8E%E5%8F%A5%E5%AD%90.html" class="archive-title">《愿你历尽千帆，归来仍是少年》精美句子</a>
+        <p class="archive-date">11-21</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/11/12/php/php%E5%AF%B9%E8%B1%A1%E5%AD%97%E6%AE%B5%E5%A3%B0%E6%98%8Eeasyswoole-orm-%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90%E6%B3%A8%E9%87%8A.html" class="archive-title">php对象字段声明,easyswoole ORM 快速生成注释</a>
+        <p class="archive-date">11-12</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/29/Swoole/easyswoole%E5%AE%89%E8%A3%85%EF%BC%8C%E5%8C%85%E5%90%AB%E6%89%80%E6%9C%89%E7%BB%84%E4%BB%B6.html" class="archive-title">EasySwoole安装，包含所有组件</a>
+        <p class="archive-date">10-29</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/28/read-book/%E3%80%8A%E5%BC%80%E8%AE%B2%E5%95%A6%E3%80%8B%E6%97%A5%E6%9C%AC%E8%91%97%E5%90%8D%E5%85%89%E5%8C%96%E5%AD%A6%E7%A7%91%E5%AD%A6%E5%AE%B6-%E8%97%A4%E5%B2%9B%E6%98%AD.html" class="archive-title">《开讲啦》日本著名光化学科学家——藤岛昭，幽默、科普、乐观主义、机会观念</a>
+        <p class="archive-date">10-28</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/25/other/%E4%BB%BF%E6%96%B0%E7%89%88%E5%BE%AE%E4%BF%A1%E8%BD%AC%E8%B4%A6%E9%A1%B5%E9%9D%A2-%E6%BA%90%E7%A0%81%E5%88%86%E4%BA%AB.html" class="archive-title">仿新版微信转账页面 源码分享</a>
+        <p class="archive-date">10-25</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/25/php/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB%E4%B8%80%E7%A7%8D%E5%B0%8F%E6%8A%80%E5%B7%A7%E6%96%B9%E5%BC%8F.html" class="archive-title">宝塔面板数据库迁移一种小技巧方式</a>
+        <p class="archive-date">10-25</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/21/basic/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E3%80%8Bb%E7%AB%99%E6%95%99%E5%AD%A6%E8%A7%86%E9%A2%91.html" class="archive-title">《数据结构与算法基础》B站教学视频</a>
+        <p class="archive-date">10-21</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/18/read-book/%E3%80%8A%E5%BC%80%E8%AE%B2%E5%95%A6%E3%80%8B%E5%BE%90%E6%98%9F-%E6%81%90%E9%BE%99%E3%80%81%E7%A7%91%E5%AD%A6%E3%80%81%E5%A5%BD%E5%A5%87%E5%BF%83%E3%80%81%E5%AD%A9%E7%AB%A5%E8%88%AC.html" class="archive-title">《开讲啦》徐星——恐龙、科学、好奇心、孩童般的快乐</a>
+        <p class="archive-date">10-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/17/other/%E5%A5%BD%E8%A7%86%E9%A2%91.html" class="archive-title">21个数学原理 gif图演示</a>
+        <p class="archive-date">10-17</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/16/php/navicat%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E4%B8%BB%E9%94%AE%E9%87%8D%E5%A4%8D%E6%97%A0%E6%B3%95%E6%8F%92%E5%85%A5.html" class="archive-title">Navicat数据同步,主键重复无法插入</a>
+        <p class="archive-date">10-16</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/11/Swoole/easyswoole-mysql-pool%E8%BF%9E%E6%8E%A5%E6%B1%A0empty-null%E7%9A%84%E9%97%AE%E9%A2%98.html" class="archive-title">easyswoole mysql-pool连接池empty null的问题</a>
+        <p class="archive-date">10-11</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/10/09/Swoole/easyswoole%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%AE%9D%E5%A1%94%E5%AE%89%E8%A3%85%E9%94%99%E8%AF%AF.html" class="archive-title">easyswoole一键安装脚本,宝塔安装错误</a>
+        <p class="archive-date">10-09</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/27/other/js%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8F%92%E5%80%BC%EF%BC%8C%E5%8F%98%E9%87%8F%E9%95%BF%E6%96%87%E6%9C%AC%E6%8D%A2%E8%A1%8C.html" class="archive-title">JS的字符串插值，变量长文本换行</a>
+        <p class="archive-date">09-27</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/20/php/php%E5%AE%9A%E6%9C%9F%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%AF%94.html" class="archive-title">php定期拉取数据对比</a>
+        <p class="archive-date">09-20</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/19/other/vmware-workstation%E5%AE%A2%E6%88%B7%E7%AB%AF-centos%E7%B3%BB%E7%BB%9F-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81-utf-8%E5%AD%97%E7%AC%A6%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA.html" class="archive-title">VMware Workstation客户端 Centos系统 中文乱码 UTF-8字符无法正常显示</a>
+        <p class="archive-date">09-19</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/18/php/md5%E5%9C%A8php%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html" class="archive-title">MD5在PHP中使用的注意事项</a>
+        <p class="archive-date">09-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/18/php/md5%E5%8A%A0%E5%AF%86%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8Aphp%E4%B8%ADmd5%E7%9A%84%E6%BC%8F%E6%B4%9E.html" class="archive-title">md5加密介绍以及php中md5的漏洞</a>
+        <p class="archive-date">09-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/17/php/php%E8%AE%A1%E7%AE%97%E4%B8%A4%E4%B8%AA%E6%97%A5%E6%9C%9F%E4%B9%8B%E9%97%B4%E7%9A%84%E9%97%B4%E9%9A%94%E9%81%BF%E5%85%8D%E5%AF%BC%E5%87%BA%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE.html" class="archive-title">php计算两个日期之间的间隔,避免导出大量数据</a>
+        <p class="archive-date">09-17</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/17/other/nginx%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%EF%BC%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82%E4%B8%A4%E6%AC%A1%E5%A4%9A%E6%AC%A1.html" class="archive-title">Nginx重试机制，浏览器重复请求两次多次</a>
+        <p class="archive-date">09-17</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/17/php/%E3%80%90%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E3%80%91%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%E7%9A%84php%E6%89%A9%E5%B1%95swoole.html" class="archive-title">【常见问题】宝塔面板如何安装最新版本的php扩展swoole</a>
+        <p class="archive-date">09-17</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/14/database/mysql%E8%AF%AF%E5%88%A0%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AEbinlog%E9%97%AA%E5%9B%9E%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF.html" class="archive-title">Mysql误删,恢复数据,binlog闪回,宝塔面板</a>
+        <p class="archive-date">09-14</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/02/php/%E3%80%90%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E3%80%91tp5return-json-encode-ajax%E8%87%AA%E5%8A%A8%E8%A2%AB%E5%8A%A0%E4%B8%8A%E5%8F%8C%E5%BC%95%E5%8F%B7.html" class="archive-title">【源码解读】TP5return json_encode ajax自动被加上双引号</a>
+        <p class="archive-date">09-02</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/front/layui2-0%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC%E5%AF%BC%E5%87%BA%E5%A4%8D%E6%9D%82%E8%A1%A8%E5%A4%B4excel%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88table2excel.html" class="archive-title">layui2.0数据表格导出复杂表头EXCEL解决方案,table2excel</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/other/%E5%A4%9Aiframe%E7%89%88%E5%90%8E%E5%8F%B0%EF%BC%8C%E5%9C%A8%E4%B8%80%E4%B8%AAiframe%E5%88%87%E6%8D%A2%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AAiframe%EF%BC%8C%E5%90%8C%E6%97%B6%E5%88%B7%E6%96%B0.html" class="archive-title">多Iframe版后台，在一个iframe切换到另一个iframe，同时刷新</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/other/%E6%A0%B9%E6%8D%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E7%94%9F%E6%88%90%E7%94%A8%E6%88%B7%E6%A0%87%E8%AF%86%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%85%8D%E7%99%BB%E9%99%86%E7%94%A8%E6%88%B7%E7%8A%B6%E6%80%81%E8%AE%A2.html" class="archive-title">根据浏览器生成用户标识，实现免登陆用户状态订单储存。</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/front/layui%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BCcheckbox%E8%AE%BE%E7%BD%AE%E9%83%A8%E5%88%86%E4%B8%8D%E5%8F%AF%E9%80%89.html" class="archive-title">layui数据表格checkbox设置部分不可选</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/docker/%E8%AE%A8%E8%AE%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8docker%E5%92%8Cdocker-compose.html" class="archive-title">讨论 - 为什么要使用docker和docker-compose</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/docker/%E5%AE%9E%E6%88%98docker-compose%E6%90%AD%E5%BB%BA%E5%9F%BA%E6%9C%AC%E7%9A%84nginxphp%E7%8E%AF%E5%A2%83.html" class="archive-title">实战 - docker-compose搭建基本的nginx+php环境</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/docker/%E5%AE%9E%E6%88%98%E5%A4%9A%E5%AE%B9%E5%99%A8nginx%E5%AE%B9%E5%99%A8%E7%81%B5%E6%B4%BB%E5%88%87%E6%8D%A2php%E7%89%88%E6%9C%AC%E5%90%8C%E6%97%B6%E8%BF%90%E8%A1%8C%E5%A4%9A%E4%B8%AAphp%E5%AE%B9.html" class="archive-title">实战 - 多容器,Nginx容器灵活切换PHP版本!同时运行多个PHP容器</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/docker/%E5%85%A5%E9%97%A8-docker%E5%AE%B9%E5%99%A8%E6%95%B0%E6%8D%AE%E5%82%A8%E5%AD%98%E5%92%8C%E8%BD%AC%E7%A7%BB.html" class="archive-title">入门 - Docker容器数据储存和转移</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/docker/%E5%85%A5%E9%97%A8-docker%E5%B0%86nginx%E5%AE%B9%E5%99%A8%E5%92%8Cphp%E5%AE%B9%E5%99%A8%E5%85%B3%E8%81%94%E8%B5%B7%E6%9D%A5.html" class="archive-title">入门 - Docker将nginx容器和php容器关联起来</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%A4%9Aphp%E7%89%88%E6%9C%AC%E4%B8%AD%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E5%8D%87%E7%BA%A7swoole.html" class="archive-title">宝塔面板多PHP版本中编译安装升级Swoole</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/openssl-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E8%AF%81%E4%B9%A6pfx%E5%88%86%E8%A7%A3%E6%88%90pem.html" class="archive-title">Openssl -  微信支付证书pfx分解成pem</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/wechat/%E5%BE%AE%E4%BF%A1%E9%80%80%E6%AC%BE%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83%E8%A7%A3%E5%AF%86%E4%BD%8E%E7%89%88%E6%9C%AC%E4%BB%A5%E5%8F%8A7-1%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E7%9A%84%E4%BD%BF.html" class="archive-title">微信退款结果回调解密,低版本以及7.1以上版本的使用方法</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/tp5-0-20-tp5%E6%9B%B4%E6%94%B9%E7%BD%91%E7%AB%99%E7%9B%AE%E5%BD%95%E4%B8%BA-public-%E5%90%8E%E8%BF%90%E8%A1%8C%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3.html" class="archive-title">TP5.0.20 - TP5更改网站目录为/public 后运行出错解决</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/php%E7%94%9F%E6%88%90%E4%B8%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E8%AE%A2%E5%8D%95%E5%8F%B7.html" class="archive-title">PHP生成不重复的订单号</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/%E6%97%A0%E9%99%90%E7%BA%A7%E5%AD%90%E5%95%86%E6%88%B7%E7%9A%84%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95.html" class="archive-title">无限级子商户的查询优化方法</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/session%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%B3%E9%97%AD%E6%97%B6%E8%BF%9B%E8%A1%8C%E4%BD%95%E5%A4%84%E7%90%86%E4%BB%A5%E5%8F%8A%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6.html" class="archive-title">session在浏览器关闭时进行何处理?以及回收机制</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/database/%E6%95%B0%E6%8D%AE%E5%88%86%E8%A1%A8%E5%88%86%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF.html" class="archive-title">数据分表分库的基本思路</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AAcomposer%E5%8C%85.html" class="archive-title">手把手教你写一个composer包</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/phpspreadsheet%E5%AF%BC%E5%87%BAexcel%E8%A1%A8%E6%A0%BC%EF%BC%8C%E9%95%BF%E6%95%B0%E5%AD%97%E8%87%AA%E5%8A%A8%E8%BD%AC%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95.html" class="archive-title">PhpSpreadsheet导出Excel表格，长数字自动转科学计数法</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/php%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E5%90%88%E6%88%90%E5%B1%85%E4%B8%AD.html" class="archive-title">PHP图片文字合成居中</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/bitmap%E7%AE%97%E6%B3%95%E7%9A%84php%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%BF%AB%E9%80%9F%E5%8E%BB%E9%87%8D%E6%8E%92%E5%BA%8F%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9%E5%82%A8%E5%AD%98.html" class="archive-title">bitmap算法的PHP实现，快速去重排序，数据压缩储存</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/php%EF%BC%9Aphar%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E4%BD%BF%E7%94%A8.html" class="archive-title">PHP：Phar的打包和使用</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/php%E8%AE%BE%E7%BD%AEredis%E5%82%A8%E5%AD%98session%EF%BC%8C%E8%87%AA%E5%AE%9A%E4%B9%89session%E9%A9%B1%E5%8A%A8.html" class="archive-title">PHP设置Redis储存Session，自定义session驱动</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/basic/http%E8%B7%A8%E5%9F%9F%E8%AF%A6%E8%A7%A3%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F.html" class="archive-title">HTTP跨域详解和解决方式</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/php/php%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E4%B8%8Ecomposer%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD.html" class="archive-title">PHP自动加载与composer自动加载</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/24/php/php-path-infothinkphp-controller-not-exists-indexphp.html" class="archive-title">PHP path_info,Thinkphp controller not exists index\php</a>
+        <p class="archive-date">08-24</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/23/database/mysql%E8%81%9A%E5%90%88%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%BC%93%E6%85%A2%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html" class="archive-title">mysql聚合统计数据查询缓慢优化方案</a>
+        <p class="archive-date">08-23</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/21/php/json%E5%BA%8F%E5%88%97%E5%8C%96%E6%8E%A5%E5%8F%A3jsonserializable.html" class="archive-title">JSON序列化接口,JsonSerializable</a>
+        <p class="archive-date">08-21</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/14/other/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E4%B9%8Bscheme%E5%85%A5%E5%8F%A3.html" class="archive-title">Chrome浏览器开发工具之scheme入口</a>
+        <p class="archive-date">08-14</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/12/php/php%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html" class="archive-title">PHP中对象的序列化和反序列化</a>
+        <p class="archive-date">08-12</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/11/php/php%E8%A7%A3%E6%9E%90json%E3%80%81xml%E9%94%99%E8%AF%AF.html" class="archive-title">PHP解析json、xml错误</a>
+        <p class="archive-date">08-11</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/10/other/chrome%E7%BC%93%E5%AD%98%E9%94%81%EF%BC%8Cphp%E9%9D%9E%E5%A0%B5%E5%A1%9E%E6%96%87%E4%BB%B6%E9%94%81%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E8%AF%A6%E8%A7%A3%E8%BF%BD%E6%9F%A5.html" class="archive-title">Chrome缓存锁，php非堵塞文件锁无效的问题详解追查</a>
+        <p class="archive-date">08-10</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/09/front/layui%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BCtemplet%E7%9A%84%E6%95%B0%E6%8D%AE%E6%97%A0%E6%B3%95%E5%90%88%E8%AE%A1.html" class="archive-title">Layui数据表格templet的数据无法合计</a>
+        <p class="archive-date">08-09</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/07/version-controller/git%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%BF%BD%E7%95%A5%E6%9C%AC%E5%9C%B0%E6%9B%B4%E6%94%B9.html" class="archive-title">git,程序配置文件管理,忽略本地更改</a>
+        <p class="archive-date">08-07</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/06/php/php%E4%B8%AD%E7%9A%84%E8%BF%9B%E5%88%B6.html" class="archive-title">php中的进制和编码</a>
+        <p class="archive-date">08-06</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/04/php/php%E7%B1%BB%EF%BC%8C%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95.html" class="archive-title">PHP类，魔术方法</a>
+        <p class="archive-date">08-04</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/01/cache/redis%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html" class="archive-title">Redis笔记一，数据类型</a>
+        <p class="archive-date">08-01</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/07/30/basic/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%96%B9%E5%BC%8F%E7%9A%84%E5%AF%B9%E6%AF%94%E9%80%89%E6%8B%A9.html" class="archive-title">负载均衡方式的对比选择</a>
+        <p class="archive-date">07-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/07/23/php/%E3%80%90%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E3%80%91%E4%B8%BA%E4%BB%80%E4%B9%88tp5%E4%B8%AD%E5%8F%AF%E4%BB%A5%E6%B3%A8%E5%85%A5%E5%8F%82%E6%95%B0request%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%8D%E4%BC%A0.html" class="archive-title">【源码解读】TP框架参数注入，参数绑定</a>
+        <p class="archive-date">07-23</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/07/18/database/%E3%80%90%E6%9C%AA%E5%AE%8C%E6%88%90%E3%80%91mysql%E7%B4%A2%E5%BC%95%E9%99%8D%E7%BB%B4.html" class="archive-title">Mysql索引降维 优化查询 提高效率</a>
+        <p class="archive-date">07-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/07/18/database/mysql%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%EF%BC%8C%E5%90%88%E7%90%86%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95.html" class="archive-title">Mysql合理建立索引,索引优化</a>
+        <p class="archive-date">07-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/07/18/database/mysql%E4%B8%ADvarchar%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83%E6%95%B0%E5%AD%97%E5%86%85%E5%AE%B9%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F.html" class="archive-title">Mysql中varchar字符串的比较,swoole预处理参数绑定</a>
+        <p class="archive-date">07-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/07/18/basic/smtp%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90php%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6swoole%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6.html" class="archive-title">SMTP邮件服务器原理解析,php发送邮件,swoole发送邮件</a>
+        <p class="archive-date">07-18</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/07/13/php/thinkphp%E4%B8%AD%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8Form%E7%9A%84%E6%80%9D%E6%83%B3%E6%A6%82%E5%BF%B5.html" class="archive-title">Thinkphp中模型的正确使用方式,ORM的思想概念</a>
+        <p class="archive-date">07-13</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/07/10/Swoole/swoole%E5%A6%82%E4%BD%95%E5%AF%B9ip%E9%99%90%E5%88%B6%E8%AE%BF%E9%97%AE%E9%A2%91%E7%8E%87.html" class="archive-title">swoole如何对ip限制访问频率</a>
+        <p class="archive-date">07-10</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/07/04/front/layui%E6%A8%A1%E5%9D%97%E5%8C%96%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E6%94%B9%E9%80%A0%E4%BC%A0%E7%BB%9Fjquery%E6%89%A9%E5%B1%95%E4%B8%BAlayui%E6%A8%A1%E5%9D%97.html" class="archive-title">Layui模块化,改造传统jquery扩展为layui模块</a>
+        <p class="archive-date">07-04</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/06/29/basic/%E6%B5%85%E8%B0%88%E9%9D%9E%E5%A0%B5%E5%A1%9E%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%90%86%E8%A7%A3.html" class="archive-title">浅谈非堵塞程序的理解</a>
+        <p class="archive-date">06-29</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/06/23/basic/http%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84get%E3%80%81post%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB.html" class="archive-title">HTTP协议中的GET、POST请求方法的区别</a>
+        <p class="archive-date">06-23</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/06/19/php/php%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0thinkphp%E8%B0%83%E8%AF%95.html" class="archive-title">PHP异常处理函数,Thinkphp调试</a>
+        <p class="archive-date">06-19</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/06/12/basic/%E5%AF%B9%E8%B1%A1%E6%B1%A0%E3%80%81%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E6%84%8F%E4%B9%89.html" class="archive-title">对象池、连接池的意义</a>
+        <p class="archive-date">06-12</p>
+      </div>
+    
+  </div>
+</section>
+  
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/archives/2021/10/index.html';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header');
+  })();
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

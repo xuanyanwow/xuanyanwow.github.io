@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      HTTP协议中的GET、POST请求方法的区别 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>HTTP协议中的GET、POST请求方法的区别</h2>
+  <p class="post-date">2019-06-23</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>在我们日常打开网页、对接接口时，使用到的一般都是HTTP协议。 HTTP 的工作方式是客户端与服务器之间的请求-响应。 HTTP 请求方法有：HEAD、PUT、DELETE、OPTIONS、CONNECT 两种最常被用到的HTTP方法是：<code>GET</code> 和 <code>POST</code>。 本篇文章讲讲<code>GET</code>和<code>POST</code>两种请求方法的区别。</p>
+<h3 id="在浏览器上表现的区别">在浏览器上表现的区别</h3>
+<p><strong>GET</strong></p>
+<ul>
+<li>GET 请求可被缓存</li>
+<li>GET 请求保留在浏览器历史记录中</li>
+<li>GET 请求可被收藏为书签</li>
+<li>GET 请求参数在URL中的是可见的</li>
+<li>GET 请求有长度限制</li>
+</ul>
+<span id="more"></span>
+<p><strong>POST</strong></p>
+<ul>
+<li>POST 请求不会被缓存</li>
+<li>POST 请求不会保留在浏览器历史记录中</li>
+<li>POST 不能被收藏为书签</li>
+<li>POST 请求参数在URL中的是不可见的</li>
+<li>POST 请求对数据长度没有要求</li>
+</ul>
+<p>在浏览器上的表现是最表面的，所以大部分的人都已经知道。 简单的就不再说了，这里再说说<code>请求参数的可见性</code>和容易让人产生误区的<code>数据长度限制</code></p>
+<h5 id="请求参数可见性">请求参数可见性</h5>
+<p>在GET请求中，查询字符串是在 GET 请求的 URL 中发送的</p>
+<pre><code class="hljs plaintext">index.php?content=这是get方式里面的一个字段的值</code></pre>
+<p>get方式请求头和请求体 <img src="https://blog.siammm.cn/wp-content/uploads/2019/06/9488ac79d8b647b56a1315ba90f5b468.png" alt="get方式请求头和请求体"> 在POST请求中，查询字符串是在 POST 请求的 HTTP 消息主体中发送的</p>
+<pre><code class="hljs plaintext">POST index.php HTTP/1.1
+Host: blog.siammm.cn
+
+content=这是post方式里面的一个字段的值</code></pre>
+<p>post方式请求头和请求体 <img src="https://blog.siammm.cn/wp-content/uploads/2019/06/6a48dd20072a9e92c2751174d59fa58d.png" alt="post方式请求头和请求体"></p>
+<blockquote>
+<p>因为post请求是将参数放在HTTP主体中，所以在常规浏览器地址栏上是看不到参数的，这就是请求参数在URL中的可见性的不同。</p>
+</blockquote>
+<p>两种请求方法请求头和请求体的对比 可以看到参数存放位置不一样 <img src="https://blog.siammm.cn/wp-content/uploads/2019/06/4d8aea9ad35575c5d2fbc4f5bec25b3c.png" alt="两种请求方法请求头和请求体的对比"></p>
+<h5 id="数据长度限制">数据长度限制</h5>
+<p>从上面的请求参数可见性我们已经知道 <code>GET</code>请求的所有参数都是在URL中发送的 我们常说的GET请求有数据长度限制，其实那只是<code>浏览器对URL长度的限制</code> 嗯，这里要看清一个点：是浏览器 而不是HTTP协议的规定，同时在web服务器上也有对于长度的限制（这些下面的文章会讲）</p>
+<blockquote>
+<p>因为post请求是将参数放在HTTP主体中，所以不会受到此限制</p>
+</blockquote>
+<p>不同的浏览器对于URL长度的限制是不同的，这个可以自行测试得出 首先：我们找到一篇长文章。（文章可以从短到长进行测试，会从正常搜索然后到达url长度限制） 然后打开<code>https://www.baidu.com/s?wd=文章内容</code> 这个网址，进行百度搜索。 <img src="https://blog.siammm.cn/wp-content/uploads/2019/06/1d6821d226b21467b6478a492b153ac0.png" alt="siam博客,get/post的区别"> 看图片上的文字说明 把搜索内容替换成超级长的文章，再怎么按回车或者跳转按钮都没效果，页面还是保留一开始的。 也就是说<code>url的长度已经到达了浏览器的限制</code>，所以<code>浏览器不处理该请求</code>了。 这张截图是在win10自带的Edge测试的，同时在搜狗浏览器也是一样的情况。 但是在谷歌Chrome浏览器就是另一种场景了。浏览器会正常跳转，但是却不能正常响应。（该情况涉及到的知识，在下面会讲） <strong>先附带一下百度上提供的资料</strong> 各个浏览器对于url长度的限制</p>
+<ol>
+<li>IE浏览器对URL的长度现限制为2048字节(自己测试最多为2047字节)。</li>
+<li>360极速浏览器对URL的长度限制为2118字节。</li>
+<li>Firefox(Browser)对URL的长度限制为65536字节。</li>
+<li>Safari(Browser)对URL的长度限制为80000字节。</li>
+<li>Opera(Browser)对URL的长度限制为190000字节。</li>
+<li>Google(chrome)对URL的长度限制为8182字节。</li>
+</ol>
+<h3 id="在http协议上的规定">在http协议上的规定</h3>
+<p>HTTP 协议没有规定URL的最大长度，也没有规定HTTP请求体的最大长度。 所以在HTTP协议上，对于GET请求和POST请求的数据长度，是<code>没有限制</code>的。 但规定服务器如果不能处理太长的URL，就得返回414状态码（Request-URI Too Long）。 这也是我们上面说到的，在谷歌Chrome浏览器中，会正常跳转，但却无法正常响应的结果。 <img src="https://blog.siammm.cn/wp-content/uploads/2019/06/5a6874a59f4f67fec448a2f0b52b0d7b.png" alt="414状态码"></p>
+<blockquote>
+<p>请注意，该结果不是由http协议直接返回，而是规定服务器可以这样子处理（不是强制性 看你web服务器想要处理多长的url），所以该情况是属于web服务器上的限制，在下面知识会继续讲解</p>
+</blockquote>
+<h3 id="在web服务器配置限制url长度">在web服务器配置限制url长度</h3>
+<p>如果请求正常通过了浏览器的限制，则会发送到web服务器上了（如apache nginx） 在进入web服务器时，也需要进行一次限制的检测。 如果我们的服务器不想服务那么长的url，可以在这里通过修改配置参数，来决定最大接收的长度。 如果超过该长度，则遵循HTTP协议，返回414状态码，返回响应并终止此次请求。 <strong>以nginx为例</strong> 在nginx的配置参数中，有两个配置项可以决定要服务的url长度。 因为url长度是属于http请求头的一部分，所以配置项上的体现是以控制请求头最大长度的。 这两个配置项是</p>
+<pre><code class="hljs plaintext">client_header_buffer_size
+large_client_header_buffers</code></pre>
+<p>首先看第一个参数：<code>client_header_buffer_size</code> 当请求进来的时候，web服务器会根据这个参数分配一块内存，用来容纳请求的请求头。 接着是第二个参数：<code>large_client_header_buffers</code> 如果分配的内存无法容纳请求头，则会根据该参数的，再次分配大一点的内存。 如果还是不够容纳，则已经超出了web服务器设置的服务长度，就会返回给客户端414状态码。</p>
+<blockquote>
+<p>如果只把<code>client_header_buffer_size</code>设置小了，<code>large_client_header_buffers</code>还是很大的话是没有用的，还会浪费多一次分配内存的操作。</p>
+</blockquote>
+<p>我这里将两个参数都设置成了1k</p>
+<pre><code class="hljs plaintext">client_header_buffer_size 1k;
+large_client_header_buffers 4 1k;</code></pre>
+<p>（改完配置记得重启服务器） 然后进行一个简单的get请求，带上1024个字节的参数(或者更长)，服务器返回<code>414 Request-URI Too Large</code> 到这里，在服务器上限制get传递的数据长度的操作就完成了。</p>
+<blockquote>
+<p>如果是apache或者其他的web服务器，也是一样的原理来进行设置。</p>
+</blockquote>
+<h2 id="总结">总结</h2>
+<ul>
+<li>GET 请求会被浏览器缓存，POST 请求不会</li>
+<li>GET 请求会被浏览器保留在历史记录中，POST 请求不会</li>
+<li>GET 请求可以被浏览器收藏为书签，POST 请求不能</li>
+<li>GET 请求参数在URL中可见，POST 请求参数不能</li>
+<li>GET 请求对数据长度有要求，POST 请求没有（这里指的是浏览器对url长度的要求）</li>
+<li>在HTTP协议中，对于GET、POST的数据长度是没有限制的</li>
+<li>在WEB服务器中，可以通过配置参数来决定要服务的URL长度限制（通过是控制最大请求头的长度）POST请求是将参数放在请求体中，所以不受该长度限制</li>
+<li>如果WEB服务器不能处理过长的URL，根据HTTP协议需要返回414状态码。</li>
+</ul>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/06/19/php/php%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0thinkphp%E8%B0%83%E8%AF%95.html">
+        <span class="nav-arrow">← </span>
+        
+          PHP异常处理函数,Thinkphp调试
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/06/29/basic/%E6%B5%85%E8%B0%88%E9%9D%9E%E5%A0%B5%E5%A1%9E%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%90%86%E8%A7%A3.html">
+        
+          浅谈非堵塞程序的理解
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A%E8%A1%A8%E7%8E%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-nav-text">在浏览器上表现的区别</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="toc-nav-text">请求参数可见性</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#%E6%95%B0%E6%8D%AE%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6"><span class="toc-nav-text">数据长度限制</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8http%E5%8D%8F%E8%AE%AE%E4%B8%8A%E7%9A%84%E8%A7%84%E5%AE%9A"><span class="toc-nav-text">在http协议上的规定</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8web%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E9%99%90%E5%88%B6url%E9%95%BF%E5%BA%A6"><span class="toc-nav-text">在web服务器配置限制url长度</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-nav-text">总结</span></a>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/06/23/basic/http协议中的get、post请求方法的区别.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "HTTP协议中的GET、POST请求方法的区别",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/07/version-controller/git%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%BF%BD%E7%95%A5%E6%9C%AC%E5%9C%B0%E6%9B%B4%E6%94%B9.html">git,程序配置文件管理,忽略本地更改</a>
+      </h2>
+      <p class="article-date">2019年8月7日</p>
+      
+        
+  <a href="/tags#项目管理" >
+    <span class="tag-code">项目管理</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>在我们开发过程中，经常会出现数据库配置文件、redis环境配置文件等。 在不同的开发环境（同事与同事之间 开发与测试与生产环境）大概率是不同的。 如果每个人都按普通的流程，Pull然后修改成自己本地的，没有忽略监听更改。 那么当他提交代码时，经常会把配置文件也上传到git仓库中。 会影响其他人的开发。 所以我们应该这样子做：<code>git仓库提供一份配置文件的基础模板，每个人都拉取到本地修改但是要忽略本地更改监听。</code></p>
+<h1>操作步骤</h1>
+<ul>
+<li>1.建立git仓库</li>
+<li>2.创建基本配置文件模板</li>
+<li>3.提交并推送到仓库</li>
+<li>4.本地忽略监听</li>
+<li>5.服务器部署，拉取仓库</li>
+<li>6.忽略监听</li>
+<li>7.更改配置文件</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2019/08/07/version-controller/git%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%BF%BD%E7%95%A5%E6%9C%AC%E5%9C%B0%E6%9B%B4%E6%94%B9.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/06/php/php%E4%B8%AD%E7%9A%84%E8%BF%9B%E5%88%B6.html">php中的进制和编码</a>
+      </h2>
+      <p class="article-date">2019年8月6日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          进制和编码的关系
+
+进制是数字上的关系
+
+
+我们日常使用的是10进制，因为我们有10个手指，这是习惯和发展使然。
+计算机的基础是2进制，因为电路只有通电、不通电两种状态，用0、1表示。一个数字成为一个位
+
+随着计算机的发展，需要表示的符号越来越多，从一开始的2位代表一字节，到后面的8位代表一 ...
+        
+      </div>
+      <a class="more" href="/2019/08/06/php/php%E4%B8%AD%E7%9A%84%E8%BF%9B%E5%88%B6.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/04/php/php%E7%B1%BB%EF%BC%8C%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95.html">PHP类，魔术方法</a>
+      </h2>
+      <p class="article-date">2019年8月4日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          以下方法在 PHP 中被称为魔术方法（Magic methods）
+__construct()
+__destruct()
+__call()
+__callStatic()
+__get()
+__set()
+__isset()
+__unset()
+__sleep()
+__wakeup()
+__to ...
+        
+      </div>
+      <a class="more" href="/2019/08/04/php/php%E7%B1%BB%EF%BC%8C%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/01/cache/redis%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html">Redis笔记一，数据类型</a>
+      </h2>
+      <p class="article-date">2019年8月1日</p>
+      
+        
+  <a href="/tags#cache" >
+    <span class="tag-code">cache</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          数据类型
+类型
+简介
+特性
+场景
+String(字符串)
+二进制安全
+可以包含任何数据,比如jpg图片或者序列化的对象,一个键最大能存储512M
+-–
+Hash(字典)
+键值对集合,即编程语言中的Map类型
+适合存储对象,并且可以像数据库中update一个属性一样只修改某一项属性值(Memc ...
+        
+      </div>
+      <a class="more" href="/2019/08/01/cache/redis%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/30/basic/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%96%B9%E5%BC%8F%E7%9A%84%E5%AF%B9%E6%AF%94%E9%80%89%E6%8B%A9.html">负载均衡方式的对比选择</a>
+      </h2>
+      <p class="article-date">2019年7月30日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>负载均衡，并不是人人平等。而是每个人都尽其所能，得其所需。 每个服务器的配置会有差异，可能某个服务器还需要兼顾其他应用服务。所以它也许不能像同集群里的其他机器一样完成一样大小的任务。</p>
+<blockquote>
+<p>通过某种负载分担技术，将外部发送来的请求均匀分配到对称结构中的某一台服务器上，而接收到请求的服务器独立地回应客户的请求。均衡负载能够分配客户请求到服务器列阵，借此提供快速获取重要数据，解决大量并发访问服务问题。</p>
+</blockquote>
+<h1>负载均衡主要解决的问题</h1>
+<ul>
+<li>处理高并发等服务，单机并发量不足以支撑，利用负载均衡分摊到多台服务器。</li>
+<li>提高用户响应，如果单机一直保持高负载运行，假设最多处理1K个并发，第1K个也需要排队等候处理。分摊到多台机器，增加处理者，平均响应速度也就提升了。</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2019/07/30/basic/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%96%B9%E5%BC%8F%E7%9A%84%E5%AF%B9%E6%AF%94%E9%80%89%E6%8B%A9.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/23/php/%E3%80%90%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E3%80%91%E4%B8%BA%E4%BB%80%E4%B9%88tp5%E4%B8%AD%E5%8F%AF%E4%BB%A5%E6%B3%A8%E5%85%A5%E5%8F%82%E6%95%B0request%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%8D%E4%BC%A0.html">【源码解读】TP框架参数注入，参数绑定</a>
+      </h2>
+      <p class="article-date">2019年7月23日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>用过TP框架的应该都知道有这样一种操作： 我们可以把传参绑定在方法的参数中，还可以绑定一些系统类 比如Request类等等</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">app</span>\<span class="hljs-title class_">index</span>\<span class="hljs-title class_">Controller</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Blog</span></span>
+<span class="hljs-class"></span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">read</span>(<span class="hljs-params"><span class="hljs-variable">$id</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;id=&#x27;</span>.<span class="hljs-variable">$id</span>;
+    &#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">archive</span>(<span class="hljs-params"><span class="hljs-variable">$year</span>, <span class="hljs-variable">$month</span>=<span class="hljs-string">&#x27;01&#x27;</span></span>)</span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;year=&#x27;</span>.<span class="hljs-variable">$year</span>.<span class="hljs-string">&#x27;&amp;month=&#x27;</span>.<span class="hljs-variable">$month</span>;
+    &#125;
+&#125;</code></pre>
+<p>当我们的url这样子访问的时候，参数就会自动注入到方法参数中</p>
+        
+      </div>
+      <a class="more" href="/2019/07/23/php/%E3%80%90%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E3%80%91%E4%B8%BA%E4%BB%80%E4%B9%88tp5%E4%B8%AD%E5%8F%AF%E4%BB%A5%E6%B3%A8%E5%85%A5%E5%8F%82%E6%95%B0request%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%8D%E4%BC%A0.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/18/database/%E3%80%90%E6%9C%AA%E5%AE%8C%E6%88%90%E3%80%91mysql%E7%B4%A2%E5%BC%95%E9%99%8D%E7%BB%B4.html">Mysql索引降维 优化查询 提高效率</a>
+      </h2>
+      <p class="article-date">2019年7月18日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>在前一篇文章中，我们已经介绍了索引、索引的优化规则等等 原文链接：<a href="https://blog.siammm.cn/archives/100" title="Siam博客 mysql索引优化">Siam博客 mysql索引优化</a> 在其中我们有引申出<code>组合索引</code>,<code>多个单字段索引冲突</code>两个知识点。 本文章主要是与后者有关联。 在原文中，我们使用了下面的例子</p>
+        
+      </div>
+      <a class="more" href="/2019/07/18/database/%E3%80%90%E6%9C%AA%E5%AE%8C%E6%88%90%E3%80%91mysql%E7%B4%A2%E5%BC%95%E9%99%8D%E7%BB%B4.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/18/database/mysql%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%EF%BC%8C%E5%90%88%E7%90%86%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95.html">Mysql合理建立索引,索引优化</a>
+      </h2>
+      <p class="article-date">2019年7月18日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+在我们日常使用数据库的时候，肯定避免不了对数据库的优化。那么对数据库的优化又少了不索引的知识。 是的，建立索引能极大地提高查询的效率。那么你知道吗，如果合理建立索引，可以更大地榨出数据库的性能——也就等同于进一步提高查询效率。 写下这篇文章就是为了记录一下对索引的优化，合理建立索引 ...
+        
+      </div>
+      <a class="more" href="/2019/07/18/database/mysql%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%EF%BC%8C%E5%90%88%E7%90%86%E5%BB%BA%E7%AB%8B%E7%B4%A2%E5%BC%95.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/18/database/mysql%E4%B8%ADvarchar%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83%E6%95%B0%E5%AD%97%E5%86%85%E5%AE%B9%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F.html">Mysql中varchar字符串的比较,swoole预处理参数绑定</a>
+      </h2>
+      <p class="article-date">2019年7月18日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>事情起因： 使用了一个varchar类型的字段储存数字值。 在根据该字段进行大小筛选的时候，出现该问题。 类似<code>select * from sheets where s_status &gt; 3</code></p>
+<h1>分析</h1>
+<p>php调用时条件传的是数字类型 组件生成的SQL语句直接执行正常</p>
+        
+      </div>
+      <a class="more" href="/2019/07/18/database/mysql%E4%B8%ADvarchar%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83%E6%95%B0%E5%AD%97%E5%86%85%E5%AE%B9%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/18/basic/smtp%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90php%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6swoole%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6.html">SMTP邮件服务器原理解析,php发送邮件,swoole发送邮件</a>
+      </h2>
+      <p class="article-date">2019年7月18日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+电子邮件是啥就不用介绍了吧，利用程序发送邮件，可以实现：客户财务报表推送、服务异常预警、自动订阅文章等等功能。 php来发送邮件的类库网上也有。比如：PHPMailer 等 但是由于类库年代久远，或者自己使用过程中出现了一些异常错误，导致一系列苦恼。 所以写下这篇文章，来讲明SMT ...
+        
+      </div>
+      <a class="more" href="/2019/07/18/basic/smtp%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90php%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6swoole%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/13/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/15/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

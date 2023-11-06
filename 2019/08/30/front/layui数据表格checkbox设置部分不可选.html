@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      layui数据表格checkbox设置部分不可选 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>layui数据表格checkbox设置部分不可选</h2>
+  <p class="post-date">2019-08-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h3 id="问题">问题</h3>
+<p>在layui数据表格中设置了字段为<code>type:checkbox</code> 但是想要实现部分不显示，不可选的功能。 <a href="#" title="layui数据表格"><img src="http://www.yancoo.cn/uploads/images/201905/30_01_layuitable.png" alt="layui数据表格" title="layui数据表格"></a> layui内置没有该功能，所以只能自己实现。</p>
+<span id="more"></span>
+<h2 id="使用templet实现">使用templet实现</h2>
+<pre><code class="hljs javascript">table.<span class="hljs-title function_">render</span>(&#123;
+    <span class="hljs-attr">elem</span>: <span class="hljs-string">&#x27;#junTable&#x27;</span>,
+    <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-attr">cols</span>: [[
+        &#123;
+            <span class="hljs-attr">templet</span>: <span class="hljs-string">&quot;#checkbd&quot;</span>,
+            <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;&lt;input type=&#x27;checkbox&#x27; name=&#x27;siam_all&#x27; title=&#x27;&#x27; lay-skin=&#x27;primary&#x27; lay-filter=&#x27;siam_all&#x27;&gt; &quot;</span>,
+            <span class="hljs-attr">width</span>: <span class="hljs-number">60</span>,
+        &#125;
+        , &#123;
+            <span class="hljs-attr">field</span>: <span class="hljs-string">&#x27;z_id&#x27;</span>,
+            <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;id&#x27;</span>
+        &#125;
+    ]],
+    <span class="hljs-attr">page</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>
+&#125;);</code></pre>
+<pre><code class="hljs markup">&lt;script type=&quot;text/html&quot; id=&quot;checkbd&quot;&gt;
+    &#123;&#123;#  if (d.can_fabu === 1)&#123; &#125;&#125;// 这里是判断要不要显示的条件
+    &lt;input type=&quot;checkbox&quot; name=&quot;siam_one&quot; title=&quot;&quot; lay-skin=&quot;primary&quot; data-id = &quot;&#123;&#123; d.z_id &#125;&#125;&quot;&gt;
+    &#123;&#123;#  &#125; &#125;&#125;
+&lt;/script&gt;</code></pre>
+<pre><code class="hljs css">&lt;style&gt;
+    <span class="hljs-selector-class">.laytable-cell-checkbox</span> <span class="hljs-selector-class">.layui-disabled</span><span class="hljs-selector-class">.layui-form-checked</span> <span class="hljs-selector-tag">i</span> &#123;
+        <span class="hljs-attribute">background</span>: <span class="hljs-number">#fff</span> <span class="hljs-meta">!important</span>;
+    &#125;
+&lt;/style&gt;</code></pre>
+<p>到这里就可以部分数据<code>不显示复选框</code>了，但是全选功能和获取id的功能还是不正常</p>
+<h3 id="全选功能">全选功能</h3>
+<pre><code class="hljs javascript">form.<span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;checkbox(siam_all)&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">var</span> status = $(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">prop</span>(<span class="hljs-string">&quot;checked&quot;</span>);
+    $.<span class="hljs-title function_">each</span>($(<span class="hljs-string">&quot;input[name=siam_one]&quot;</span>), <span class="hljs-keyword">function</span> (<span class="hljs-params">i, value</span>) &#123;
+        $(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">prop</span>(<span class="hljs-string">&quot;checked&quot;</span>, status);
+    &#125;);
+    form.<span class="hljs-title function_">render</span>();
+&#125;);</code></pre>
+<h3 id="获取选中数据">获取选中数据</h3>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> ids = [];
+$.<span class="hljs-title function_">each</span>($(<span class="hljs-string">&quot;input[name=siam_one]:checked&quot;</span>), <span class="hljs-keyword">function</span> (<span class="hljs-params">i, value</span>) &#123;
+    ids[i] = $(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&quot;data-id&quot;</span>);  <span class="hljs-comment">// 如果需要获取其他的值 需要在模板中把值放到属性中 然后这里就可以拿到了</span>
+&#125;);</code></pre>
+<h2 id="使用done函数禁用">使用done函数禁用</h2>
+<p>这是网上的做法，但是有瑕疵，全选不可用，并且不可选状态和可选状态的复选框样式很接近，建议重写不可选的样式 （参考上面的）</p>
+<pre><code class="hljs markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot; /&gt;
+        &lt;title&gt;layui&lt;/title&gt;
+        &lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot; /&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1&quot; /&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://res.layui.com/layui/dist/css/layui.css&quot; media=&quot;all&quot; /&gt;
+        &lt;!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 --&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;div style=&quot;margin-bottom: 5px;&quot;&gt;
+            &lt;div id=&quot;table-main&quot;&gt;
+&lt;span class=&quot;layui-btn&quot; id=&quot;getselect&quot;&gt;获取选中行&lt;/span&gt;
+
+                &lt;table class=&quot;layui-table&quot; id=&quot;idTest&quot; lay-filter=&quot;demo&quot;&gt;&lt;/table&gt;
+            &lt;/div&gt;
+            &lt;script type=&quot;text/html&quot; id=&quot;barDemo&quot;&gt;
+                &lt; a class = &quot;layui-btn layui-btn-primary layui-btn-mini&quot;
+                lay - event = &quot;detail&quot; &gt; 查看 &lt; /a&gt;
+            &lt;/script&gt;
+            &lt;script src=&quot;https://res.layui.com/layui/dist/layui.all.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+            &lt;!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --&gt;
+            &lt;script&gt;
+                layui.use([&#x27;table&#x27;, &#x27;jquery&#x27;, &#x27;form&#x27;, &#x27;layer&#x27;], function() &#123;
+                    var table = layui.table;
+                    var $ = layui.jquery;
+                    var form = layui.form;
+                    var layer = layui.layer;
+                    var tableIns = table.render(&#123; //其它参数在此省略
+                        elem: &#x27;#idTest&#x27;,
+                        id: &#x27;idTest&#x27;,
+                        url: &#x27;https://www.layui.com/demo/table/user/&#x27;, // 注意：如果你直接复制所有代码到本地，数据请求需要本地返回数据
+                        cols: [
+                            [&#123;
+                                    checkbox: true,
+                                    fixed: true
+                                &#125;,
+                                &#123;
+                                    field: &#x27;id&#x27;,
+                                    width: 80,
+                                    sort: true,
+                                    fixed: true,
+                                    title: &#x27;ID&#x27;
+                                &#125;,
+                                &#123;
+                                    fixed: &#x27;right&#x27;,
+                                    width: 160,
+                                    align: &#x27;center&#x27;,
+                                    toolbar: &#x27;#barDemo&#x27;
+                                &#125;
+                            ]
+                        ],
+                        where: &#123;&#125;, //如果无需传递额外参数，可不加该参数
+                        limits: [10, 15, 20, 40, 60, 80],
+                        limit: 10,
+                        page: true, //开启分页
+                        done: function(res, curr, count) &#123;
+                            var data = res.data;
+                            var allck = true;
+                            for (var item in data) &#123;
+                                if (data[item].score == 57) &#123; //关键点如果data中score包含57那么就不能全选
+                                    allck = false;
+                                &#125;
+                                break;
+                            &#125;
+                            if (!allck) &#123;
+                                $(&quot;.layui-table-header&quot;).find(&quot;input[name = &#x27;layTableCheckbox&#x27;][lay-filter=&#x27;layTableAllChoose&#x27;]&quot;).each(function() &#123;
+                                    $(this).attr(&quot;disabled&quot;, &#x27;disabled&#x27;).next().removeClass(&quot;layui-form-checked&quot;);
+                                    form.render(&#x27;checkbox&#x27;);
+                                &#125;);
+                            &#125;
+                            var i = 0;
+                            $(&quot;.layui-table-body.layui-table-main&quot;).find(&quot;input[name=&#x27;layTableCheckbox&#x27;]&quot;).each(function() &#123;
+                                if (res.data[i].score == 57) &#123; //关键点如果当前行数据中score包含57那么就不可选
+                                    $(this).attr(&quot;disabled&quot;, &#x27;disabled&#x27;).removeAttr(&quot;checked&quot;);
+                                    form.render(&#x27;checkbox&#x27;);
+                                &#125;
+                                i++;
+                            &#125;);
+                            i = 0;
+                            $(&quot;.layui-table-fixed.layui-table-fixed-l&quot;).find(&quot;.layui-table-body&quot;).find(&quot;input[name=&#x27;layTableCheckbox&#x27;]&quot;).each(function() &#123;
+                                if (res.data[i].score == 57) &#123; //关键点如果当前行数据中score包含57那么就不可选
+                                    $(this).attr(&quot;disabled&quot;, &#x27;disabled&#x27;).removeAttr(&quot;checked&quot;);
+                                    form.render(&#x27;checkbox&#x27;);
+                                &#125;
+                                i++;
+                            &#125;);
+                        &#125;
+                    &#125;);
+                    //监听表格复选框选择
+                    table.on(&#x27;checkbox(demo)&#x27;, function(obj) &#123;
+                        console.log(obj)
+                    &#125;);
+                    $(&quot;#getselect&quot;).click(function() &#123;
+                        var checkStatus = table.checkStatus(&#x27;idTest&#x27;); //test即为基础参数id对应的值
+                        layer.alert(JSON.stringify(checkStatus.data));
+                    &#125;);
+                &#125;);
+            &lt;/script&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+
+&lt;/html&gt;</code></pre></section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/30/docker/%E8%AE%A8%E8%AE%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8docker%E5%92%8Cdocker-compose.html">
+        <span class="nav-arrow">← </span>
+        
+          讨论 - 为什么要使用docker和docker-compose
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/30/other/%E6%A0%B9%E6%8D%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E7%94%9F%E6%88%90%E7%94%A8%E6%88%B7%E6%A0%87%E8%AF%86%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%85%8D%E7%99%BB%E9%99%86%E7%94%A8%E6%88%B7%E7%8A%B6%E6%80%81%E8%AE%A2.html">
+        
+          根据浏览器生成用户标识，实现免登陆用户状态订单储存。
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-nav-text">问题</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8templet%E5%AE%9E%E7%8E%B0"><span class="toc-nav-text">使用templet实现</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%85%A8%E9%80%89%E5%8A%9F%E8%83%BD"><span class="toc-nav-text">全选功能</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%8E%B7%E5%8F%96%E9%80%89%E4%B8%AD%E6%95%B0%E6%8D%AE"><span class="toc-nav-text">获取选中数据</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8done%E5%87%BD%E6%95%B0%E7%A6%81%E7%94%A8"><span class="toc-nav-text">使用done函数禁用</span></a>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/08/30/front/layui数据表格checkbox设置部分不可选.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "layui数据表格checkbox设置部分不可选",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

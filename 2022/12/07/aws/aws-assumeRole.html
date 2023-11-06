@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="应用程序需要做sessionToken，提供给用户访问S3的存储资源，但是需要做用户隔离（只能访问自己应用内的资源，不能访问别的用户的资源）.AWS-assumeRole.控制不同token访问不同目录" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="AWS,assumeRole,token,sessionToken" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      AWS-assumeRole.控制不同token访问不同目录 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>AWS-assumeRole.控制不同token访问不同目录</h2>
+  <p class="post-date">2022-12-07</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1>aws</h1>
+<h2 id="问题背景">问题背景</h2>
+<p>应用程序需要做sessionToken，提供给用户访问S3的存储资源，但是需要做用户隔离（只能访问自己应用内的资源，不能访问别的用户的资源）</p>
+<p>思路：</p>
+<p>基本条件 S3资源库都设为私有</p>
+<ol>
+<li>方案一，每次获取资源前都来server接口获取临时下载token</li>
+<li>方案二，生成短时间内有效的（比如1个小时）token，针对目录设置访问权限</li>
+</ol>
+<p>方案一很简单，使用的是AWS的“预签名”<code>GetObject</code>即可</p>
+<p>主要记录一下在实践方案二的过程</p>
+<h2 id="基本知识储备">基本知识储备</h2>
+<ul>
+<li>policy 权限</li>
+<li>IMA（Identiy and Acess Management）  理解为访问控制  角色权限控制</li>
+<li>
+<ul>
+<li>用户</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>权限策略 —— 用N个小权限组成一个小的策略 帮助快速配置</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>角色</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>组</li>
+</ul>
+</li>
+</ul>
+<p>角色、组、用户都是很基本的概念了 ，这里就不做解释</p>
+<p>对于小公司来说，可能我们只有一个<code>用户账号</code>，开通了所有AWS产品的权限   比如S3 OSS存储，CDN管理，日志管理</p>
+<p>如果在大一点规模的公司，你所在部门/产品线，只有一小部分权限</p>
+<p>所有的API和后台操作都需要管理员向你的用户账号授权才可以操作。</p>
+<h2 id="assumeRole">assumeRole</h2>
+<p>它的翻译为<code>承担角色</code>/<code>假设角色</code>。我的理解它可能翻译为<code>虚拟生成角色下的用户账号</code>更实在。</p>
+<p>毫无疑问，我们<code>虚拟生成</code>这个动作，也是调用API，需要权限授权。所以请管理员在你的用户账号上赋予这个权限吧</p>
+<h3 id="创建角色">创建角色</h3>
+<p>wait!!等等</p>
+<p>我们的API名字叫什么？    假设 + 角色</p>
+<p>角色呢？</p>
+<p>在这个API中，我们想生成一个虚拟用户，是依赖“角色”作为权限模板的。所以我们还需要创建一个角色</p>
+<p>同时我们在生成用户账号的时候也可以自定义policy权限</p>
+<p>自定义权限与角色权限的关系是 <code>【交集】</code>   赋予虚拟用户</p>
+<p>在我们这个例子中，</p>
+<ul>
+<li>角色的权限我们可以设置为读取整个S3桶、上传资源</li>
+<li>自定义权限可以指定不同的目录的读取权限</li>
+</ul>
+<p>那么产生的结果就是以我们自定义权限为准（因为它比较小，交集后等于自己）</p>
+<h3 id="授权高级账号-生成虚拟用户的权限">授权高级账号 生成虚拟用户的权限</h3>
+<p>以JSON为例</p>
+<pre><code class="hljs plaintext">&#123;
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        &#123;
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: &quot;sts:AssumeRole&quot;,
+            &quot;Resource&quot;: &quot;arn:aws:iam::用户id:role/角色名&quot;
+        &#125;
+    ]
+&#125;</code></pre>
+<p>ok ，现在我们可以使用这个高级账号来生成虚拟用户了</p>
+<h3 id="PHP-SDK-生成虚拟用户">PHP-SDK 生成虚拟用户</h3>
+<blockquote>
+<p>注意  在以下代码中使用<code>[]</code>包起来的就是需要替换成你自己的参数</p>
+</blockquote>
+<pre><code class="hljs php">
+<span class="hljs-keyword">use</span> <span class="hljs-title">Aws</span>\<span class="hljs-title">Sts</span>\<span class="hljs-title">StsClient</span>;
+
+
+<span class="hljs-variable">$stsClient</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">StsClient</span>([
+    <span class="hljs-string">&#x27;version&#x27;</span> =&gt; <span class="hljs-string">&#x27;latest&#x27;</span>,
+    <span class="hljs-string">&#x27;region&#x27;</span> =&gt; <span class="hljs-string">&quot;ap-northeast-1&quot;</span>,
+    <span class="hljs-string">&#x27;credentials&#x27;</span> =&gt; [
+        <span class="hljs-string">&#x27;key&#x27;</span> =&gt; <span class="hljs-string">&quot;[高级账号的key]&quot;</span>,
+        <span class="hljs-string">&#x27;secret&#x27;</span> =&gt; <span class="hljs-string">&quot;[高级账号的secret]&quot;</span>,
+    ],
+]);
+
+<span class="hljs-comment">// 定义一下虚拟用户的权限，这里限制了只能访问1开头的目录资源</span>
+<span class="hljs-variable">$policy</span> = <span class="hljs-string">&lt;&lt;&lt;EOF</span>
+<span class="hljs-string">&#123;</span>
+<span class="hljs-string">    &quot;Version&quot;: &quot;2012-10-17&quot;,</span>
+<span class="hljs-string">    &quot;Statement&quot;: [</span>
+<span class="hljs-string">        &#123;</span>
+<span class="hljs-string">            &quot;Effect&quot;: &quot;Allow&quot;,</span>
+<span class="hljs-string">            &quot;Action&quot;: &quot;s3:*&quot;,</span>
+<span class="hljs-string">            &quot;Resource&quot;: [</span>
+<span class="hljs-string">                &quot;[arn:aws:s3:::siam/1/]&quot;,</span>
+<span class="hljs-string">                &quot;[arn:aws:s3:::siam/1/*]&quot;</span>
+<span class="hljs-string">            ]</span>
+<span class="hljs-string">        &#125;</span>
+<span class="hljs-string">    ]</span>
+<span class="hljs-string">&#125;</span>
+<span class="hljs-string">EOF</span>;
+
+<span class="hljs-comment">// 生成虚拟用户（返回的是token）</span>
+<span class="hljs-variable">$result</span> = <span class="hljs-variable">$stsClient</span>-&gt;<span class="hljs-title function_ invoke__">assumeRole</span>([
+    <span class="hljs-string">&#x27;RoleArn&#x27;</span> =&gt; <span class="hljs-string">&#x27;arn:aws:iam::[用户arn]:role/[read-only]&#x27;</span>,// 这里是基于什么角色来生成 总得有个模板吧
+    <span class="hljs-string">&#x27;RoleSessionName&#x27;</span> =&gt; <span class="hljs-string">&#x27;[newsession]&#x27;</span>,// 直接叫newsession也可以
+    <span class="hljs-string">&#x27;Policy&#x27;</span> =&gt; <span class="hljs-variable">$policy</span>
+]);
+
+
+<span class="hljs-variable">$credentials</span> = <span class="hljs-variable">$result</span>[<span class="hljs-string">&#x27;Credentials&#x27;</span>];</code></pre>
+<h2 id="总结">总结</h2>
+<p>没啥说的，一开始我测试的时候，是创建了俩个用户账号，然后A用B当模板去创建，一直报错没权限</p>
+<p>后面想清楚了，名字就叫Role  所以我需要创建一个Role</p>
+<ul>
+<li>一个高级账号</li>
+<li>一个Role当模板</li>
+<li>高级账号操作API，使用Role + Policy 生成虚拟用户token</li>
+</ul>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#aws" >
+    <span class="tag-code">aws</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2022/12/05/php/phpstorm.html">
+        <span class="nav-arrow">← </span>
+        
+          phpstorm食用指南(自用)
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2022/12/08/version-controller/why-git.html">
+        
+          Why Git?
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">aws</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="toc-nav-text">问题背景</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%82%A8%E5%A4%87"><span class="toc-nav-text">基本知识储备</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#assumeRole"><span class="toc-nav-text">assumeRole</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A7%92%E8%89%B2"><span class="toc-nav-text">创建角色</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%8E%88%E6%9D%83%E9%AB%98%E7%BA%A7%E8%B4%A6%E5%8F%B7-%E7%94%9F%E6%88%90%E8%99%9A%E6%8B%9F%E7%94%A8%E6%88%B7%E7%9A%84%E6%9D%83%E9%99%90"><span class="toc-nav-text">授权高级账号 生成虚拟用户的权限</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#PHP-SDK-%E7%94%9F%E6%88%90%E8%99%9A%E6%8B%9F%E7%94%A8%E6%88%B7"><span class="toc-nav-text">PHP-SDK 生成虚拟用户</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-nav-text">总结</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2022/12/07/aws/aws-assumeRole.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "AWS-assumeRole.控制不同token访问不同目录",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

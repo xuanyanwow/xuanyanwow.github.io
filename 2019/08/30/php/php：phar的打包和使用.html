@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      PHP：Phar的打包和使用 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>PHP：Phar的打包和使用</h2>
+  <p class="post-date">2019-08-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="什么是Phar">什么是Phar?</h2>
+<p>Phar是PHP里类似于<code>Jar</code>的一种打包文件，可以将整个应用打包，便于部署等。</p>
+<h3 id="安装需求">安装需求</h3>
+<p>Phar需要 <code>PHP &gt;= 5.2</code> ，在 PHP5.3或以上，Phar已经包含在内置的扩展中，在这之前可以通过<code>PECL</code>扩展安装。</p>
+<h3 id="运行时配置">运行时配置</h3>
+<p>通过<code>php.ini</code>的配置项，可以设定一些Phar的函数行为方式。</p>
+<p>配置项</p>
+<p>默认值</p>
+<p>解释</p>
+<p>phar.readonly</p>
+<p>1</p>
+<p>只允许读，只能在php.ini中取消设置</p>
+<p>phar.require_hash</p>
+<p>1</p>
+<p>强制所有打开的Phar包需要包含某种签名，否则拒绝处理，只能在php.ini中取消设置</p>
+<p>phar.extract_list</p>
+<p>从phar 2.0.0开始，此INI设置已被删除，加载路径映射</p>
+<p>phar.cache_list</p>
+<p>允许在Web服务器启动时预先解析映射phar存档，从而提供性能改进，使运行文件从phar存档中移出，非常接近从传统的基于磁盘的安装运行这些文件的速度。</p>
+<h3 id="使用Phar">使用Phar</h3>
+<p>Phar包在概念上类似于Java的Jar包，但是根据PHP应用程序的需求和灵活性进行了定制，Phar包用于在单个文件中分发完整的PHP应用程序或者库（单一入口）。 使用Phar包和使用其他的PHP库是相同的： 加载文件 --&gt; 调用</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">require_once</span> <span class="hljs-string">&quot;phar://siam.phar/user.class.php&quot;</span>;
+
+<span class="hljs-variable">$u</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">user</span>();
+<span class="hljs-variable">$u</span>-&gt;<span class="hljs-title function_ invoke__">set_name</span>(<span class="hljs-string">&quot;siam&quot;</span>);</code></pre>
+<h3 id="制作Phar包">制作Phar包</h3>
+<p>我们先建立以下层级的文件</p>
+<pre><code class="hljs plaintext">siam
+├── src 目标程序
+   ├── test
+      └── index.html
+   └── A.php
+   └── B.php
+   └── index.php
+└── build.php   打包程序</code></pre>
+<p>其中src目录下 就是你需要打包的整个程序文件，这里就不展示了、 build.php文件是执行打包的文件</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-comment">//产生一个siam.phar文件</span>
+<span class="hljs-variable">$phar</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Phar</span>(<span class="hljs-string">&#x27;siam.phar&#x27;</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;siam.phar&#x27;</span>);
+<span class="hljs-comment">// 添加src里面的所有文件到siam.phar归档文件</span>
+<span class="hljs-variable">$phar</span>-&gt;<span class="hljs-title function_ invoke__">buildFromDirectory</span>(<span class="hljs-title function_ invoke__">dirname</span>(<span class="hljs-keyword">__FILE__</span>) . <span class="hljs-string">&#x27;/src&#x27;</span>);
+<span class="hljs-comment">//设置执行时的入口文件，第一个用于命令行，第二个用于浏览器访问，这里都设置为index.php</span>
+<span class="hljs-variable">$phar</span>-&gt;<span class="hljs-title function_ invoke__">setDefaultStub</span>(<span class="hljs-string">&#x27;index.php&#x27;</span>, <span class="hljs-string">&#x27;index.php&#x27;</span>);</code></pre>
+<p>设置好包名、打包目标、运行入口文件，我们在浏览器访问build.php即可看到在目录中生成了一个<code>siam.phar</code>的文件。</p>
+<blockquote>
+<p>第一次访问build.php提示报错:disabled by the php.ini setting phar.readonly，记得看文章上面，在php.ini手动打开，不能通过函数设置的哈~</p>
+</blockquote>
+<p>siam.phar的开头内容大概如下</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$web</span> = <span class="hljs-string">&#x27;index.php&#x27;</span>;
+
+<span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">in_array</span>(<span class="hljs-string">&#x27;phar&#x27;</span>, <span class="hljs-title function_ invoke__">stream_get_wrappers</span>()) &amp;&amp; <span class="hljs-title function_ invoke__">class_exists</span>(<span class="hljs-string">&#x27;Phar&#x27;</span>, <span class="hljs-number">0</span>)) &#123;
+<span class="hljs-title class_">Phar</span>::<span class="hljs-title function_ invoke__">interceptFileFuncs</span>();
+<span class="hljs-title function_ invoke__">set_include_path</span>(<span class="hljs-string">&#x27;phar://&#x27;</span> . <span class="hljs-keyword">__FILE__</span> . PATH_SEPARATOR . <span class="hljs-title function_ invoke__">get_include_path</span>());
+<span class="hljs-title class_">Phar</span>::<span class="hljs-title function_ invoke__">webPhar</span>(<span class="hljs-literal">null</span>, <span class="hljs-variable">$web</span>);
+<span class="hljs-keyword">include</span> <span class="hljs-string">&#x27;phar://&#x27;</span> . <span class="hljs-keyword">__FILE__</span> . <span class="hljs-string">&#x27;/&#x27;</span> . <span class="hljs-title class_">Extract_Phar</span>::<span class="hljs-variable constant_">START</span>;
+<span class="hljs-keyword">return</span>;
+&#125;
+
+<span class="hljs-keyword">if</span> (@(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_URI&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>]) &amp;&amp; (<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>] == <span class="hljs-string">&#x27;GET&#x27;</span>  <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>] == <span class="hljs-string">&#x27;POST&#x27;</span>))) &#123;
+<span class="hljs-title class_">Extract_Phar</span>::<span class="hljs-title function_ invoke__">go</span>(<span class="hljs-literal">true</span>);
+<span class="hljs-variable">$mimes</span> = <span class="hljs-keyword">array</span>(
+<span class="hljs-string">&#x27;phps&#x27;</span> =&gt; <span class="hljs-number">2</span>,
+<span class="hljs-string">&#x27;c&#x27;</span> =&gt; <span class="hljs-string">&#x27;text/plain&#x27;</span>,
+<span class="hljs-string">&#x27;cc&#x27;</span> =&gt; <span class="hljs-string">&#x27;text/plain&#x27;</span>,
+<span class="hljs-string">&#x27;cpp&#x27;</span> =&gt; <span class="hljs-string">&#x27;text/plain&#x27;</span>,
+<span class="hljs-string">&#x27;c++&#x27;</span> =&gt; <span class="hljs-string">&#x27;text/plain&#x27;</span>,
+......
+)</code></pre>
+<h3 id="效果预览">效果预览</h3>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 测试siam.phar</span>
+<span class="hljs-comment"> */</span>
+
+<span class="hljs-comment"># 测试入口文件</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;phar://siam.phar&#x27;</span>;
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;br&gt;&quot;</span>;
+
+<span class="hljs-comment"># 测试类文件</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;phar://siam.phar/A.php&#x27;</span>;
+
+<span class="hljs-variable">$class</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Siam</span>\<span class="hljs-title function_ invoke__">A</span>();
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$class</span>-&gt;<span class="hljs-title function_ invoke__">a</span>();
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;br&gt;&quot;</span>;
+
+<span class="hljs-comment"># 测试静态文件</span>
+<span class="hljs-variable">$html</span> = <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;phar://siam.phar/test/index.html&#x27;</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$html</span>;
+</code></pre>
+<h3 id="命令行模式">命令行模式</h3>
+<p>上面我们演示了的是其他php程序加载调用phar包的情况。 我们也可以用命令行来运行phar包。 首先我们先改造一下入口文件</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$argv</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>) &#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$key</span> == <span class="hljs-number">0</span>)&#123;
+        <span class="hljs-keyword">continue</span>;
+    &#125;
+
+    <span class="hljs-keyword">switch</span> (<span class="hljs-variable">$value</span>) &#123;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;-v&#x27;</span>:
+            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;当前版本 v1.0&quot;</span>;
+            <span class="hljs-keyword">break</span>;
+
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;-m&#x27;</span>:
+            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;siam&quot;</span>;
+            <span class="hljs-keyword">break</span>;
+
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;未知命令&quot;</span>;<span class="hljs-keyword">die</span>;
+            <span class="hljs-keyword">break</span>;
+    &#125;
+&#125;</code></pre>
+<p>然后再次构建phar包，在命令行模式下分别输入以下命令试试吧</p>
+<pre><code class="hljs plaintext">php ./siam.phar 
+php ./siam.phar -v
+php ./siam.phar -v -m 
+php ./siam.phar -v -t</code></pre>
+<h3 id="Phar中目录路径相关">Phar中目录路径相关</h3>
+<p>我们都知道在PHP中是可以通过函数和常量来获取运行脚本所在目录路径的，那么在Phar打包的程序中，展示的目录路径又会是怎么样的？ 我们将<code>src/index.php</code>中的文件再次改为以下内容来进行测试</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// getcwd()返回当前工作目录</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;getcwd --&gt;&quot;</span> . <span class="hljs-title function_ invoke__">getcwd</span>();
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
+
+<span class="hljs-comment">// 获取当前文件的绝对路径</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;__FILE__ --&gt;&quot;</span> .<span class="hljs-keyword">__FILE__</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
+
+<span class="hljs-comment">// 获取当前脚本的目录</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;__DIR__ --&gt;&quot;</span> .<span class="hljs-keyword">__DIR__</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
+
+<span class="hljs-comment">// 当前执行脚本的绝对路径。记住，在CLI方式运行php是获取不到的</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;SCRIPT_FILENAME --&gt;&quot;</span> .<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&quot;SCRIPT_FILENAME&quot;</span>];
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;
+
+<span class="hljs-comment">// 当前运行脚本所在的文档根目录。在服务器配置文件中定义</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;DOCUMENT_ROOT --&gt;&quot;</span> .<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&quot;DOCUMENT_ROOT&quot;</span>];
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;</code></pre>
+<p>接着我们分别运行<code>src/index.php</code>和<code>siam.phar</code> <a href="#" title="phar运行结果对比"><img src="http://yancoo.cn/uploads/images/201902/20190330-1.png" alt="phar运行结果对比" title="phar运行结果对比"></a> 在结果中我们可以看到类似如图的结果</p>
+<p>phar</p>
+<p>正常PHP脚本</p>
+<p>getcwd</p>
+<p>得到phar包所在目录</p>
+<p>得到php脚本所在目录</p>
+<p>__FILE__</p>
+<p>phar:// 数据流包装器，指向入口脚本所在绝对路径（注意：phar包名作为一个目录层级）</p>
+<p>得到php脚本文件所在绝对路径</p>
+<p>__DIR__</p>
+<p>phar:// 数据流包装器，指向入口脚本所在目录绝对路径</p>
+<p>得到php脚本所在目录绝对路径</p>
+<p>$_SERVER[“SCRIPT_FILENAME”]</p>
+<p>phar包名</p>
+<p>php脚本文件名</p>
+<p>$_SERVER[“DOCUMENT_ROOT”]</p>
+<p>应该是本地测试原因为空，后面补充</p>
+<h4 id="Phar包中的临时文件存放">Phar包中的临时文件存放</h4>
+<p>假设我们的程序打包成了phar包，那么在运行中产生的日志记录，我们应该怎么来存放。 根据上面的测试，我们知道了 <code>__FILE__</code> <code>__DIR__</code> 两个常量得到的是<code>phar:// 数据流包装器</code>，如果我们使用这两个常量来设置Log文件存放路径，是否能正常储存?</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$logPath</span> = <span class="hljs-keyword">__DIR__</span> .   <span class="hljs-string">&quot;/test.log&quot;</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$logPath</span>.<span class="hljs-string">&quot;\n&quot;</span>;
+<span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-variable">$logPath</span>, <span class="hljs-string">&quot;test\n&quot;</span>);
+
+<span class="hljs-comment">// 写完再读出来</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-variable">$logPath</span>);</code></pre>
+<blockquote>
+<p>打包，运行，会得到以下结果</p>
+</blockquote>
+<pre><code class="hljs plaintext">phar://F:/WWW/learn/phar/siam.phar/test.log
+test</code></pre>
+<p>但是我们的日志需要储存一般都是用<code>FILE_APPEND</code>追加内容储存。 然而phar包中的运行你将会得到以下结果</p>
+<pre><code class="hljs plaintext">Warning: file_put_contents(phar://F:/WWW/learn/phar/siam.phar/test.log): failed to open stream: phar error: open mode append not supported in phar://F:/WWW/learn/phar/siam.phar/index.php on line 4</code></pre>
+<p>关键报错：open model append not supported in phar 可见phar内的文件写入不支持追加模式打开。 并且在后续的日志查看中 也极其不方便，因为phar包内的文件我们并不能直接查看，所以我们储存临时文件应该存放在外部。</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$logPath</span> = <span class="hljs-title function_ invoke__">getcwd</span>() .   <span class="hljs-string">&quot;/test.log&quot;</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-variable">$logPath</span>.<span class="hljs-string">&quot;\n&quot;</span>;
+<span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-variable">$logPath</span>, <span class="hljs-string">&quot;test\n&quot;</span>, FILE_APPEND);</code></pre>
+<p>getcwd()函数将会得到phar包所在目录，然后在同级将创建test.log文件存放日志内容。</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/30/php/php%E8%AE%BE%E7%BD%AEredis%E5%82%A8%E5%AD%98session%EF%BC%8C%E8%87%AA%E5%AE%9A%E4%B9%89session%E9%A9%B1%E5%8A%A8.html">
+        <span class="nav-arrow">← </span>
+        
+          PHP设置Redis储存Session，自定义session驱动
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/30/php/bitmap%E7%AE%97%E6%B3%95%E7%9A%84php%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%BF%AB%E9%80%9F%E5%8E%BB%E9%87%8D%E6%8E%92%E5%BA%8F%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9%E5%82%A8%E5%AD%98.html">
+        
+          bitmap算法的PHP实现，快速去重排序，数据压缩储存
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFPhar"><span class="toc-nav-text">什么是Phar?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AE%89%E8%A3%85%E9%9C%80%E6%B1%82"><span class="toc-nav-text">安装需求</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E9%85%8D%E7%BD%AE"><span class="toc-nav-text">运行时配置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E4%BD%BF%E7%94%A8Phar"><span class="toc-nav-text">使用Phar</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%88%B6%E4%BD%9CPhar%E5%8C%85"><span class="toc-nav-text">制作Phar包</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E6%95%88%E6%9E%9C%E9%A2%84%E8%A7%88"><span class="toc-nav-text">效果预览</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="toc-nav-text">命令行模式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Phar%E4%B8%AD%E7%9B%AE%E5%BD%95%E8%B7%AF%E5%BE%84%E7%9B%B8%E5%85%B3"><span class="toc-nav-text">Phar中目录路径相关</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Phar%E5%8C%85%E4%B8%AD%E7%9A%84%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE"><span class="toc-nav-text">Phar包中的临时文件存放</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/08/30/php/php：phar的打包和使用.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "PHP：Phar的打包和使用",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

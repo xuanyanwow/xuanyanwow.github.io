@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Chrome缓存锁，php非堵塞文件锁无效的问题详解追查 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>Chrome缓存锁，php非堵塞文件锁无效的问题详解追查</h2>
+  <p class="post-date">2019-08-10</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1>写在前面</h1>
+<p>为什么写下这篇文章 在编写PHP文件锁的时候，非堵塞模式 <code>LOCK_NB</code> 加了却没有效果 预期反应：当前面有请求在执行了，后续的请求马上返回客户端：拿不到锁，执行失败。 现实状况：假设业务逻辑需要执行5s，第一个请求发送后，马上有第二个请求发送，第二个请求会等待第一个请求结束，然后再执行自己本次请求，总共耗时10s</p>
+<h1>简单说说php写下的锁</h1>
+<p>为了后面更好地讲解和理解，简单带上php文件锁的几行代码</p>
+<span id="more"></span>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$p_file</span> = <span class="hljs-string">&quot;index.lock&quot;</span>;
+<span class="hljs-variable">$o_file</span> = <span class="hljs-title function_ invoke__">fopen</span>(<span class="hljs-variable">$p_file</span>, <span class="hljs-string">&#x27;w+&#x27;</span>);
+
+<span class="hljs-comment">// 非堵塞模型 拿不到锁马上返回false</span>
+<span class="hljs-variable">$lock</span> = <span class="hljs-title function_ invoke__">flock</span>(<span class="hljs-variable">$o_file</span>, LOCK_EX  LOCK_NB);
+<span class="hljs-keyword">if</span> (!<span class="hljs-variable">$lock</span>) &#123;
+  <span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-string">&#x27;被锁了&#x27;</span>);
+&#125;<span class="hljs-keyword">else</span> &#123;
+  <span class="hljs-title function_ invoke__">sleep</span>(<span class="hljs-number">5</span>);
+  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;完成&quot;</span>;
+&#125;</code></pre>
+<h1>追寻之路</h1>
+<h2 id="最直观地搜索">最直观地搜索</h2>
+<p>百度<code>PHP LOCK_NB 无效</code> 找文章 找到一篇文章如下：</p>
+<hr>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/08/d222dccd2db7bba01db692e354dfb6a9.png" alt=""></p>
+<hr>
+<p>引用</p>
+<blockquote>
+<p>如果你是在本机测试，你要分两个不同的浏览器测试。 例如一个chrome，一个firefox， chrome先执行，firefox再执行，就可以看到效果了，如果你用同一个浏览器会等待的。</p>
+</blockquote>
+<p>确实，我们可以<code>使用两个浏览器</code>来执行，就可以达到预期想要的非堵塞效果。但是原因呢，几乎没有文章讲解。 <code>宣言不会死心</code>，想要坚持找到合适的答案。</p>
+<h2 id="猜测有什么会影响">猜测有什么会影响</h2>
+<p>根据不够成熟的经验，简单猜测</p>
+<ul>
+<li>服务端导致：可能由于系统等等特殊场景，会导致非堵塞失效。</li>
+<li>前端导致：可能由于浏览器处理问题，导致请求堵塞。</li>
+</ul>
+<p>这两个排查顺序，首先我检查了PHP手册和其他站点的文章，<code>确保函数和参数的使用正确</code>，也没有在文档中发现比较特别的注意事项。 在Windows和Linux系统上都出现过此问题。所以也排除windows系统不支持的可能。 接下来就只能进行前端的排查，通过开发者面板——&gt;网络请求——&gt;尝试分析<code>请求头/响应头</code>等信息 一开始的猜想是：要么是客户端请求头，要么是服务端响应头，会有一个标识在等待或者转发等等 分析看到大概如下的情况 （请求里的请求头信息很少，很正常，所以看到外面的状态） <img src="https://blog.siammm.cn/wp-content/uploads/2019/08/267b075db82deb9cc048dcc76b071def.png" alt=""> 此时显示的是Pending 在等待状态。</p>
+<h2 id="浏览器Pending状态">浏览器Pending状态</h2>
+<p>想要知道该状态会在什么情况下产生，搜索这方面的文章。。 看到的可能如下：</p>
+<ul>
+<li>建议你把浏览器先卸载,用360安全卫士清理系统后重装一下。</li>
+<li>#现象Chrome打开任何网页都显示“喔唷崩溃啦”。#尝试关于页无法进入，没法升级浏览器；设置页无法进入，没法清除浏览数据或重置浏览器；</li>
+</ul>
+<p>等等垃圾答复（机器人或者刷积分的）</p>
+<h4 id="但是，也有精品的文章">但是，也有精品的文章</h4>
+<p>该文章属于FEX百度团队 《关于请求被挂起页面加载缓慢问题的追查》 在大概2014年的时候，百度团队追查前端<code>偶发</code>的缓慢请求(可能一两分钟)的一篇技术文章</p>
+<blockquote>
+<p>涉及面非常专业，排查思路非常值得学习！赞！！</p>
+</blockquote>
+<p>也是从中得到本篇文章想要的知识点 下面会陆续引用文章中的一小段内容</p>
+<h2 id="神秘的CACHE-LOCK">神秘的CACHE LOCK</h2>
+<p>稳重提到，在Stackoverflow上找到一个<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/27513994/chrome-stalls-when-making-multiple-requests-to-same-resource" title="问题">问题</a>，跟FEX面临的问题有些类似点：</p>
+<ul>
+<li>偶发，并不是必然出现的。这里我们的问题也是偶发，很难复现，需要反复刷。</li>
+<li>也是请求被Pending了很久，从请求的时间线来看，体现在Stalled上。</li>
+</ul>
+<p>在问题中，有提供以下报错 ERR_CACHE_LOCK_TIMEOUT 20秒</p>
+<pre><code class="hljs plaintext">t=33627 [st= 5] HTTP_CACHE_ADD_TO_ENTRY [dt=20001] –&gt; net_error = -409 (ERR_CACHE_LOCK_TIMEOUT)</code></pre>
+<p>同时还有一段这样子的描述</p>
+<blockquote>
+<p>The error message refers to a patch added to Chrome six months ago (<a target="_blank" rel="noopener" href="https://codereview.chromium.org/345643003">https://codereview.chromium.org/345643003</a>), which implements a 20-second timeout when the same resource is requested multiple times. In fact, one of the bugs the patch tries to fix (bug number 46104) refers to a similar situation, and the patch is meant to reduce the time spent waiting.</p>
+</blockquote>
+<p>核心句子： 这是Chormeium发布的一个补丁：它在多次请求同一资源时实现20秒的超时。 也从中得知了<code>浏览器有缓存锁</code>的知识。</p>
+<blockquote>
+<p>浏览器对一个资源发起请求前，会先检查本地缓存，此时这个请求对该资源对应的缓存的读写是独占的。此时后续的请求，在请求这个资源的时候，就需要等待拿锁。（在上面这个补丁发布之前，会无限等待，补丁是让等待最多20秒）</p>
+</blockquote>
+<p>那么如何让浏览器不使用缓存锁呢</p>
+<ul>
+<li>对请求加个时间戳或者参数等让请求变得唯一</li>
+<li>或者服务器响应头设置为无缓存</li>
+</ul>
+<p>嗯，先简单尝试一下，在Chrome中，打开文章一开始的php脚本，但是此时有一个请求带上参数 <code>index.php?t=1</code> <code>index.php</code> 顺利实现预期效果：一个执行5秒，一个马上返回拿锁失败的消息。</p>
+<h2 id="测试CACHE-LOCK的超时时间">测试CACHE LOCK的超时时间</h2>
+<p>再简单修改sleep的时间为30，目的是测试上文补丁中说的，最长等待时间是20s。 第二个请求出现以下状况，完全符合。20秒后，拿不到该资源的本地缓存锁，则发送请求执行。 <img src="https://blog.siammm.cn/wp-content/uploads/2019/08/62cd6392c6874d3bd5672f0112f1de8f.png" alt=""></p>
+<h1>总结</h1>
+<ul>
+<li>Chrome浏览器有缓存锁概念（其他浏览器还未测试）</li>
+<li>PHP LOCK_NB没有失效，表面现象是因为前端特性导致的</li>
+<li>Chrome的缓存锁超时时间是20s</li>
+<li>可以通过不同参数或者由服务端响应头来控制浏览器不缓存文件,也就不会去检查拿本地缓存锁。</li>
+</ul>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/09/front/layui%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BCtemplet%E7%9A%84%E6%95%B0%E6%8D%AE%E6%97%A0%E6%B3%95%E5%90%88%E8%AE%A1.html">
+        <span class="nav-arrow">← </span>
+        
+          Layui数据表格templet的数据无法合计
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/11/php/php%E8%A7%A3%E6%9E%90json%E3%80%81xml%E9%94%99%E8%AF%AF.html">
+        
+          PHP解析json、xml错误
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">写在前面</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">简单说说php写下的锁</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">追寻之路</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%9C%80%E7%9B%B4%E8%A7%82%E5%9C%B0%E6%90%9C%E7%B4%A2"><span class="toc-nav-text">最直观地搜索</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%8C%9C%E6%B5%8B%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BD%B1%E5%93%8D"><span class="toc-nav-text">猜测有什么会影响</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8Pending%E7%8A%B6%E6%80%81"><span class="toc-nav-text">浏览器Pending状态</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E4%BD%86%E6%98%AF%EF%BC%8C%E4%B9%9F%E6%9C%89%E7%B2%BE%E5%93%81%E7%9A%84%E6%96%87%E7%AB%A0"><span class="toc-nav-text">但是，也有精品的文章</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%A5%9E%E7%A7%98%E7%9A%84CACHE-LOCK"><span class="toc-nav-text">神秘的CACHE LOCK</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%B5%8B%E8%AF%95CACHE-LOCK%E7%9A%84%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4"><span class="toc-nav-text">测试CACHE LOCK的超时时间</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">总结</span></a></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/08/10/other/chrome缓存锁，php非堵塞文件锁无效的问题详解追查.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "Chrome缓存锁，php非堵塞文件锁无效的问题详解追查",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

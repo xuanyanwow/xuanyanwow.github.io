@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/13/php/thinkphp%E4%B8%AD%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8Form%E7%9A%84%E6%80%9D%E6%83%B3%E6%A6%82%E5%BF%B5.html">Thinkphp中模型的正确使用方式,ORM的思想概念</a>
+      </h2>
+      <p class="article-date">2019年7月13日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          在Thinkphp的文档中关于框架特性的描述，有这么一句话
+
+ORM：重构的数据库、模型及关联，MongoDb支持；
+
+从这句话可以得知，Thinkphp中的数据库、模型，基于的ORM概念来完成。
+ORM是什么？
+对象-关系映射（OBJECT-RELATIONAL MAPPING，简称ORM ...
+        
+      </div>
+      <a class="more" href="/2019/07/13/php/thinkphp%E4%B8%AD%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8Form%E7%9A%84%E6%80%9D%E6%83%B3%E6%A6%82%E5%BF%B5.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/10/Swoole/swoole%E5%A6%82%E4%BD%95%E5%AF%B9ip%E9%99%90%E5%88%B6%E8%AE%BF%E9%97%AE%E9%A2%91%E7%8E%87.html">swoole如何对ip限制访问频率</a>
+      </h2>
+      <p class="article-date">2019年7月10日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          swoole如何对ip限制访问频率
+在我们开发api的过程中，有的时候我们还需要考虑单个用户(ip)访问频率控制，避免被恶意调用。 归根到底也就只有两个步骤：
+
+用户访问要统计次数
+执行操作逻辑之前要判断次数频率是否过高，过高则不执行
+
+easyswoole中实现Ip访问频率限制
+本文章举例 ...
+        
+      </div>
+      <a class="more" href="/2019/07/10/Swoole/swoole%E5%A6%82%E4%BD%95%E5%AF%B9ip%E9%99%90%E5%88%B6%E8%AE%BF%E9%97%AE%E9%A2%91%E7%8E%87.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/07/04/front/layui%E6%A8%A1%E5%9D%97%E5%8C%96%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E6%94%B9%E9%80%A0%E4%BC%A0%E7%BB%9Fjquery%E6%89%A9%E5%B1%95%E4%B8%BAlayui%E6%A8%A1%E5%9D%97.html">Layui模块化,改造传统jquery扩展为layui模块</a>
+      </h2>
+      <p class="article-date">2019年7月4日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h2 id="此篇文章比较偏向笔记类型">此篇文章比较偏向笔记类型</h2>
+<p>在我使用jquery扩展，拖拽组件的时候，因为使用的布局模板有些冲突，导致无法使用扩展，所以才会解决之后写下这篇文章。 <strong>Layui中内置了jquery</strong> 只有你所使用的模块有依赖到它，它才会加载，并且如果你的页面已经script引入了jquery，它并不会重复加载。内置的jquery模块去除了全局的$和jQuery。 这是layui文档中的描述，它内置了jq，但是去除了全局的$和jQuery对象，也就是在window的全局对外接口被删除了。 <strong>拖拽组件的实现</strong> 假设siam.js是一个扩展，里面提供了一个类似这样的方法</p>
+        
+      </div>
+      <a class="more" href="/2019/07/04/front/layui%E6%A8%A1%E5%9D%97%E5%8C%96%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E6%94%B9%E9%80%A0%E4%BC%A0%E7%BB%9Fjquery%E6%89%A9%E5%B1%95%E4%B8%BAlayui%E6%A8%A1%E5%9D%97.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/06/29/basic/%E6%B5%85%E8%B0%88%E9%9D%9E%E5%A0%B5%E5%A1%9E%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%90%86%E8%A7%A3.html">浅谈非堵塞程序的理解</a>
+      </h2>
+      <p class="article-date">2019年6月29日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>这篇文章，主要讲讲非堵塞编程带给程序的意义。 在我们谈到今天的主题之前，先来做一点基础知识的补充。</p>
+<h2 id="什么是I-O">什么是I/O</h2>
+<p>我们的计算机系统架构简易可看成如下，I/O接口连接其他硬件如：网卡、键盘鼠标、磁盘等。 I代表Input，输入数据。 O代表Output，输出数据。 <img src="https://blog.siammm.cn/wp-content/uploads/2019/06/3674cd0f72fc6b4f43522b703b9d3767.png" alt="计算机基础架构图"> 当程序需要发送网络请求或者从磁盘中读取文件等IO操作时 CPU发出指令，然后信号经过总线到达网卡或者磁盘 然后拿到数据，再经过总线到达主存中，CPU继续对主存中的数据进行操作。</p>
+<blockquote>
+<p>CPU的执行速率：主频 比如3GHz = 一秒钟有30亿个时钟脉冲，执行一条指令一般只需要几个时钟脉冲。也就是一秒可以执行的指令经常是以亿计算的。</p>
+</blockquote>
+<p>以网络请求为例（磁盘IO也是一样的原理），当CPU发出指令之后，想要得到结果需要经过很长的等待（比如网络延迟经常是几十ms时间，CPU都过了多少千万个时钟脉冲了）</p>
+<h2 id="同步、异步、堵塞、非堵塞的概念">同步、异步、堵塞、非堵塞的概念</h2>
+<p>相信看这篇文章的你也不是第一次看到这种概念，在很多文章中经常会以购物等场景做例子。 这里只做一个简单的介绍： <code>同步、异步</code>分为一组概念； <code>堵塞、非堵塞</code>分为一组概念； （同步、异步）：关注的是：数据的接收方式 （堵塞、非堵塞）：关注的是：是否等待结果返回 这是两个分组（因为它们的关注点不同） 但是往往<code>同步跟堵塞</code>是一起的，<code>异步跟非堵塞</code>是一起的。 如果我们需要同步接收数据，肯定要让当前程序暂停，等待数据返回再做处理。 如果我们选择了异步接收数据，程序还堵塞的话那就没什么意义了，所以非堵塞模式，一般会返回发送调用请求的结果，然后程序继续执行，直到结果准备好了，再通过回调函数等方式触发程序做处理。</p>
+        
+      </div>
+      <a class="more" href="/2019/06/29/basic/%E6%B5%85%E8%B0%88%E9%9D%9E%E5%A0%B5%E5%A1%9E%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%90%86%E8%A7%A3.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/06/23/basic/http%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84get%E3%80%81post%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB.html">HTTP协议中的GET、POST请求方法的区别</a>
+      </h2>
+      <p class="article-date">2019年6月23日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>在我们日常打开网页、对接接口时，使用到的一般都是HTTP协议。 HTTP 的工作方式是客户端与服务器之间的请求-响应。 HTTP 请求方法有：HEAD、PUT、DELETE、OPTIONS、CONNECT 两种最常被用到的HTTP方法是：<code>GET</code> 和 <code>POST</code>。 本篇文章讲讲<code>GET</code>和<code>POST</code>两种请求方法的区别。</p>
+<h3 id="在浏览器上表现的区别">在浏览器上表现的区别</h3>
+<p><strong>GET</strong></p>
+<ul>
+<li>GET 请求可被缓存</li>
+<li>GET 请求保留在浏览器历史记录中</li>
+<li>GET 请求可被收藏为书签</li>
+<li>GET 请求参数在URL中的是可见的</li>
+<li>GET 请求有长度限制</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2019/06/23/basic/http%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84get%E3%80%81post%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/06/19/php/php%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0thinkphp%E8%B0%83%E8%AF%95.html">PHP异常处理函数,Thinkphp调试</a>
+      </h2>
+      <p class="article-date">2019年6月19日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          在我们开发过程、已上线的应用中，程序经常会因为异常而崩溃。 比如：数据库执行失败、调用了不存在的类、调用了不存在的函数/方法… 如果是在开发过程中还好，问题肯定是由我们自己发现，可以清楚地看到异常的信息。 那么如果是已经上线的应用，那么出现问题的时候，客户往往是这么说的
+
+在xxx的时候 网 ...
+        
+      </div>
+      <a class="more" href="/2019/06/19/php/php%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0thinkphp%E8%B0%83%E8%AF%95.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/06/12/basic/%E5%AF%B9%E8%B1%A1%E6%B1%A0%E3%80%81%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E6%84%8F%E4%B9%89.html">对象池、连接池的意义</a>
+      </h2>
+      <p class="article-date">2019年6月12日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>这次我们来讲讲对象池、连接池的意义，在此之前我们先了解学习一些其他的基础知识，以便我们结合理解池的意义。</p>
+<h4 id="nginx与php-fpm的进程模型">nginx与php-fpm的进程模型</h4>
+<p>nginx采用多进程模型，启动之后的进程将包含<code>一个master</code>和<code>多个worker</code>进程。 <strong>master</strong>是worker的父进程，主要职责是用来管理worker进程的。</p>
+<ul>
+<li>向worker进程发送信号，如通知退出</li>
+<li>监控worker状态，当worker退出后（无论正常异常），可以重新启动新的worker。</li>
+</ul>
+<blockquote>
+<p>可以实现<code>从容重启</code>：master进程在接收到信号后，会先重新加载配置，然后再启动新进程开始接收新请求，并向所有老进程发送信号告知不再接收新请求并在处理完所有未处理完的请求后自动退出。</p>
+</blockquote>
+<p><strong>worker</strong>进程负责处理请求，如果是静态文件则可以直接处理完，如果是php程序还需要调用php来处理，当php处理完成时获取php的返回，并返回给客户端。 采用的是<code>异步非堵塞</code>，当调用php的时候不会堵塞等待，会抽空处理下一个请求，当php处理完成时恢复之前的请求并返回给客户端。 <strong>php-fpm</strong>是php-cgi的管理器，在<code>php &gt;= 5.3.3</code>就已经集成在php中了。 它的出现提供了更好的php管理方式</p>
+        
+      </div>
+      <a class="more" href="/2019/06/12/basic/%E5%AF%B9%E8%B1%A1%E6%B1%A0%E3%80%81%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E6%84%8F%E4%B9%89.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/14/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a class="unvisible" href="/">下一页 <span class="page-arrow">→</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

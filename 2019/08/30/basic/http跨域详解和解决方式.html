@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      HTTP跨域详解和解决方式 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>HTTP跨域详解和解决方式</h2>
+  <p class="post-date">2019-08-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="HTTP跨域">HTTP跨域</h2>
+<blockquote>
+<p>Access to XMLHttpRequest at ‘xx’ from origin ‘xx’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.</p>
+</blockquote>
+<p>前端的这个报错相信很多人都有遇到过，也知道这是跨域请求的问题。 那么究竟什么是<code>跨域</code>，跨域又是怎么产生的，以及跨域请求的问题需要怎么解决。我们一起来了解一下这些知识。</p>
+<h2 id="什么叫跨域">什么叫跨域</h2>
+<p><code>域</code> ： 域既是 Windows 网络操作系统的逻辑组织单元，也是Internet的逻辑组织单元，它是<code>安全边界</code>。 只有域的所有者才能访问管理域内部的资源，若其他的域要访问或者管理，则需要该域赋予其他域相关权限。 从小角度来讲，在php中的<code>变量作用域</code>，就可以体现出安全边界的概念。在以下例子中，调用test函数并不会输出任何内容。</p>
+<span id="more"></span>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-variable">$a</span> = <span class="hljs-number">123</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>&#123;
+    <span class="hljs-keyword">echo</span> <span class="hljs-variable">$a</span>;
+&#125;
+<span class="hljs-title function_ invoke__">test</span>();</code></pre>
+<p>因为函数内调用的是<code>局部作用域</code>的变量，而在局部作用域内并没有声明 $a 变量。 除非我们使用<code>global $a;</code>从全局作用域引用该变量。<br>
+在PHP脚本中的变量作用域不算复杂，而将一个网站看做一个域，当它要引用其他域的资源时，就需要目标域对原始域进行授权信任。 这种从其他域获取资源的操作就叫做 <code>跨域</code>。</p>
+<h2 id="浏览器的同源策略">浏览器的同源策略</h2>
+<p><code>同源策略</code>是Web的一种安全约定，浏览器的同源策略只是对其的一种实现。 浏览器同源策略将认为任何站点装载的内容都是不安全的。所以会对<code>跨域的操作或者请求</code>进行限制，从而让用户安全的上网。<br>
+<code>同源</code> 指的是 <code>域名、协议、端口</code> 相同。 若有其中一个不同，浏览器将会认为非同源，也就是跨域。<br>
+浏览器的同源策略主要有两种</p>
+<ul>
+<li>DOM 同源策略 ： 禁止对不同源页面的 Dom 元素进行操作，主要是在 iframe 标签加载跨域页面出现。</li>
+<li>XMLHttpRequest 同源策略 ： 禁止使用 XHR 对象对不同源地址发起请求。</li>
+<li>存储在浏览器中的数据，如localStroage、Cooke和IndexedDB不能通过脚本跨域访问</li>
+</ul>
+<h4 id="Dom-同源策略">Dom 同源策略</h4>
+<p>如果没有 DOM 同源策略，也就是说不同域的 iframe 之间可以相互访问操作。 那么将会出现这种攻击操作：我们 iframe 包含某个网站的登录页，并且监听目标网站的登录按钮，当用户触发按钮的时候，我们拿到目标网站 input 的dom元素，并且取值，保存到自己的服务器上。 但是因为有 Dom 同源策略的存在，禁止操作不同源页面的dom元素，甚至我们还可以将自己的网站设置 <code>禁止在非同源网站上 iframe</code> ，我们来看看下面的例子</p>
+<pre><code class="hljs markup">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Siam - Dom同源策略&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;iframe src=&quot;http://www.alipay.com&quot;&gt;
+    &lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+<p>运行以上代码，我们会看到支付宝的网站是禁止在了非同源网站上ifarme。 <img src="http://yancoo.cn/uploads/images/201904/20_01.png" alt="dom运行结果"> 我们可以看到报错</p>
+<blockquote>
+<p>v.asp:1 Refused to display ‘<a target="_blank" rel="noopener" href="https://www.alipay.com/">https://www.alipay.com/</a>’ in a frame because it set ‘X-Frame-Options’ to ‘sameorigin’.</p>
+</blockquote>
+<p><code>X-Frame-Options</code> 是一个HTTP标头（header），用来告诉浏览器这个网页是否可以放在iFrame内。 用法</p>
+<pre><code class="hljs plaintext">X-Frame-Options: DENY     // 不允许iframe
+X-Frame-Options: SAMEORIGIN   // 只允许同源的网站iframe
+X-Frame-Options: ALLOW-FROM http://yancoo.cn/  // 只允许指定网站iframe</code></pre>
+<h4 id="XMLHttpRequest-同源策略">XMLHttpRequest 同源策略</h4>
+<p>如果没有 XHR 同源策略，以及不允许跨域获取cookies等的限制，那么攻击者将可以发起 <code>CSRF (跨站请求伪造)</code> 攻击 场景可以如下：</p>
+<ol>
+<li>你登录了某个银行网站，<a target="_blank" rel="noopener" href="http://www.siambank.com">www.siambank.com</a>，银行网站返回你的登录状态并且保存在cookies中。</li>
+<li>你没有安全退出清空cookies，又刚好不小心浏览到了恶意网站 <a target="_blank" rel="noopener" href="http://www.ggg.com">www.ggg.com</a></li>
+<li>一进入 <a target="_blank" rel="noopener" href="http://www.ggg.com">www.ggg.com</a> ，它将会向 <code>银行网站</code> 发起XHR请求。（发送请求将会带上目标网站设置的cookies）</li>
+<li>银行拿到cookies，验证通过，返回数据。</li>
+</ol>
+<h2 id="跨域的解决方法">跨域的解决方法</h2>
+<p>前面我们已经说了，如果想要跨域请求访问或者管理资源，需要目标域赋予权限，到目前为止我们只说了浏览器同源策略的限制，下面我们就再说说赋予权限进行跨域访问相关的知识。</p>
+<h4 id="CORS-跨域资源共享">CORS 跨域资源共享</h4>
+<p><code>CORS</code> 是一个 <code>W3C标准</code>,该标准定义了在访问跨域资源时，服务端和客户端需要如何沟通，如何授权信任。 CORS的原理是：使用 <code>http自定义头部</code> ，请求头附带客户端信息，服务端验证，并且返回响应头告诉客户端是否允许访问。 所以该标准需要客户端和服务端同时配合支持，当前所有的浏览器都支持该标准。 CORS 对于用户来说是无感知的，由<code>浏览器自动完成</code> 。 因为当前所有浏览器都支持该标准，并且由浏览器自动完成检测，所以当我们需要使用CORS的时候，只需要由<code>服务端改动，前端不需要改动</code>。 CORS将http请求分为<code>简单请求</code>和<code>非简单请求</code>。 浏览器对于两种类型的请求的处理步骤有一些不同：<br>
+<strong>简单请求</strong> <code>简单请求</code>：从名字来理解，就是发送请求的类型或者数据不复杂。 必须<code>同时满足</code>以下两个条件的请求，才是简单请求</p>
+<ul>
+<li>请求方法只能是在以下三种之中。
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>HEAD</li>
+</ul>
+</li>
+<li>HTTP头部信息不自定义，也就是只能设置默认字段的信息
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Last-Event-ID</li>
+<li>Content-Type 只限于三个值 <code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code>、<code>text/plain</code></li>
+</ul>
+</li>
+</ul>
+<p>处理步骤：</p>
+<ol>
+<li>浏览器在Http头部带上原始域的标识 <code>Origin</code></li>
+<li>服务端根据该标识来判断是否需要信任授权，如果信任就在响应头部返回相同的标识。</li>
+<li>浏览器判断响应头是否匹配，做相应结果处理 默认情况下 请求和响应都不带cookies</li>
+</ol>
+<p>如果需要附带cookies信息 ajax的 <code>withCredentials</code> 设置为 true 服务端 响应头需要增加 <code>Access-Control-Allow-Credentials: true</code> <strong>非简单请求</strong> 处理步骤：</p>
+<ol>
+<li>在发送真正请求之前，会先发送一次<code>预检</code>请求，来判断服务端是否支持非简单请求的类方法。<code>预检</code> 请求包含<code>跟简单请求一样的Origin</code>、<code>Access-Control-Request-Method 真实请求的方法 如PUT</code>、<code>Access-Control-Request-Headers自定义复杂头部（可选）</code></li>
+<li>预检通过之后，浏览器会再次使用<code>真实请求方法</code>发起请求</li>
+</ol>
+<p><strong>实践</strong> 我们先配置两个网站<code>www.siam.com</code> <code>www.siam2.com</code></p>
+<blockquote>
+<p>因为域名不同，所以是非同源请求，会产生跨域。</p>
+</blockquote>
+<p>在siam网站写下index.html文件，让它使用ajax去请求<code>siam2</code>网站的内容。</p>
+<pre><code class="hljs markup">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;首页1&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+        &lt;h1&gt;这是原始页面的内容&lt;/h1&gt;
+    &lt;script src=&quot;https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+    $(function()&#123;
+        $.ajax(&#123;
+            url : &quot;http://www.siam2.com/index2.php&quot;,
+            success:function(res)&#123;
+                $(&#x27;body&#x27;).html(res);
+            &#125;
+        &#125;)
+    &#125;)
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>siam2的index.php</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;来自index2.php的内容&quot;</span>;</code></pre>
+<p>访问index.html。会看到浏览器已经发送了请求，但是产生了报错</p>
+<blockquote>
+<p>(index):1 Access to XMLHttpRequest at ‘<a target="_blank" rel="noopener" href="http://www.siam2.com/index2.php">http://www.siam2.com/index2.php</a>’ from origin ‘<a target="_blank" rel="noopener" href="http://siam.com">http://siam.com</a>’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.</p>
+</blockquote>
+<p><img src="http://yancoo.cn/uploads/images/201904/20_2.png" alt="dom运行结果"> 因为我们还没有在服务端中信任<code>www.siam.com</code>，所以浏览器拿不到信任站点信息，跨域请求失败。 但我们可以看到 http的请求码是200，代表请求成功，在preview中也可以看到php脚本的正常返回，所以 <code>跨域请求失败，php脚本也会正常运行结束</code>。 接下来我们在服务端添加信任siam网站，是需要在响应头中增加字段，来添加信任站点的域名。</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Access-Control-Allow-Origin:http://www.siam.com&#x27;</span>);
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;来自index2.php的内容&quot;</span>;</code></pre>
+<p><img src="http://yancoo.cn/uploads/images/201904/20_3.png" alt="ajax运行结果"><br>
+到这里就跨域请求成功了。但这仅仅是简单请求的场景下，我们还要来测试一下非简单请求的情况。<br>
+因为简单请求必须是HEAD，GET，POST其一，所以我们这里直接使用<code>PUT</code>方法来测试就可以出现非简单请求的场景了。当然你也可以自定义HTTP头部来实现非简单请求。 我们把index.html的ajax方法改为put 然后请求</p>
+<pre><code class="hljs plaintext">$.ajax(&#123;
+    url : &quot;http://www.siam2.com/index2.php&quot;,
+    type: &quot;PUT&quot;,
+    success:function(res)&#123;
+        $(&#x27;body&#x27;).html(res);
+    &#125;
+&#125;)</code></pre>
+<p><img src="http://yancoo.cn/uploads/images/201904/20_4.png" alt="ajax运行结果"><br>
+可以看到在请求中，我们填的是<code>PUT</code>，但是这里产生的却是<code>OPTIONS</code>，前面我们也说了，非简单请求会先产生一次<code>预检</code>请求，带上origin和真实的方法 <code>在这里是PUT</code> ，服务端验证通过了origin和方法之后，浏览器才会使用真实的方法<code>PUT</code>发送一次请求。 我们还没有在服务端返回头部告诉浏览器说我们支持PUT方法，所以浏览器这里拿不到权限，报错了。 我们在服务端的代码添加头部</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Access-Control-Allow-Origin:http://www.siam.com&#x27;</span>);
+<span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Access-Control-Allow-Methods:PUT,DELETE&#x27;</span>); <span class="hljs-comment">// 需要同意两种类型，就用逗号隔开</span>
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;来自index2.php的内容&quot;</span>;</code></pre>
+<p>到这里就可以正常的请求了，但是可以在浏览器中看到，产生了两次请求，也就是说php脚本执行了两次。 我们例子中只是简单输出一个字符，如果是查询数据库等操作呢？ 是不是就多出了一次无用的请求。 所以我们可以在服务端拦截预检请求，直接返回同意访问的头部，后面的脚本就不需要执行了。 还有前面的简单请求，哪怕是还没有添加信任，跨域请求失败，脚本也一样会运行。</p>
+<blockquote>
+<p>这是因为<code>http协议</code>并没有跨域的概念，请求发送了就会执行，而到达了浏览器的时候，才由浏览器解析响应头，查看是否有相应的字段来决定要不要继续执行。</p>
+</blockquote>
+<p>我们可以将脚本优化一下</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// 如果不是同意的来源 就不用运行了</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">strpos</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_ORIGIN&#x27;</span>], <span class="hljs-string">&#x27;http://www.siam.com&#x27;</span>) === <span class="hljs-literal">false</span>)&#123;
+    <span class="hljs-keyword">die</span>;
+&#125;
+<span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Access-Control-Allow-Origin:http://www.siam.com&#x27;</span>);
+<span class="hljs-comment">// 如果是预检请求，则通知信任即可，不需要执行脚本。</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>] === <span class="hljs-string">&#x27;OPTIONS&#x27;</span>)&#123;
+    <span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Access-Control-Allow-Methods:PUT,DELETE&#x27;</span>);
+    <span class="hljs-keyword">die</span>;
+&#125;
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;来自index2.php的内容&quot;</span>;</code></pre>
+<p>同时我们可以看一下，是否每一个<code>非简单请求</code>都需要先发送预检请求。我们在一个页面连续请求两次</p>
+<pre><code class="hljs plaintext">$.ajax(&#123;
+    url : &quot;http://www.siam2.com/index2.php&quot;,
+    type: &quot;PUT&quot;,
+    success:function(res)&#123;
+        $(&#x27;body&#x27;).html(res);
+        $.ajax(&#123;
+            url : &quot;http://www.siam2.com/index2.php&quot;,
+            type: &quot;PUT&quot;,
+            success:function(res)&#123;
+                $(&#x27;body&#x27;).html(res);
+            &#125;
+        &#125;)
+    &#125;
+&#125;)</code></pre>
+<p>发现浏览器只有请求了3次：1次OPTIONS，2次PUT。 <img src="http://yancoo.cn/uploads/images/201904/20_5.png" alt="ajax运行结果"></p>
+<blockquote>
+<p>在一个页面中，预检操作只需要进行一次。</p>
+</blockquote>
+<p>到这里CORS的基本就弄懂了。 优点 * CORS 通信与同源的 AJAX 通信没有差别，代码完全一样，容易维护。 * 支持所有类型的 HTTP 请求。 缺点 * 第一次发送非简单请求时会多一次请求，增加服务器压力。</p>
+<h4 id="JSONP-跨域解决">JSONP 跨域解决</h4>
+<p>在浏览器中，我们可以使用<code>script</code>标签来加载js脚本，如果使用过cdn的童鞋应该知道，我们可以直接填写不同源的地址，因为浏览器允许<code>script</code>加载跨域资源。我们可以通过该标签来加载动态脚本，但是<code>需要服务端调整数据结构</code>。 相当于让服务端输出<code>调用js函数</code>的语句 首先我们在html中写下以下代码，创建一个script，调用动态脚本</p>
+<pre><code class="hljs markup">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Siam - script 同源解决&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;这是原始页面的内容&lt;/h1&gt;
+    &lt;script src=&quot;https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+    // 这里需要先写好相应的回调处理函数，然后服务端的脚本调用 传参
+    function test(text)&#123;
+        $(&#x27;body&#x27;).append(text);
+    &#125;
+
+    $(function()&#123;
+        $(&quot;body&quot;).append(&quot;&lt;script src=&#x27;http://www.siam2.com/script.php&#x27;&gt;&lt;\/script&gt;&quot;);
+    &#125;)
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>服务端脚本</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;test(&#x27;这是返回内容&#x27;)&quot;</span>;</code></pre>
+<p>这样子也可以正常的运行返回 优点 * 兼容性好，现在主流的跨域解决方案之一 缺点 * 只支持get * 要确定 JSONP 请求是否失败并不容易。虽然 HTML5 给 script 标签新增了一个 onerror 事件处理程序，但是存在兼容性问题</p>
+<h4 id="服务器代理">服务器代理</h4>
+<p>除了使用以上的两种方案，我们还可以在nginx配置反向代理，在www.siam.com下某个路径代理到www.siam2.com即可 我们打开nginx.conf</p>
+<pre><code class="hljs plaintext">server &#123;
+    listen       80;
+    server_name  www.siam.com;
+
+    #charset koi8-r;
+
+    #access_log  logs/host.access.log  main;
+
+    location / &#123;
+        root   html;
+        index  index.html index.htm;
+    &#125;
+
+    location ^~ /apis &#123;
+        proxy_pass http://www.siam2.com;
+    &#125;
+&#125;</code></pre>
+<p>通过反向代理，我们就可以通过 <a target="_blank" rel="noopener" href="http://www.siam.com/apis/index2.php">www.siam.com/apis/index2.php</a> 这个路径来访问原来部署在www.siam2.com下的内容。 这样子就是同源请求了。</p>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/30/php/php%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E4%B8%8Ecomposer%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD.html">
+        <span class="nav-arrow">← </span>
+        
+          PHP自动加载与composer自动加载
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/30/php/php%E8%AE%BE%E7%BD%AEredis%E5%82%A8%E5%AD%98session%EF%BC%8C%E8%87%AA%E5%AE%9A%E4%B9%89session%E9%A9%B1%E5%8A%A8.html">
+        
+          PHP设置Redis储存Session，自定义session驱动
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HTTP%E8%B7%A8%E5%9F%9F"><span class="toc-nav-text">HTTP跨域</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E4%BB%80%E4%B9%88%E5%8F%AB%E8%B7%A8%E5%9F%9F"><span class="toc-nav-text">什么叫跨域</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="toc-nav-text">浏览器的同源策略</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Dom-%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="toc-nav-text">Dom 同源策略</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#XMLHttpRequest-%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="toc-nav-text">XMLHttpRequest 同源策略</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-nav-text">跨域的解决方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#CORS-%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB"><span class="toc-nav-text">CORS 跨域资源共享</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#JSONP-%E8%B7%A8%E5%9F%9F%E8%A7%A3%E5%86%B3"><span class="toc-nav-text">JSONP 跨域解决</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86"><span class="toc-nav-text">服务器代理</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/08/30/basic/http跨域详解和解决方式.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "HTTP跨域详解和解决方式",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

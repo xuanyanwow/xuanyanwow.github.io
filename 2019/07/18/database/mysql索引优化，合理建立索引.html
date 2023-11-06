@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Mysql合理建立索引,索引优化。在我们日常使用数据库的时候，肯定避免不了对数据库的优化。那么对数据库的优化又少了不`索引`的知识。 是的，建立`索引`能极大地提高查询的效率。那么你知道吗，如果合理建立索引，可以更大地榨出数据库的性能——也就等同于进一步提高查询效率。 写下这篇文章就是为了记录一下对索引的优化，合理建立索引。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="mysql,索引,优化" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Mysql合理建立索引,索引优化 | Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <!-- <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/atom-dark-one.min.css"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/agate.min.css">
+<style>
+  .hljs {
+    background: #333 !important;
+    color: #fff;
+  }
+
+  .markdown-content figure,
+  .article-summary figure {
+    background: #333333 !important;
+  }
+  .highlight-tools {
+    display: flex;
+    position: relative;
+    height:34px;
+    line-height: 34px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.15em;
+    user-select: none;
+    box-sizing: border-box;
+    padding:0 15px;
+    border-radius: 2px 2px 0 0px ;
+    margin:0 2px;
+    color:#fff;
+    background-color: #333333;
+    border-bottom: 1px solid #fff;
+  }
+  .highlight-tools i{
+    font-size: 1.55em;
+    /* margin-top:1px; */
+    margin-left:5px;
+    margin-right:15px;
+    line-height: 34px;
+  }
+  .highlight-tools .expand{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+  .highlight-tools .expand.closed {
+    -webkit-transform: rotate(-90deg)!important;
+    -moz-transform: rotate(-90deg)!important;
+    -o-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+  }
+  code {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+  }
+
+</style>
+<div id="article-banner">
+  <h2>Mysql合理建立索引,索引优化</h2>
+  <p class="post-date">2019-07-18</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1>写在前面</h1>
+<p>在我们日常使用数据库的时候，肯定避免不了对数据库的优化。那么对数据库的优化又少了不<code>索引</code>的知识。 是的，建立<code>索引</code>能极大地提高查询的效率。那么你知道吗，如果合理建立索引，可以更大地榨出数据库的性能——也就等同于进一步提高查询效率。 写下这篇文章就是为了记录一下对索引的优化，合理建立索引。</p>
+<h1>什么是索引</h1>
+<p>MySQL官方对索引的定义为：索引(Index)是帮助MySQL高效获取数据的数据结构。 我们可以简单理解为：快速查找排好序的一种数据结构。Mysql索引主要有两种结构：B+Tree索引和Hash索引。 索引就相当于字典前的目录，如果这个目录划分规划更好，那么我们找到想要的数据就会更方便，也就提高了查询的效率。 索引的类型有：</p>
+<ul>
+<li>normal：表示普通索引</li>
+<li>unique：表示唯一的，不允许有重复值的索引</li>
+<li>full textl: 表示全文搜索的索引，用于搜索很长一篇文章的时候，效果最好。</li>
+</ul>
+<h1>建立索引的场景</h1>
+<p>索引不是越多越好，因为每次更新、插入数据，就需要对索引文件进行变动，会减低该类型操作的执行效率。 如果建立索引的字段太多，影响就会很大。 所以我们<code>只在合理的字段上建立索引</code>。</p>
+<ul>
+<li>在经常用来当查询条件<code>(where,on,group by,order by)</code>的字段上建立索引。</li>
+<li>在数据的维度比较大的字段上建立索引。</li>
+<li>对数据较小的列使用索引，可以使索引文件更小，同时内存中也可以装载更多的索引键。</li>
+<li>为较长的字符串使用前缀索引。<code>比如数据的长度大部分是150个字节，我们只建立前100个字节的索引。</code></li>
+</ul>
+<p>常见的可以用于建立索引的字段场景： ① 用户id 在订单表中的用户id字段上建立索引，根据用户id筛选订单，则会很快查询出用户的订单。 用户一般是在自己的后台查看订单，所以表中的其他用户数据与他无关，如果没有建立索引，每次查询都是全表扫描，则会很慢。（我们每个人在淘宝平台上占的订单比例都不到0.0001） ② 商品名 同上，如果不建立索引，我们在淘宝输入框搜索<code>键盘</code>，怎么快速查询出键盘商品？ ③ 日期 常用的活跃数据，一般都是是最近产生的，很少人没事去翻半年前的订单数据吧？ 合适的还有很多很多场景，需要各位小伙伴自己好好思量。</p>
+<h1>索引不生效的场景</h1>
+<p>并不是建立了索引就在查询语句中生效。</p>
+<ul>
+<li>当语句中带有or的时候，索引会失效</li>
+<li>当索引的字段使用like查询，并且使用了<code>前通配</code>比如<code>%Siam</code>，索引失效。后通配会生效<code>Siam%</code></li>
+<li>当索引的字段是字符类型，但是储存的值是数字，比如 user_name:‘123456’，在查询语句中要 user_name = '123456’而<code>不能</code> user_name = 123456 否则发生类型转换，索引失效，其他类型的字段 比如日期等 也同理</li>
+<li>当使用的条件语句，预计结果数量超过全表数据的一定比例时，会转为全表扫描（mysql一般是30%左右）这就是为什么在建立索引的时候要选择维度（区别度）比较高的列，性别这种字段不适合建立索引。</li>
+<li>语句中出现列数据运算才判断的，比如where age - 10 &gt; 0 每一行都要运算之后才知道是否大于0 所以就是全表扫描，如果age &gt; 10 则可使用索引。使用函数转换列数据也一样原理。</li>
+<li>组合索引时使用的条件语句。</li>
+</ul>
+<blockquote>
+<p>上面举例的一些场景都是比较容易理解的。组合索引还没涉及，往下继续介绍。</p>
+</blockquote>
+<h2 id="mysql中，多个索引同时使用？">mysql中，多个索引同时使用？</h2>
+<p>先来看一条语句</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> user_name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;siam_007&#x27;</span> <span class="hljs-keyword">and</span> create_time <span class="hljs-operator">=</span> <span class="hljs-number">1563280050</span></code></pre>
+<p>假设在这个表中，user_name字段和create_time都是建立了索引的。也没有发生数据类型转换等情况。</p>
+<blockquote>
+<p>问题：该语句有几个索引生效？</p>
+</blockquote>
+<p>是2个吗？并不是这样子的。 虽然两个字段的索引都没有问题，如果单独使用也都能生效。 但是：<code>MySQL会从可用的索引中猜测出效率最高的一个索引并使用它</code> 怎么证明？使用<code>explain</code>语句（详解可以在网上其他资料找到） 只要在sql语句最前面加上该语法，则会显示查询类型相关的信息。</p>
+<pre><code class="hljs sql">Explain <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> mysql_index_test <span class="hljs-keyword">where</span> user_name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;siam_007&#x27;</span> <span class="hljs-keyword">and</span> create_time <span class="hljs-operator">=</span> <span class="hljs-number">1563280050</span></code></pre>
+<p><img src="https://blog.siammm.cn/wp-content/uploads/2019/07/41e60766824cbab658d4b5f45334be3b.png" alt=""> 我建立了两个索引，都能用，都是本次查询只能使用一个。</p>
+<blockquote>
+<p>基于这个情况，会引申出<code>两个知识点</code></p>
+</blockquote>
+<ul>
+<li>组合索引</li>
+<li>多个单字段索引冲突</li>
+</ul>
+<h2 id="组合索引">组合索引</h2>
+<p>先来说说组合索引吧，我们在新建索引的时候（可视化软件），是这样子的页面 <img src="https://blog.siammm.cn/wp-content/uploads/2019/07/5ca5a6b5b08ff87b5d44efcfb1712d17.png" alt=""> 当我们勾选上2个或者2个以上 就能把它叫为<code>组合索引</code>了 可以看到还有调整顺序的功能 在组合索引中，<code>字段顺序</code>也是极为重要的。 假设我们有这样一个索引：new : a,b,c 字段 在查询时使用<code>where a = 1 and b = 2 and c= 3</code>。那么这个语句肯定是生效的。 如果我们使用<code>where b = 2 and c =3</code>没有a条件 而a又是在组合索引中最左侧的，那么索引就不会生效。 还是要扫描全部行 <code>where a,c where a,b where b,a,c</code> 这样子使用都是可以生效的。 组合索引要注意字段顺序，是指在创建索引时候的排序，而不是sql语句中where的顺序，我们使用<code>where b = 2 and a = 1 and c = 3</code>也是 可以生效的 那么组合索引的字段顺序要如何排比较好? 后面会有新的一篇文章会讲这个</p>
+<h2 id="多个单字段索引冲突">多个单字段索引冲突</h2>
+<p>如果我们在表中，拥有两个索引，比如<code>user_name 用户名, user_phone 用户手机号</code> 现在有这样子的数据量： 100W条数据 user_name=‘我是用户名’ 100条数据 user_phone=‘110’ 5条数据 user_name=‘我是用户名’ and user_phone=‘110’ 假设有这样子一条语句：</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> user_name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;我是用户名&#x27;</span> <span class="hljs-keyword">and</span> user_phone<span class="hljs-operator">=</span><span class="hljs-string">&#x27;110&#x27;</span></code></pre>
+<p>有两个字段都有索引可用，mysql会选择一个使用。这是属于mysql的内部处理判断 正常情况下，如果用user_phone索引生效的话，会很快得到结果（先筛选出100条 再筛选） 如果user_name生效，则要先筛选100W条数据，再筛选user_phone mysql的内部判断可能使得user_name索引生效，此时效率就会很低了，我们可以<code>强制使用某个索引</code> phone是索引名 是新建的时候填的</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test index(phone) <span class="hljs-keyword">where</span> user_name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;我是用户名&#x27;</span> <span class="hljs-keyword">and</span> user_phone<span class="hljs-operator">=</span><span class="hljs-string">&#x27;110&#x27;</span></code></pre>
+<blockquote>
+<p>此种情况出现的概率比较小，毕竟mysql的解释器很复杂，也做了足够多的优化。只有排查慢日志并且分析确定索引冲突的情况才需要强制使用索引。</p>
+</blockquote>
+<h1>优化 （总结）</h1>
+<ul>
+<li>只在经常使用的字段上建立索引，否则会拖慢数据更新和插入的速度。</li>
+<li>只在维度高的字段上建立索引，否则会使得数据比例过大，转为全表扫描。</li>
+<li>优先对数据量比较小的字段建立索引，可以使索引文件更小，同时内存中也可以装载更多的索引键。</li>
+<li>规范sql语句的生成，禁止发生<code>列运算</code>、<code>类型转换</code>的发生。</li>
+<li>长字符串可以使用前缀索引，只对字符串的前面一定字符长度建立索引。</li>
+<li>组合索引的顺序合理优化（会有新文章介绍）</li>
+<li>当多个单字段索引发生冲突时，强制使用某个索引。</li>
+</ul>
+</section>
+    <div style="color: #9199a1;font-weight: 600;font-size: 12px;margin-top: 40px;">
+      本文链接： <a id="article-href" target="_blank"></a> <br />
+      版权声明： 本文由 <a style="font-weight: 800;color:#333;" href="https://blog.siammm.cn">Siam</a>原创发布，转载请遵循<span
+        style="font-weight: 800;color:#333;">《署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)》</span>许可协议授权
+    </div>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      </div>
+      
+        <!-- Tags END -->
+        <!-- NAV START -->
+        
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/07/18/database/mysql%E4%B8%ADvarchar%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83%E6%95%B0%E5%AD%97%E5%86%85%E5%AE%B9%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F.html">
+        <span class="nav-arrow">← </span>
+        
+          Mysql中varchar字符串的比较,swoole预处理参数绑定
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/07/18/database/%E3%80%90%E6%9C%AA%E5%AE%8C%E6%88%90%E3%80%91mysql%E7%B4%A2%E5%BC%95%E9%99%8D%E7%BB%B4.html">
+        
+          Mysql索引降维 优化查询 提高效率
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+          <!-- NAV END -->
+          <!-- 打赏 START -->
+          
+              <!-- 打赏 END -->
+              <!-- 二维码 START -->
+              
+                <div class="qrcode">
+                  <canvas id="share-qrcode"></canvas>
+                  <p class="notice">扫描二维码，分享此文章</p>
+                </div>
+                
+                  <!-- 二维码 END -->
+                  
+                      <!-- Gitment START -->
+                      <div id="comments"></div>
+                      <!-- Gitment END -->
+                      
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">文章导航</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">写在前面</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">什么是索引</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">建立索引的场景</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">索引不生效的场景</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#mysql%E4%B8%AD%EF%BC%8C%E5%A4%9A%E4%B8%AA%E7%B4%A2%E5%BC%95%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-nav-text">mysql中，多个索引同时使用？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E7%BB%84%E5%90%88%E7%B4%A2%E5%BC%95"><span class="toc-nav-text">组合索引</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#%E5%A4%9A%E4%B8%AA%E5%8D%95%E5%AD%97%E6%AE%B5%E7%B4%A2%E5%BC%95%E5%86%B2%E7%AA%81"><span class="toc-nav-text">多个单字段索引冲突</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link"><span class="toc-nav-text">优化 （总结）</span></a></li></ol>
+    
+  </div>
+</aside>
+      
+        <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://blog.siammm.cn/2019/07/18/database/mysql索引优化，合理建立索引.html';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function () {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function () {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="' + src + '" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function () {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+
+    $("#article-href").attr("href", document.location.href);
+    $("#article-href").html(decodeURIComponent(document.location.href));
+
+    // code expand
+    const expandCode = function () {
+      this.classList.toggle('expand-done')
+    }
+    const highlightShrinkFn = (ele) => {
+      const $nextEle = [...ele.parentNode.children].slice(1)
+      ele.firstChild.classList.toggle('closed')
+      console.log($nextEle[$nextEle.length - 1]);
+      if ($($nextEle[$nextEle.length - 1]).is(":hidden")) {
+        $nextEle.forEach(e => { 
+          e.style.display = 'block' 
+        })
+      } else {
+        $nextEle.forEach(e => {
+          e.style.display = 'none' 
+        })
+      }
+    }
+    
+    const highlightToolsFn = function(e){
+      const $target = e.target.classList
+      if ($target.contains('expand')) highlightShrinkFn(this)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
+      else highlightShrinkFn(this)
+    }
+
+    function createEle(lang, item) {
+      const highlightHeightLimit = 10;
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      let isHighlightShrink = false;
+      let isHighlightCopy = false;
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fa fa-angle-down expand ${highlightShrinkClass}"></i>`
+      }
+
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fa fa-paste copy-button"></i>'
+      }
+
+      const fragment = document.createDocumentFragment()
+
+      const hlTools = document.createElement('div')
+      hlTools.className = `highlight-tools ${highlightShrinkClass}`
+      hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
+      hlTools.addEventListener('click', highlightToolsFn)
+      fragment.appendChild(hlTools)
+
+      if (highlightHeightLimit && item.offsetHeight > highlightHeightLimit + 30) {
+        const ele = document.createElement('div')
+        ele.className = 'code-expand-btn'
+        ele.innerHTML = '<i class="fa fa-angle-double-down"></i>'
+        ele.addEventListener('click', expandCode)
+        // fragment.appendChild(ele)// copy按钮
+      }
+
+
+      item.insertBefore(fragment, item.firstChild)
+    }
+    $("pre").each(function (i, item) {
+      let langName = item.firstChild.getAttribute('class') ? item.firstChild.getAttribute('class').split(' ')[1] : undefined
+      if (langName === 'plain' || langName === undefined) langName = 'Code'
+      const highlightLangEle = `<div class="code-lang">${langName}</div>`
+      createEle(highlightLangEle, item)
+    });
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+  
+
+    
+      <script>
+        var gitmentConfig = "xuanyanwow";
+        if (gitmentConfig !== 'undefined') {
+          var gitment = new Gitment({
+            id: "Mysql合理建立索引,索引优化",
+            owner: "xuanyanwow",
+            repo: "blogComment",
+            oauth: {
+              client_id: "f94e94a2ffcd0722b86b",
+              client_secret: "c5cb89ca87892806012bd78a16189a76247e5bfd"
+            },
+            theme: {
+              render(state, instance) {
+                const container = document.createElement('div')
+                container.lang = "en-US"
+                container.className = 'gitment-container gitment-root-container'
+                container.appendChild(instance.renderHeader(state, instance))
+                container.appendChild(instance.renderEditor(state, instance))
+                container.appendChild(instance.renderComments(state, instance))
+                container.appendChild(instance.renderFooter(state, instance))
+                return container;
+              }
+            }
+          })
+          gitment.render(document.getElementById('comments'))
+        }
+      </script>
+      
+
+        
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2023 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>
