@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="一个支持离线使用的待办事项提醒助手">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TODO助手">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>⏰</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>⏰</text></svg>">
+    <title>TODO 提醒助手</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 好看的渐变颗粒背景颜色 */
+        body {
+            background: 
+            radial-gradient(55% 330%, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.5) 550%), 
+            linear-gradient(to top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.6) 50%), 
+            linear-gradient(to top right, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.3) 120%);
+            background-color: #DFE3E4;
+            background-blend-mode: color-burn, screen, color-burn;
+        }
+        
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .install-prompt {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .install-prompt.show {
+            display: flex;
+        }
+
+        .install-prompt-text {
+            flex: 1;
+            font-size: 0.95em;
+            color: #2d3748;
+        }
+
+        .install-prompt-text strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #667eea;
+        }
+
+        .btn-install {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-install:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-close {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2em;
+            line-height: 1;
+            transition: all 0.2s ease;
+        }
+
+        .btn-close:hover {
+            background: #cbd5e0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .input-section {
+            display: grid;
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 0.9em;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"],
+        select,
+        textarea {
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        input[type="text"]:focus,
+        input[type="datetime-local"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .time-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+        }
+
+        .btn-tertiary {
+            background: #4299e1;
+            color: white;
+        }
+
+        .btn-tertiary:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #f56565;
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+
+        .btn-success {
+            background: #48bb78;
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .btn-success:hover {
+            background: #38a169;
+        }
+
+        .btn-info {
+            background: #4299e1;
+            color: white;
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .btn-info:hover {
+            background: #3182ce;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85em;
+        }
+
+        #todoList {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .todo-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .todo-item.expired {
+            border-left: 4px solid #f56565;
+            background: #fff5f5;
+        }
+
+        .todo-content {
+            flex: 1;
+        }
+
+        .todo-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .todo-notes {
+            font-size: 0.95em;
+            color: #4a5568;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background: #f7fafc;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .todo-notes-empty {
+            font-style: italic;
+            color: #a0aec0;
+        }
+
+        .todo-notes-edit {
+            width: 100%;
+            margin-bottom: 8px;
+            min-height: 60px;
+        }
+
+        .todo-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .todo-time {
+            font-size: 0.9em;
+            color: #718096;
+        }
+
+        .todo-countdown {
+            font-size: 0.95em;
+            font-weight: 500;
+            color: #4299e1;
+        }
+
+        .todo-countdown.expired {
+            color: #f56565;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .badge-daily {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+
+        .badge-monthly {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .todo-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .empty-state-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .empty-state-text {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .time-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+
+            .todo-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .todo-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-icon">⏰</div>
+            <h1>TODO 提醒助手</h1>
+        </div>
+
+        <div id="installPrompt" class="install-prompt">
+            <div class="install-prompt-text">
+                <strong>📱 安装应用到桌面</strong>
+                <span>离线访问，更快捷的使用体验</span>
+            </div>
+            <button class="btn-install" onclick="installPWA()">立即安装</button>
+            <button class="btn-close" onclick="closeInstallPrompt()">✕</button>
+        </div>
+
+        <div class="card">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="todoText">任务内容</label>
+                    <input type="text" id="todoText" placeholder="输入你的待办事项..." />
+                </div>
+
+                <div class="time-inputs">
+                    <div class="input-group">
+                        <label for="reminderTime">提醒时间</label>
+                        <input type="datetime-local" id="reminderTime" />
+                    </div>
+                    <div class="input-group">
+                        <label for="minutesFromNow">或者分钟后</label>
+                        <input type="number" id="minutesFromNow" placeholder="例如: 30" min="1" />
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="repeatType">重复设置</label>
+                    <select id="repeatType">
+                        <option value="none">不重复</option>
+                        <option value="daily">每日重复</option>
+                        <option value="monthly">每月重复</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="todoNotes">备注（可选）</label>
+                    <textarea id="todoNotes" placeholder="添加备注信息..." rows="3"></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="addTodo()">➕ 添加任务</button>
+                    <button class="btn-secondary" onclick="exportTodos()">📥 导出备份</button>
+                    <button class="btn-tertiary" onclick="document.getElementById('importFile').click()">📤 导入备份</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="todoList"></div>
+    </div>
+
+    <input type="file" id="importFile" accept=".json" onchange="importTodos(event)" />
+
+    <script>
+        let todos = [];
+        let timers = {};
+        let deferredPrompt = null;
+
+        // 注册 Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker 注册成功:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('❌ Service Worker 注册失败:', error);
+                    });
+            });
+        }
+
+        // 监听 PWA 安装提示事件
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // 显示自定义安装提示
+            const installPrompt = document.getElementById('installPrompt');
+            if (installPrompt) {
+                installPrompt.classList.add('show');
+            }
+        });
+
+        // 监听 PWA 安装成功事件
+        window.addEventListener('appinstalled', () => {
+            console.log('✅ PWA 已安装成功');
+            deferredPrompt = null;
+            const installPrompt = document.getElementById('installPrompt');
+            if (installPrompt) {
+                installPrompt.classList.remove('show');
+            }
+        });
+
+        // 安装 PWA
+        async function installPWA() {
+            if (!deferredPrompt) {
+                alert('此应用已安装或浏览器不支持安装功能');
+                return;
+            }
+
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                console.log('✅ 用户接受安装');
+            } else {
+                console.log('❌ 用户拒绝安装');
+            }
+            
+            deferredPrompt = null;
+        }
+
+        // 关闭安装提示
+        function closeInstallPrompt() {
+            const installPrompt = document.getElementById('installPrompt');
+            if (installPrompt) {
+                installPrompt.classList.remove('show');
+            }
+            // 记住用户关闭了安装提示
+            localStorage.setItem('pwa-install-dismissed', 'true');
+        }
+
+        // 检查是否已关闭过安装提示
+        window.addEventListener('load', () => {
+            const dismissed = localStorage.getItem('pwa-install-dismissed');
+            if (!dismissed && deferredPrompt) {
+                const installPrompt = document.getElementById('installPrompt');
+                if (installPrompt) {
+                    installPrompt.classList.add('show');
+                }
+            }
+        });
+
+        // 请求通知权限
+        if (Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+
+        // 加载本地存储
+        function loadTodos() {
+            const saved = localStorage.getItem('todos');
+            if (saved) {
+                todos = JSON.parse(saved).map(t => ({
+                    ...t, 
+                    time: new Date(t.time),
+                    repeatType: t.repeatType || 'none',
+                    notes: t.notes || '',
+                    isEditingNotes: false,
+                    forceReminder: true // 所有任务都是强制提醒
+                }));
+                todos.forEach(setReminder);
+                renderTodos();
+            }
+        }
+
+        function saveTodos() {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        function addTodo() {
+            const text = document.getElementById('todoText').value.trim();
+            const time = document.getElementById('reminderTime').value;
+            const minutes = document.getElementById('minutesFromNow').value;
+            const repeatType = document.getElementById('repeatType').value;
+            const notes = document.getElementById('todoNotes').value.trim();
+
+            if (!text) {
+                alert('请输入任务内容！');
+                return;
+            }
+
+            if (!time && !minutes) {
+                alert('请设置提醒时间！');
+                return;
+            }
+
+            const todo = {
+                id: Date.now(),
+                text: text,
+                time: minutes ? new Date(Date.now() + minutes * 60000) : new Date(time),
+                forceReminder: true, // 所有任务都是强制提醒
+                repeatType: repeatType,
+                notes: notes,
+                isEditingNotes: false
+            };
+
+            todos.push(todo);
+            setReminder(todo);
+            saveTodos();
+            renderTodos();
+
+            // 清空表单
+            document.getElementById('todoText').value = '';
+            document.getElementById('reminderTime').value = '';
+            document.getElementById('minutesFromNow').value = '';
+            document.getElementById('repeatType').value = 'none';
+            document.getElementById('todoNotes').value = '';
+        }
+
+        // 计算下一次提醒时间
+        function calculateNextTime(currentTime, repeatType) {
+            const nextTime = new Date(currentTime);
+            if (repeatType === 'daily') {
+                nextTime.setDate(nextTime.getDate() + 1);
+            } else if (repeatType === 'monthly') {
+                nextTime.setMonth(nextTime.getMonth() + 1);
+            }
+            return nextTime;
+        }
+
+        // 完成任务（处理重复任务）
+        function completeTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (!todo) return;
+
+            // 如果是重复任务，创建下一个周期的任务
+            if (todo.repeatType !== 'none') {
+                // 从原任务的时间开始计算下一次时间
+                const newTime = calculateNextTime(todo.time, todo.repeatType);
+                
+                const newTodo = {
+                    id: Date.now(),
+                    text: todo.text,
+                    time: newTime,
+                    forceReminder: true,
+                    repeatType: todo.repeatType,
+                    notes: todo.notes,
+                    isEditingNotes: false
+                };
+                todos.push(newTodo);
+                setReminder(newTodo);
+            }
+
+            // 删除当前任务
+            removeTodo(id);
+        }
+
+        // 开始编辑备注
+        function startEditNotes(id) {
+            const todo = todos.find(t => t.id === id);
+            if (!todo) return;
+            
+            todo.isEditingNotes = true;
+            renderTodos();
+        }
+
+        // 保存备注
+        function saveNotes(id) {
+            const todo = todos.find(t => t.id === id);
+            if (!todo) return;
+
+            const textarea = document.getElementById(`notes-${id}`);
+            if (textarea) {
+                todo.notes = textarea.value.trim();
+                todo.isEditingNotes = false;
+                saveTodos();
+                renderTodos();
+            }
+        }
+
+        // 取消编辑备注
+        function cancelEditNotes(id) {
+            const todo = todos.find(t => t.id === id);
+            if (!todo) return;
+
+            todo.isEditingNotes = false;
+            renderTodos();
+        }
+
+        function setReminder(todo) {
+            const now = new Date();
+            const delay = todo.time - now;
+
+            if (delay > 0) {
+                timers[todo.id] = setTimeout(() => {
+                    startForceReminder(todo);
+                }, delay);
+            } else if (delay <= 0) {
+                // 已过期的任务立即启动强制提醒
+                startForceReminder(todo);
+            }
+        }
+
+        function startForceReminder(todo) {
+            if (Notification.permission === 'granted') {
+                const notification = new Notification('TODO提醒', {
+                    body: todo.text,
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><text y="18" font-size="18">⏰</text></svg>',
+                    requireInteraction: true
+                });
+                notification.onclick = function() {
+                    window.focus();
+                    this.close();
+                };
+            }
+            timers[todo.id] = setInterval(() => {
+                if (Notification.permission === 'granted') {
+                    const notification = new Notification('TODO提醒', {
+                        body: todo.text,
+                        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><text y="18" font-size="18">⏰</text></svg>',
+                        requireInteraction: true
+                    });
+                    notification.onclick = function() {
+                        window.focus();
+                        this.close();
+                    };
+                }
+            }, 5000);
+            renderTodos();
+        }
+
+        function removeTodo(id) {
+            todos = todos.filter(t => t.id !== id);
+            if (timers[id]) {
+                clearInterval(timers[id]);
+                clearTimeout(timers[id]);
+                delete timers[id];
+            }
+            saveTodos();
+            renderTodos();
+        }
+
+        function renderTodos() {
+            const list = document.getElementById('todoList');
+            
+            if (todos.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📝</div>
+                        <div class="empty-state-text">暂无待办事项，添加一个开始吧！</div>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = todos.map(todo => {
+                const remaining = Math.max(0, todo.time - new Date());
+                const hours = Math.floor(remaining / 3600000);
+                const minutes = Math.floor((remaining % 3600000) / 60000);
+                const seconds = Math.floor((remaining % 60000) / 1000);
+                const isExpired = remaining === 0;
+                
+                // 生成标签
+                let badges = '';
+                if (todo.repeatType === 'daily') {
+                    badges += '<span class="badge badge-daily">📅 每日重复</span>';
+                } else if (todo.repeatType === 'monthly') {
+                    badges += '<span class="badge badge-monthly">📆 每月重复</span>';
+                }
+
+                const countdownText = remaining > 0 
+                    ? `${hours}时 ${minutes.toString().padStart(2,'0')}分 ${seconds.toString().padStart(2,'0')}秒`
+                    : '已到期';
+
+                // 备注显示或编辑
+                let notesHtml = '';
+                if (todo.isEditingNotes) {
+                    notesHtml = `
+                        <textarea id="notes-${todo.id}" class="todo-notes-edit">${todo.notes || ''}</textarea>
+                        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                            <button class="btn-success btn-small" onclick="saveNotes(${todo.id})">💾 保存</button>
+                            <button class="btn-danger btn-small" onclick="cancelEditNotes(${todo.id})">✕ 取消</button>
+                        </div>
+                    `;
+                } else if (todo.notes) {
+                    notesHtml = `<div class="todo-notes">📝 ${todo.notes}</div>`;
+                } else {
+                    notesHtml = `<div class="todo-notes todo-notes-empty">暂无备注</div>`;
+                }
+
+                // 判断是否显示完成按钮
+                // 1. 普通任务（不重复）：始终显示完成按钮
+                // 2. 重复任务：只有在已到期时才显示完成按钮
+                const isRepeatTask = todo.repeatType !== 'none';
+                const showCompleteButton = !isRepeatTask || isExpired;
+                
+                return `
+                    <div class="todo-item ${isExpired ? 'expired' : ''}">
+                        <div class="todo-content">
+                            <div class="todo-text">${todo.text}</div>
+                            ${notesHtml}
+                            <div class="todo-meta">
+                                <span class="todo-time">⏰ ${todo.time.toLocaleString('zh-CN')}</span>
+                                <span class="todo-countdown ${isExpired ? 'expired' : ''}">${countdownText}</span>
+                                ${badges}
+                            </div>
+                        </div>
+                        <div class="todo-actions">
+                            ${!todo.isEditingNotes ? `<button class="btn-info" onclick="startEditNotes(${todo.id})">✏️ 编辑备注</button>` : ''}
+                            ${showCompleteButton ? `<button class="btn-success" onclick="completeTodo(${todo.id})">✓ 完成</button>` : ''}
+                            <button class="btn-danger" onclick="removeTodo(${todo.id})">✕ 删除</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 导出功能
+        function exportTodos() {
+            if (todos.length === 0) {
+                alert('没有可导出的任务！');
+                return;
+            }
+
+            const dataStr = JSON.stringify(todos, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const now = new Date();
+            const timestamp = now.getFullYear() + 
+                            (now.getMonth() + 1).toString().padStart(2, '0') + 
+                            now.getDate().toString().padStart(2, '0') + '_' +
+                            now.getHours().toString().padStart(2, '0') + 
+                            now.getMinutes().toString().padStart(2, '0') + 
+                            now.getSeconds().toString().padStart(2, '0');
+            
+            const fileName = `todos_backup_${timestamp}.json`;
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = fileName;
+            link.click();
+            
+            URL.revokeObjectURL(link.href);
+            alert(`已导出 ${todos.length} 个任务到文件：${fileName}`);
+        }
+
+        // 导入功能
+        function importTodos(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    // 验证数据格式
+                    if (!Array.isArray(importedData)) {
+                        throw new Error('无效的数据格式：应为数组');
+                    }
+
+                    // 验证每个任务的必需字段
+                    const validTodos = importedData.filter(todo => {
+                        return todo.id && todo.text && todo.time;
+                    }).map(todo => ({
+                        id: todo.id,
+                        text: todo.text,
+                        time: new Date(todo.time),
+                        forceReminder: true, // 所有任务都是强制提醒
+                        repeatType: todo.repeatType || 'none',
+                        notes: todo.notes || '',
+                        isEditingNotes: false
+                    }));
+
+                    if (validTodos.length === 0) {
+                        throw new Error('没有找到有效的任务数据');
+                    }
+
+                    // 询问用户是替换还是合并
+                    const shouldReplace = confirm(
+                        `找到 ${validTodos.length} 个有效任务。\n\n` +
+                        `点击「确定」替换现有任务\n` +
+                        `点击「取消」合并到现有任务`
+                    );
+
+                    if (shouldReplace) {
+                        // 清除所有现有定时器
+                        Object.keys(timers).forEach(id => {
+                            clearInterval(timers[id]);
+                            clearTimeout(timers[id]);
+                        });
+                        timers = {};
+                        todos = validTodos;
+                    } else {
+                        // 合并任务，更新ID避免冲突
+                        const maxId = todos.length > 0 ? Math.max(...todos.map(t => t.id)) : 0;
+                        validTodos.forEach((todo, index) => {
+                            todo.id = maxId + index + 1;
+                            todos.push(todo);
+                        });
+                    }
+
+                    // 设置所有提醒
+                    todos.forEach(setReminder);
+                    saveTodos();
+                    renderTodos();
+
+                    alert(`成功导入 ${validTodos.length} 个任务！`);
+                } catch (error) {
+                    alert(`导入失败：${error.message}`);
+                }
+                
+                // 重置文件输入
+                event.target.value = '';
+            };
+
+            reader.onerror = function() {
+                alert('文件读取失败！');
+                event.target.value = '';
+            };
+
+            reader.readAsText(file);
+        }
+
+        // 初始化
+        loadTodos();
+
+        // 每秒更新倒计时显示
+        setInterval(renderTodos, 1000);
+    </script>
+</body>
+</html>

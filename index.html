@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2026/06/04/other/webauthn.html">WebAuthn + FIDO2 零基础落地笔记（OAuth 微服务完整接入方案）</a>
+      </h2>
+      <p class="article-date">2026年6月4日</p>
+      
+        
+  <a href="/tags#架构" >
+    <span class="tag-code">架构</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          WebAuthn + FIDO2 零基础落地笔记（OAuth 微服务完整接入方案）
+本文为 OAuth 微服务接入 WebAuthn 无密码登录的完整落地笔记，整合协议原理、层级关系、数据流、接口设计、业务流程与踩坑点，全程贴合后端开发视角，可直接作为生产接入标准方案。
+目标：实现「用户已登 ...
+        
+      </div>
+      <a class="more" href="/2026/06/04/other/webauthn.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2026/04/08/php/%E6%89%B9%E9%87%8F%E6%B8%85%E7%90%86debug%E6%97%A5%E5%BF%97%E8%B0%83%E7%94%A8%E8%84%9A%E6%9C%AC.html">基于 PHP-Parser 的 debug 日志批量清理脚本</a>
+      </h2>
+      <p class="article-date">2026年4月8日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+  <a href="/tags#PHP-Parser" >
+    <span class="tag-code">PHP-Parser</span>
+  </a>
+
+  <a href="/tags#AST" >
+    <span class="tag-code">AST</span>
+  </a>
+
+  <a href="/tags#工具脚本" >
+    <span class="tag-code">工具脚本</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          基于 PHP-Parser 的 debug 日志批量清理脚本
+在项目开发阶段，我们经常会插入大量 logs()-&gt;debug(...) 调用用于排查问题。
+虽然可以调整logger日志级别，在线上不运行debug，但是终究会有性能损耗，如果能像其他语言先行编译去除无用代码和注释，效率是 ...
+        
+      </div>
+      <a class="more" href="/2026/04/08/php/%E6%89%B9%E9%87%8F%E6%B8%85%E7%90%86debug%E6%97%A5%E5%BF%97%E8%B0%83%E7%94%A8%E8%84%9A%E6%9C%AC.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2025/11/12/php/php-locale-aware-sorting.html">PHP中SORT_LOCALE_STRING的地区排序差异</a>
+      </h2>
+      <p class="article-date">2025年11月12日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+在使用 SORT_LOCALE_STRING 进行排序时，遇到了一个奇怪的现象：本地环境和 GitHub Actions 环境的排序结果不一致。
+本地运行结果：
+[a, A, b, B, c, C]  // 大小写混合排序
+GitHub Actions 运行结果：
+[A, B, C ...
+        
+      </div>
+      <a class="more" href="/2025/11/12/php/php-locale-aware-sorting.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2025/07/24/Swoole/brew%E5%AE%89%E8%A3%85swoole%E5%8F%8A%E6%8C%87%E5%AE%9A%E6%97%A7%E7%89%88%E6%9C%AC.html">brew安装swoole及指定旧版本</a>
+      </h2>
+      <p class="article-date">2025年7月24日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          添加扩展库安装swoole
+
+brew tap shivammathur/extensions
+
+# 安装swoole 到8.2php
+brew install swoole@8.2
+问题
+安装swoole时后面带的标签是指定安装的相关 php 版本号，无法指定 swoole 版本号，作者相 ...
+        
+      </div>
+      <a class="more" href="/2025/07/24/Swoole/brew%E5%AE%89%E8%A3%85swoole%E5%8F%8A%E6%8C%87%E5%AE%9A%E6%97%A7%E7%89%88%E6%9C%AC.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2024/07/03/database/mysql-varbinary-convert-utf8.html">mysql varbinary 查询出来转 utf8 编码查看</a>
+      </h2>
+      <p class="article-date">2024年7月3日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          背景
+在公司业务解决历史遗留的表字符编码问题时候，使用到了 varbinary 这个类型
+具体怎么解决编码问题的这期不讲，这期主要讲  varbinary  在我使用开源 DBeaver 查看的时候 无法正常显示成文字  怎么快速简单的解决
+SQL
+SELECT CONCAT(
+    &# ...
+        
+      </div>
+      <a class="more" href="/2024/07/03/database/mysql-varbinary-convert-utf8.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2024/07/02/database/mysql-JOIN-%E8%A1%A8%E5%89%8D%E7%BC%80.html">mysql JOIN 表前缀</a>
+      </h2>
+      <p class="article-date">2024年7月2日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          相关报错
+SQL 错误 [1052] [23000]: Column &#x27;xxx&#x27; in where clause is ambiguous
+问题举例
+假设有以下两个表
+CREATE TABLE users (
+    user_id INT PRIMARY KEY,
+   ...
+        
+      </div>
+      <a class="more" href="/2024/07/02/database/mysql-JOIN-%E8%A1%A8%E5%89%8D%E7%BC%80.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/08/28/php/php-composer-test.html">调试本地composer包</a>
+      </h2>
+      <p class="article-date">2023年8月28日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          正文
+组件包测试
+在给 hyperf 框架贡献PR的时候，有时候改完想在本地起一个项目引入修改后的包来本地测试。操作过好多次，但每次都还是要去百度搜索…直接记录到博客一下
+在项目的composer.json设置仓库
+&#123;
+    &quot;repositories&quot;: & ...
+        
+      </div>
+      <a class="more" href="/2023/08/28/php/php-composer-test.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/06/28/docker/WSL_Docker.html">windows.WSL.一些坑</a>
+      </h2>
+      <p class="article-date">2023年6月28日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          WSL
+结束不掉
+wsl --shutdown
+卡住了没反应
+服务里重启LxssManager服务;
+如果LxssManager是stopping的状态无法重启, 执行:
+tasklist /svc /fi &quot;imagename eq svchost.exe&quot; | fin ...
+        
+      </div>
+      <a class="more" href="/2023/06/28/docker/WSL_Docker.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/04/17/queue/kafkaRebalance.html">Kafka rebalance 与滚动更新</a>
+      </h2>
+      <p class="article-date">2023年4月17日</p>
+      
+        
+  <a href="/tags#Kafka" >
+    <span class="tag-code">Kafka</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Kafka rebalance 与滚动更新
+rebalance 的场景
+Kafka的Rebalance机制是指在消费者组内有新的消费者加入或有某个消费者退出时，Kafka会重新分配分区给消费者以实现负载均衡。常见的会触发Rebalance的场景包括：
+
+新增Topic或Partition
+消 ...
+        
+      </div>
+      <a class="more" href="/2023/04/17/queue/kafkaRebalance.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2023/03/06/php/memory_leak.html">php-gc机制的补充</a>
+      </h2>
+      <p class="article-date">2023年3月6日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          php-gc
+高级语言的特征:内存gc机制，可以对内存空间自行管理释放，对程序员的心智负担少了很多。
+在php官网上 垃圾回收机制的地址是这个 -&gt; https://www.php.net/manual/zh/features.gc.php
+关于引用计数基本知识这些，相信大家都在官网或 ...
+        
+      </div>
+      <a class="more" href="/2023/03/06/php/memory_leak.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a class="unvisible" href="/"><span class="page-arrow">←</span> 上一页</a>
+  
+  
+    <a href="/page/2/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2026 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/16/php/navicat%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E4%B8%BB%E9%94%AE%E9%87%8D%E5%A4%8D%E6%97%A0%E6%B3%95%E6%8F%92%E5%85%A5.html">Navicat数据同步,主键重复无法插入</a>
+      </h2>
+      <p class="article-date">2019年10月16日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>基础知识</h1>
+<p><code>Navicat</code>是一个非常好用的可视化mysql管理软件（其他数据库也有对应版本的支持） 它拥有非常丰富的功能，结构同步、数据同步、数据传输、进程监控、数据导出导入等等 但这是一个付费软件，新用户可以免费试用，这个问题是笔者在以前试用处理数据的时候遇到的。</p>
+<h1>问题</h1>
+<p>在A和B机器上分别有<code>结构相同</code>，<code>数据不完全相同</code>的两个数据库 比如 A机器上的表</p>
+        
+      </div>
+      <a class="more" href="/2019/10/16/php/navicat%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E4%B8%BB%E9%94%AE%E9%87%8D%E5%A4%8D%E6%97%A0%E6%B3%95%E6%8F%92%E5%85%A5.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/11/Swoole/easyswoole-mysql-pool%E8%BF%9E%E6%8E%A5%E6%B1%A0empty-null%E7%9A%84%E9%97%AE%E9%A2%98.html">easyswoole mysql-pool连接池empty null的问题</a>
+      </h2>
+      <p class="article-date">2019年10月11日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>问题由来</h1>
+<p>在easyswoole的群里，每天都需要回答各种各样的问题，其中不乏一些问题反复被小白们问起，比如今天的这个主题：<code>连接池取出empty 为null</code>导致的问题 本文会简单引申出<code>什么是连接池</code>、<code>连接池数量如何设置</code>、<code>连接池的优点</code>等问题。</p>
+<h1>什么是连接池</h1>
+<blockquote>
+<p>连接池是创建和管理一个连接的缓冲池的技术，这些连接准备好被任何需要它们的线程使用。</p>
+</blockquote>
+<p>简单来说，就是创建一个容器，并且把资源提前准备好放在里面，比如我们常用的redis连接、mysql连接。</p>
+<h1>连接池的优点</h1>
+<p>计算机是由许多零件组装而成，比如CPU、内存、硬盘等等。 当我们进行网络连接、请求的时候，就需要在不同组件中传递和返回各种信号、数据 比如在CPU、内存、网卡中，数据的传递，请求，获取。 如果在短时间内进行一万次mysql的连接，就需要在这个往返过程循环，在路上浪费了很多时间、性能消耗。 如果我们先把连接连接好，并且放在连接池中，程序中需要使用就从池中获取，执行操作。 就省去了反复创建连接、断开连接的操作。 可以减少I/O操作，提高资源利用率。</p>
+        
+      </div>
+      <a class="more" href="/2019/10/11/Swoole/easyswoole-mysql-pool%E8%BF%9E%E6%8E%A5%E6%B1%A0empty-null%E7%9A%84%E9%97%AE%E9%A2%98.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/10/09/Swoole/easyswoole%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%AE%9D%E5%A1%94%E5%AE%89%E8%A3%85%E9%94%99%E8%AF%AF.html">easyswoole一键安装脚本,宝塔安装错误</a>
+      </h2>
+      <p class="article-date">2019年10月9日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>常见问题</h1>
+<p>在新接触easyswoole的phper中，经常遇到以下几个问题</p>
+<ul>
+<li>安装步骤多 麻烦</li>
+<li>宝塔等集成环境下容易出错</li>
+<li>自己会安装，但是懒 有没有一键的？</li>
+</ul>
+<h1>开始创造</h1>
+<p>本人作为easyswoole开发组组员之一。为生态的完善和偷懒着想，在某一天讨论中就开始有了这个想法。 并且写下了这个小脚本</p>
+<blockquote>
+<p>需要注意的是，这只是几句很简单的命令，并且在文档中都有出现。只是文档有比较多的场景描述，可能导致有些新人没有细心观看到。</p>
+</blockquote>
+<p>在宝塔面板中，如果按照easyswoole文档第一步骤进行安装的话，是会产生错误的，在文档后续步骤会有解决方案，但是很多新人到了报错这里就不看了，或者就走了弯路。 使用这个脚本，可以直接安装成功，比较方便 最大的作用还是偷懒吧~</p>
+        
+      </div>
+      <a class="more" href="/2019/10/09/Swoole/easyswoole%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%AE%9D%E5%A1%94%E5%AE%89%E8%A3%85%E9%94%99%E8%AF%AF.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/27/other/js%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8F%92%E5%80%BC%EF%BC%8C%E5%8F%98%E9%87%8F%E9%95%BF%E6%96%87%E6%9C%AC%E6%8D%A2%E8%A1%8C.html">JS的字符串插值，变量长文本换行</a>
+      </h2>
+      <p class="article-date">2019年9月27日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>苦逼的PHPer要写前端</h1>
+<p>作为一个PHPer，经常需要在html中写js jq来解析数据，形成列表、选项等等。 （谁让我们PHPer还要兼顾页面呢？？ 又不会Vue，只能这样子讨讨生活。） 那么就经常遇到Html代码拼接，或者字符串拼接，可能是这样子的问题</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">let</span> html = <span class="hljs-string">&quot;&quot;</span>;
+
+<span class="hljs-keyword">for</span>(...)&#123;
+    html += <span class="hljs-string">&quot;&lt;li&gt; &quot;</span> + data.<span class="hljs-property">name</span> + <span class="hljs-string">&quot;&lt;/li&gt;&quot;</span>;
+&#125;</code></pre>
+<p>这种还是简单的，只有一个li，如果是2层、3层的div嵌套，那么这里就会是一团糟糕 有没有优雅一点的写法呢，比如php中的</p>
+        
+      </div>
+      <a class="more" href="/2019/09/27/other/js%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8F%92%E5%80%BC%EF%BC%8C%E5%8F%98%E9%87%8F%E9%95%BF%E6%96%87%E6%9C%AC%E6%8D%A2%E8%A1%8C.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/20/php/php%E5%AE%9A%E6%9C%9F%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%AF%94.html">php定期拉取数据对比</a>
+      </h2>
+      <p class="article-date">2019年9月20日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>今天在网上看帖子提问的时候，看到有人发表了一个提问</p>
+<blockquote>
+<p>php下载远程的批量文件，每天一次，对比昨天和今天的文件，将旧文件替换成新文件</p>
+</blockquote>
+<p>我们通过这个问题来分析讲解一下其中的知识点。 首先要解决的问题是：如何让程序每天自动执行一次脚本</p>
+        
+      </div>
+      <a class="more" href="/2019/09/20/php/php%E5%AE%9A%E6%9C%9F%E6%8B%89%E5%8F%96%E6%95%B0%E6%8D%AE%E5%AF%B9%E6%AF%94.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/19/other/vmware-workstation%E5%AE%A2%E6%88%B7%E7%AB%AF-centos%E7%B3%BB%E7%BB%9F-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81-utf-8%E5%AD%97%E7%AC%A6%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA.html">VMware Workstation客户端 Centos系统 中文乱码 UTF-8字符无法正常显示</a>
+      </h2>
+      <p class="article-date">2019年9月19日</p>
+      
+        
+  <a href="/tags#杂谈" >
+    <span class="tag-code">杂谈</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          问题由来
+发生该问题的时间比较长了，之前没有第一时间整理记录。依稀记得是因为系统重装之后，Vmware软件重新安装，然后导入以前的虚拟机配置文件，就出现了中文乱码的问题。 从百度上查到的各种资料，都是说语言包和配置的问题，需要重新安装、修改配置等等步骤，下面将记录我的尝试步骤和解决问题的方案 ...
+        
+      </div>
+      <a class="more" href="/2019/09/19/other/vmware-workstation%E5%AE%A2%E6%88%B7%E7%AB%AF-centos%E7%B3%BB%E7%BB%9F-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81-utf-8%E5%AD%97%E7%AC%A6%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/18/php/md5%E5%9C%A8php%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">MD5在PHP中使用的注意事项</a>
+      </h2>
+      <p class="article-date">2019年9月18日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          回顾知识
+在之前的文章中，已经介绍过MD5的基础知识，以及特殊密码不符加密结果判断相等的情况 可以回顾一下该文章：历史文章 MD5介绍
+由于PHP==判断时优先转换数字的坑
+这就是上一篇文章说到的问题的原因：“0e830400451993494058024219903391” == “0e8 ...
+        
+      </div>
+      <a class="more" href="/2019/09/18/php/md5%E5%9C%A8php%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/18/php/md5%E5%8A%A0%E5%AF%86%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8Aphp%E4%B8%ADmd5%E7%9A%84%E6%BC%8F%E6%B4%9E.html">md5加密介绍以及php中md5的漏洞</a>
+      </h2>
+      <p class="article-date">2019年9月18日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          什么是MD5
+md5是一种密码散列函数，也叫密码散列算法。 密码散列函数是一种单向散列函数，它可以将给定的数据提取出信息摘要，也就是给定数据的指纹信息。结果的摘要信息格式是一致的，通常用一个短的随机字母和数字组成的字符串来代表。
+密码散列函数的特点
+
+对于任何一个给定的消息，它都很容易就能运 ...
+        
+      </div>
+      <a class="more" href="/2019/09/18/php/md5%E5%8A%A0%E5%AF%86%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8Aphp%E4%B8%ADmd5%E7%9A%84%E6%BC%8F%E6%B4%9E.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/17/php/php%E8%AE%A1%E7%AE%97%E4%B8%A4%E4%B8%AA%E6%97%A5%E6%9C%9F%E4%B9%8B%E9%97%B4%E7%9A%84%E9%97%B4%E9%9A%94%E9%81%BF%E5%85%8D%E5%AF%BC%E5%87%BA%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE.html">php计算两个日期之间的间隔,避免导出大量数据</a>
+      </h2>
+      <p class="article-date">2019年9月17日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+在做系统业务功能的时候，有的时候业务人员会进行超大范围地导出excel表格，导致内存、CPU占用飙升。 这对于系统的平滑运行不太友好，应该进行导出任务排队、限制范围等操作来控制频率、资源使用率。
+探索
+导出任务排队
+这里讲讲实现思路：
+
+前端请求服务端接口，告诉它要导出的日期范围、 ...
+        
+      </div>
+      <a class="more" href="/2019/09/17/php/php%E8%AE%A1%E7%AE%97%E4%B8%A4%E4%B8%AA%E6%97%A5%E6%9C%9F%E4%B9%8B%E9%97%B4%E7%9A%84%E9%97%B4%E9%9A%94%E9%81%BF%E5%85%8D%E5%AF%BC%E5%87%BA%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/17/other/nginx%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%EF%BC%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82%E4%B8%A4%E6%AC%A1%E5%A4%9A%E6%AC%A1.html">Nginx重试机制，浏览器重复请求两次多次</a>
+      </h2>
+      <p class="article-date">2019年9月17日</p>
+      
+        
+  <a href="/tags#架构" >
+    <span class="tag-code">架构</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          前言
+在研究nginx的时候，偶然看到网上前辈一篇解决问题的实战记录文章，稍微整理一下，学习补充一下知识点。
+场景还原
+问题 用户再浏览器里执行了一次http请求，结果后端服务器执行了两遍，如果这次请求是Insert操作，可想而知，数据库会多出一条一模一样的记录来。
+
+网关用Nginx做了反 ...
+        
+      </div>
+      <a class="more" href="/2019/09/17/other/nginx%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%EF%BC%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82%E4%B8%A4%E6%AC%A1%E5%A4%9A%E6%AC%A1.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/9/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/11/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2026 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

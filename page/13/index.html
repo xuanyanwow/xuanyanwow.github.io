@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AAcomposer%E5%8C%85.html">手把手教你写一个composer包</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h2 id="什么是composer">什么是composer</h2>
+<p><code>Composer</code> 是一个命令行工具，它的作用就是帮我们的项目<code>管理所依赖的开发包</code>，属于<code>依赖包管理工具</code>。</p>
+<h2 id="什么是依赖包管理工具">什么是依赖包管理工具</h2>
+<p>由于程序届的《开源运动》，我们可以在社区找到很多别人提供的工具，也可以向社区贡献我们的代码。 在github还没有兴起的年代，我们是需要到工具的官网下载代码，比如jquery。然后放到我们自己的项目目录里，再在我们的页面中使用。 但是…当一个网站依赖的包越来越多，我们会发现这是一件非常麻烦的事情：</p>
+<ul>
+<li>安装新包，代码目录管理等问题</li>
+<li>升级依赖包，只能手动替换文件</li>
+<li>安装过程发现某个包需要依赖于另一个包，那我们又要开始安装前面的包…</li>
+<li>…</li>
+</ul>
+<p>哪怕是每个开源包都有自己的官网，也还是需要用户去下载安装。 即使是有一个类似<code>github</code>的大仓库，可以存放所有的项目，实现一站下载。 但不同依赖包之间的关系也还是需要手动维持，包与包之间的关系有可能是相互依赖，也可能是冲突的。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AAcomposer%E5%8C%85.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/phpspreadsheet%E5%AF%BC%E5%87%BAexcel%E8%A1%A8%E6%A0%BC%EF%BC%8C%E9%95%BF%E6%95%B0%E5%AD%97%E8%87%AA%E5%8A%A8%E8%BD%AC%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95.html">PhpSpreadsheet导出Excel表格，长数字自动转科学计数法</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          原代码
+public function down($data)
+&#123;
+    $spreadsheet = new Spreadsheet();
+    $sheet       = $spreadsheet-&gt;getActiveSheet();
+
+    $lieCount  ...
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/phpspreadsheet%E5%AF%BC%E5%87%BAexcel%E8%A1%A8%E6%A0%BC%EF%BC%8C%E9%95%BF%E6%95%B0%E5%AD%97%E8%87%AA%E5%8A%A8%E8%BD%AC%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/php%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E5%90%88%E6%88%90%E5%B1%85%E4%B8%AD.html">PHP图片文字合成居中</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          PHP处理图片
+PHP使用GD库创建和处理包括GIF，PNG，jpef，wbmp以及xpm在内的多种格式的图像。 以下教程：图片合成文字，实现合成文字水平、垂直居中。
+读取图片资源
+imagecreatefrom 系列函数用于从文件或 URL 载入一幅图像，成功返回图像资源，失败则返回一个空 ...
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/php%E5%9B%BE%E7%89%87%E6%96%87%E5%AD%97%E5%90%88%E6%88%90%E5%B1%85%E4%B8%AD.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/bitmap%E7%AE%97%E6%B3%95%E7%9A%84php%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%BF%AB%E9%80%9F%E5%8E%BB%E9%87%8D%E6%8E%92%E5%BA%8F%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9%E5%82%A8%E5%AD%98.html">bitmap算法的PHP实现，快速去重排序，数据压缩储存</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>，## 基础知识储备</p>
+<h4 id="一个字节占用8个位">一个字节占用8个位</h4>
+<pre><code class="hljs plaintext">1字节(byte)=8位(bit)
+1K=1024字节
+1M=1024k</code></pre>
+<p>因为电路的逻辑只有0和1两个状态，这里的0和1并不是数字的0和1，0和1是表示两种不同的状态，0表示低电平，1表示高电平。因为计算机是由无数个逻辑电路组成的，只能根据0和1的无限位数和组合来表达信息。 电脑只认识0和1这两个数字，所有的数据在电脑中都是以0和1组成的编码存储的，这样的编码叫做二进制。一个0或一个1就叫做一个位 最初的计算机性能和存储容量都比较差,所以普遍采用4位BCD编码(这个编码出现比计算机还早,最早是用在打孔卡上的)。 BCD编码表示数字还可以,但表示字母或符号就很不好用,需要用多个编码来表示。 后来又演变出6位的BCD编码(BCDIC),以及至今仍在广泛使用的7位ASCII编码。 不过最终决定字节大小的,是大名鼎鼎的System/360。当时IBM为System/360设计了一套8位EBCDIC编码,涵盖了数字、大小写字母和大部分常用符号,同时又兼容广泛用于打孔卡的6位BCDIC编码。System/360很成功,也奠定了字符存储单位采用8位长度的基础,这就是1字节=8位的由来。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/bitmap%E7%AE%97%E6%B3%95%E7%9A%84php%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%BF%AB%E9%80%9F%E5%8E%BB%E9%87%8D%E6%8E%92%E5%BA%8F%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9%E5%82%A8%E5%AD%98.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/php%EF%BC%9Aphar%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E4%BD%BF%E7%94%A8.html">PHP：Phar的打包和使用</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          什么是Phar?
+Phar是PHP里类似于Jar的一种打包文件，可以将整个应用打包，便于部署等。
+安装需求
+Phar需要 PHP &gt;= 5.2 ，在 PHP5.3或以上，Phar已经包含在内置的扩展中，在这之前可以通过PECL扩展安装。
+运行时配置
+通过php.ini的配置项，可以设定 ...
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/php%EF%BC%9Aphar%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E4%BD%BF%E7%94%A8.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/php%E8%AE%BE%E7%BD%AEredis%E5%82%A8%E5%AD%98session%EF%BC%8C%E8%87%AA%E5%AE%9A%E4%B9%89session%E9%A9%B1%E5%8A%A8.html">PHP设置Redis储存Session，自定义session驱动</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          思
+我们在之前的文章已经讲到了session是将数据储存在本地文件中，并且将session_id返回给客户端（浏览器会储存在cookies里）。 那么当我们在负载均衡集群环境的时候，负载调度部分负责把客户端的请求按照不同的策略分配给后端服务节点。所以会出现我们在A机器设置了session，后 ...
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/php%E8%AE%BE%E7%BD%AEredis%E5%82%A8%E5%AD%98session%EF%BC%8C%E8%87%AA%E5%AE%9A%E4%B9%89session%E9%A9%B1%E5%8A%A8.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/basic/http%E8%B7%A8%E5%9F%9F%E8%AF%A6%E8%A7%A3%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F.html">HTTP跨域详解和解决方式</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#计算机基础" >
+    <span class="tag-code">计算机基础</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h2 id="HTTP跨域">HTTP跨域</h2>
+<blockquote>
+<p>Access to XMLHttpRequest at ‘xx’ from origin ‘xx’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.</p>
+</blockquote>
+<p>前端的这个报错相信很多人都有遇到过，也知道这是跨域请求的问题。 那么究竟什么是<code>跨域</code>，跨域又是怎么产生的，以及跨域请求的问题需要怎么解决。我们一起来了解一下这些知识。</p>
+<h2 id="什么叫跨域">什么叫跨域</h2>
+<p><code>域</code> ： 域既是 Windows 网络操作系统的逻辑组织单元，也是Internet的逻辑组织单元，它是<code>安全边界</code>。 只有域的所有者才能访问管理域内部的资源，若其他的域要访问或者管理，则需要该域赋予其他域相关权限。 从小角度来讲，在php中的<code>变量作用域</code>，就可以体现出安全边界的概念。在以下例子中，调用test函数并不会输出任何内容。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/basic/http%E8%B7%A8%E5%9F%9F%E8%AF%A6%E8%A7%A3%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/php/php%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E4%B8%8Ecomposer%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD.html">PHP自动加载与composer自动加载</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          当我们编写面向对象的程序时，通常是将类分别放在不同的文件中。但这样一来，当我们调用其他类的时候，则需要先手动引入该文件（否则会因为当前程序中没有该类名的类而报错） 久而久之加载的列表就会很混乱复杂，不方便管理。
+文件A.php
+&lt;?php
+class A&#123;
+    publi ...
+        
+      </div>
+      <a class="more" href="/2019/08/30/php/php%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD%E4%B8%8Ecomposer%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BD.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/24/php/php-path-infothinkphp-controller-not-exists-indexphp.html">PHP path_info,Thinkphp controller not exists index\php</a>
+      </h2>
+      <p class="article-date">2019年8月24日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+为什么写下这篇文章，嗯，因为又踩坑了。 问题背景：
+
+php7.2
+nginx
+thinkphp5
+
+问题体现： url如果以/为结尾 比如index.php/admin/，不会自动访问默认控制器、方法index，而是报错
+controller not exists:app\adm ...
+        
+      </div>
+      <a class="more" href="/2019/08/24/php/php-path-infothinkphp-controller-not-exists-indexphp.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/23/database/mysql%E8%81%9A%E5%90%88%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%BC%93%E6%85%A2%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html">mysql聚合统计数据查询缓慢优化方案</a>
+      </h2>
+      <p class="article-date">2019年8月23日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+在我们日常操作数据库的时候，比如订单表、访问记录表、商品表的时候。 经常会处理计算数据列总和、数据行数等统计问题。 随着业务发展，这些表会越来越大，如果处理不当，查询统计的速度也会越来越慢，直到业务无法再容忍。 所以，我们需要先了解、思考这些场景知识点，在设计之初，便预留一些优化空 ...
+        
+      </div>
+      <a class="more" href="/2019/08/23/database/mysql%E8%81%9A%E5%90%88%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E7%BC%93%E6%85%A2%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/12/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/14/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2026 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

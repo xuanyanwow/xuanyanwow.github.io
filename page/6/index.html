@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/05/26/script/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9D%82%E8%B4%A7%E6%91%8A%E8%84%9A%E6%9C%AC.html">腾讯云杂货摊脚本</a>
+      </h2>
+      <p class="article-date">2021年5月26日</p>
+      
+        
+  <a href="/tags#代码片段" >
+    <span class="tag-code">代码片段</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          // ==UserScript==
+// @name         腾讯云活动测试
+// @namespace    http://blog.siammm.cn
+// @version      0.1
+// @description  try to take over the world ...
+        
+      </div>
+      <a class="more" href="/2021/05/26/script/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9D%82%E8%B4%A7%E6%91%8A%E8%84%9A%E6%9C%AC.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/04/30/php/thinkphp6%EF%BC%8C%E6%B3%A8%E8%A7%A3%E6%B3%A8%E9%87%8A%E7%94%9F%E6%88%90api%E5%88%97%E8%A1%A8.html">Thinkphp6，注解注释生成api列表</a>
+      </h2>
+      <p class="article-date">2021年4月30日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          自己写的一个小功能需要用到，稍微存一下该段代码， 接口代码需要写的格式 
+// 遍历controller目录下的文件，判断注释中是否包含@Siam-Api
+$dir = app_path().&quot;/controller/&quot;;
+$dir_contain = scandir($ ...
+        
+      </div>
+      <a class="more" href="/2021/04/30/php/thinkphp6%EF%BC%8C%E6%B3%A8%E8%A7%A3%E6%B3%A8%E9%87%8A%E7%94%9F%E6%88%90api%E5%88%97%E8%A1%A8.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2021/03/08/other/el-dialog%E9%87%8C%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8D%E6%9B%B4%E6%96%B0%EF%BC%8C%E5%9C%A8%E5%85%B3%E9%97%AD%E7%9A%84%E4%B8%80%E7%9E%AC%E9%97%B4%E6%9B%B4%E6%96%B0%E4%BA%86.html">el-dialog里的数组不更新，在关闭的一瞬间更新了</a>
+      </h2>
+      <p class="article-date">2021年3月8日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <pre><code class="hljs markup">&lt;el-dialog title=&quot;拆单&quot; :visible.sync=&quot;dialog_split&quot;&gt;
+    &lt;div v-for=&quot;(item, i) in split_goods_json&quot; &gt;
+        &lt;el-input v-model=&quot;split_goods_json[i].split_number&quot; style=&quot;width: 150px;&quot;&gt;
+        &lt;/el-input&gt;
+    &lt;/div&gt;
+&lt;/el-dialog&gt;</code></pre>
+<p>但是在方法中更新数据不会重新渲染，其实这个问题的本质也不是dialog的问题，而是vue的机制问题， <a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/reactivity.html">https://cn.vuejs.org/v2/guide/reactivity.html</a></p>
+<h1>Vue 不能检测以下数组的变动</h1>
+<p>当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue 当你修改数组的长度时，例如：vm.items.length = newLength 为了解决第一类问题，以下两种方式都可以实现和 vm.items[indexOfItem] = newValue 相同的效果，同时也将在响应式系统内触发状态更新：</p>
+        
+      </div>
+      <a class="more" href="/2021/03/08/other/el-dialog%E9%87%8C%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8D%E6%9B%B4%E6%96%B0%EF%BC%8C%E5%9C%A8%E5%85%B3%E9%97%AD%E7%9A%84%E4%B8%80%E7%9E%AC%E9%97%B4%E6%9B%B4%E6%96%B0%E4%BA%86.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/12/02/php/php%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F-%E8%A7%A3%E5%86%B3%E6%95%B0%E5%80%BC%E5%9E%8B%E7%89%88%E6%9C%AC%E5%8F%B7%E6%8E%92%E5%BA%8F%E9%94%99%E4%B9%B1.html">PHP数组排序 解决数值型版本号排序错乱</a>
+      </h2>
+      <p class="article-date">2020年12月2日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          问题
+本人在写EasySwoole新的组件时，使用到了插件思维，所以需要做包的解析等逻辑。在解析下列版本解析时，发现一些小问题。做个记录。
+v1.0.php
+v2.0.php
+v10.0.php
+普通调用
+asort($list);
+返回的结果是
+v1.0.php
+v10.0.php
+v2. ...
+        
+      </div>
+      <a class="more" href="/2020/12/02/php/php%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F-%E8%A7%A3%E5%86%B3%E6%95%B0%E5%80%BC%E5%9E%8B%E7%89%88%E6%9C%AC%E5%8F%B7%E6%8E%92%E5%BA%8F%E9%94%99%E4%B9%B1.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/12/01/php/tp5-0%E5%AE%89%E8%A3%85testing-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E6%8A%A5%E9%94%99.html">TP5.0安装testing 单元测试 报错</a>
+      </h2>
+      <p class="article-date">2020年12月1日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          常见问题记录
+The each() function is deprecated. This message will be suppressed on further calls
+
+原因：使用了比较高版本的php，topthink/tesing v1.x仅限php7.1使用 太高太低都会出 ...
+        
+      </div>
+      <a class="more" href="/2020/12/01/php/tp5-0%E5%AE%89%E8%A3%85testing-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E6%8A%A5%E9%94%99.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/11/25/database/%E4%B8%89%E8%A8%80%E4%B8%A4%E8%AF%AD%E8%AE%B0%E5%BD%95mysql-for-update%E9%94%81.html">三言两语记录mysql for update锁</a>
+      </h2>
+      <p class="article-date">2020年11月25日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>FOR UPDATE</h1>
+<p>中文直译的意思是：用于更新。 理解：这次查询的数据我要用于更新操作，所以麻烦Mysql帮我加锁，其他进程在我更新完成之前不能发起for update请求（可以发起普通select请求， 用于前端展示） 用途：防止高并发情况下，比如用户连续快速点击两次购买，导致商品数量超卖 为负数等情况</p>
+<h1>必要条件</h1>
+<ul>
+<li>mysql innodb引擎</li>
+<li>在事务中启用for update（直到commit 或者rollback 此次更新操作结束 释放锁）</li>
+<li>mysql暂无for update nowait 需要封装，增加控制超时时间的逻辑，这样子伪nowait</li>
+<li>select命中索引或者主键，则为行锁，没有命中则为表锁（需要注意 避免影响业务）</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2020/11/25/database/%E4%B8%89%E8%A8%80%E4%B8%A4%E8%AF%AD%E8%AE%B0%E5%BD%95mysql-for-update%E9%94%81.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/11/21/wechat/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B-%E5%85%8D%E8%B4%B9%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%98%A0%E5%B0%84%E6%9C%AC%E5%9C%B0%EF%BC%8C.html">微信公众号应用开发流程 免费内网穿透映射本地，实现调试</a>
+      </h2>
+      <p class="article-date">2020年11月21日</p>
+      
+        
+  <a href="/tags#微信" >
+    <span class="tag-code">微信</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>众所周知，我们微信开发过程会遇到以下两个场景：</p>
+<ul>
+<li>用户扫码、点击菜单、发送消息 等，【微信】会转发到【我们在微信后台配置的域名】，实现逻辑处理，推送消息给用户 或者 做相应的逻辑处理</li>
+<li>公众号页面，需要登录获取openid，跳转的域名需要白名单。不利于本地调试</li>
+</ul>
+<h1>内网映射</h1>
+<p>我们可以使用一系列内网穿透映射的工具，可以在公网访问本地开放的程序，（无论是自己搭建还是使用其他产品 都适用） 如果是自己搭建或者使用付费的内网穿透工具，那么隧道域名将可以固定，我们在以下两个地方配置为获取到的内网域名，微信将会把所有请求 转发到 我们本地的这个穿透域名上，就可以实时调试了</p>
+        
+      </div>
+      <a class="more" href="/2020/11/21/wechat/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B-%E5%85%8D%E8%B4%B9%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%98%A0%E5%B0%84%E6%9C%AC%E5%9C%B0%EF%BC%8C.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/11/16/php/php-easywechat-sdk-%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%8E%9F%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF.html">PHP EasyWechat SDK 微信公众号原页面获取用户信息</a>
+      </h2>
+      <p class="article-date">2020年11月16日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          前因
+由于EasyWechat文档编写的不够完善，在这里补充一下。 官方提供的文档如下
+$app = Factory::officialAccount($config);
+$oauth = $app-&gt;oauth;
+
+// 未登录
+if (empty($_SESSION[&#x27;w ...
+        
+      </div>
+      <a class="more" href="/2020/11/16/php/php-easywechat-sdk-%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%8E%9F%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/07/30/wechat/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Fwebview%EF%BC%8Ca%E9%94%9A%E7%82%B9%E8%B7%B3%E8%BD%AC%EF%BC%8C%E5%9B%9E%E9%80%80%E6%97%B6%E4%B8%80%E7%9B%B4%E4%BF%9D%E7%95%99%E5%9C%A8%E5%8E%9F%E9%A1%B5.html">微信小程序webview，a锚点跳转，回退时一直保留在原页面</a>
+      </h2>
+      <p class="article-date">2020年7月30日</p>
+      
+        
+  <a href="/tags#微信" >
+    <span class="tag-code">微信</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>公司业务，需要写一个页面导航，大概功能如下（APP排版，webview嵌套在小程序中） <img src="https://blog.siammm.cn/wp-content/uploads/2020/07/wp_editor_md_9e40612d7c54bb960332699721f5db9c.jpg" alt=""> 当点击导航的时候，也可以自动跳转到相应的地方。使用的是<code>a标签的锚点跳转</code> 功能和效果都是在浏览器上测试正常的，但在小程序上遇到以下问题</p>
+        
+      </div>
+      <a class="more" href="/2020/07/30/wechat/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Fwebview%EF%BC%8Ca%E9%94%9A%E7%82%B9%E8%B7%B3%E8%BD%AC%EF%BC%8C%E5%9B%9E%E9%80%80%E6%97%B6%E4%B8%80%E7%9B%B4%E4%BF%9D%E7%95%99%E5%9C%A8%E5%8E%9F%E9%A1%B5.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/07/02/php/php-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E5%88%86-%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B-h5%E5%95%86%E5%9F%8E%E5%85%88%E4%BA%AB%E5%90%8E%E4%BB%98.html">php 微信支付分 开发过程 H5商城先享后付</a>
+      </h2>
+      <p class="article-date">2020年7月2日</p>
+      
+        
+  <a href="/tags#微信" >
+    <span class="tag-code">微信</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          前言
+公司项目需要，在H5商城、小程序商城、APP商城、线下促销场景，推出最新的微信支付分功能。 （类似花呗） 先签约，后续付款 遇到一些问题，写下此文章。 有不明确的地方，欢迎添加我QQ 59419979 一起交流补充。
+问题
+the permission value is offline ...
+        
+      </div>
+      <a class="more" href="/2020/07/02/php/php-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E5%88%86-%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B-h5%E5%95%86%E5%9F%8E%E5%85%88%E4%BA%AB%E5%90%8E%E4%BB%98.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/5/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/7/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2026 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/17/php/%E3%80%90%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E3%80%91%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%E7%9A%84php%E6%89%A9%E5%B1%95swoole.html">【常见问题】宝塔面板如何安装最新版本的php扩展swoole</a>
+      </h2>
+      <p class="article-date">2019年9月17日</p>
+      
+        
+  <a href="/tags#SWOOLE" >
+    <span class="tag-code">SWOOLE</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>大家都知道，宝塔是一个面向小白的服务器运维面板，内置了非常丰富的问题。 我们可以快速安装各个版本的语言、软件、扩展等等 当笔者在使用过程中，学习php先进的技术swoole，swoole比较有名的easyswoole框架时，需要比较新的swoole版本。 而通过宝塔自动安装的是稍微旧一点的版本，那么如何安装自定义版本、最新版本呢？</p>
+<h1>编译安装swoole</h1>
+<p>其他php扩展其实也是一样的原理， 我们可以自行编译。 在另一篇文章中，我有比较详细的编译安装过程，可以参考一下。 <a href="https://blog.siammm.cn/archives/154" title="宝塔面板多PHP版本编译安装swoole">宝塔面板多PHP版本编译安装swoole</a></p>
+<h1>总结</h1>
+<p>宝塔面板能提高我们非运维专业人员的管理效率，但是也会损失一些灵活性，要根据需求灵活使用工具。</p>
+        
+      </div>
+      <a class="more" href="/2019/09/17/php/%E3%80%90%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E3%80%91%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%E7%9A%84php%E6%89%A9%E5%B1%95swoole.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/14/database/mysql%E8%AF%AF%E5%88%A0%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AEbinlog%E9%97%AA%E5%9B%9E%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF.html">Mysql误删,恢复数据,binlog闪回,宝塔面板</a>
+      </h2>
+      <p class="article-date">2019年9月14日</p>
+      
+        
+  <a href="/tags#数据库" >
+    <span class="tag-code">数据库</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+DBA或开发人员，有时会误删或者误更新数据 你是否有删库经历？删库是否真的无解 如果是线上环境并且影响较大，就需要能快速回滚。 传统恢复方法是利用备份重搭实例，再应用去除错误sql后的binlog来恢复数据。 此法费时费力，甚至需要停机维护，并不适合快速回滚。 也有团队利用LVM快 ...
+        
+      </div>
+      <a class="more" href="/2019/09/14/database/mysql%E8%AF%AF%E5%88%A0%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AEbinlog%E9%97%AA%E5%9B%9E%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/09/02/php/%E3%80%90%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E3%80%91tp5return-json-encode-ajax%E8%87%AA%E5%8A%A8%E8%A2%AB%E5%8A%A0%E4%B8%8A%E5%8F%8C%E5%BC%95%E5%8F%B7.html">【源码解读】TP5return json_encode ajax自动被加上双引号</a>
+      </h2>
+      <p class="article-date">2019年9月2日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>事情起因</h1>
+<p>在thinkphp5中，return数据才是控制器正确的时候方式，而不是直接echo 然后die 或者exti 因为框架有后置数据的落地处理等等，直接让程序退出并不友好，既然我们选择了框架，就应该遵循框架的设计理念 这样子能让我们避免一些坑爹事件的发生。 此次我在控制器中，并没有使用tp的<code>Json Response</code>对象，而是想通过<code>return json_encode($arr);</code>返回字符串的形式 正常应该输出如下</p>
+<pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;siam&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">21</span><span class="hljs-punctuation">&#125;</span></code></pre>
+<p>结果却输出为</p>
+<pre><code class="hljs plaintext">&quot;&#123;&quot;name&quot;:&quot;siam&quot;, &quot;age&quot;:21&#125;&quot;</code></pre>
+<p>这样子就明显乱套了，前端解析直接崩溃。</p>
+<h1>控制器原理</h1>
+<p>追寻response后框架的处理，框架会根据控制器<code>return</code>的数据类型做不同的处理</p>
+<ul>
+<li>返回Reponse子类，比如Json、Jsonp、Xml、View、重定向等等，则会执行子类的run()</li>
+<li>返回不是Reponse子类，则会自动识别响应输出类型</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2019/09/02/php/%E3%80%90%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%E3%80%91tp5return-json-encode-ajax%E8%87%AA%E5%8A%A8%E8%A2%AB%E5%8A%A0%E4%B8%8A%E5%8F%8C%E5%BC%95%E5%8F%B7.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/front/layui2-0%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC%E5%AF%BC%E5%87%BA%E5%A4%8D%E6%9D%82%E8%A1%A8%E5%A4%B4excel%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88table2excel.html">layui2.0数据表格导出复杂表头EXCEL解决方案,table2excel</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h3 id="layui-数据表格组件">layui 数据表格组件</h3>
+<p>layui是一套面向所有层次的前后端开发者，零门槛开箱即用的前端UI解决方案。很多的后端开发在开发后台系统时候都会选择它。 数据表格组件也是使用非常频繁的，它可以快速从api得到数据并进行处理渲染成表格，并且还有排序、总计、导出表格等等功能。 <img src="http://cdn.yancoo.cn/img/20190128/layuitable.png" alt="layui数据表格" title="layui数据表格"> 在一次的需求中，需要使用复杂表头并且导出EXCEL表格，发现layui并不支持复杂表头的处理，社区之中也还未找到相关的方案。于是使用了table2excel插件协助完成需求。（如果你有更好更方便的方法，希望你能联系我或者留言交流一下，谢谢） 以下简单记一下笔记和步骤，方便自己和他人。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/front/layui2-0%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC%E5%AF%BC%E5%87%BA%E5%A4%8D%E6%9D%82%E8%A1%A8%E5%A4%B4excel%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88table2excel.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/other/%E5%A4%9Aiframe%E7%89%88%E5%90%8E%E5%8F%B0%EF%BC%8C%E5%9C%A8%E4%B8%80%E4%B8%AAiframe%E5%88%87%E6%8D%A2%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AAiframe%EF%BC%8C%E5%90%8C%E6%97%B6%E5%88%B7%E6%96%B0.html">多Iframe版后台，在一个iframe切换到另一个iframe，同时刷新</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>当我们使用多标签iframe的后台管理模板时，需要在一个iframe中跳转到另一个iframe，并且对新iframe进行操作，这篇文章记录一下我在开发过程中编写的代码。 有一个标签 #tab 用于储存已经打开的标签页 <a href="#" title="tab标签说明"><img src="http://yancoo.cn/uploads/images/20190103/2019190103-045938.png" alt="tab标签说明" title="tab标签说明"></a> 存放iframe的标签.tabsbody-item 结构如下</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/other/%E5%A4%9Aiframe%E7%89%88%E5%90%8E%E5%8F%B0%EF%BC%8C%E5%9C%A8%E4%B8%80%E4%B8%AAiframe%E5%88%87%E6%8D%A2%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AAiframe%EF%BC%8C%E5%90%8C%E6%97%B6%E5%88%B7%E6%96%B0.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/other/%E6%A0%B9%E6%8D%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E7%94%9F%E6%88%90%E7%94%A8%E6%88%B7%E6%A0%87%E8%AF%86%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%85%8D%E7%99%BB%E9%99%86%E7%94%A8%E6%88%B7%E7%8A%B6%E6%80%81%E8%AE%A2.html">根据浏览器生成用户标识，实现免登陆用户状态订单储存。</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>fingerprint2库，在github上有</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/other/%E6%A0%B9%E6%8D%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E7%94%9F%E6%88%90%E7%94%A8%E6%88%B7%E6%A0%87%E8%AF%86%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%85%8D%E7%99%BB%E9%99%86%E7%94%A8%E6%88%B7%E7%8A%B6%E6%80%81%E8%AE%A2.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/front/layui%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BCcheckbox%E8%AE%BE%E7%BD%AE%E9%83%A8%E5%88%86%E4%B8%8D%E5%8F%AF%E9%80%89.html">layui数据表格checkbox设置部分不可选</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h3 id="问题">问题</h3>
+<p>在layui数据表格中设置了字段为<code>type:checkbox</code> 但是想要实现部分不显示，不可选的功能。 <a href="#" title="layui数据表格"><img src="http://www.yancoo.cn/uploads/images/201905/30_01_layuitable.png" alt="layui数据表格" title="layui数据表格"></a> layui内置没有该功能，所以只能自己实现。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/front/layui%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BCcheckbox%E8%AE%BE%E7%BD%AE%E9%83%A8%E5%88%86%E4%B8%8D%E5%8F%AF%E9%80%89.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/docker/%E8%AE%A8%E8%AE%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8docker%E5%92%8Cdocker-compose.html">讨论 - 为什么要使用docker和docker-compose</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>优点总结(后面进行讨论)</h1>
+<h2 id="更高效的利用系统资源">更高效的利用系统资源</h2>
+<h2 id="更快速的启动时间">更快速的启动时间</h2>
+<h2 id="一致的运行环境">一致的运行环境</h2>
+<h2 id="持续交付和部署">持续交付和部署</h2>
+<h2 id="更轻松的迁移">更轻松的迁移</h2>
+<h2 id="更轻松的维护和扩展">更轻松的维护和扩展</h2>
+<p>讨论 ===== 更高效？</p>
+<hr>
+<p>docker是容器型虚拟化，不需要进行硬件虚拟、运行完整操作系统等额外的开销。所以提高了对系统资源的利用率 简单来说：可以在同样配置的机器上虚拟运行更多的应用。</p>
+<h2 id="更快速？">更快速？</h2>
+<p>因为docker不需要运行完成的操作系统，而是直接运行宿主机的内核，因此可以做到秒级甚至毫秒级的启动关闭。 简单来说：加载1万个文件和100个文件的速度区别</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/docker/%E8%AE%A8%E8%AE%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8docker%E5%92%8Cdocker-compose.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/docker/%E5%AE%9E%E6%88%98docker-compose%E6%90%AD%E5%BB%BA%E5%9F%BA%E6%9C%AC%E7%9A%84nginxphp%E7%8E%AF%E5%A2%83.html">实战 - docker-compose搭建基本的nginx+php环境</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>安装docker-compose</h1>
+<p>简单说几句，具体可以参照官网的详细教程。</p>
+<ul>
+<li>
+<p>确保已经安装docker</p>
+</li>
+<li>
+<p>从github拉取docker-compose</p>
+        
+      </div>
+      <a class="more" href="/2019/08/30/docker/%E5%AE%9E%E6%88%98docker-compose%E6%90%AD%E5%BB%BA%E5%9F%BA%E6%9C%AC%E7%9A%84nginxphp%E7%8E%AF%E5%A2%83.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/30/docker/%E5%AE%9E%E6%88%98%E5%A4%9A%E5%AE%B9%E5%99%A8nginx%E5%AE%B9%E5%99%A8%E7%81%B5%E6%B4%BB%E5%88%87%E6%8D%A2php%E7%89%88%E6%9C%AC%E5%90%8C%E6%97%B6%E8%BF%90%E8%A1%8C%E5%A4%9A%E4%B8%AAphp%E5%AE%B9.html">实战 - 多容器,Nginx容器灵活切换PHP版本!同时运行多个PHP容器</a>
+      </h2>
+      <p class="article-date">2019年8月30日</p>
+      
+        
+  <a href="/tags#Docker" >
+    <span class="tag-code">Docker</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>容器link原理 =========== 在前面一章中，我们使用 <code>--link</code>来将php容器和nginx容器关联在一起，并在nginx容器中的配置写下了如下代码，写下的php001就是我们在–link中设置的别名，其实这是通过本地host实现的。</p>
+<pre><code class="hljs plaintext">&#123;
+    try_files $uri =404;
+    fastcgi_pass php001:9000;   #极其重要
+    fastcgi_index index.php;
+    include /etc/nginx/conf.d/fastcgi_params;  #这里也是需要注意的，之前就是在这里还惨我了，需要绝对路径。不然路径默认从nginx的配置目录开始。
+&#125;</code></pre>
+        
+      </div>
+      <a class="more" href="/2019/08/30/docker/%E5%AE%9E%E6%88%98%E5%A4%9A%E5%AE%B9%E5%99%A8nginx%E5%AE%B9%E5%99%A8%E7%81%B5%E6%B4%BB%E5%88%87%E6%8D%A2php%E7%89%88%E6%9C%AC%E5%90%8C%E6%97%B6%E8%BF%90%E8%A1%8C%E5%A4%9A%E4%B8%AAphp%E5%AE%B9.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/10/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/12/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2026 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

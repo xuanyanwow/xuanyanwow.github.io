@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    WebAuthn 测试页
+    
+    ⚠️ 重要提示：
+    WebAuthn API 必须在安全上下文中运行（HTTPS 或 localhost）
+    
+    功能：
+    1. 设备注册：注册新的生物识别设备
+    2. 设备登录：使用已注册设备进行认证
+    
+    使用方法：
+    1. 启动本地服务器（任选其一）：
+       • PHP:      php -S localhost:8000
+       • Python:   python -m http.server 8000
+       • Node.js:  npx http-server -p 8000
+       • Hyperf:   php bin/hyperf.php start
+    
+    2. 在浏览器中访问：
+       http://localhost:8000/index.html
+    
+    3. 确保后端API服务已启动并填写正确的API地址
+    
+    支持的浏览器：
+    • Chrome 67+
+    • Edge 18+
+    • Safari 13+
+    • Firefox 60+
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebAuthn 测试页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px;
+            display: flex;
+            gap: 30px;
+            min-height: calc(100vh - 40px);
+        }
+
+        .left-panel {
+            flex: 0 0 420px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .panel-title {
+            color: #333;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(72, 187, 120, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .log-container {
+            flex: 1;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #logs {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .log-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .log-entry {
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+            word-break: break-all;
+        }
+
+        .log-info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            color: #1565c0;
+        }
+
+        .log-success {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            color: #2e7d32;
+        }
+
+        .log-error {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            color: #c62828;
+        }
+
+        .log-warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            color: #e65100;
+        }
+
+        .clear-btn {
+            padding: 6px 12px;
+            background: #ff5252;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .clear-btn:hover {
+            background: #ff1744;
+        }
+
+        .status-banner {
+            margin-bottom: 20px;
+            padding: 16px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-banner.ready {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            color: #2e7d32;
+        }
+
+        .status-banner.error {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            color: #c62828;
+        }
+
+        .status-banner.warning {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            color: #e65100;
+        }
+
+        .status-icon {
+            font-size: 24px;
+        }
+
+        .status-content {
+            flex: 1;
+        }
+
+        .status-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .status-message {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-step1 {
+            background: #bbdefb;
+            color: #1565c0;
+        }
+
+        .badge-step2 {
+            background: #c5e1a5;
+            color: #558b2f;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        /* 响应式布局 */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .left-panel {
+                flex: none;
+                width: 100%;
+            }
+
+            .right-panel {
+                flex: none;
+                width: 100%;
+            }
+
+            .log-container {
+                max-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧面板 -->
+        <div class="left-panel">
+            <h1>🔐 WebAuthn 测试</h1>
+            <p class="subtitle">测试无密码身份验证的注册与登录流程</p>
+
+            <div id="statusBanner" style="display: none;"></div>
+
+            <div class="form-group">
+                <label for="apiBase">API 基础地址</label>
+                <input type="text" id="apiBase" placeholder="http://localhost:9501" value="http://localhost:9501">
+            </div>
+
+            <div class="form-group">
+                <label for="userId">用户 ID</label>
+                <input type="number" id="userId" placeholder="请输入用户ID" value="1">
+            </div>
+
+            <button class="btn btn-primary" id="registerBtn" onclick="startRegistration()">
+                <span id="registerBtnText">🚀 开始注册设备</span>
+            </button>
+
+            <button class="btn btn-secondary" id="loginBtn" onclick="startAuthentication()">
+                <span id="loginBtnText">🔑 设备登录</span>
+            </button>
+        </div>
+
+        <!-- 右侧面板 -->
+        <div class="right-panel">
+            <div class="panel-title">
+                📋 执行日志
+                <button class="clear-btn" onclick="clearLogs()" style="float: right;">清空</button>
+            </div>
+            <div class="log-container">
+                <div id="logs"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 更新状态横幅
+        function updateStatusBanner(type, title, message) {
+            const banner = document.getElementById('statusBanner');
+            banner.style.display = 'flex';
+            banner.className = `status-banner ${type}`;
+            
+            let icon = '✅';
+            if (type === 'error') icon = '❌';
+            if (type === 'warning') icon = '⚠️';
+            
+            banner.innerHTML = `
+                <div class="status-icon">${icon}</div>
+                <div class="status-content">
+                    <div class="status-title">${title}</div>
+                    <div class="status-message">${message}</div>
+                </div>
+            `;
+        }
+
+        // 日志记录函数
+        function log(message, type = 'info', badge = '') {
+            const logsDiv = document.getElementById('logs');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            
+            const badgeHtml = badge ? `<span class="badge badge-${badge}">${badge === 'step1' ? '步骤1' : '步骤2'}</span>` : '';
+            const timestamp = new Date().toLocaleTimeString('zh-CN', { hour12: false });
+            
+            entry.innerHTML = `${badgeHtml}<strong>[${timestamp}]</strong> ${message}`;
+            // 将新日志插入到最前面
+            logsDiv.insertBefore(entry, logsDiv.firstChild);
+        }
+
+        // 清空日志
+        function clearLogs() {
+            document.getElementById('logs').innerHTML = '';
+            log('日志已清空', 'info');
+        }
+
+        // 设置按钮加载状态
+        function setButtonLoading(loading, buttonType = 'register') {
+            const btn = document.getElementById(buttonType === 'register' ? 'registerBtn' : 'loginBtn');
+            const btnText = document.getElementById(buttonType === 'register' ? 'registerBtnText' : 'loginBtnText');
+            
+            if (loading) {
+                btn.disabled = true;
+                btnText.innerHTML = '<span class="spinner"></span>处理中...';
+            } else {
+                btn.disabled = false;
+                btnText.innerHTML = buttonType === 'register' ? '🚀 开始注册设备' : '🔑 设备登录';
+            }
+        }
+
+        // 开始认证流程（设备登录）
+        async function startAuthentication() {
+            const apiBase = document.getElementById('apiBase').value.trim();
+            const userId = parseInt(document.getElementById('userId').value);
+
+            // 验证输入
+            if (!apiBase) {
+                alert('请输入API基础地址');
+                return;
+            }
+
+            if (!userId || userId <= 0) {
+                alert('请输入有效的用户ID');
+                return;
+            }
+
+            // 检查安全上下文
+            if (!window.isSecureContext) {
+                log('❌ 非安全上下文，WebAuthn API 不可用', 'error');
+                alert('WebAuthn 需要安全上下文（HTTPS 或 localhost）');
+                return;
+            }
+
+            // 检查浏览器支持
+            if (!window.PublicKeyCredential) {
+                log('❌ 当前浏览器不支持 WebAuthn', 'error');
+                alert('您的浏览器不支持 WebAuthn API');
+                return;
+            }
+
+            setButtonLoading(true, 'login');
+            log('========== 开始 WebAuthn 认证流程（登录）==========', 'info');
+            log(`📝 用户ID: ${userId}`, 'info');
+
+            try {
+                // ==================== 步骤1: 获取认证选项 ====================
+                log('📡 正在调用 /web-authn/authentication/options...', 'info', 'step1');
+                
+                const optionsResponse = await fetch(`${apiBase}/web-authn/authentication/options`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ user_id: userId })
+                });
+
+                if (!optionsResponse.ok) {
+                    const errorText = await optionsResponse.text();
+                    throw new Error(`HTTP ${optionsResponse.status}: ${errorText}`);
+                }
+
+                const optionsResult = await optionsResponse.json();
+                log(`✅ 步骤1完成 - 服务器响应: ${JSON.stringify(optionsResult)}`, 'success', 'step1');
+
+                // 检查响应格式
+                if (!optionsResult.data || !optionsResult.data.options) {
+                    throw new Error('服务器返回格式错误，缺少 options 数据');
+                }
+
+                const options = optionsResult.data.options;
+                log(`📦 收到认证选项，Challenge长度: ${options.challenge.length}`, 'info', 'step1');
+
+                // 转换 options 格式（Base64URL 转 ArrayBuffer）
+                const publicKeyCredentialRequestOptions = {
+                    challenge: base64UrlToArrayBuffer(options.challenge),
+                    timeout: options.timeout || 60000,
+                    rpId: options.rpId,
+                    userVerification: options.userVerification || 'preferred'
+                };
+
+                // 如果有 allowCredentials，则转换
+                if (options.allowCredentials && options.allowCredentials.length > 0) {
+                    publicKeyCredentialRequestOptions.allowCredentials = options.allowCredentials.map(cred => ({
+                        id: base64UrlToArrayBuffer(cred.id),
+                        type: cred.type,
+                        transports: cred.transports
+                    }));
+                    log(`📋 允许的凭证数量: ${options.allowCredentials.length}`, 'info', 'step1');
+                }
+
+                // ==================== 步骤2: 调用浏览器 API 获取凭证 ====================
+                log('🔐 正在调用 navigator.credentials.get()...', 'info', 'step2');
+                log('⏳ 请完成生物识别验证（指纹、Face ID 等）', 'warning', 'step2');
+
+                const credential = await navigator.credentials.get({
+                    publicKey: publicKeyCredentialRequestOptions
+                });
+
+                if (!credential) {
+                    throw new Error('认证失败，用户可能取消了操作');
+                }
+
+                log('✅ 认证凭证获取成功！', 'success', 'step2');
+
+                // 将凭证转换为可传输格式
+                const credentialForServer = {
+                    id: credential.id,
+                    rawId: arrayBufferToBase64Url(credential.rawId),
+                    type: credential.type,
+                    response: {
+                        clientDataJSON: arrayBufferToBase64Url(credential.response.clientDataJSON),
+                        authenticatorData: arrayBufferToBase64Url(credential.response.authenticatorData),
+                        signature: arrayBufferToBase64Url(credential.response.signature)
+                    }
+                };
+
+                // 如果存在 userHandle，也要转换
+                if (credential.response.userHandle) {
+                    credentialForServer.response.userHandle = arrayBufferToBase64Url(credential.response.userHandle);
+                }
+
+                log(`📤 凭证ID: ${credential.id.substring(0, 32)}...`, 'info', 'step2');
+
+                // ==================== 步骤3: 验证认证响应 ====================
+                log('📡 正在调用 /web-authn/authentication/verify...', 'info', 'step2');
+
+                const verifyResponse = await fetch(`${apiBase}/web-authn/authentication/verify`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        credential: credentialForServer
+                    })
+                });
+
+                if (!verifyResponse.ok) {
+                    const errorText = await verifyResponse.text();
+                    throw new Error(`HTTP ${verifyResponse.status}: ${errorText}`);
+                }
+
+                const verifyResult = await verifyResponse.json();
+                
+                if (verifyResult.status === 1) {
+                    log(`🎉 登录成功！${verifyResult.message || ''}`, 'success', 'step2');
+                    log(`📋 返回数据: ${JSON.stringify(verifyResult.data || {})}`, 'success', 'step2');
+                    log('========== WebAuthn 认证流程完成 ==========', 'success');
+                    
+                    updateStatusBanner('ready', '登录成功', '设备认证通过，欢迎回来！');
+                } else {
+                    throw new Error(verifyResult.message || '认证失败');
+                }
+
+            } catch (error) {
+                log(`❌ 登录失败: ${error.message}`, 'error');
+                console.error('详细错误:', error);
+                
+                // 提供更友好的错误提示
+                if (error.name === 'NotAllowedError') {
+                    log('💡 提示: 用户取消了生物识别验证或验证超时', 'warning');
+                } else if (error.name === 'NotFoundError') {
+                    log('💡 提示: 未找到该用户的已注册设备，请先注册', 'warning');
+                } else if (error.name === 'InvalidStateError') {
+                    log('💡 提示: 设备状态异常，请重试', 'warning');
+                }
+                
+                updateStatusBanner('error', '登录失败', error.message);
+            } finally {
+                setButtonLoading(false, 'login');
+            }
+        }
+
+        // Base64URL 编码（ArrayBuffer 转 Base64URL）
+        function arrayBufferToBase64Url(buffer) {
+            const bytes = new Uint8Array(buffer);
+            let binary = '';
+            for (let i = 0; i < bytes.byteLength; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binary)
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=/g, '');
+        }
+
+        // Base64URL 解码（Base64URL 转 ArrayBuffer）
+        function base64UrlToArrayBuffer(base64url) {
+            const base64 = base64url
+                .replace(/-/g, '+')
+                .replace(/_/g, '/');
+            const padding = '='.repeat((4 - base64.length % 4) % 4);
+            const binary = atob(base64 + padding);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        // 开始注册流程
+        async function startRegistration() {
+            const apiBase = document.getElementById('apiBase').value.trim();
+            const userId = parseInt(document.getElementById('userId').value);
+
+            // 验证输入
+            if (!apiBase) {
+                alert('请输入API基础地址');
+                return;
+            }
+
+            if (!userId || userId <= 0) {
+                alert('请输入有效的用户ID');
+                return;
+            }
+
+            // 检查安全上下文
+            if (!window.isSecureContext) {
+                log('❌ 非安全上下文，WebAuthn API 不可用', 'error');
+                alert('WebAuthn 需要安全上下文（HTTPS 或 localhost）\n\n请使用本地服务器运行此页面，例如：\n• php -S localhost:8000\n• python -m http.server 8000\n• npx http-server -p 8000');
+                return;
+            }
+
+            // 检查浏览器支持
+            if (!window.PublicKeyCredential) {
+                log('❌ 当前浏览器不支持 WebAuthn', 'error');
+                alert('您的浏览器不支持 WebAuthn API\n\n请使用支持的浏览器：\n• Chrome 67+\n• Edge 18+\n• Safari 13+\n• Firefox 60+');
+                return;
+            }
+
+            setButtonLoading(true);
+            log('========== 开始 WebAuthn 注册流程 ==========', 'info');
+            log(`📝 用户ID: ${userId}`, 'info');
+
+            try {
+                // ==================== 步骤1: 获取注册选项 ====================
+                log('📡 正在调用 /web-authn/registration/options...', 'info', 'step1');
+                
+                const optionsResponse = await fetch(`${apiBase}/web-authn/registration/options`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ user_id: userId })
+                });
+
+                if (!optionsResponse.ok) {
+                    throw new Error(`HTTP ${optionsResponse.status}: ${optionsResponse.statusText}`);
+                }
+
+                const optionsResult = await optionsResponse.json();
+                log(`✅ 步骤1完成 - 服务器响应: ${JSON.stringify(optionsResult)}`, 'success', 'step1');
+
+                // 检查响应格式
+                if (!optionsResult.data || !optionsResult.data.options) {
+                    throw new Error('服务器返回格式错误，缺少 options 数据');
+                }
+
+                const options = optionsResult.data.options;
+                log(`📦 收到注册选项，Challenge长度: ${options.challenge.length}`, 'info', 'step1');
+
+                // 转换 options 格式（Base64URL 转 ArrayBuffer）
+                const publicKeyCredentialCreationOptions = {
+                    challenge: base64UrlToArrayBuffer(options.challenge),
+                    rp: options.rp,
+                    user: {
+                        id: base64UrlToArrayBuffer(options.user.id),
+                        name: options.user.name,
+                        displayName: options.user.displayName
+                    },
+                    pubKeyCredParams: options.pubKeyCredParams,
+                    timeout: options.timeout,
+                    attestation: options.attestation,
+                    authenticatorSelection: options.authenticatorSelection,
+                    excludeCredentials: (options.excludeCredentials || []).map(cred => ({
+                        id: base64UrlToArrayBuffer(cred.id),
+                        type: cred.type,
+                        transports: cred.transports
+                    }))
+                };
+
+                // ==================== 步骤2: 调用浏览器 API 创建凭证 ====================
+                log('🔐 正在调用 navigator.credentials.create()...', 'info', 'step2');
+                log('⏳ 请完成生物识别验证（指纹、Face ID 等）', 'warning', 'step2');
+
+                const credential = await navigator.credentials.create({
+                    publicKey: publicKeyCredentialCreationOptions
+                });
+
+                if (!credential) {
+                    throw new Error('凭证创建失败，用户可能取消了操作');
+                }
+
+                log('✅ 凭证创建成功！', 'success', 'step2');
+
+                // 将凭证转换为可传输格式
+                const credentialForServer = {
+                    id: credential.id,
+                    rawId: arrayBufferToBase64Url(credential.rawId),
+                    type: credential.type,
+                    response: {
+                        clientDataJSON: arrayBufferToBase64Url(credential.response.clientDataJSON),
+                        attestationObject: arrayBufferToBase64Url(credential.response.attestationObject)
+                    }
+                };
+
+                if (credential.response.getTransports) {
+                    credentialForServer.transports = credential.response.getTransports();
+                }
+
+                log(`📤 凭证ID: ${credential.id.substring(0, 32)}...`, 'info', 'step2');
+
+                // ==================== 步骤3: 验证注册响应 ====================
+                log('📡 正在调用 /web-authn/registration/verify...', 'info', 'step2');
+
+                const verifyResponse = await fetch(`${apiBase}/web-authn/registration/verify`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        credential: credentialForServer
+                    })
+                });
+
+                if (!verifyResponse.ok) {
+                    throw new Error(`HTTP ${verifyResponse.status}: ${verifyResponse.statusText}`);
+                }
+
+                const verifyResult = await verifyResponse.json();
+                
+                if (verifyResult.status === 1) {
+                    log(`🎉 注册成功！${verifyResult.message || ''}`, 'success', 'step2');
+                    log(`📋 返回数据: ${JSON.stringify(verifyResult.data || {})}`, 'success', 'step2');
+                    log('========== WebAuthn 注册流程完成 ==========', 'success');
+                } else {
+                    throw new Error(verifyResult.message || '验证失败');
+                }
+
+            } catch (error) {
+                log(`❌ 注册失败: ${error.message}`, 'error');
+                console.error('详细错误:', error);
+                
+                // 提供更友好的错误提示
+                if (error.name === 'NotAllowedError') {
+                    log('💡 提示: 用户取消了生物识别验证或验证超时', 'warning');
+                } else if (error.name === 'InvalidStateError') {
+                    log('💡 提示: 该设备可能已经注册过，请使用认证流程', 'warning');
+                }
+            } finally {
+                setButtonLoading(false, 'register');
+            }
+        }
+
+        // 页面加载时的初始化
+        window.addEventListener('DOMContentLoaded', async () => {
+            log('🌟 WebAuthn 测试页面已加载', 'info');
+            
+            // 1. 检查安全上下文
+            if (!window.isSecureContext) {
+                updateStatusBanner('error', '非安全上下文', '请使用 HTTPS 或通过本地服务器（如 http://localhost:8000）访问');
+                log('❌ 当前不在安全上下文中！WebAuthn API 需要 HTTPS 或 localhost', 'error');
+                log('💡 解决方案:', 'warning');
+                log('   方案1: 使用本地服务器访问（推荐）', 'warning');
+                log('   • 使用 PHP: php -S localhost:8000', 'info');
+                log('   • 使用 Python: python -m http.server 8000', 'info');
+                log('   • 使用 Node.js: npx http-server -p 8000', 'info');
+                log('   然后访问: http://localhost:8000/index.html', 'info');
+                log('   方案2: 部署到 HTTPS 服务器', 'warning');
+                // 禁用注册按钮
+                document.getElementById('registerBtn').disabled = true;
+                return;
+            }
+            
+            log('✅ 安全上下文检查通过（HTTPS 或 localhost）', 'success');
+            
+            // 2. 检查 PublicKeyCredential 基础支持
+            if (!window.PublicKeyCredential) {
+                updateStatusBanner('error', '浏览器不支持 WebAuthn', '请使用 Chrome 67+、Edge 18+、Safari 13+ 或 Firefox 60+');
+                log('❌ 浏览器不支持 WebAuthn API', 'error');
+                log('💡 请使用支持 WebAuthn 的现代浏览器:', 'warning');
+                log('   • Chrome 67+ / Edge 18+ / Safari 13+ / Firefox 60+', 'info');
+                // 禁用注册按钮
+                document.getElementById('registerBtn').disabled = true;
+                return;
+            }
+            
+            log('✅ 浏览器支持 PublicKeyCredential API', 'success');
+            
+            // 3. 检查平台认证器支持（指纹、Face ID 等）
+            let hasBiometric = false;
+            try {
+                const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+                if (available) {
+                    hasBiometric = true;
+                    log('✅ 设备支持平台认证器（生物识别）', 'success');
+                } else {
+                    log('⚠️ 设备不支持平台认证器，但可使用外部安全密钥', 'warning');
+                }
+            } catch (error) {
+                log('⚠️ 无法检测平台认证器支持', 'warning');
+            }
+            
+            // 4. 检查条件中介支持（自动填充功能）
+            try {
+                if (typeof PublicKeyCredential.isConditionalMediationAvailable === 'function') {
+                    const conditionalAvailable = await PublicKeyCredential.isConditionalMediationAvailable();
+                    if (conditionalAvailable) {
+                        log('✅ 支持条件中介（自动填充）', 'success');
+                    }
+                }
+            } catch (error) {
+                // 忽略此错误，非关键功能
+            }
+            
+            log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+            log('🎉 环境检查完成，可以开始测试！', 'success');
+            
+            // 显示成功状态
+            if (hasBiometric) {
+                updateStatusBanner('ready', '环境就绪', '您的设备支持生物识别，可以开始测试 WebAuthn 注册流程');
+            } else {
+                updateStatusBanner('warning', '部分功能可用', '设备不支持生物识别，但可以使用外部安全密钥进行测试');
+            }
+        });
+    </script>
+</body>
+</html>

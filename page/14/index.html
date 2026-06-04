@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="baidu-site-verification" content="code-16lMrlrtOl" />
+  <!-- description -->
+  
+  <meta name="description" content="Siam个人技术博客，我目前接触的知识有PHP, Go, NodeJs, Docker, Mysql。其他还在持续学习中。" />
+  
+
+  <!-- keywords -->
+  
+  <meta name="keywords" content="PHP, Go, NodeJs, Docker, Mysql" />
+   
+
+
+  
+    <link rel="shortcut icon" type="image/ico" href="https://blog.siammm.cn/wp-content/uploads/2019/06/20190612032728575_easyicon_net_32.ico"/>
+  
+  <title>
+    
+      Siam博客
+    
+  </title>
+  <!-- <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/6.1.0/css/fontawesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <style>
+::-webkit-scrollbar-track-piece {
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b8b8b8;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  filter: alpha(opacity = 50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5
+}
+::-webkit-scrollbar-thumb:hover {
+  height: 50px;
+  background-color: #878987;
+  -webkit-border-radius: 6px
+}
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+
+  
+  <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+    
+<script src="/js/gitment.js"></script>
+
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+  
+<script src="/js/diff.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Siam博客</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/english/" class="item-link">学英语</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tools/" class="item-link">在线工具</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/show/" class="item-link">分享杂谈</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于我</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/friend/" class="item-link">友链</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">首页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">标签</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/english/" class="menu-link">学英语</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tools/" class="menu-link">在线工具</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/show/" class="menu-link">分享杂谈</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于我</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/friend/" class="menu-link">友链</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/21/php/json%E5%BA%8F%E5%88%97%E5%8C%96%E6%8E%A5%E5%8F%A3jsonserializable.html">JSON序列化接口,JsonSerializable</a>
+      </h2>
+      <p class="article-date">2019年8月21日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          写在前面
+php中操作json的函数有json_encode(),json_decode() 在该文档中，encode的传入值可以是除了resource 类型之外的任何数据类型。
+简单序列化一个类
+class Siam&#123;
+    public $name = &#x27;siam& ...
+        
+      </div>
+      <a class="more" href="/2019/08/21/php/json%E5%BA%8F%E5%88%97%E5%8C%96%E6%8E%A5%E5%8F%A3jsonserializable.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/14/other/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E4%B9%8Bscheme%E5%85%A5%E5%8F%A3.html">Chrome浏览器开发工具之scheme入口</a>
+      </h2>
+      <p class="article-date">2019年8月14日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>没啥 ，就是自己玩着玩着发现还有这么多没见过，记录一下</p>
+<h3 id="实验室">实验室</h3>
+<p>chrome://flags/ 一些实验性的功能，可能在未来保留成正式或者被移除，同时也可能会产生不可预期的影响，开发者鼓捣记得备份数据！</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog%5C_1806ff8820102xr22.html">http://blog.sina.com.cn/s/blog\_1806ff8820102xr22.html</a></p>
+</blockquote>
+<p>知乎文章</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27380104">https://www.zhihu.com/question/27380104</a></p>
+</blockquote>
+<h3 id="网络调试">网络调试</h3>
+<p>chrome://net-internals/#events net-internals是一套工具集合，用于帮助诊断网络请求与访问方面的问题，它通过监听和搜集 DNS，Sockets，SPDY，Caches等事件与数据来向开发者反馈各种网络请求的过程、状态以及可能产生影响的因素。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/14/other/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E4%B9%8Bscheme%E5%85%A5%E5%8F%A3.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/12/php/php%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">PHP中对象的序列化和反序列化</a>
+      </h2>
+      <p class="article-date">2019年8月12日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          php的serialize函数和unserialize函数
+serialize() 返回字符串，可以存储于任何地方。 serialize() 可处理除了 resource 之外的任何类型。甚至可以 serialize() 那些包含了指向其自身引用的数组。 这有利于存储或传递 PHP 的值，同 ...
+        
+      </div>
+      <a class="more" href="/2019/08/12/php/php%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/11/php/php%E8%A7%A3%E6%9E%90json%E3%80%81xml%E9%94%99%E8%AF%AF.html">PHP解析json、xml错误</a>
+      </h2>
+      <p class="article-date">2019年8月11日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          解析json
+php内置函数json_decode() 可以解析json字符串 但是有的时候看起来正确的json，解析却一直返回null。 你知道吗，json是可能解析失败的，此时PHP不会产生提示。 我们需要手动通过json_last_error()函数获取
+function json_d ...
+        
+      </div>
+      <a class="more" href="/2019/08/11/php/php%E8%A7%A3%E6%9E%90json%E3%80%81xml%E9%94%99%E8%AF%AF.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/10/other/chrome%E7%BC%93%E5%AD%98%E9%94%81%EF%BC%8Cphp%E9%9D%9E%E5%A0%B5%E5%A1%9E%E6%96%87%E4%BB%B6%E9%94%81%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E8%AF%A6%E8%A7%A3%E8%BF%BD%E6%9F%A5.html">Chrome缓存锁，php非堵塞文件锁无效的问题详解追查</a>
+      </h2>
+      <p class="article-date">2019年8月10日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>为什么写下这篇文章 在编写PHP文件锁的时候，非堵塞模式 <code>LOCK_NB</code> 加了却没有效果 预期反应：当前面有请求在执行了，后续的请求马上返回客户端：拿不到锁，执行失败。 现实状况：假设业务逻辑需要执行5s，第一个请求发送后，马上有第二个请求发送，第二个请求会等待第一个请求结束，然后再执行自己本次请求，总共耗时10s</p>
+<h1>简单说说php写下的锁</h1>
+<p>为了后面更好地讲解和理解，简单带上php文件锁的几行代码</p>
+        
+      </div>
+      <a class="more" href="/2019/08/10/other/chrome%E7%BC%93%E5%AD%98%E9%94%81%EF%BC%8Cphp%E9%9D%9E%E5%A0%B5%E5%A1%9E%E6%96%87%E4%BB%B6%E9%94%81%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E8%AF%A6%E8%A7%A3%E8%BF%BD%E6%9F%A5.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/09/front/layui%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BCtemplet%E7%9A%84%E6%95%B0%E6%8D%AE%E6%97%A0%E6%B3%95%E5%90%88%E8%AE%A1.html">Layui数据表格templet的数据无法合计</a>
+      </h2>
+      <p class="article-date">2019年8月9日</p>
+      
+        
+  <a href="/tags#前端" >
+    <span class="tag-code">前端</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>在使用layui数据表格的时候，有一个列是使用templet，依据其他两个列数据计算得到。 在该列开启合计行，一直显示是0 。其他两列数据合计正常。 在社区和百度上寻找过答案，并没有相关介绍。 在解决了该问题后，写下这篇小记录。</p>
+        
+      </div>
+      <a class="more" href="/2019/08/09/front/layui%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BCtemplet%E7%9A%84%E6%95%B0%E6%8D%AE%E6%97%A0%E6%B3%95%E5%90%88%E8%AE%A1.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/07/version-controller/git%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%BF%BD%E7%95%A5%E6%9C%AC%E5%9C%B0%E6%9B%B4%E6%94%B9.html">git,程序配置文件管理,忽略本地更改</a>
+      </h2>
+      <p class="article-date">2019年8月7日</p>
+      
+        
+  <a href="/tags#项目管理" >
+    <span class="tag-code">项目管理</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <h1>写在前面</h1>
+<p>在我们开发过程中，经常会出现数据库配置文件、redis环境配置文件等。 在不同的开发环境（同事与同事之间 开发与测试与生产环境）大概率是不同的。 如果每个人都按普通的流程，Pull然后修改成自己本地的，没有忽略监听更改。 那么当他提交代码时，经常会把配置文件也上传到git仓库中。 会影响其他人的开发。 所以我们应该这样子做：<code>git仓库提供一份配置文件的基础模板，每个人都拉取到本地修改但是要忽略本地更改监听。</code></p>
+<h1>操作步骤</h1>
+<ul>
+<li>1.建立git仓库</li>
+<li>2.创建基本配置文件模板</li>
+<li>3.提交并推送到仓库</li>
+<li>4.本地忽略监听</li>
+<li>5.服务器部署，拉取仓库</li>
+<li>6.忽略监听</li>
+<li>7.更改配置文件</li>
+</ul>
+        
+      </div>
+      <a class="more" href="/2019/08/07/version-controller/git%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%BF%BD%E7%95%A5%E6%9C%AC%E5%9C%B0%E6%9B%B4%E6%94%B9.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/06/php/php%E4%B8%AD%E7%9A%84%E8%BF%9B%E5%88%B6.html">php中的进制和编码</a>
+      </h2>
+      <p class="article-date">2019年8月6日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          进制和编码的关系
+
+进制是数字上的关系
+
+
+我们日常使用的是10进制，因为我们有10个手指，这是习惯和发展使然。
+计算机的基础是2进制，因为电路只有通电、不通电两种状态，用0、1表示。一个数字成为一个位
+
+随着计算机的发展，需要表示的符号越来越多，从一开始的2位代表一字节，到后面的8位代表一 ...
+        
+      </div>
+      <a class="more" href="/2019/08/06/php/php%E4%B8%AD%E7%9A%84%E8%BF%9B%E5%88%B6.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/04/php/php%E7%B1%BB%EF%BC%8C%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95.html">PHP类，魔术方法</a>
+      </h2>
+      <p class="article-date">2019年8月4日</p>
+      
+        
+  <a href="/tags#PHP" >
+    <span class="tag-code">PHP</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          以下方法在 PHP 中被称为魔术方法（Magic methods）
+__construct()
+__destruct()
+__call()
+__callStatic()
+__get()
+__set()
+__isset()
+__unset()
+__sleep()
+__wakeup()
+__to ...
+        
+      </div>
+      <a class="more" href="/2019/08/04/php/php%E7%B1%BB%EF%BC%8C%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95.html">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/08/01/cache/redis%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html">Redis笔记一，数据类型</a>
+      </h2>
+      <p class="article-date">2019年8月1日</p>
+      
+        
+  <a href="/tags#cache" >
+    <span class="tag-code">cache</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          数据类型
+类型
+简介
+特性
+场景
+String(字符串)
+二进制安全
+可以包含任何数据,比如jpg图片或者序列化的对象,一个键最大能存储512M
+-–
+Hash(字典)
+键值对集合,即编程语言中的Map类型
+适合存储对象,并且可以像数据库中update一个属性一样只修改某一项属性值(Memc ...
+        
+      </div>
+      <a class="more" href="/2019/08/01/cache/redis%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/page/13/"><span class="page-arrow">← </span>上一页</a>
+  
+  
+    <a href="/page/15/">下一页<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2026 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcdn.net/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'false';
+  async("//cdn.bootcdn.net/ajax/libs/highlight.js/11.5.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '260ea9ad5f40c94bd0edc03bd9e699fc';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>
